@@ -9,7 +9,7 @@ Currently this project is ran and supported by [GameServersHub](https://gameserv
 ![Watermark](https://cdn.discordapp.com/attachments/997658950038204506/1151949832664121424/twitch-banner.png)
 
 # What is GameServersHub?:
-- GameServersHub is an online community that is your one-stop shop for everything gaming-related! Are you a player wanting tutorials or guides on how to run gaming servers efficiently? Are you a customer wanting to purchase gaming resources to improve your gaming communities? Are you a developer looking to freelance, sell, or upload free resources for the public? Are you an advertiser or marketing looking for a targeted audience to market your products to? GameServersHub is designed to offer you everything you need, which means everything that would allow you to operate efficiently. GSH works exclusively with some of the best in the industry, and we work directly with many game studios to bring the best content possible to our audiences.
+- GameServersHub is an online community that is your one-stop shop for everything gaming-related! Are you a player wanting tutorials or guides on how to run gaming servers efficiently? Are you a customer wanting to purchase gaming resources to improve your gaming communities? Are you a developer looking to freelance, sell, or upload free resources for the public? Are you an advertiser looking for a targeted audience to market your products to? GameServersHub is designed to offer you everything you need, which means everything that would allow you to operate efficiently. GSH works exclusively with some of the best in the industry, and we work directly with many game studios to bring the best content possible to our audiences.
 
 # What is "ServerAPI" and how does it work?:
 - ServerAPI is the official framework that allows user-generated content to be created as "Video Game Server Plugins" for the popular video games "Ark 2, Ark: Survival Evolved, Ark: Survival Ascended, Atlas: MMO" our framework is 100% OPEN SOURCE and FREE for the public to use. Our framework has been supported and praised by fellow Wildcard Studios and Nitrado. The ServerAPI framework has over 71,000,000+ active views with 400,000+ active installations, and it's widely accepted by the vast majority of the server owners and admin communities that rely heavily on the framework to operate their gaming servers efficiently!
@@ -17,13 +17,12 @@ Currently this project is ran and supported by [GameServersHub](https://gameserv
 # Is this framework safe and secure?:
 - All of the code is public for you to view, but the API framework is generally safe and secure. The question becomes how safe and secure can game server plugins be, and that generally falls under the developer producing the plugins, but rest assured, game server resources are heavily moderated on the GSH website, and any valid reports of plugins being malicious are removed, banned and de-platformed entirely from our API framework.
 
-
-
-
 ## Social Media Links:
 - [Website (Marketplace)](https://gameservershub.com/forums/)
 - [Plugins (Marketplace)](https://gameservershub.com/forums/resources/)
 - [Discord (Join to learn more today!)](https://discord.gg/gsh)
+
+You can reach our support email over at `support@gameservershub.com`
 
 ## Requirements:
 
