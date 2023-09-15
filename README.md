@@ -46,7 +46,7 @@ You may join our [Discord server](https://discord.gg/gsh) if you have any questi
 ## Disclaimers
 
 - This is a community project aimed at extending the official server executable that is distributed with the game. Studio Wildcard retains all ownership over the original server files, game copyrights, etc.
-- Unless specified otherwise, the Server API is distributed under the MIT license, which can be found [here](LICENSE.TXT)
+- Unless specified otherwise, the Server API is distributed under the MIT license, which can be found [here](https://github.com/ServersHub/ServerAPI/blob/main/LICENSE)
 
 ## FAQ
 
