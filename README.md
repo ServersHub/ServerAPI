@@ -18,7 +18,7 @@ Currently this project is ran and supported by [GameServersHub](https://gameserv
 - All of the code is public for you to view, but the API framework is generally safe and secure. The question becomes how safe and secure can game server plugins be, and that generally falls under the developer producing the plugins, but rest assured, game server resources are heavily moderated on the GSH website, and any valid reports of plugins being malicious are removed, banned and de-platformed entirely from our API framework.
 
 ## Social Media Links:
-- [Website (Marketplace)](https://gameservershub.com/forums/)
+- [Website (Forums)](https://gameservershub.com/forums/)
 - [Plugins (Marketplace)](https://gameservershub.com/forums/resources/)
 - [Discord (Join to learn more today!)](https://discord.gg/gsh)
 
