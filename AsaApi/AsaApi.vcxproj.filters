@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Core">
+      <UniqueIdentifier>{a93ca284-f245-4ef2-901b-2535f554d545}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Private">
+      <UniqueIdentifier>{58b93328-2dac-4b2b-8c41-02a17c7e731e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Private\PDBReader">
+      <UniqueIdentifier>{33f06268-195c-49c3-be9e-000d8db7c38e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Public">
+      <UniqueIdentifier>{49a4967d-3b28-4100-8909-6e68961f8f39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Public\API">
+      <UniqueIdentifier>{ac8f1bb7-c68f-483f-9526-a420ea83a11f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Private\Ark">
+      <UniqueIdentifier>{460fe5fd-2323-4145-8161-979d81e95a9d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Private\PDBReader\PDBReader.cpp">
+      <Filter>Source Files\Core\Private\PDBReader</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Private\Helpers.cpp">
+      <Filter>Source Files\Core\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Private\Offsets.cpp">
+      <Filter>Source Files\Core\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Private\Tools.cpp">
+      <Filter>Source Files\Core\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Private\Base.cpp">
+      <Filter>Source Files\Core\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Private\Logger.cpp">
+      <Filter>Source Files\Core\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Private\Ark\ArkBaseApi.cpp">
+      <Filter>Source Files\Core\Private\Ark</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Core\Private\PDBReader\PDBReader.h">
+      <Filter>Source Files\Core\Private\PDBReader</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Public\API\Fields.h">
+      <Filter>Source Files\Core\Public\API</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Public\API\Base.h">
+      <Filter>Source Files\Core\Public\API</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Private\Helpers.h">
+      <Filter>Source Files\Core\Private</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Private\Offsets.h">
+      <Filter>Source Files\Core\Private</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Private\IBaseApi.h">
+      <Filter>Source Files\Core\Private</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Private\Ark\ArkBaseApi.h">
+      <Filter>Source Files\Core\Private\Ark</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="AsaApi.def">
+      <Filter>Source Files</Filter>
+    </None>
+  </ItemGroup>
+</Project>
