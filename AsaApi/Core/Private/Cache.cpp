@@ -6,7 +6,7 @@
 #include <string>
 #include <cstdint>
 #include <filesystem>
-#include <openssl/sha.h>
+#include <openssl/evp.h>
 
 namespace Cache
 {
@@ -18,21 +18,41 @@ namespace Cache
 			return "";
 		}
 
-		SHA256_CTX sha256;
-		SHA256_Init(&sha256);
+		EVP_MD_CTX* mdctx = EVP_MD_CTX_new();
+		if (mdctx == nullptr) {
+			Log::GetLog()->error("Error creating EVP_MD_CTX");
+			return "";
+		}
+
+		if (EVP_DigestInit_ex(mdctx, EVP_sha256(), nullptr) != 1) {
+			EVP_MD_CTX_free(mdctx);
+			Log::GetLog()->error("Error initializing SHA-256 context");
+			return "";
+		}
 
 		const int bufferSize = 4096;
 		char buffer[bufferSize];
 		while (!file.eof()) {
 			file.read(buffer, bufferSize);
-			SHA256_Update(&sha256, buffer, file.gcount());
+			if (EVP_DigestUpdate(mdctx, buffer, file.gcount()) != 1) {
+				EVP_MD_CTX_free(mdctx);
+				Log::GetLog()->error("Error updating SHA-256 context");
+				return "";
+			}
 		}
 
-		unsigned char digest[SHA256_DIGEST_LENGTH];
-		SHA256_Final(digest, &sha256);
+		unsigned char digest[EVP_MAX_MD_SIZE];
+		unsigned int digestLen;
+		if (EVP_DigestFinal_ex(mdctx, digest, &digestLen) != 1) {
+			EVP_MD_CTX_free(mdctx);
+			Log::GetLog()->error("Error finalizing SHA-256 context");
+			return "";
+		}
+
+		EVP_MD_CTX_free(mdctx);
 
 		std::string result;
-		for (int i = 0; i < SHA256_DIGEST_LENGTH; i++) {
+		for (unsigned int i = 0; i < digestLen; i++) {
 			char hex[3];
 			snprintf(hex, sizeof(hex), "%02x", digest[i]);
 			result += hex;
@@ -62,7 +82,7 @@ namespace Cache
 			return content;
 		}
 		else {
-			Log::GetLog()->error("Error opening file for reading: " + filename.string());
+			Log::GetLog()->warn("Error opening file for reading: " + filename.string());
 			return "";
 		}
 	}

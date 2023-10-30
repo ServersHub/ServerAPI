@@ -4,6 +4,7 @@
 #include "..\Private\Cache.h"
 #include "Tools.h"
 #include <Logger/Logger.h>
+#include <filesystem>
 
 namespace API
 {
@@ -15,6 +16,8 @@ namespace API
 
 	bool ArkBaseApi::Init()
 	{
+		namespace fs = std::filesystem;
+
 		Log::GetLog()->info("-----------------------------------------------");
 		Log::GetLog()->info("ARK:SA Api V{:.2f}", GetVersion());
 		Log::GetLog()->info("Loading...\n");
@@ -35,7 +38,9 @@ namespace API
 			const std::string fileHash = Cache::calculateSHA256(filepath);
 			const std::string storedHash = Cache::readFromFile(cacheCheckFile);
 
-			if (fileHash != storedHash)
+			if (fileHash != storedHash
+				|| !fs::exists(offsetsFile)
+				|| !fs::exists(bitfieldsFile))
 			{
 				Log::GetLog()->info("Cache refresh required this will take several minutes to complete");
 				pdb_reader.Read(filepath, &offsets_dump, &bitfields_dump);

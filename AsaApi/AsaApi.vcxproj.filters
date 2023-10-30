@@ -91,5 +91,6 @@
     <None Include="AsaApi.def">
       <Filter>Source Files</Filter>
     </None>
+    <None Include="vcpkg.json" />
   </ItemGroup>
 </Project>
