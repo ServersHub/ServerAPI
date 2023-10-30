@@ -57,6 +57,9 @@
     <ClCompile Include="Core\Private\Ark\ArkBaseApi.cpp">
       <Filter>Source Files\Core\Private\Ark</Filter>
     </ClCompile>
+    <ClCompile Include="Core\Private\Cache.cpp">
+      <Filter>Source Files\Core\Private</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Private\PDBReader\PDBReader.h">
@@ -79,6 +82,9 @@
     </ClInclude>
     <ClInclude Include="Core\Private\Ark\ArkBaseApi.h">
       <Filter>Source Files\Core\Private\Ark</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Private\Cache.h">
+      <Filter>Source Files\Core\Private</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
