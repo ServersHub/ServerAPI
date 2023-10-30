@@ -82,7 +82,9 @@ namespace Cache
 			return content;
 		}
 		else {
-			Log::GetLog()->warn("Error opening file for reading: " + filename.string());
+			if (std::filesystem::exists(filename))
+				Log::GetLog()->error("Error file exists but is not readable: " + filename.string());
+
 			return "";
 		}
 	}
