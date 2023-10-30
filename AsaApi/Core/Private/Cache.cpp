@@ -62,7 +62,7 @@ namespace Cache
 			return content;
 		}
 		else {
-			Log::GetLog()->error("Error opening file for reading: " + filename.string());
+			Log::GetLog()->warn("Error opening file for reading: " + filename.string());
 			return "";
 		}
 	}

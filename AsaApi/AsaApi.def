@@ -1,3 +1,3 @@
 LIBRARY AsaApi.dll
 EXPORTS
-	ExportFunc @1
+	InitApi @1
