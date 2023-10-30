@@ -5,7 +5,6 @@
 #include "Tools.h"
 #include <Logger/Logger.h>
 #include <filesystem>
-
 namespace API
 {
 	constexpr float api_version = 1.00;
