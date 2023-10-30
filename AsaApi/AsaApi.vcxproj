@@ -119,13 +119,16 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>D:\ArkAscendedApi\ServerAPI\AsaApi\Core\Public;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)AsaApi\Core\Public;$(SolutionDir)include\openssl;$(SolutionDir)include\poco;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
       <ModuleDefinitionFile>AsaApi.def</ModuleDefinitionFile>
+      <AdditionalLibraryDirectories>$(SolutionDir)lib\</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libssl.lib;Crypt32.lib;Iphlpapi.lib;ws2_32.lib;winmm.lib;wldap32.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -138,6 +141,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>$(SolutionDir)AsaApi\Core\Public;$(SolutionDir)include\openssl;$(SolutionDir)include\poco;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -146,11 +150,14 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
       <ModuleDefinitionFile>AsaApi.def</ModuleDefinitionFile>
+      <AdditionalLibraryDirectories>$(SolutionDir)lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Crypt32.lib;Iphlpapi.lib;ws2_32.lib;winmm.lib;wldap32.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Core\Private\Ark\ArkBaseApi.cpp" />
     <ClCompile Include="Core\Private\Base.cpp" />
+    <ClCompile Include="Core\Private\Cache.cpp" />
     <ClCompile Include="Core\Private\Helpers.cpp" />
     <ClCompile Include="Core\Private\Logger.cpp" />
     <ClCompile Include="Core\Private\Offsets.cpp" />
@@ -160,6 +167,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Private\Ark\ArkBaseApi.h" />
+    <ClInclude Include="Core\Private\Cache.h" />
     <ClInclude Include="Core\Private\Helpers.h" />
     <ClInclude Include="Core\Private\IBaseApi.h" />
     <ClInclude Include="Core\Private\Offsets.h" />
