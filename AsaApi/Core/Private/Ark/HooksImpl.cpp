@@ -36,7 +36,7 @@ namespace AsaApi
 	DECLARE_HOOK(RCONClientConnection_ProcessRCONPacket, void, RCONClientConnection*, RCONPacket*, UWorld*);
 	DECLARE_HOOK(AGameState_DefaultTimer, void, AGameState*);
 	DECLARE_HOOK(AShooterGameMode_BeginPlay, void, AShooterGameMode*);
-	DECLARE_HOOK(URCONServer_Init, bool, URCONServer*, FString, int, UShooterCheatManager*);
+	DECLARE_HOOK(URCONServer_Init, bool, URCONServer*, FString*, unsigned int, UShooterCheatManager*);
 	DECLARE_HOOK(APlayerController_ServerReceivedPlayerControllerAck_Implementation, void, APlayerController*);
 	DECLARE_HOOK(AShooterPlayerController_Possess, void, AShooterPlayerController*, APawn*);
 	DECLARE_HOOK(AShooterGameMode_Logout, void, AShooterGameMode*, AController*);
@@ -161,7 +161,7 @@ namespace AsaApi
 		//if (HideCommand)
 		//	return ((APlayerController*)_this)->ConsoleCommand(result, Command, false);
 		//else
-			return AShooterPlayerController_ConsoleCommand_original(_this, result, Command, bWriteToLog);
+		return AShooterPlayerController_ConsoleCommand_original(_this, result, Command, bWriteToLog);
 	}
 
 	void Hook_RCONClientConnection_ProcessRCONPacket(RCONClientConnection* _this, RCONPacket* packet,
@@ -186,7 +186,7 @@ namespace AsaApi
 		}
 		*/
 		API::PluginManager::DetectPluginChangesTimerCallback(); // We call this here to avoid UnknownModule crashes
-		
+
 		AGameState_DefaultTimer_original(_this);
 	}
 
@@ -197,7 +197,7 @@ namespace AsaApi
 		//dynamic_cast<ApiUtils&>(*API::game_api->GetApiUtils()).SetStatus(ServerStatus::Ready);
 	}
 
-	bool Hook_URCONServer_Init(URCONServer* _this, FString Password, int InPort, UShooterCheatManager* SCheatManager)
+	bool Hook_URCONServer_Init(URCONServer* _this, FString* Password, unsigned int InPort, UShooterCheatManager* SCheatManager)
 	{
 		//need fix
 		//dynamic_cast<ApiUtils&>(*API::game_api->GetApiUtils()).SetCheatManager(SCheatManager);
