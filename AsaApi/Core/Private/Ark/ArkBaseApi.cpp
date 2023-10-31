@@ -2,15 +2,18 @@
 #include "..\Private\PDBReader\PDBReader.h"
 #include "..\Private\Offsets.h"
 #include "..\Private\Cache.h"
+#include "..\Hooks.h"
 #include "Tools.h"
 #include <Logger/Logger.h>
 #include "HooksImpl.h"
 #include <filesystem>
+
 namespace API
 {
 	constexpr float api_version = 1.00;
 
 	ArkBaseApi::ArkBaseApi()
+		: hooks_(std::make_unique<Hooks>())
 	{
 	}
 
