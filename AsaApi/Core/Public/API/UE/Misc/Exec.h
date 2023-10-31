@@ -6,7 +6,7 @@
 #include "Misc/AssertionMacros.h"
 
 class FOutputDevice;
-class UWorld;
+struct UWorld;
 
 #ifndef UE_ALLOW_EXEC_COMMANDS
 	#if UE_BUILD_SHIPPING && !WITH_EDITOR

@@ -50,7 +50,7 @@ namespace API
 		std::ifstream f{path};
 		if (!f.good())
 			throw std::runtime_error("Failed to open pdb file");
-
+		
 		IDiaDataSource* data_source;
 		IDiaSession* dia_session;
 		IDiaSymbol* symbol;

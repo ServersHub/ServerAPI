@@ -4,7 +4,7 @@
 
 #include <string>
 
-namespace ArkApi::Tools
+namespace AsaApi::Tools
 {
 	ARK_API std::string GetCurrentDir();
 
@@ -35,5 +35,5 @@ namespace ArkApi::Tools
 // For back compatibility
 namespace API
 {
-	namespace Tools = ArkApi::Tools;
+	namespace Tools = AsaApi::Tools;
 }

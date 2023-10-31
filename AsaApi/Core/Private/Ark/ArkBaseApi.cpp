@@ -4,6 +4,7 @@
 #include "..\Private\Cache.h"
 #include "Tools.h"
 #include <Logger/Logger.h>
+#include "HooksImpl.h"
 #include <filesystem>
 namespace API
 {
@@ -68,7 +69,8 @@ namespace API
 		}
 
 		Offsets::Get().Init(move(offsets_dump), move(bitfields_dump));
-
+		Sleep(10);
+		AsaApi::InitHooks();
 		Log::GetLog()->info("API was successfully loaded");
 		Log::GetLog()->info("-----------------------------------------------\n");
 
@@ -87,5 +89,9 @@ namespace API
 
 	void ArkBaseApi::RegisterCommands()
 	{
+	}
+	std::unique_ptr<AsaApi::IHooks>& ArkBaseApi::GetHooks()
+	{
+		return hooks_;
 	}
 } // namespace API

@@ -1327,7 +1327,7 @@ public:
 	 *	@param	Out			The output device to utilize
 	 *	@return	bool		true if command was processed, false if not
 	 */
-	static bool Exec(class UWorld* InWorld, const TCHAR* Cmd, FOutputDevice& Out)
+	static bool Exec(struct UWorld* InWorld, const TCHAR* Cmd, FOutputDevice& Out)
 	{
 		return false;
 	}

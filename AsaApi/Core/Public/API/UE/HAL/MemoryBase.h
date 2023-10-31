@@ -9,7 +9,7 @@
 #include "Misc/OutputDevice.h"
 #include "Templates/Atomic.h"
 
-class UWorld;
+struct UWorld;
 template <typename T> class TAtomic;
 
 #ifndef UPDATE_MALLOC_STATS
