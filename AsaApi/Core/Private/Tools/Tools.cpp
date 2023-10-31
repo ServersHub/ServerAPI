@@ -49,13 +49,13 @@ namespace AsaApi::Tools
 			return converted_string;
 
 		const auto size_needed = WideCharToMultiByte(CP_UTF8, 0, wstr.data(), static_cast<int>(wstr.size()), nullptr, 0,
-		                                             nullptr, nullptr);
+			nullptr, nullptr);
 		if (size_needed > 0)
 		{
 			converted_string.resize(size_needed);
 
 			WideCharToMultiByte(CP_UTF8, 0, wstr.data(), static_cast<int>(wstr.size()), converted_string.data(),
-			                    size_needed, nullptr, nullptr);
+				size_needed, nullptr, nullptr);
 		}
 
 		return converted_string;
@@ -76,7 +76,7 @@ namespace AsaApi::Tools
 			converted_string.resize(size_needed);
 
 			MultiByteToWideChar(CP_UTF8, 0, str.data(), static_cast<int>(str.size()), converted_string.data(),
-			                    size_needed);
+				size_needed);
 		}
 
 		return converted_string;
@@ -91,4 +91,4 @@ namespace AsaApi::Tools
 	{
 		return API::game_api->GetVersion();
 	}
-} // namespace Tools // namespace ArkApi
+} // namespace Tools // namespace AsaApi
