@@ -26,11 +26,10 @@ namespace AsaApi
 {
 	// Hooks declaration
 	DECLARE_HOOK(UEngine_Init, void, DWORD64, DWORD64);
-	DECLARE_HOOK(UWorld_InitWorld, void, UWorld*, DWORD64);
+	DECLARE_HOOK(UEngine_LoadMap, bool, DWORD64, DWORD64, DWORD64, DWORD64, DWORD64);
 	DECLARE_HOOK(UWorld_Tick, void, DWORD64, DWORD64, float);
 	DECLARE_HOOK(AShooterGameMode_InitGame, void, AShooterGameMode*, FString*, FString*, FString*);
-	DECLARE_HOOK(AShooterPlayerController_ServerSendChatMessage_Impl, void, AShooterPlayerController*, FString*,
-		int); //EChatSendMode::Type); temporary replaced with int
+	DECLARE_HOOK(AShooterPlayerController_ServerSendChatMessage_Impl, void, AShooterPlayerController*, FString*, int); //EChatSendMode::Type); temporary replaced with int
 	DECLARE_HOOK(APlayerController_ConsoleCommand, FString*, APlayerController*, FString*, FString*, bool);
 	DECLARE_HOOK(AShooterPlayerController_ConsoleCommand, FString*, AShooterPlayerController*, FString*, FString*, bool);
 	DECLARE_HOOK(RCONClientConnection_ProcessRCONPacket, void, RCONClientConnection*, RCONPacket*, UWorld*);
@@ -46,7 +45,7 @@ namespace AsaApi
 		auto& hooks = API::game_api->GetHooks();
 		Log::GetLog()->info("hooks: {}", (uint64)&hooks);
 		hooks->SetHook("UEngine.Init", &Hook_UEngine_Init, &UEngine_Init_original);
-		hooks->SetHook("UWorld.InitWorld", &Hook_UWorld_InitWorld, &UWorld_InitWorld_original);
+		hooks->SetHook("UEngine.LoadMap", &Hook_UEngine_LoadMap, &UEngine_LoadMap_original);
 		hooks->SetHook("UWorld.Tick", &Hook_UWorld_Tick, &UWorld_Tick_original);
 		hooks->SetHook("AShooterGameMode.InitGame", &Hook_AShooterGameMode_InitGame,
 			&AShooterGameMode_InitGame_original);
@@ -86,13 +85,13 @@ namespace AsaApi
 		dynamic_cast<API::IBaseApi&>(*API::game_api).RegisterCommands();
 	}
 
-	void Hook_UWorld_InitWorld(UWorld* world, DWORD64 ivs)
+	bool Hook_UEngine_LoadMap(DWORD64 world, DWORD64 WorldContext, DWORD64 URL, DWORD64 Pending, DWORD64 Error)
 	{
-		Log::GetLog()->info("UWorld::InitWorld was called");
+		Log::GetLog()->info("UEngine::LoadMap was called");
 		// need fix
 		//dynamic_cast<ApiUtils&>(*API::game_api->GetApiUtils()).SetWorld(world);
 
-		UWorld_InitWorld_original(world, ivs);
+		return UEngine_LoadMap_original(world, WorldContext, URL, Pending, Error);
 	}
 
 	void Hook_UWorld_Tick(DWORD64 world, DWORD64 tick_type, float delta_seconds)
