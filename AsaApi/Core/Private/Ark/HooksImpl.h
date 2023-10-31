@@ -3,4 +3,4 @@
 namespace AsaApi
 {
 	void InitHooks();
-} // namespace ArkApi
+} // namespace AsaApi

@@ -170,10 +170,12 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Core\Private\Ark\ApiUtils.cpp" />
     <ClCompile Include="Core\Private\Ark\ArkBaseApi.cpp" />
     <ClCompile Include="Core\Private\Ark\HooksImpl.cpp" />
     <ClCompile Include="Core\Private\Base.cpp" />
     <ClCompile Include="Core\Private\Cache.cpp" />
+    <ClCompile Include="Core\Private\Commands.cpp" />
     <ClCompile Include="Core\Private\Helpers.cpp" />
     <ClCompile Include="Core\Private\Hooks.cpp" />
     <ClCompile Include="Core\Private\Logger.cpp" />
@@ -184,16 +186,19 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Core\Private\Ark\ApiUtils.h" />
     <ClInclude Include="Core\Private\Ark\ArkBaseApi.h" />
     <ClInclude Include="Core\Private\Ark\Globals.h" />
     <ClInclude Include="Core\Private\Ark\HooksImpl.h" />
     <ClInclude Include="Core\Private\Cache.h" />
+    <ClInclude Include="Core\Private\Commands.h" />
     <ClInclude Include="Core\Private\Helpers.h" />
     <ClInclude Include="Core\Private\Hooks.h" />
     <ClInclude Include="Core\Private\IBaseApi.h" />
     <ClInclude Include="Core\Private\Offsets.h" />
     <ClInclude Include="Core\Private\PDBReader\PDBReader.h" />
     <ClInclude Include="Core\Private\PluginManager\PluginManager.h" />
+    <ClInclude Include="Core\Public\API\ARK\Ark.h" />
     <ClInclude Include="Core\Public\API\Base.h" />
     <ClInclude Include="Core\Public\API\Fields.h" />
     <ClInclude Include="Core\Public\API\UE\Algo\Accumulate.h" />
@@ -909,8 +914,11 @@
     <ClInclude Include="Core\Public\API\UE\Windows\WindowsPlatformTLS.h" />
     <ClInclude Include="Core\Public\API\UE\Windows\WindowsSemaphore.h" />
     <ClInclude Include="Core\Public\API\UE\Windows\WindowsSystemIncludes.h" />
+    <ClInclude Include="Core\Public\Ark\ArkApiUtils.h" />
     <ClInclude Include="Core\Public\IApiUtils.h" />
+    <ClInclude Include="Core\Public\ICommands.h" />
     <ClInclude Include="Core\Public\IHooks.h" />
+    <ClInclude Include="Core\Public\Tools.h" />
     <ClInclude Include="D:\Spill\UE_5.2\Engine\Source\Runtime\Core\Public\Delegates\IntegerSequence.h" />
   </ItemGroup>
   <ItemGroup>

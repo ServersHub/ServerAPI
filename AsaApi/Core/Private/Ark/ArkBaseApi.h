@@ -3,6 +3,7 @@
 #include "../IBaseApi.h"
 #include <IApiUtils.h>
 #include "Containers/UnrealString.h"
+
 namespace API
 {
 	class ArkBaseApi : public IBaseApi
@@ -16,9 +17,9 @@ namespace API
 		std::string GetApiName() override;
 		void RegisterCommands() override;
 
-		//std::unique_ptr<ArkApi::ICommands>& GetCommands() override;
+		std::unique_ptr<AsaApi::ICommands>& GetCommands() override;
 		std::unique_ptr<AsaApi::IHooks>& GetHooks() override;
-		//std::unique_ptr<ArkApi::IApiUtils>& GetApiUtils() override;
+		std::unique_ptr<AsaApi::IApiUtils>& GetApiUtils() override;
 
 	private:
 		// Callbacks
@@ -29,12 +30,12 @@ namespace API
 		//static void UnloadPluginCmd(APlayerController* /*player_controller*/, FString* /*cmd*/, bool /*unused*/);
 
 		//static void LoadPluginRcon(RCONClientConnection* /*rcon_connection*/, RCONPacket* /*rcon_packet*/,
-		         //                  UWorld* /*unused*/);
+				 //                  UWorld* /*unused*/);
 		//static void UnloadPluginRcon(RCONClientConnection* /*rcon_connection*/, RCONPacket* /*rcon_packet*/,
-		                         //    UWorld* /*unused*/);
+								 //    UWorld* /*unused*/);
 
-		//std::unique_ptr<ArkApi::ICommands> commands_;
+		std::unique_ptr<AsaApi::ICommands> commands_;
 		std::unique_ptr<AsaApi::IHooks> hooks_;
-		//std::unique_ptr<ArkApi::IApiUtils> api_utils_;
+		std::unique_ptr<AsaApi::IApiUtils> api_utils_;
 	};
 } // namespace API

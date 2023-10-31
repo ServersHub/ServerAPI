@@ -3,9 +3,11 @@
 #include "..\Private\Offsets.h"
 #include "..\Private\Cache.h"
 #include "..\Hooks.h"
+#include "..\Commands.h"
 #include "Tools.h"
 #include <Logger/Logger.h>
 #include "HooksImpl.h"
+#include "ApiUtils.h"
 #include <filesystem>
 
 namespace API
@@ -13,7 +15,9 @@ namespace API
 	constexpr float api_version = 1.00;
 
 	ArkBaseApi::ArkBaseApi()
-		: hooks_(std::make_unique<Hooks>())
+		: commands_(std::make_unique<AsaApi::Commands>()),
+		hooks_(std::make_unique<Hooks>()),
+		api_utils_(std::make_unique<AsaApi::ApiUtils>())
 	{
 	}
 
@@ -87,14 +91,28 @@ namespace API
 
 	std::string ArkBaseApi::GetApiName()
 	{
-		return "ArkApi";
+		return "AsaApi";
 	}
 
 	void ArkBaseApi::RegisterCommands()
 	{
+		GetCommands()->AddConsoleCommand("plugins.load", &LoadPluginCmd);
+		GetCommands()->AddConsoleCommand("plugins.unload", &UnloadPluginCmd);
+		GetCommands()->AddRconCommand("plugins.load", &LoadPluginRcon);
+		GetCommands()->AddRconCommand("plugins.unload", &UnloadPluginRcon);
 	}
 	std::unique_ptr<AsaApi::IHooks>& ArkBaseApi::GetHooks()
 	{
 		return hooks_;
+	}
+
+	std::unique_ptr<AsaApi::ICommands>& ArkBaseApi::GetCommands()
+	{
+		return commands_;
+	}
+
+	std::unique_ptr<AsaApi::IApiUtils>& ArkBaseApi::GetApiUtils()
+	{
+		return api_utils_;
 	}
 } // namespace API

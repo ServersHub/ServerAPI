@@ -12,7 +12,6 @@
 
 namespace API
 {
-	
 	PluginManager& PluginManager::Get()
 	{
 		static PluginManager instance;
@@ -60,7 +59,7 @@ namespace API
 			return plugin_pdb_config;
 		}
 
-		std::ifstream file{config_path};
+		std::ifstream file{ config_path };
 		if (file.is_open())
 		{
 			file >> plugin_pdb_config;
@@ -75,7 +74,7 @@ namespace API
 		nlohmann::json config = nlohmann::json::object({});
 
 		const std::string config_path = Tools::GetCurrentDir() + "/config.json";
-		std::ifstream file{config_path};
+		std::ifstream file{ config_path };
 		if (!file.is_open())
 		{
 			return config;
@@ -166,7 +165,7 @@ namespace API
 
 		auto plugin_info = ReadPluginInfo(plugin_name);
 
-		// Check version		
+		// Check version
 		const auto required_version = static_cast<float>(plugin_info["MinApiVersion"]);
 		if (required_version != .0f && game_api->GetVersion() < required_version)
 		{
@@ -190,9 +189,9 @@ namespace API
 		}
 
 		return loaded_plugins_.emplace_back(std::make_shared<Plugin>(h_module, plugin_name, plugin_info["FullName"],
-		                                                             plugin_info["Description"], plugin_info["Version"],
-		                                                             plugin_info["MinApiVersion"],
-		                                                             plugin_info["Dependencies"]));
+			plugin_info["Description"], plugin_info["Version"],
+			plugin_info["MinApiVersion"],
+			plugin_info["Dependencies"]));
 	}
 
 	void PluginManager::UnloadPlugin(const std::string& plugin_name) noexcept(false)
@@ -240,7 +239,7 @@ namespace API
 		const std::string dir_path = Tools::GetCurrentDir() + "/" + game_api->GetApiName() + "/Plugins/" + plugin_name;
 		const std::string config_path = dir_path + "/PluginInfo.json";
 
-		std::ifstream file{config_path};
+		std::ifstream file{ config_path };
 		if (file.is_open())
 		{
 			file >> plugin_info;
@@ -277,7 +276,7 @@ namespace API
 				if (!IsPluginLoaded(dependency))
 				{
 					Log::GetLog()->error("Plugin {} is  missing! {} might not work correctly", dependency,
-					                     plugin->name);
+						plugin->name);
 				}
 			}
 		}
@@ -286,10 +285,10 @@ namespace API
 	std::vector<std::shared_ptr<Plugin>>::const_iterator PluginManager::FindPlugin(const std::string& plugin_name)
 	{
 		const auto iter = std::find_if(loaded_plugins_.begin(), loaded_plugins_.end(),
-		                               [plugin_name](const std::shared_ptr<Plugin>& plugin) -> bool
-		                               {
-			                               return plugin->name == plugin_name;
-		                               });
+			[plugin_name](const std::shared_ptr<Plugin>& plugin) -> bool
+			{
+				return plugin->name == plugin_name;
+			});
 
 		return iter;
 	}
@@ -323,7 +322,7 @@ namespace API
 		bool save_world = save_world_before_reload_;
 
 		for (const auto& dir_name : fs::directory_iterator(
-			     Tools::GetCurrentDir() + "/" + game_api->GetApiName() + "/Plugins"))
+			Tools::GetCurrentDir() + "/" + game_api->GetApiName() + "/Plugins"))
 		{
 			const auto& path = dir_name.path();
 			if (!is_directory(path))
@@ -346,7 +345,7 @@ namespace API
 				{
 					Log::GetLog()->info("Saving world before reloading plugins ... THIS NEEDS FIXING...");
 					//commented out for initial build
-					//ArkApi::GetApiUtils().GetShooterGameMode()->SaveWorld(true);
+					//AsaApi::GetApiUtils().GetShooterGameMode()->SaveWorld(true);
 					Log::GetLog()->info("World saved.");
 
 					save_world = false; // do not save again if multiple plugins are reloaded in this loop

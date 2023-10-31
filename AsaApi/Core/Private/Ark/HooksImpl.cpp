@@ -22,6 +22,7 @@ struct URCONServer;
 struct APawn;
 struct AController;
 //temp predefines end
+
 namespace AsaApi
 {
 	// Hooks declaration
@@ -89,7 +90,7 @@ namespace AsaApi
 	{
 		Log::GetLog()->info("UEngine::LoadMap was called");
 		// need fix
-		//dynamic_cast<ApiUtils&>(*API::game_api->GetApiUtils()).SetWorld(world);
+		dynamic_cast<ApiUtils&>(*API::game_api->GetApiUtils()).SetWorld(world);
 
 		return UEngine_LoadMap_original(world, WorldContext, URL, Pending, Error);
 	}
@@ -120,7 +121,7 @@ namespace AsaApi
 	{
 		//need fix
 		/*const long double last_chat_time = player_controller->LastChatMessageTimeField();
-		const long double now_time = ArkApi::GetApiUtils().GetWorld()->TimeSecondsField();
+		const long double now_time = AsaApi::GetApiUtils().GetWorld()->TimeSecondsField();
 
 		const auto spam_check = now_time - last_chat_time < 1.0;
 		if (last_chat_time > 0 && spam_check)
@@ -130,10 +131,10 @@ namespace AsaApi
 
 		player_controller->LastChatMessageTimeField() = now_time;
 
-		const auto command_executed = dynamic_cast<ArkApi::Commands&>(*API::game_api->GetCommands()).
+		const auto command_executed = dynamic_cast<AsaApi::Commands&>(*API::game_api->GetCommands()).
 			CheckChatCommands(player_controller, message, mode);
 
-		const auto prevent_default = dynamic_cast<ArkApi::Commands&>(*API::game_api->GetCommands()).
+		const auto prevent_default = dynamic_cast<AsaApi::Commands&>(*API::game_api->GetCommands()).
 			CheckOnChatMessageCallbacks(player_controller, message, mode, spam_check, command_executed);
 
 		if (command_executed || prevent_default)

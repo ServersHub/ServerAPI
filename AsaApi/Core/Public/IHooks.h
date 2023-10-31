@@ -2,6 +2,7 @@
 
 #include <API/Base.h>
 #include "HAL/UnrealMemory.h"
+
 namespace AsaApi
 {
 	class ARK_API IHooks
@@ -32,8 +33,8 @@ namespace AsaApi
 
 	private:
 		virtual bool SetHookInternal(const std::string& func_name, LPVOID detour,
-		                             LPVOID* original) = 0;
+			LPVOID* original) = 0;
 	};
 
 	ARK_API IHooks& APIENTRY GetHooks();
-} // namespace ArkApi
+} // namespace AsaApi
