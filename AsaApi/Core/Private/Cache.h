@@ -29,7 +29,7 @@ namespace Cache
 		{
 			std::size_t keySize = entry.first.size();
 			file.write(reinterpret_cast<char*>(&keySize), sizeof(keySize));
-			file.write(entry.first.c_str(), keySize);
+			file.write(entry.first.data(), keySize);
 			file.write(reinterpret_cast<const char*>(&entry.second), sizeof(T));
 		}
 
@@ -40,6 +40,7 @@ namespace Cache
 	std::unordered_map<std::string, T> deserializeMap(const std::filesystem::path& filename)
 	{
 		std::unordered_map<std::string, T> data;
+		data.reserve(std::filesystem::file_size(filename) / sizeof(T));
 
 		if (!std::filesystem::exists(filename))
 		{
