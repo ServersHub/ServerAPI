@@ -10,7 +10,7 @@ std::string GetLogName()
 	static std::string log_name("-1");
 	if (log_name == "-1")
 	{
-		const std::string config_path = ArkApi::Tools::GetCurrentDir() + "/config.json";
+		const std::string config_path = AsaApi::Tools::GetCurrentDir() + "/config.json";
 		std::ifstream file{config_path};
 		if (!file.is_open())
 		{

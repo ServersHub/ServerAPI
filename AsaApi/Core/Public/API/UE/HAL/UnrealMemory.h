@@ -7,6 +7,7 @@
 #include "API/UE/HAL/MemoryBase.h"
 #include "API/UE/HAL/PlatformMemory.h"
 #include "Templates/IsPointer.h"
+#include "API/Fields.h"
 
 #ifndef UE_USE_VERYLARGEPAGEALLOCATOR
 #define UE_USE_VERYLARGEPAGEALLOCATOR 0
@@ -206,10 +207,25 @@ struct FMemory
 	//
 	// C style memory allocation stubs.
 	//
+	//static void* Malloc(SIZE_T Count, uint32 Alignment = DEFAULT_ALIGNMENT);
+	static void* Malloc(SIZE_T Count, uint32 Alignment = DEFAULT_ALIGNMENT)
+	{
+		return NativeCall<void*, unsigned __int64, unsigned int>(nullptr, "FMemory.Malloc", Count, Alignment);
+	}
 
-	static void* Malloc(SIZE_T Count, uint32 Alignment = DEFAULT_ALIGNMENT);
-	static void* Realloc(void* Original, SIZE_T Count, uint32 Alignment = DEFAULT_ALIGNMENT);
-	static void Free(void* Original);
+
+	//static void* Realloc(void* Original, SIZE_T Count, uint32 Alignment = DEFAULT_ALIGNMENT);
+	static void* Realloc(void* Original, SIZE_T Size, uint32 Alignment)
+	{
+		if(!Original)
+			return Malloc(Size);
+		return NativeCall<void*, void*, unsigned __int64>(nullptr, "FMemory.Realloc", Original, Size);
+	}
+	//static void Free(void* Original);
+	static void Free(void* Original) 
+	{ 
+		NativeCall<void, void*>(nullptr, "FMemory.Free", Original); 
+	}
 	static SIZE_T GetAllocSize(void* Original);
 
 	static FORCEINLINE_DEBUGGABLE void* MallocZeroed(SIZE_T Count, uint32 Alignment = DEFAULT_ALIGNMENT)
@@ -225,7 +241,10 @@ struct FMemory
 	* and shrink containers to optimal sizes.
 	* This call is always fast and threadsafe with no locking.
 	*/
-	static SIZE_T QuantizeSize(SIZE_T Count, uint32 Alignment = DEFAULT_ALIGNMENT);
+	static SIZE_T QuantizeSize(SIZE_T Count, uint32 Alignment = DEFAULT_ALIGNMENT)
+	{
+		return NativeCall<SIZE_T, SIZE_T, uint32>(nullptr, "FMemory.QuantizeSize", Count, Alignment);
+	}
 
 	/**
 	* Releases as much memory as possible. Must be called from the main thread.

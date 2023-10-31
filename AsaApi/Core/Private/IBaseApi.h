@@ -2,7 +2,7 @@
 
 #include <memory>
 #include <string>
-
+#include "IHooks.h"
 //#include "ICommands.h"
 
 namespace API
@@ -18,7 +18,7 @@ namespace API
 		virtual void RegisterCommands() = 0;
 
 		//virtual std::unique_ptr<ArkApi::ICommands>& GetCommands() = 0;
-		//virtual std::unique_ptr<ArkApi::IHooks>& GetHooks() = 0;
+		virtual std::unique_ptr<AsaApi::IHooks>& GetHooks() = 0;
 		//virtual std::unique_ptr<ArkApi::IApiUtils>& GetApiUtils() = 0;
 	};
 
