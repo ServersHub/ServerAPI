@@ -737,7 +737,7 @@ struct TIsContiguousContainer<FMemoryImageString>
 
 class FMemoryImageString
 {
-	DECLARE_EXPORTED_TYPE_LAYOUT(FMemoryImageString, CORE_API, NonVirtual);
+	DECLARE_EXPORTED_TYPE_LAYOUT(FMemoryImageString, , NonVirtual);
 private:
 	/** Array holding the character data */
 	using DataType = TMemoryImageArray<TCHAR>;
@@ -849,7 +849,7 @@ DECLARE_INTRINSIC_TYPE_LAYOUT(FHashedNameDebugString);
 
 class FHashedName
 {
-	DECLARE_EXPORTED_TYPE_LAYOUT(FHashedName, CORE_API, NonVirtual);
+	DECLARE_EXPORTED_TYPE_LAYOUT(FHashedName, , NonVirtual);
 public:
 	inline FHashedName() : Hash(0u) {}
 	explicit FHashedName(uint64 InHash);

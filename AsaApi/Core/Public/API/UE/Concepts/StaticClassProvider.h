@@ -2,7 +2,7 @@
 
 #pragma once
 
-class UClass;
+struct UClass;
 
 /**
  * Describes a type with a StaticClass (static) member.

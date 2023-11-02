@@ -94,21 +94,21 @@ typedef int32 BINNED_STAT_TYPE;
 #endif
 
 /** Malloc binned allocator specific stats. */
-DECLARE_MEMORY_STAT_EXTERN(TEXT("Binned Os Current"),		STAT_Binned_OsCurrent,STATGROUP_MemoryAllocator, CORE_API);
-DECLARE_MEMORY_STAT_EXTERN(TEXT("Binned Os Peak"),			STAT_Binned_OsPeak,STATGROUP_MemoryAllocator, CORE_API);
-DECLARE_MEMORY_STAT_EXTERN(TEXT("Binned Waste Current"),	STAT_Binned_WasteCurrent,STATGROUP_MemoryAllocator, CORE_API);
-DECLARE_MEMORY_STAT_EXTERN(TEXT("Binned Waste Peak"),		STAT_Binned_WastePeak,STATGROUP_MemoryAllocator, CORE_API);
-DECLARE_MEMORY_STAT_EXTERN(TEXT("Binned Used Current"),		STAT_Binned_UsedCurrent,STATGROUP_MemoryAllocator, CORE_API);
-DECLARE_MEMORY_STAT_EXTERN(TEXT("Binned Used Peak"),		STAT_Binned_UsedPeak,STATGROUP_MemoryAllocator, CORE_API);
-DECLARE_DWORD_COUNTER_STAT_EXTERN(TEXT("Binned Current Allocs"),	STAT_Binned_CurrentAllocs,STATGROUP_MemoryAllocator, CORE_API);
-DECLARE_DWORD_COUNTER_STAT_EXTERN(TEXT("Binned Total Allocs"),		STAT_Binned_TotalAllocs,STATGROUP_MemoryAllocator, CORE_API);
-DECLARE_MEMORY_STAT_EXTERN(TEXT("Binned Slack Current"),	STAT_Binned_SlackCurrent,STATGROUP_MemoryAllocator, CORE_API);
+DECLARE_MEMORY_STAT_EXTERN(TEXT("Binned Os Current"),		STAT_Binned_OsCurrent,STATGROUP_MemoryAllocator, );
+DECLARE_MEMORY_STAT_EXTERN(TEXT("Binned Os Peak"),			STAT_Binned_OsPeak,STATGROUP_MemoryAllocator, );
+DECLARE_MEMORY_STAT_EXTERN(TEXT("Binned Waste Current"),	STAT_Binned_WasteCurrent,STATGROUP_MemoryAllocator, );
+DECLARE_MEMORY_STAT_EXTERN(TEXT("Binned Waste Peak"),		STAT_Binned_WastePeak,STATGROUP_MemoryAllocator, );
+DECLARE_MEMORY_STAT_EXTERN(TEXT("Binned Used Current"),		STAT_Binned_UsedCurrent,STATGROUP_MemoryAllocator, );
+DECLARE_MEMORY_STAT_EXTERN(TEXT("Binned Used Peak"),		STAT_Binned_UsedPeak,STATGROUP_MemoryAllocator, );
+DECLARE_DWORD_COUNTER_STAT_EXTERN(TEXT("Binned Current Allocs"),	STAT_Binned_CurrentAllocs,STATGROUP_MemoryAllocator, );
+DECLARE_DWORD_COUNTER_STAT_EXTERN(TEXT("Binned Total Allocs"),		STAT_Binned_TotalAllocs,STATGROUP_MemoryAllocator, );
+DECLARE_MEMORY_STAT_EXTERN(TEXT("Binned Slack Current"),	STAT_Binned_SlackCurrent,STATGROUP_MemoryAllocator, );
 
 #if USE_OS_SMALL_BLOCK_GRAB_MEMORY_FROM_OS && ENABLE_LOW_LEVEL_MEM_TRACKER
-DECLARE_LLM_MEMORY_STAT_EXTERN(TEXT("Nano Malloc Pages Current"), STAT_Binned_NanoMallocPages_Current,STATGROUP_LLMPlatform, CORE_API);
-DECLARE_LLM_MEMORY_STAT_EXTERN(TEXT("Nano Malloc Pages Peak"), STAT_Binned_NanoMallocPages_Peak,STATGROUP_LLMPlatform, CORE_API);
-DECLARE_LLM_MEMORY_STAT_EXTERN(TEXT("Nano Malloc Pages Waste Current"), STAT_Binned_NanoMallocPages_WasteCurrent,STATGROUP_LLMPlatform, CORE_API);
-DECLARE_LLM_MEMORY_STAT_EXTERN(TEXT("Nano Malloc Pages Waste Peak"),STAT_Binned_NanoMallocPages_WastePeak,STATGROUP_LLMPlatform, CORE_API);
+DECLARE_LLM_MEMORY_STAT_EXTERN(TEXT("Nano Malloc Pages Current"), STAT_Binned_NanoMallocPages_Current,STATGROUP_LLMPlatform, );
+DECLARE_LLM_MEMORY_STAT_EXTERN(TEXT("Nano Malloc Pages Peak"), STAT_Binned_NanoMallocPages_Peak,STATGROUP_LLMPlatform, );
+DECLARE_LLM_MEMORY_STAT_EXTERN(TEXT("Nano Malloc Pages Waste Current"), STAT_Binned_NanoMallocPages_WasteCurrent,STATGROUP_LLMPlatform, );
+DECLARE_LLM_MEMORY_STAT_EXTERN(TEXT("Nano Malloc Pages Waste Peak"),STAT_Binned_NanoMallocPages_WastePeak,STATGROUP_LLMPlatform, );
 #endif //USE_OS_SMALL_BLOCK_GRAB_MEMORY_FROM_OS
 
 

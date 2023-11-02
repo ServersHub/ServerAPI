@@ -24,7 +24,7 @@ class FStructuredArchiveRecord;
 class FStructuredArchiveSlot;
 class FStructuredArchiveStream;
 class FText;
-class UObject;
+struct UObject;
 struct FLazyObjectPtr;
 struct FObjectPtr;
 struct FSoftObjectPath;

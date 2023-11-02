@@ -4,11 +4,11 @@
 #include "Containers/UnrealString.h"
 #include "CoreTypes.h"
 #include "HAL/PlatformTLS.h"
-#include "Logging/LogMacros.h"
+//#include "Logging/LogMacros.h"
 #include "Misc/Build.h"
 #include "Misc/EnumClassFlags.h"
 #include "Misc/OutputDevice.h"
-#include "ProfilingDebugging/CpuProfilerTrace.h"
+//#include "ProfilingDebugging/CpuProfilerTrace.h"
 #include "Templates/Atomic.h"
 #include "UObject/NameTypes.h"
 
@@ -24,8 +24,8 @@ class FOutputDeviceRedirector;
 class FRunnableThread;
 class FText;
 class ITransaction;
-class UClass;
-
+struct UClass;
+/*
 DECLARE_LOG_CATEGORY_EXTERN(LogHAL, Log, All);
 DECLARE_LOG_CATEGORY_EXTERN(LogSerialization, Log, All);
 DECLARE_LOG_CATEGORY_EXTERN(LogUnrealMath, Log, All);
@@ -63,7 +63,7 @@ DECLARE_LOG_CATEGORY_EXTERN(LogTemp, Log, All);
 #ifdef PLATFORM_GLOBAL_LOG_CATEGORY_ALT
 	DECLARE_LOG_CATEGORY_EXTERN_HELPER(PLATFORM_GLOBAL_LOG_CATEGORY_ALT, Log, All);
 #endif
-
+*/
 
 FOutputDeviceRedirector* GetGlobalLogSingleton();
 

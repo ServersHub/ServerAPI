@@ -33,7 +33,7 @@ class FProperty;
 class FString;
 class FText;
 class ITargetPlatform;
-class UObject;
+struct UObject;
 namespace UE::Serialization{ class FEditorBulkData; }
 struct FArchiveSerializedPropertyChain;
 template<class TEnum> class TEnumAsByte;

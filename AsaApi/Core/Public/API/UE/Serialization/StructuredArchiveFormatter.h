@@ -11,7 +11,7 @@ class FArchive;
 class FName;
 class FString;
 class FText;
-class UObject;
+struct UObject;
 
 /**
  * Specifies the type of a value in a slot. Used by FContextFreeArchiveFormatter for introspection.

@@ -5,7 +5,7 @@
 #include "Containers/UnrealString.h"
 #include "CoreTypes.h"
 #include "Delegates/Delegate.h"
-#include "Logging/LogMacros.h"
+//#include "Logging/LogMacros.h"
 #include "Misc/EngineNetworkCustomVersion.h"
 
 // The version number used for determining network compatibility. If zero, uses the engine compatible version.
@@ -14,7 +14,7 @@
 // The version number used for determining replay compatibility
 #define ENGINE_REPLAY_VERSION  ENGINE_NET_VERSION
 
-DECLARE_LOG_CATEGORY_EXTERN( LogNetVersion, Log, All );
+//DECLARE_LOG_CATEGORY_EXTERN( LogNetVersion, Log, All );
 
 class FNetworkReplayVersion
 {

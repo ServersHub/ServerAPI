@@ -11,7 +11,7 @@
 class FName;
 class FString;
 class FText;
-class UObject;
+struct UObject;
 struct FLazyObjectPtr;
 struct FObjectPtr;
 struct FSoftObjectPath;
