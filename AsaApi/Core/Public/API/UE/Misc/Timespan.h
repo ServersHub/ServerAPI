@@ -10,7 +10,7 @@
 class FArchive;
 class FOutputDevice;
 class FString;
-class UObject;
+struct UObject;
 template <typename ElementType> struct TIntervalTraits;
 
 
@@ -751,7 +751,7 @@ public:
 
 public:
 
-	friend class UObject;
+	friend struct UObject;
 
 	/**
 	 * Serialize the given time span from or into the specified archive.

@@ -11,7 +11,7 @@
 #include "Misc/LargeWorldCoordinatesSerializer.h"
 #include "Misc/NetworkVersion.h"
 #include "Math/IntPoint.h"
-#include "Logging/LogMacros.h"
+//#include "Logging/LogMacros.h"
 
 #ifdef _MSC_VER
 #pragma warning (push)

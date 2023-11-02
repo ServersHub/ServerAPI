@@ -13,7 +13,7 @@
 #include "CoreTypes.h"
 
 #ifdef __clang__
-	#define MINIMAL_WINDOWS_API CORE_API
+	#define MINIMAL_WINDOWS_API 
 #else
 	#define MINIMAL_WINDOWS_API extern "C" __declspec(dllimport)
 #endif

@@ -15,7 +15,7 @@
 #include "Templates/Atomic.h"
 #include "Serialization/MemoryLayout.h"
 #include "Misc/StringBuilder.h"
-#include "Trace/Trace.h"
+//#include "Trace/Trace.h"
 
 /*----------------------------------------------------------------------------
 	Definitions.
@@ -1866,7 +1866,7 @@ private:
 	friend bool operator==(FDisplayNameEntryId A, FNameEntryId B) { return A.GetDisplayId() == B; }
 	friend uint32 GetTypeHash(FDisplayNameEntryId InId) { return GetTypeHash(InId.GetDisplayId()); }
 
-public: // Internal functions for batch serialization code - intentionally lacking CORE_API
+public: // Internal functions for batch serialization code - intentionally lacking 
 	static FDisplayNameEntryId FromComparisonId(FNameEntryId ComparisonId);
 	FNameEntryId ToDisplayId() const;
 	void SetLoadedComparisonId(FNameEntryId ComparisonId); // Called first

@@ -44,7 +44,6 @@ namespace AsaApi
 	void InitHooks()
 	{
 		auto& hooks = API::game_api->GetHooks();
-		Log::GetLog()->info("hooks: {}", (uint64)&hooks);
 		hooks->SetHook("UEngine.Init", &Hook_UEngine_Init, &UEngine_Init_original);
 		hooks->SetHook("UEngine.LoadMap", &Hook_UEngine_LoadMap, &UEngine_LoadMap_original);
 		hooks->SetHook("UWorld.Tick", &Hook_UWorld_Tick, &UWorld_Tick_original);

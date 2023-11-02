@@ -2,16 +2,16 @@
 
 #pragma once
 
-class UObjectBase;
-class UObjectBaseUtility;
-class	UObject;
+struct UObjectBase;
+struct UObjectBaseUtility;
+struct	UObject;
 class		UField;
 class			UEnum;
 class			FProperty;
 class				FObjectProperty;
 class			UStruct;
 class				UFunction;
-class				UClass;
+struct				UClass;
 class				UScriptStruct;
 class		FLinker;
 class			FLinkerLoad;

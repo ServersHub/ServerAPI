@@ -14,7 +14,7 @@
 #include "Misc/NetworkVersion.h"
 #include "Math/Color.h"
 #include "Math/IntPoint.h"
-#include "Logging/LogMacros.h"
+//#include "Logging/LogMacros.h"
 #include "Math/Vector2D.h"
 #include "Misc/ByteSwap.h"
 #include "Internationalization/Text.h"

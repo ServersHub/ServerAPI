@@ -50,7 +50,7 @@ public:
 		return *this;
 	}
 
-	virtual FArchive& operator<<( class UObject*& Res ) override
+	virtual FArchive& operator<<(struct UObject*& Res ) override
 	{
 		// Not supported through this archive
 		check(0);

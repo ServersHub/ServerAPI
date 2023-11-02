@@ -39,7 +39,7 @@ public:
 		return *this;
 	}
 
-	virtual FArchive& operator<<(class UObject*& Value) override
+	virtual FArchive& operator<<(struct UObject*& Value) override
 	{
 		check(0);
 		return *this;

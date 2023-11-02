@@ -20,7 +20,7 @@ class FCbObjectView;
 class FLargeMemoryWriter;
 class ICookedPackageWriter;
 class IPackageStoreWriter;
-class UObject;
+struct UObject;
 struct FPackageStoreEntryResource;
 struct FSavePackageArgs;
 struct FSavePackageResultStruct;

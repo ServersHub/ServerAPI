@@ -75,7 +75,7 @@ public:
 	inline constexpr static bool TCanAppendRange_V = TIsContiguousContainer<RangeType>::Value && TCanAppend_V<decltype(*::GetData(DeclVal<RangeType>()))>;
 
 				TStringBuilderBase() = default;
-	CORE_API	~TStringBuilderBase();
+		~TStringBuilderBase();
 
 				TStringBuilderBase(const TStringBuilderBase&) = delete;
 				TStringBuilderBase(TStringBuilderBase&&) = delete;

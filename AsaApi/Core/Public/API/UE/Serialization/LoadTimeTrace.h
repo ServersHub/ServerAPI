@@ -20,8 +20,8 @@ namespace UE { namespace Trace { class FChannel; } }
 
 #if LOADTIMEPROFILERTRACE_ENABLED
 
-UE_TRACE_CHANNEL_EXTERN(LoadTimeChannel, CORE_API);
-UE_TRACE_CHANNEL_EXTERN(AssetLoadTimeChannel, CORE_API);
+UE_TRACE_CHANNEL_EXTERN(LoadTimeChannel, );
+UE_TRACE_CHANNEL_EXTERN(AssetLoadTimeChannel, );
 
 struct FLoadTimeProfilerTrace
 {

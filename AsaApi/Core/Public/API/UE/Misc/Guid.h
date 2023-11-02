@@ -19,7 +19,7 @@ class FMemoryUnfreezeContent;
 class FOutputDevice;
 class FPointerTableBase;
 class FSHA1;
-class UObject;
+struct UObject;
 template <typename CharType> class TStringBuilderBase;
 template <typename T> struct TCanBulkSerialize;
 template <typename T> struct TIsPODType;
@@ -275,7 +275,7 @@ public:
 	 * @return true on success, false otherwise.
 	 * @see ImportTextItem
 	 */
-	bool ExportTextItem(FString& ValueStr, FGuid const& DefaultValue, UObject* Parent, int32 PortFlags, class UObject* ExportRootScope) const;
+	bool ExportTextItem(FString& ValueStr, FGuid const& DefaultValue, UObject* Parent, int32 PortFlags, struct UObject* ExportRootScope) const;
 
 	/**
 	 * Imports the GUIDs value from a text buffer.

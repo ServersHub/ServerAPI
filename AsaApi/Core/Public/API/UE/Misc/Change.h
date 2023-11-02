@@ -12,7 +12,7 @@
 
 class FFeedbackContext;
 class FReferenceCollector;
-class UObject;
+struct UObject;
 
 /**
  * FChange modifies a UObject and is meant to be used to implement undo/redo.

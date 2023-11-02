@@ -53,7 +53,7 @@ public:
 
 	//~ Begin FArchive Interface
 	virtual FArchive& operator<<(class FName& Value) override;
-	virtual FArchive& operator<<(class UObject*& Value) override;
+	virtual FArchive& operator<<(struct UObject*& Value) override;
 	virtual FArchive& operator<<(class FText& Value) override;
 	//~ End FArchive Interface
 

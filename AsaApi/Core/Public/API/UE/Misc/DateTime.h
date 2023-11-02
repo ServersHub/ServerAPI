@@ -12,7 +12,7 @@
 
 class FArchive;
 class FOutputDevice;
-class UObject;
+struct UObject;
 
 
 /**
