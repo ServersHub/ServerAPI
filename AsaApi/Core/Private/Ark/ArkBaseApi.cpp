@@ -1,5 +1,6 @@
 #include "ArkBaseApi.h"
 #include "..\Private\PDBReader\PDBReader.h"
+#include "..\PluginManager\PluginManager.h"
 #include "..\Private\Offsets.h"
 #include "..\Private\Cache.h"
 #include "..\Hooks.h"
@@ -94,13 +95,6 @@ namespace API
 		return "AsaApi";
 	}
 
-	void ArkBaseApi::RegisterCommands()
-	{
-		GetCommands()->AddConsoleCommand("plugins.load", &LoadPluginCmd);
-		GetCommands()->AddConsoleCommand("plugins.unload", &UnloadPluginCmd);
-		GetCommands()->AddRconCommand("plugins.load", &LoadPluginRcon);
-		GetCommands()->AddRconCommand("plugins.unload", &UnloadPluginRcon);
-	}
 	std::unique_ptr<AsaApi::IHooks>& ArkBaseApi::GetHooks()
 	{
 		return hooks_;
@@ -114,5 +108,94 @@ namespace API
 	std::unique_ptr<AsaApi::IApiUtils>& ArkBaseApi::GetApiUtils()
 	{
 		return api_utils_;
+	}
+
+	void ArkBaseApi::RegisterCommands()
+	{
+		GetCommands()->AddConsoleCommand("plugins.load", &LoadPluginCmd);
+		GetCommands()->AddConsoleCommand("plugins.unload", &UnloadPluginCmd);
+		GetCommands()->AddRconCommand("plugins.load", &LoadPluginRcon);
+		GetCommands()->AddRconCommand("plugins.unload", &UnloadPluginRcon);
+	}
+
+	FString ArkBaseApi::LoadPlugin(FString* cmd)
+	{
+		TArray<FString> parsed;
+		cmd->ParseIntoArray(parsed, L" ", true);
+
+		if (parsed.IsValidIndex(1))
+		{
+			const std::string plugin_name = parsed[1].ToString();
+
+			try
+			{
+				PluginManager::Get().LoadPlugin(plugin_name);
+			}
+			catch (const std::exception& error)
+			{
+				Log::GetLog()->warn("({}) {}", __FUNCTION__, error.what());
+				return FString::Format("Failed to load plugin - {}", error.what());
+			}
+
+			Log::GetLog()->info("Loaded plugin - {}", plugin_name.c_str());
+
+			return "Successfully loaded plugin";
+		}
+
+		return "Plugin not found";
+	}
+
+	FString ArkBaseApi::UnloadPlugin(FString* cmd)
+	{
+		TArray<FString> parsed;
+		cmd->ParseIntoArray(parsed, L" ", true);
+
+		if (parsed.IsValidIndex(1))
+		{
+			const std::string plugin_name = parsed[1].ToString();
+
+			try
+			{
+				PluginManager::Get().UnloadPlugin(plugin_name);
+			}
+			catch (const std::exception& error)
+			{
+				Log::GetLog()->warn("({}) {}", __FUNCTION__, error.what());
+				return *FString::Format("Failed to unload plugin - {}", error.what());
+			}
+
+			Log::GetLog()->info("Unloaded plugin - {}", plugin_name.c_str());
+
+			return L"Successfully unloaded plugin";
+		}
+
+		return L"Plugin not found";
+	}
+
+	// Command Callbacks
+	void ArkBaseApi::LoadPluginCmd(APlayerController* player_controller, FString* cmd, bool /*unused*/)
+	{
+		auto* shooter_controller = static_cast<AShooterPlayerController*>(player_controller);
+		AsaApi::GetApiUtils().SendServerMessage(shooter_controller, FColorList::Green, *LoadPlugin(cmd));
+	}
+
+	void ArkBaseApi::UnloadPluginCmd(APlayerController* player_controller, FString* cmd, bool /*unused*/)
+	{
+		auto* shooter_controller = static_cast<AShooterPlayerController*>(player_controller);
+		AsaApi::GetApiUtils().SendServerMessage(shooter_controller, FColorList::Green, *UnloadPlugin(cmd));
+	}
+
+	// RCON Command Callbacks
+	void ArkBaseApi::LoadPluginRcon(RCONClientConnection* rcon_connection, RCONPacket* rcon_packet, UWorld* /*unused*/)
+	{
+		FString reply = LoadPlugin(&rcon_packet->Body);
+		rcon_connection->SendMessageW(rcon_packet->Id, 0, &reply);
+	}
+
+	void ArkBaseApi::UnloadPluginRcon(RCONClientConnection* rcon_connection, RCONPacket* rcon_packet,
+		UWorld* /*unused*/)
+	{
+		FString reply = UnloadPlugin(&rcon_packet->Body);
+		rcon_connection->SendMessageW(rcon_packet->Id, 0, &reply);
 	}
 } // namespace API

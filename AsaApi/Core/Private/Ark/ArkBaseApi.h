@@ -26,13 +26,13 @@ namespace API
 		static FString LoadPlugin(FString* cmd);
 		static FString UnloadPlugin(FString* cmd);
 
-		//static void LoadPluginCmd(APlayerController* /*player_controller*/, FString* /*cmd*/, bool /*unused*/);
-		//static void UnloadPluginCmd(APlayerController* /*player_controller*/, FString* /*cmd*/, bool /*unused*/);
+		static void LoadPluginCmd(APlayerController* /*player_controller*/, FString* /*cmd*/, bool /*unused*/);
+		static void UnloadPluginCmd(APlayerController* /*player_controller*/, FString* /*cmd*/, bool /*unused*/);
 
-		//static void LoadPluginRcon(RCONClientConnection* /*rcon_connection*/, RCONPacket* /*rcon_packet*/,
-				 //                  UWorld* /*unused*/);
-		//static void UnloadPluginRcon(RCONClientConnection* /*rcon_connection*/, RCONPacket* /*rcon_packet*/,
-								 //    UWorld* /*unused*/);
+		static void LoadPluginRcon(RCONClientConnection* /*rcon_connection*/, RCONPacket* /*rcon_packet*/,
+			UWorld* /*unused*/);
+		static void UnloadPluginRcon(RCONClientConnection* /*rcon_connection*/, RCONPacket* /*rcon_packet*/,
+			UWorld* /*unused*/);
 
 		std::unique_ptr<AsaApi::ICommands> commands_;
 		std::unique_ptr<AsaApi::IHooks> hooks_;

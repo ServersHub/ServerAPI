@@ -1,7 +1,7 @@
 #include "HooksImpl.h"
 
-//#include "ApiUtils.h"
-//#include "../Commands.h"
+#include "ApiUtils.h"
+#include "../Commands.h"
 #include "../Hooks.h"
 #include "../PluginManager/PluginManager.h"
 #include "../IBaseApi.h"
@@ -27,7 +27,7 @@ namespace AsaApi
 {
 	// Hooks declaration
 	DECLARE_HOOK(UEngine_Init, void, DWORD64, DWORD64);
-	DECLARE_HOOK(UEngine_LoadMap, bool, DWORD64, DWORD64, DWORD64, DWORD64, DWORD64);
+	DECLARE_HOOK(UEngine_LoadMap, bool, UWorld*, DWORD64, DWORD64, DWORD64, DWORD64);
 	DECLARE_HOOK(UWorld_Tick, void, DWORD64, DWORD64, float);
 	DECLARE_HOOK(AShooterGameMode_InitGame, void, AShooterGameMode*, FString*, FString*, FString*);
 	DECLARE_HOOK(AShooterPlayerController_ServerSendChatMessage_Impl, void, AShooterPlayerController*, FString*, int); //EChatSendMode::Type); temporary replaced with int
@@ -85,7 +85,7 @@ namespace AsaApi
 		dynamic_cast<API::IBaseApi&>(*API::game_api).RegisterCommands();
 	}
 
-	bool Hook_UEngine_LoadMap(DWORD64 world, DWORD64 WorldContext, DWORD64 URL, DWORD64 Pending, DWORD64 Error)
+	bool Hook_UEngine_LoadMap(UWorld* world, DWORD64 WorldContext, DWORD64 URL, DWORD64 Pending, DWORD64 Error)
 	{
 		Log::GetLog()->info("UEngine::LoadMap was called");
 		// need fix
