@@ -31,6 +31,9 @@
 
 #include <type_traits>
 
+#include "API/UE/Containers/StringConv.h"
+#include "Logger/Logger.h"
+#include "fmt/format.h"
 struct FStringFormatArg;
 template<typename InKeyType,typename InValueType,typename SetAllocator ,typename KeyFuncs > class TMap;
 
@@ -55,7 +58,36 @@ class FString
 {
 public:
 	using AllocatorType = TSizedDefaultAllocator<32>;
+	/** Create Ansi std::string from FString*/
+	std::string ToString()
+	{
+		return std::string(TCHAR_TO_ANSI(**this));
+	}
+	/** Create FString from Ansi std::string*/
+	static FString FromString(const std::string input)
+	{
+		return FString(ANSI_TO_TCHAR(input.c_str()));
+	}
+	/** Create UTF8 std::string from FString*/
+	std::string ToStringUTF8()
+	{
+		return std::string(TCHAR_TO_UTF8(**this));
+	}
+	/** Create FString from UTF8 std::string */
+	static FString FromStringUTF8(const std::string input)
+	{
+		return FString(UTF8_TO_TCHAR(input.c_str()));
+	}
+	template <typename T, typename... Args>
+	static FString Format(const T* format, Args&&... args)
+	{
+		if constexpr (!TIsCharType<T>::Value)
+			static_assert(TIsCharType<T>::Value, "format must be a char or wchar_t");
 
+		auto formatted_msg = fmt::format(format, std::forward<Args>(args)...);
+
+		return FString(formatted_msg.c_str());
+	}
 private:
 	/** Array holding the character data */
 	typedef TArray<TCHAR, AllocatorType> DataType;
