@@ -183,6 +183,9 @@
     <ClCompile Include="Core\Private\PDBReader\PDBReader.cpp" />
     <ClCompile Include="Core\Private\PluginManager\PluginManager.cpp" />
     <ClCompile Include="Core\Private\Tools\Tools.cpp" />
+    <ClCompile Include="Core\Public\API\UE\Containers\GenericPlatformString.cpp" />
+    <ClCompile Include="Core\Public\API\UE\Containers\String.cpp" />
+    <ClCompile Include="D:\Spill\UE_5.2\Engine\Source\Runtime\Core\Private\Misc\CString.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>

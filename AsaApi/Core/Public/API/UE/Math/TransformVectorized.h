@@ -4,7 +4,7 @@
 
 #include "Containers/UnrealString.h"
 #include "CoreTypes.h"
-#include "Logging/LogMacros.h"
+//#include "Logging/LogMacros.h"
 #include "Math/Axis.h"
 #include "Math/MathFwd.h"
 #include "Math/Matrix.h"

@@ -1609,7 +1609,7 @@ public:
 	using FArchiveState::SetArchiveState;
 	using FArchiveState::SetError;
 	using FArchiveState::ClearError;
-	using FArchiveState::SetCriticalError;
+	//using FArchiveState::SetCriticalError;
 	using FArchiveState::GetInnermostState;
 	using FArchiveState::CountBytes;
 	using FArchiveState::GetArchiveName;

@@ -6,7 +6,7 @@
 #include "Misc/AssertionMacros.h"
 #include "Math/UnrealMathUtility.h"
 #include "Containers/UnrealString.h"
-#include "Logging/LogMacros.h"
+//#include "Logging/LogMacros.h"
 #include "Math/Vector.h"
 #include "Math/VectorRegister.h"
 #include "Math/Rotator.h"

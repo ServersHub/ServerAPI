@@ -8,7 +8,7 @@
 #include "Containers/UnrealString.h"
 #include "Misc/Parse.h"
 #include "Misc/LargeWorldCoordinatesSerializer.h"
-#include "Logging/LogMacros.h"
+//#include "Logging/LogMacros.h"
 #include "Math/Vector2D.h"
 #include "Math/Vector.h"
 #include "Serialization/MemoryLayout.h"
