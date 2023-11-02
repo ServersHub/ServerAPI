@@ -301,7 +301,7 @@ namespace AsaApi
 		*/
 		static FORCEINLINE FString GetSteamName(AController* player_controller)
 		{
-			return player_controller != nullptr ? player_controller->PlayerStateField()->PlayerNameField() : "";
+			return player_controller != nullptr ? player_controller->PlayerStateField()->PlayerNamePrivateField() : "";
 		}
 
 		/**
@@ -466,7 +466,9 @@ namespace AsaApi
 		*/
 		static FORCEINLINE FVector GetPosition(APlayerController* player_controller)
 		{
-			return player_controller != nullptr ? player_controller->DefaultActorLocationField() : FVector{ 0, 0, 0 };
+			return FVector{ 0, 0, 0 };
+			// need fix -wooly
+			//return player_controller != nullptr ? player_controller->DefaultActorLocationField() : FVector{ 0, 0, 0 };
 		}
 
 		/**
@@ -479,7 +481,9 @@ namespace AsaApi
 		static FORCEINLINE std::optional<FString> TeleportToPlayer(AShooterPlayerController* me, AShooterPlayerController* him,
 			bool check_for_dino, float max_dist)
 		{
-			if (!(me != nullptr && him != nullptr && me->GetPlayerCharacter() != nullptr && him->
+			return "function in api needs fix.";
+			//need fix -wooly
+			/*if (!(me != nullptr && him != nullptr && me->GetPlayerCharacter() != nullptr && him->
 				GetPlayerCharacter()
 				!= nullptr
 				&& !me->GetPlayerCharacter()->IsDead() && !him->GetPlayerCharacter()->IsDead())
@@ -502,7 +506,7 @@ namespace AsaApi
 
 			me->SetPlayerPos(pos.X, pos.Y, pos.Z);
 
-			return {};
+			return {};*/
 		}
 
 		/**
@@ -513,8 +517,8 @@ namespace AsaApi
 		static FORCEINLINE bool TeleportToPos(AShooterPlayerController* player_controller, const FVector& pos)
 		{
 			if (player_controller != nullptr && !IsPlayerDead(player_controller))
-			{
-				player_controller->SetPlayerPos(pos.X, pos.Y, pos.Z);
+			{				
+				player_controller->SetPlayerPos((float)pos.X, (float)pos.Y, (float)pos.Z);
 				return true;
 			}
 
@@ -562,7 +566,9 @@ namespace AsaApi
 		 */
 		static FORCEINLINE FString GetIPAddress(AShooterPlayerController* player)
 		{
-			return player && player->GetNetConnection() && !player->GetNetConnection()->ClientGivenIPField().IsEmpty() ? player->GetNetConnection()->ClientGivenIPField() : "";
+			//Needs fix -wooly
+			return "function not implemented.";
+			//return player && player->GetNetConnection() && !player->GetNetConnection()->ClientGivenIPField().IsEmpty() ? player->GetNetConnection()->ClientGivenIPField() : "";
 		}
 
 		/**

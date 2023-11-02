@@ -1,9 +1,4 @@
 #pragma once
-//#include "Delegates/Delegate.h"
-//#include "UObject/ObjectPtr.h"
-//#include "API/UE/Delegates/DelegateSignatureImpl.inl"
-
-
 struct AGameState;
 struct FNetworkNotify {
 
@@ -13,10 +8,7 @@ struct UPrimalWorld : UObject
 
 };
 
-struct AInfo : AActor
-{
 
-};
 struct AGameStateBase : AInfo
 {
 

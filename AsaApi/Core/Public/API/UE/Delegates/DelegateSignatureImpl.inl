@@ -14,7 +14,7 @@
 #include "Misc/Crc.h"
 #include "UObject/NameTypes.h"
 #include "UObject/ScriptDelegates.h"
-#include "UObject/WeakObjectPtrTemplates.h"
+//#include "UObject/WeakObjectPtrTemplates.h"
 #include "Templates/IsConst.h"
 #include "Templates/RemoveReference.h"
 #include "Templates/SharedPointer.h"
