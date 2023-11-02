@@ -18,7 +18,8 @@
 #include "Templates/Tuple.h"
 #include "Templates/UnrealTypeTraits.h"
 #include "UObject/NameTypes.h"
-#include "UObject/WeakObjectPtrTemplates.h"
+#include "API/ARK/UE.h"
+//#include "UObject/WeakObjectPtrTemplates.h"
 
 class FDelegateBase;
 class FDelegateHandle;

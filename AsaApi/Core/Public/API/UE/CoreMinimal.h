@@ -104,7 +104,7 @@
 #include "CoreGlobals.h"
 #include "Templates/SharedPointer.h"
 #include "Internationalization/CulturePointer.h"
-#include "UObject/WeakObjectPtrTemplates.h"
+//#include "UObject/WeakObjectPtrTemplates.h"
 #include "Delegates/DelegateSettings.h"
 #include "Delegates/IDelegateInstance.h"
 #include "Delegates/DelegateBase.h"

@@ -212,4 +212,4 @@
 #include "UObject/ScriptDelegates.h"
 #include "UObject/UnrealNames.h"
 #include "UObject/UObjectHierarchyFwd.h"
-#include "UObject/WeakObjectPtrTemplates.h"
+//#include "UObject/WeakObjectPtrTemplates.h"

@@ -7,7 +7,7 @@
 #include "Misc/AssertionMacros.h"
 #include "UObject/NameTypes.h"
 #include "Templates/SharedPointer.h"
-#include "UObject/WeakObjectPtrTemplates.h"
+//#include "UObject/WeakObjectPtrTemplates.h"
 #include "Delegates/MulticastDelegateBase.h" // IWYU pragma: export
 #include "Delegates/TSMulticastDelegateBase.h"
 #include "Delegates/IntegerSequence.h" // IWYU pragma: export
