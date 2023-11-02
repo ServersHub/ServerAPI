@@ -39,7 +39,7 @@ struct FPrimalChatMessage {
         UserId("")
     {
     }
-    FPrimalChatMessage* operator=(const FPrimalChatMessage* __that) { return NativeCall<FPrimalChatMessage*, FPrimalChatMessage*>(this, "FPrimalChatMessage.operator=", __that); }
+    FPrimalChatMessage* operator=(FPrimalChatMessage* __that) { return NativeCall<FPrimalChatMessage*, FPrimalChatMessage*>(this, "FPrimalChatMessage.operator=", __that); }
 };
 
 

@@ -215,7 +215,7 @@ struct FMemory
 
 
 	//static void* Realloc(void* Original, SIZE_T Count, uint32 Alignment = DEFAULT_ALIGNMENT);
-	static void* Realloc(void* Original, SIZE_T Size, uint32 Alignment)
+	static void* Realloc(void* Original, SIZE_T Size, uint32 Alignment = DEFAULT_ALIGNMENT)
 	{
 		if(!Original)
 			return Malloc(Size);
