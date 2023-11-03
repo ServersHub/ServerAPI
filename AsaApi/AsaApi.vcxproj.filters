@@ -156,6 +156,18 @@
     <ClCompile Include="Core\Private\PluginManager\PluginManager.cpp">
       <Filter>Source Files\Core\Private\PluginManager</Filter>
     </ClCompile>
+    <ClCompile Include="Core\Public\API\UE\Containers\GenericPlatformString.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Public\API\UE\Containers\String.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Public\API\UE\Misc\CString.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Public\API\UE\Serialization\Archive.cpp">
+      <Filter>Source Files\Core\Public\API\UE\Serialization</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Private\PDBReader\PDBReader.h">
@@ -2380,6 +2392,48 @@
     </ClInclude>
     <ClInclude Include="Core\Public\API\ARK\UE.h">
       <Filter>Source Files\Core\Public\API\ARK</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Public\API\UE\Containers\SortedMap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Public\API\UE\Hash\CityHashHelpers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Public\API\UE\Hash\xxhash.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Public\API\UE\Internationalization\CulturePointer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Public\API\UE\Internationalization\Internationalization.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Public\API\UE\Internationalization\ITextData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Public\API\UE\Internationalization\LocalizedTextSourceTypes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Public\API\UE\Internationalization\LocKeyFuncs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Public\API\UE\Internationalization\LocTesting.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Public\API\UE\Internationalization\StringTableCoreFwd.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Public\API\UE\Internationalization\Text.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Public\API\UE\Internationalization\TextComparison.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Public\API\UE\Internationalization\TextKey.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Public\API\UE\Internationalization\TextLocalizationManager.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

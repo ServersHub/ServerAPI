@@ -157,22 +157,22 @@ struct FWindowsPlatformAtomics
 		return ::_InterlockedExchangePointer(Dest, Exchange);
 	}
 
-	static FORCEINLINE int8 InterlockedCompareExchange( volatile int8* Dest, int8 Exchange, int8 Comparand )
+	static FORCEINLINE int8 InterlockedCompareExchange2( volatile int8* Dest, int8 Exchange, int8 Comparand )
 	{
 		return (int8)::_InterlockedCompareExchange8((char*)Dest, (char)Exchange, (char)Comparand);
 	}
 
-	static FORCEINLINE int16 InterlockedCompareExchange( volatile int16* Dest, int16 Exchange, int16 Comparand )
+	static FORCEINLINE int16 InterlockedCompareExchange2( volatile int16* Dest, int16 Exchange, int16 Comparand )
 	{
 		return (int16)::_InterlockedCompareExchange16((short*)Dest, (short)Exchange, (short)Comparand);
 	}
 
-	static FORCEINLINE int32 InterlockedCompareExchange( volatile int32* Dest, int32 Exchange, int32 Comparand )
+	static FORCEINLINE int32 InterlockedCompareExchange2( volatile int32* Dest, int32 Exchange, int32 Comparand )
 	{
 		return (int32)::_InterlockedCompareExchange((long*)Dest, (long)Exchange, (long)Comparand);
 	}
 
-	static FORCEINLINE int64 InterlockedCompareExchange( volatile int64* Dest, int64 Exchange, int64 Comparand )
+	static FORCEINLINE int64 InterlockedCompareExchange2( volatile int64* Dest, int64 Exchange, int64 Comparand )
 	{
 		#if !(UE_BUILD_SHIPPING || UE_BUILD_TEST)
 			if (IsAligned(Dest, alignof(int64)) == false)
@@ -282,22 +282,22 @@ struct FWindowsPlatformAtomics
 
 	static FORCEINLINE int8 AtomicRead(volatile const int8* Src)
 	{
-		return InterlockedCompareExchange((int8*)Src, 0, 0);
+		return InterlockedCompareExchange2((int8*)Src, 0, 0);
 	}
 
 	static FORCEINLINE int16 AtomicRead(volatile const int16* Src)
 	{
-		return InterlockedCompareExchange((int16*)Src, 0, 0);
+		return InterlockedCompareExchange2((int16*)Src, 0, 0);
 	}
 
 	static FORCEINLINE int32 AtomicRead(volatile const int32* Src)
 	{
-		return InterlockedCompareExchange((int32*)Src, 0, 0);
+		return InterlockedCompareExchange2((int32*)Src, 0, 0);
 	}
 
 	static FORCEINLINE int64 AtomicRead(volatile const int64* Src)
 	{
-		return InterlockedCompareExchange((int64*)Src, 0, 0);
+		return InterlockedCompareExchange2((int64*)Src, 0, 0);
 	}
 
 	static FORCEINLINE int8 AtomicRead_Relaxed(volatile const int8* Src)
@@ -320,7 +320,7 @@ struct FWindowsPlatformAtomics
 		#if PLATFORM_64BITS
 			return *Src;
 		#else
-			return InterlockedCompareExchange((volatile int64*)Src, 0, 0);
+			return InterlockedCompareExchange2((volatile int64*)Src, 0, 0);
 		#endif
 	}
 
