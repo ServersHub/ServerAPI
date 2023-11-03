@@ -207,12 +207,12 @@ namespace API
 			// Check if it's a member function
 			if (str_name.find(':') != std::string::npos)
 			{
-				const std::string new_str = ReplaceString(str_name, "::", ".");
+				const std::string new_str = ReplaceString(str_name, "::", ".") + "(" + GetFunctionSymbolParams(sym) + ")";
 				(*offsets_dump_)[new_str] = offset;
 			}
 			else
 			{
-				(*offsets_dump_)["Global." + str_name] = offset;
+				(*offsets_dump_)["Global." + str_name + "(" + GetFunctionSymbolParams(sym) + ")"] = offset;
 			}
 		}
 	}
@@ -374,4 +374,35 @@ namespace API
 
 		CoUninitialize();
 	}
+
+	std::string PdbReader::GetFunctionSymbolParams(IDiaSymbol* pFunction)
+	{
+		std::string parameterTypes;
+		BSTR undecorated = nullptr;
+		if (SUCCEEDED(pFunction->get_undecoratedNameEx(0x20000, &undecorated))) // 0x20000 - Don't include __ptr64 in output (just on the func sig, but the params can still output it)
+		{
+			parameterTypes = Tools::Utf8Encode(undecorated);
+			Log::GetLog()->info("{}", parameterTypes);
+			// public: void __cdecl UShooterCheatManager::DrawDebugBoxForVolumes(float,int,bool,bool,float) __ptr64
+			const size_t start = parameterTypes.find('(');
+			const size_t end = parameterTypes.find(')');
+			if (start != std::string::npos && end != std::string::npos)
+			{
+				parameterTypes = parameterTypes.substr(start + 1, end - start - 1);
+				parameterTypes = ReplaceString(parameterTypes, "struct ", "");
+				parameterTypes = ReplaceString(parameterTypes, "class ", "");
+				parameterTypes = ReplaceString(parameterTypes, "enum ", "");
+				parameterTypes = ReplaceString(parameterTypes, "& __ptr64", "*"); // pointers
+				parameterTypes = ReplaceString(parameterTypes, "const ", "");
+				parameterTypes = ReplaceString(parameterTypes, " ", "");
+				parameterTypes = ReplaceString(parameterTypes, "__ptr64", "");
+				if (parameterTypes == "void")
+					parameterTypes.clear();
+			}
+		}
+
+		return parameterTypes;
+	}
+
+
 } // namespace API

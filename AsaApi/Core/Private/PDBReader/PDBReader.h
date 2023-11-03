@@ -31,6 +31,7 @@ namespace API
 		static std::string GetSymbolNameString(IDiaSymbol* /*symbol*/);
 		static uint32_t GetSymbolId(IDiaSymbol* /*symbol*/);
 		static void Cleanup(IDiaSymbol* /*symbol*/, IDiaSession* /*session*/, IDiaDataSource* /*source*/);
+		static std::string GetFunctionSymbolParams(IDiaSymbol* /*symbol*/);
 
 		std::unordered_map<std::string, intptr_t>* offsets_dump_{nullptr};
 		std::unordered_map<std::string, BitField>* bitfields_dump_{nullptr};
