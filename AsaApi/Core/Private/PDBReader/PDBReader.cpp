@@ -382,8 +382,6 @@ namespace API
 		if (SUCCEEDED(pFunction->get_undecoratedNameEx(0x20000, &undecorated))) // 0x20000 - Don't include __ptr64 in output (just on the func sig, but the params can still output it)
 		{
 			parameterTypes = Tools::Utf8Encode(undecorated);
-			Log::GetLog()->info("{}", parameterTypes);
-			// public: void __cdecl UShooterCheatManager::DrawDebugBoxForVolumes(float,int,bool,bool,float) __ptr64
 			const size_t start = parameterTypes.find('(');
 			const size_t end = parameterTypes.find(')');
 			if (start != std::string::npos && end != std::string::npos)
