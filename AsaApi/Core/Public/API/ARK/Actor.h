@@ -39,7 +39,7 @@ struct FPrimalChatMessage {
         UserId("")
     {
     }
-    FPrimalChatMessage* operator=(FPrimalChatMessage* __that) { return NativeCall<FPrimalChatMessage*, FPrimalChatMessage*>(this, "FPrimalChatMessage.operator=", __that); }
+    FPrimalChatMessage* operator=(FPrimalChatMessage* __that) { return NativeCall<FPrimalChatMessage*, FPrimalChatMessage*>(this, "FPrimalChatMessage.operator=(FPrimalChatMessage&)", __that); }
 };
 
 
@@ -87,7 +87,7 @@ struct APlayerController : APrimalController
         TObjectPtr<UCheatManager>& ptr = *GetNativePointerField<TObjectPtr<UCheatManager>*>(this, "APlayerController.CheatManager");
         return ptr.Get();
     }
-    UNetConnection* GetNetConnection() { return NativeCall<UNetConnection*>(this, "APlayerController.GetNetConnection"); }
+    UNetConnection* GetNetConnection() { return NativeCall<UNetConnection*>(this, "APlayerController.GetNetConnection()"); }
 };
 struct APrimalPlayerController : APlayerController
 {
@@ -102,15 +102,15 @@ struct AShooterPlayerController : ABasePlayerController
     __int64& LinkedPlayerIDField() { return *GetNativePointerField<__int64*>(this, "AShooterPlayerController.LinkedPlayerID"); }
     //functions:
     
-    void ClientChatMessage_Implementation(FPrimalChatMessage Chat) { NativeCall<void, FPrimalChatMessage>(this, "AShooterPlayerController.ClientChatMessage_Implementation", Chat); }
-    void ClientServerChatDirectMessage(FString* MessageText, FLinearColor MessageColor, bool bIsBold) { NativeCall<void, FString*, FLinearColor, bool>(this, "AShooterPlayerController.ClientServerChatDirectMessage", MessageText, MessageColor, bIsBold); }
-    void ClientChatMessage(FPrimalChatMessage Chat) { NativeCall<void, FPrimalChatMessage>(this, "AShooterPlayerController.ClientChatMessage", Chat); }   
-    void ClientServerSOTFNotificationCustom(FString* MessageText, FLinearColor MessageColor, float DisplayScale, float DisplayTime, UTexture2D* MessageIcon, USoundBase* SoundToPlay) { NativeCall<void, FString*, FLinearColor, float, float, UTexture2D*, USoundBase*>(this, "AShooterPlayerController.ClientServerSOTFNotificationCustom_Implementation", MessageText, MessageColor, DisplayScale, DisplayTime, MessageIcon, SoundToPlay); }
-    FString* ConsoleCommand(FString* result, FString* Command, bool bWriteToLog) { return NativeCall<FString*, FString*, FString*, bool>(this, "AShooterPlayerController.ConsoleCommand", result, Command, bWriteToLog); }
-    AShooterCharacter* GetPlayerCharacter() { return NativeCall<AShooterCharacter*>(this, "AShooterPlayerController.GetPlayerCharacter"); }
-    FString* GetPlayerCharacterName(FString* result) { return NativeCall<FString*, FString*>(this, "AShooterPlayerController.GetPlayerCharacterName", result); }    
-    void SetPlayerPos(float X, float Y, float Z) { NativeCall<void, float, float, float>(this, "AShooterPlayerController.SetPlayerPos", X, Y, Z); }
-    AActor* SpawnActor(FString* blueprintPath, float spawnDistance, float spawnYOffset, float ZOffset, bool bDoDeferBeginPlay) { return NativeCall<AActor*, FString*, float, float, float, bool>(this, "AShooterPlayerController.SpawnActor", blueprintPath, spawnDistance, spawnYOffset, ZOffset, bDoDeferBeginPlay); }
+    void ClientChatMessage_Implementation(FPrimalChatMessage Chat) { NativeCall<void, FPrimalChatMessage>(this, "AShooterPlayerController.ClientChatMessage_Implementation(FPrimalChatMessage)", Chat); }
+    void ClientServerChatDirectMessage(FString* MessageText, FLinearColor MessageColor, bool bIsBold) { NativeCall<void, FString*, FLinearColor, bool>(this, "AShooterPlayerController.ClientServerChatDirectMessage(FString&,FLinearColor,bool)", MessageText, MessageColor, bIsBold); }
+    void ClientChatMessage(FPrimalChatMessage Chat) { NativeCall<void, FPrimalChatMessage>(this, "AShooterPlayerController.ClientChatMessage(FPrimalChatMessage)", Chat); }   
+    void ClientServerSOTFNotificationCustom(FString* MessageText, FLinearColor MessageColor, float DisplayScale, float DisplayTime, UTexture2D* MessageIcon, USoundBase* SoundToPlay) { NativeCall<void, FString*, FLinearColor, float, float, UTexture2D*, USoundBase*>(this, "AShooterPlayerController.ClientServerSOTFNotificationCustom_Implementation(FString&,FLinearColor,float,float,UTexture2D*,USoundBase*,int)", MessageText, MessageColor, DisplayScale, DisplayTime, MessageIcon, SoundToPlay); }
+    FString* ConsoleCommand(FString* result, FString* Command, bool bWriteToLog) { return NativeCall<FString*, FString*, FString*, bool>(this, "AShooterPlayerController.ConsoleCommand(FString&,bool)", result, Command, bWriteToLog); }
+    AShooterCharacter* GetPlayerCharacter() { return NativeCall<AShooterCharacter*>(this, "AShooterPlayerController.GetPlayerCharacter()"); }
+    FString* GetPlayerCharacterName(FString* result) { return NativeCall<FString*, FString*>(this, "AShooterPlayerController.GetPlayerCharacterName()", result); }    
+    void SetPlayerPos(float X, float Y, float Z) { NativeCall<void, float, float, float>(this, "AShooterPlayerController.SetPlayerPos(float,float,float)", X, Y, Z); }
+    AActor* SpawnActor(FString* blueprintPath, float spawnDistance, float spawnYOffset, float ZOffset, bool bDoDeferBeginPlay) { return NativeCall<AActor*, FString*, float, float, float, bool>(this, "AShooterPlayerController.SpawnActor(FString&,float,float,float,int,float)", blueprintPath, spawnDistance, spawnYOffset, ZOffset, bDoDeferBeginPlay); }
 };
 
 struct APawn : AActor
@@ -118,14 +118,14 @@ struct APawn : AActor
 };
 struct APrimalPawn: APawn
 {
-    APrimalPawn* GetOwnerController() { return NativeCall<APrimalPawn*>(this, "APrimalPawn.GetOwnerController"); }
+    APrimalPawn* GetOwnerController() { return NativeCall<APrimalPawn*>(this, "APrimalPawn.GetOwnerController()"); }
 };
 struct ACharacter : APrimalPawn
 {
 };
 struct APrimalCharacter : ACharacter
 {
-    bool IsDead() { return NativeCall<bool>(this, "APrimalCharacter.IsDead"); }
+    bool IsDead() { return NativeCall<bool>(this, "APrimalCharacter.IsDead()"); }
     UPrimalInventoryComponent* MyInventoryComponentField() { return *GetNativePointerField<UPrimalInventoryComponent**>(this, "APrimalCharacter.MyInventoryComponent"); }
     
 };
@@ -144,9 +144,9 @@ struct APrimalDinoCharacter : APrimalCharacter
 struct AShooterCharacter : APrimalCharacter
 {
     //Functions
-    APrimalDinoCharacter* GetRidingDino() { return NativeCall<APrimalDinoCharacter*>(this, "AShooterCharacter.GetRidingDino"); }
-    UPrimalPlayerData* GetPlayerData() { return NativeCall<UPrimalPlayerData*>(this, "AShooterCharacter.GetPlayerData"); }
-    TWeakObjectPtr<AShooterPlayerController>& LastValidPlayerControllerField() { return *GetNativePointerField<TWeakObjectPtr<AShooterPlayerController>*>(this, "AShooterCharacter.LastValidPlayerController"); }
+    APrimalDinoCharacter* GetRidingDino() { return NativeCall<APrimalDinoCharacter*>(this, "AShooterCharacter.GetRidingDino()"); }
+    UPrimalPlayerData* GetPlayerData() { return NativeCall<UPrimalPlayerData*>(this, "AShooterCharacter.GetPlayerData()"); }
+    TWeakObjectPtr<AShooterPlayerController>& LastValidPlayerControllerField() { return *GetNativePointerField<TWeakObjectPtr<AShooterPlayerController>*>(this, "AShooterCharacter.LastValidPlayerController()"); }
 };
 struct UCheatManager : UObject
 {

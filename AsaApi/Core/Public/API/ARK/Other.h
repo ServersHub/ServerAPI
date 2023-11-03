@@ -31,13 +31,13 @@ struct RCONClientConnection
 
 	// Functions
 
-	void Tick(long double WorldTime, UWorld* InWorld) { NativeCall<void, long double, UWorld*>(this, "RCONClientConnection.Tick", WorldTime, InWorld); }
-	void ProcessRCONPacket(RCONPacket* Packet, UWorld* InWorld) { NativeCall<void, RCONPacket*, UWorld*>(this, "RCONClientConnection.ProcessRCONPacket", Packet, InWorld); }
-	void SendMessageW(int Id, int Type, FString* OutGoingMessage) { NativeCall<void, int, int, FString*>(this, "RCONClientConnection.SendMessageW", Id, Type, OutGoingMessage); }
-	void Close() { NativeCall<void>(this, "RCONClientConnection.Close"); }
+	void Tick(long double WorldTime, UWorld* InWorld) { NativeCall<void, long double, UWorld*>(this, "RCONClientConnection.Tick(double,UWorld*)", WorldTime, InWorld); }
+	void ProcessRCONPacket(RCONPacket* Packet, UWorld* InWorld) { NativeCall<void, RCONPacket*, UWorld*>(this, "RCONClientConnection.ProcessRCONPacket(RCONPacket&,UWorld*)", Packet, InWorld); }
+	void SendMessageW(int Id, int Type, FString* OutGoingMessage) { NativeCall<void, int, int, FString*>(this, "RCONClientConnection.SendMessage(int,int,FString&)", Id, Type, OutGoingMessage); }
+	void Close() { NativeCall<void>(this, "RCONClientConnection.Close()"); }
 };
 struct UVictoryCore
 {
 	//functions
-	static TArray<AActor*>* ServerOctreeOverlapActors(TArray<AActor*>* result, UWorld* theWorld, FVector* AtLoc, float Radius, EServerOctreeGroup::Type OctreeType, bool bForceActorLocationDistanceCheck) { return NativeCall<TArray<AActor*>*, TArray<AActor*>*, UWorld*, FVector*, float, EServerOctreeGroup::Type, bool>(nullptr, "UVictoryCore.ServerOctreeOverlapActors", result, theWorld, AtLoc, Radius, OctreeType, bForceActorLocationDistanceCheck); }
+	static TArray<AActor*>* ServerOctreeOverlapActors(TArray<AActor*>* result, UWorld* theWorld, FVector* AtLoc, float Radius, EServerOctreeGroup::Type OctreeType, bool bForceActorLocationDistanceCheck) { return NativeCall<TArray<AActor*>*, TArray<AActor*>*, UWorld*, FVector*, float, EServerOctreeGroup::Type, bool>(nullptr, "UVictoryCore.ServerOctreeOverlapActors(UObject*,UE::Math::TVector<double>,float,EServerOctreeGroup::Type,TSubclassOf<AActor>,bool)", result, theWorld, AtLoc, Radius, OctreeType, bForceActorLocationDistanceCheck); }
 };
