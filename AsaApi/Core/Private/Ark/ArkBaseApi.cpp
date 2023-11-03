@@ -37,12 +37,10 @@ namespace API
 
 		try
 		{
-			const std::string current_dir = Tools::GetCurrentDir();
-			const std::wstring dir = Tools::Utf8Decode(current_dir);
-			const std::filesystem::path filepath = dir + L"/ArkAscendedServer.pdb";
-			const std::filesystem::path cacheCheckFile = dir + L"/ArkApi/cache_check.txt";
-			const std::filesystem::path offsetsFile = dir + L"/ArkApi/offsets_dump.map";
-			const std::filesystem::path bitfieldsFile = dir + L"/ArkApi/bitfields_dump.map";
+			const fs::path filepath = fs::current_path().append("ArkAscendedServer.pdb");
+			const fs::path cacheCheckFile = fs::current_path().append(ArkBaseApi::GetApiName()+"/cache_check.txt");
+			const fs::path offsetsFile = fs::current_path().append(ArkBaseApi::GetApiName()+"/offsets_dump.map");
+			const fs::path bitfieldsFile = fs::current_path().append(ArkBaseApi::GetApiName()+"/bitfields_dump.map");
 			const std::string fileHash = Cache::calculateSHA256(filepath);
 			const std::string storedHash = Cache::readFromFile(cacheCheckFile);
 
@@ -92,7 +90,7 @@ namespace API
 
 	std::string ArkBaseApi::GetApiName()
 	{
-		return "AsaApi";
+		return "ArkApi";
 	}
 
 	std::unique_ptr<AsaApi::IHooks>& ArkBaseApi::GetHooks()
