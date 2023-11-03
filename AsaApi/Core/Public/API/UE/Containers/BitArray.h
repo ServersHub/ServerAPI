@@ -118,7 +118,8 @@ public:
 				{
 					uint32 Current = Data;
 					uint32 Desired = Current | Mask;
-					if (Current == Desired || FPlatformAtomics::InterlockedCompareExchange((volatile int32*)&Data, (int32)Desired, (int32)Current) == (int32)Current)
+#undef InterlockedCompareExchange
+					if (Current == Desired || FPlatformAtomics::InterlockedCompareExchange2((volatile int32*)&Data, (int32)Desired, (int32)Current) == (int32)Current)
 					{
 						return;
 					}
@@ -133,7 +134,7 @@ public:
 				{
 					uint32 Current = Data;
 					uint32 Desired = Current & ~Mask;
-					if (Current == Desired || FPlatformAtomics::InterlockedCompareExchange((volatile int32*)&Data, (int32)Desired, (int32)Current) == (int32)Current)
+					if (Current == Desired || FPlatformAtomics::InterlockedCompareExchange2((volatile int32*)&Data, (int32)Desired, (int32)Current) == (int32)Current)
 					{
 						return;
 					}
