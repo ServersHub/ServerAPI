@@ -22,6 +22,7 @@
 #include "Templates/RemoveReference.h"
 #include "Templates/UnrealTemplate.h"
 #include "UObject/NameTypes.h"
+#include "..\Fields.h"
 
 /* FString implementation
  *****************************************************************************/
@@ -232,8 +233,21 @@ FORCEINLINE void ConstructWithSlack(/* Out */ TArray<TCHAR>& Data, const CharTyp
 
 } // namespace UE::String::Private
 
-FString::FString(const ANSICHAR* Str)								{ UE::String::Private::ConstructFromCString(Data, Str); }
+/*FString::FString(const ANSICHAR* Str)								{ UE::String::Private::ConstructFromCString(Data, Str); }
 FString::FString(const WIDECHAR* Str)								{ UE::String::Private::ConstructFromCString(Data, Str); }
+FString::FString(const UTF8CHAR* Str)								{ UE::String::Private::ConstructFromCString(Data, Str); }
+FString::FString(const UCS2CHAR* Str)								{ UE::String::Private::ConstructFromCString(Data, Str); }
+FString::FString(int32 Len, const ANSICHAR* Str)					{ UE::String::Private::ConstructWithLength(Data, Len, Str); }
+FString::FString(int32 Len, const WIDECHAR* Str)					{ UE::String::Private::ConstructWithLength(Data, Len, Str); }
+FString::FString(int32 Len, const UTF8CHAR* Str)					{ UE::String::Private::ConstructWithLength(Data, Len, Str); }
+FString::FString(int32 Len, const UCS2CHAR* Str)					{ UE::String::Private::ConstructWithLength(Data, Len, Str); }
+FString::FString(const ANSICHAR* Str, int32 ExtraSlack)				{ UE::String::Private::ConstructWithSlack(Data, Str, ExtraSlack); }
+FString::FString(const WIDECHAR* Str, int32 ExtraSlack)				{ UE::String::Private::ConstructWithSlack(Data, Str, ExtraSlack); }
+FString::FString(const UTF8CHAR* Str, int32 ExtraSlack)				{ UE::String::Private::ConstructWithSlack(Data, Str, ExtraSlack); }
+FString::FString(const UCS2CHAR* Str, int32 ExtraSlack)				{ UE::String::Private::ConstructWithSlack(Data, Str, ExtraSlack); }*/
+
+FString::FString(const ANSICHAR* Str)								{ NativeCall<void, const ANSICHAR*>(this, "FString.FString(char*)", Str); }
+FString::FString(const WIDECHAR* Str)								{ NativeCall<void, const WIDECHAR*>(this, "FString.FString(wchar_t*)", Str); }
 FString::FString(const UTF8CHAR* Str)								{ UE::String::Private::ConstructFromCString(Data, Str); }
 FString::FString(const UCS2CHAR* Str)								{ UE::String::Private::ConstructFromCString(Data, Str); }
 FString::FString(int32 Len, const ANSICHAR* Str)					{ UE::String::Private::ConstructWithLength(Data, Len, Str); }

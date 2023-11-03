@@ -6,9 +6,9 @@ struct FWeakObjectPtr
 	int ObjectIndex;
 	int ObjectSerialNumber;
 
-	void operator=(UObject const* __that) { return NativeCall<void, UObject const*>(this, "FWeakObjectPtr.operator=", __that); }
-	UObject* Get(bool bEvenIfPendingKill = false) { return NativeCall<UObject*, bool>(this, "FWeakObjectPtr.Get", bEvenIfPendingKill); }
-	//	bool IsValid() { return NativeCall<bool>(this, "FWeakObjectPtr.IsValid"); }
+	void operator=(UObject const* __that) { return NativeCall<void, UObject const*>(this, "FWeakObjectPtr.operator=(UObject*)", __that); }
+	UObject* Get(bool bEvenIfPendingKill = false) { return NativeCall<UObject*, bool>(this, "FWeakObjectPtr.Get(bool)", bEvenIfPendingKill); }
+	bool IsValid() { return NativeCall<bool>(this, "FWeakObjectPtr.IsValid()"); }
 };
 
 template <typename T>
@@ -29,7 +29,7 @@ struct TWeakObjectPtr
 
 	T* Get(bool bEvenIfPendingKill = false)
 	{
-		return NativeCall<T*, bool>(this, "FWeakObjectPtr.Get", bEvenIfPendingKill);
+		return NativeCall<T*, bool>(this, "FWeakObjectPtr.Get()", bEvenIfPendingKill);
 	}
 
 	FORCEINLINE operator bool()
@@ -108,7 +108,7 @@ struct UObject : UObjectBaseUtility
 
 struct UTexture : UObject
 {
-	static UClass* StaticClass() { return NativeCall<UClass*>(nullptr, "UTexture.StaticClass"); }
+	static UClass* StaticClass() { return NativeCall<UClass*>(nullptr, "UTexture.StaticClass()"); }
 };
 
 struct UTexture2D : UTexture

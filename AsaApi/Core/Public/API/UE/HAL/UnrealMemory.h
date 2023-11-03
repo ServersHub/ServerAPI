@@ -210,7 +210,7 @@ struct FMemory
 	//static void* Malloc(SIZE_T Count, uint32 Alignment = DEFAULT_ALIGNMENT);
 	static void* Malloc(SIZE_T Count, uint32 Alignment = DEFAULT_ALIGNMENT)
 	{
-		return NativeCall<void*, unsigned __int64, unsigned int>(nullptr, "FMemory.Malloc", Count, Alignment);
+		return NativeCall<void*, unsigned __int64, unsigned int>(nullptr, "FMemory.Malloc(unsigned__int64,unsignedint)", Count, Alignment);
 	}
 
 
@@ -219,12 +219,12 @@ struct FMemory
 	{
 		if(!Original)
 			return Malloc(Size);
-		return NativeCall<void*, void*, unsigned __int64>(nullptr, "FMemory.Realloc", Original, Size);
+		return NativeCall<void*, void*, unsigned __int64>(nullptr, "FMemory.Realloc(void*,unsigned__int64,unsignedint)", Original, Size);
 	}
 	//static void Free(void* Original);
 	static void Free(void* Original) 
 	{ 
-		NativeCall<void, void*>(nullptr, "FMemory.Free", Original); 
+		NativeCall<void, void*>(nullptr, "FMemory.Free(void*)", Original); 
 	}
 	static SIZE_T GetAllocSize(void* Original);
 
@@ -243,7 +243,7 @@ struct FMemory
 	*/
 	static SIZE_T QuantizeSize(SIZE_T Count, uint32 Alignment = DEFAULT_ALIGNMENT)
 	{
-		return NativeCall<SIZE_T, SIZE_T, uint32>(nullptr, "FMemory.QuantizeSize", Count, Alignment);
+		return NativeCall<SIZE_T, SIZE_T, uint32>(nullptr, "FMallocBinned2.QuantizeSize(unsigned__int64,unsignedint)", Count, Alignment);
 	}
 
 	/**

@@ -44,29 +44,29 @@ namespace AsaApi
 	void InitHooks()
 	{
 		auto& hooks = API::game_api->GetHooks();
-		hooks->SetHook("UEngine.Init", &Hook_UEngine_Init, &UEngine_Init_original);
-		hooks->SetHook("UEngine.LoadMap", &Hook_UEngine_LoadMap, &UEngine_LoadMap_original);
-		hooks->SetHook("UWorld.Tick", &Hook_UWorld_Tick, &UWorld_Tick_original);
-		hooks->SetHook("AShooterGameMode.InitGame", &Hook_AShooterGameMode_InitGame,
+		hooks->SetHook("UEngine.Init(IEngineLoop*)", &Hook_UEngine_Init, &UEngine_Init_original);
+		hooks->SetHook("UEngine.LoadMap(FWorldContext&,FURL,UPendingNetGame*,FString&)", &Hook_UEngine_LoadMap, &UEngine_LoadMap_original);
+		hooks->SetHook("UWorld.Tick(ELevelTick,float)", &Hook_UWorld_Tick, &UWorld_Tick_original);
+		hooks->SetHook("AShooterGameMode.InitGame(FString&,FString&,FString&)", &Hook_AShooterGameMode_InitGame,
 			&AShooterGameMode_InitGame_original);
-		hooks->SetHook("AShooterPlayerController.ServerSendChatMessage_Implementation",
+		hooks->SetHook("AShooterPlayerController.ServerSendChatMessage_Implementation(FString&,int)",
 			&Hook_AShooterPlayerController_ServerSendChatMessage_Impl,
 			&AShooterPlayerController_ServerSendChatMessage_Impl_original);
-		hooks->SetHook("APlayerController.ConsoleCommand", &Hook_APlayerController_ConsoleCommand,
+		hooks->SetHook("APlayerController.ConsoleCommand(FString&,FString&,bool)", &Hook_APlayerController_ConsoleCommand,
 			&APlayerController_ConsoleCommand_original);
-		hooks->SetHook("AShooterPlayerController.ConsoleCommand", &Hook_AShooterPlayerController_ConsoleCommand,
+		hooks->SetHook("AShooterPlayerController.ConsoleCommand(FString&,FString&,bool)", &Hook_AShooterPlayerController_ConsoleCommand,
 			&AShooterPlayerController_ConsoleCommand_original);
-		hooks->SetHook("RCONClientConnection.ProcessRCONPacket", &Hook_RCONClientConnection_ProcessRCONPacket,
+		hooks->SetHook("RCONClientConnection.ProcessRCONPacket(RCONPacket*,UWorld*)", &Hook_RCONClientConnection_ProcessRCONPacket,
 			&RCONClientConnection_ProcessRCONPacket_original);
-		hooks->SetHook("AGameState.DefaultTimer", &Hook_AGameState_DefaultTimer, &AGameState_DefaultTimer_original);
-		hooks->SetHook("AShooterGameMode.BeginPlay", &Hook_AShooterGameMode_BeginPlay,
+		hooks->SetHook("AGameState.DefaultTimer()", &Hook_AGameState_DefaultTimer, &AGameState_DefaultTimer_original);
+		hooks->SetHook("AShooterGameMode.BeginPlay()", &Hook_AShooterGameMode_BeginPlay,
 			&AShooterGameMode_BeginPlay_original);
-		hooks->SetHook("URCONServer.Init", &Hook_URCONServer_Init, &URCONServer_Init_original);
-		hooks->SetHook("APlayerController.ServerReceivedPlayerControllerAck_Implementation", &Hook_APlayerController_ServerReceivedPlayerControllerAck_Implementation,
+		hooks->SetHook("URCONServer.Init(FString&,int,UShooterCheatManager*)", &Hook_URCONServer_Init, &URCONServer_Init_original);
+		hooks->SetHook("APlayerController.ServerReceivedPlayerControllerAck_Implementation()", &Hook_APlayerController_ServerReceivedPlayerControllerAck_Implementation,
 			&APlayerController_ServerReceivedPlayerControllerAck_Implementation_original);
-		hooks->SetHook("AShooterPlayerController.Possess", &Hook_AShooterPlayerController_Possess,
+		hooks->SetHook("AShooterPlayerController.Possess(APawn*)", &Hook_AShooterPlayerController_Possess,
 			&AShooterPlayerController_Possess_original);
-		hooks->SetHook("AShooterGameMode.Logout", &Hook_AShooterGameMode_Logout, &AShooterGameMode_Logout_original);
+		hooks->SetHook("AShooterGameMode.Logout(AController*)", &Hook_AShooterGameMode_Logout, &AShooterGameMode_Logout_original);
 
 		Log::GetLog()->info("Initialized hooks\n");
 	}

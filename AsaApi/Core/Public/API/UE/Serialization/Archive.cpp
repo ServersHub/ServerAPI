@@ -4,11 +4,11 @@
 
 FArchive& FArchive::SerializeByteOrderSwapped(unsigned int& Length)
 { 
-	//return NativeCall<FArchive&, unsigned int&>(this, "FArchive.SerializeByteOrderSwapped", Length); 
+	//return NativeCall<FArchive&, unsigned int&>(this, "FArchive.SerializeByteOrderSwapped(void*,int)", Length); 
 	return *this;
 }
 
-void FArchiveState::SetCriticalError() { NativeCall<void>(this, "FArchiveState.SetCriticalError"); }
+void FArchiveState::SetCriticalError() { NativeCall<void>(this, "FArchiveState.SetCriticalError()"); }
 
 float FLinearColor::sRGBToLinearTable[256] =
 {
@@ -69,7 +69,7 @@ float FLinearColor::sRGBToLinearTable[256] =
 const FColor FColor::Green(0, 255, 0);
 const FColor FColorList::Green(0, 255, 0);
 
-bool FToBoolHelper::FromCStringWide(wchar_t const* str) { return NativeCall<bool, wchar_t const*>(nullptr, "FToBoolHelper.FromCStringWide", str); }
+bool FToBoolHelper::FromCStringWide(wchar_t const* str) { return NativeCall<bool, wchar_t const*>(nullptr, "FToBoolHelper.FromCStringWide(wchar_t*)", str); }
 
-int FGenericPlatformStricmp::Stricmp(wchar_t const* str1, wchar_t const* str2) { return NativeCall<int, wchar_t const*, wchar_t const*>(nullptr, "FGenericPlatformStricmp.Stricmp", str1, str2); }
-int FGenericPlatformStricmp::Strnicmp(wchar_t const* str1, wchar_t const* str2, unsigned __int64 count) { return NativeCall<int, wchar_t const*, wchar_t const*, unsigned __int64>(nullptr, "FGenericPlatformStricmp.Strnicmp", str1, str2, count); }
+int FGenericPlatformStricmp::Stricmp(wchar_t const* str1, wchar_t const* str2) { return NativeCall<int, wchar_t const*, wchar_t const*>(nullptr, "FGenericPlatformStricmp.Stricmp(wchar_t*,char*)", str1, str2); }
+int FGenericPlatformStricmp::Strnicmp(wchar_t const* str1, wchar_t const* str2, unsigned __int64 count) { return NativeCall<int, wchar_t const*, wchar_t const*, unsigned __int64>(nullptr, "FGenericPlatformStricmp.Strnicmp(FGenericPlatformTypes::UTF8CHAR*,FGenericPlatformTypes::UTF8CHAR*,unsigned__int64)", str1, str2, count); }

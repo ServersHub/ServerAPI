@@ -25,14 +25,14 @@ struct AShooterGameState : AGameState
 
 struct UWorld : UPrimalWorld, FNetworkNotify {
 	//variables
-	APlayerController* GetFirstPlayerController() { return NativeCall<APlayerController*>(this, "UWorld.GetFirstPlayerController"); }
+	APlayerController* GetFirstPlayerController() { return NativeCall<APlayerController*>(this, "UWorld.GetFirstPlayerController()"); }
 
 	//functions
-	AShooterGameState *GameStateField() { return (AShooterGameState*)GetNativePointerField <TObjectPtr<AGameStateBase>*> (this, "UWorld.GameState")->Get(); }
+	AShooterGameState *GameStateField() { return (AShooterGameState*)GetNativePointerField <TObjectPtr<AGameStateBase>*> (this, "UWorld.GameState()")->Get(); }
 	//TArray<TAutoWeakObjectPtr<APlayerController>>& PlayerControllerListField() { return *GetNativePointerField<TArray<TAutoWeakObjectPtr<APlayerController>>*>(this, "UWorld.PlayerControllerList"); }
 
 	TArray<TWeakObjectPtr<APlayerController>, TSizedDefaultAllocator<32>> PlayerControllerListField() { 
-		return *GetNativePointerField<TArray<TWeakObjectPtr<APlayerController>, TSizedDefaultAllocator<32>>*>(this, "UWorld.PlayerControllerList"); }
+		return *GetNativePointerField<TArray<TWeakObjectPtr<APlayerController>, TSizedDefaultAllocator<32>>*>(this, "UWorld.PlayerControllerList()"); }
 };
 
 struct AGameModeBase : AInfo
