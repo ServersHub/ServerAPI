@@ -2669,6 +2669,7 @@ struct AShooterPlayerController : ABasePlayerController
     static void ClientAddActorItem() { NativeCall<void>(nullptr, "AShooterPlayerController.ClientAddActorItem()"); }
     static void ClientAddFloatingText() { NativeCall<void>(nullptr, "AShooterPlayerController.ClientAddFloatingText()"); }
     static void ClientChatMessage() { NativeCall<void>(nullptr, "AShooterPlayerController.ClientChatMessage()"); }
+    void ClientChatMessage(FPrimalChatMessage Chat) { NativeCall<void, FPrimalChatMessage>(this, "AShooterPlayerController.ClientChatMessage", Chat); }
     //void ClientCollectedAchievementItem(TSubclassOf<UPrimalItem> ItemClass) { NativeCall<void, TSubclassOf<UPrimalItem>>(this, "AShooterPlayerController.ClientCollectedAchievementItem(TSubclassOf<UPrimalItem>)", ItemClass); }
     void ClientDisplayNotificationDialog(const FString* Message, const FString* Title, bool bIsError, bool OnOkGoToMainMenu, bool bAutoClose, bool bCanBeTop, bool bHideXBoxFooter) { NativeCall<void, const FString*, const FString*, bool, bool, bool, bool, bool>(this, "AShooterPlayerController.ClientDisplayNotificationDialog(FString&,FString&,bool,bool,bool,bool,bool)", Message, Title, bIsError, OnOkGoToMainMenu, bAutoClose, bCanBeTop, bHideXBoxFooter); }
     void ClientDoMultiUse(UObject* ForObject, int useIndex) { NativeCall<void, UObject*, int>(this, "AShooterPlayerController.ClientDoMultiUse(UObject*,int)", ForObject, useIndex); }
