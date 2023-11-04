@@ -590,7 +590,7 @@ struct FItemNetInfo
 	unsigned int& ExpirationTimeUTCField() { return *GetNativePointerField<unsigned int*>(this, "FItemNetInfo.ExpirationTimeUTC"); }
 	//TSubclassOf<UPrimalItem>& ItemCustomClassField() { return *GetNativePointerField<TSubclassOf<UPrimalItem>*>(this, "FItemNetInfo.ItemCustomClass"); }
 	//unsigned __int16[8] & ItemStatValuesField() { return *GetNativePointerField<unsigned __int16[8] *>(this, "FItemNetInfo.ItemStatValues"); }
-	//__int16[6] & ItemColorIDField() { return *GetNativePointerField<__int16[6] *>(this, "FItemNetInfo.ItemColorID"); }
+	////__int16[6] & ItemColorIDField() { return *GetNativePointerField<__int16[6] *>(this, "FItemNetInfo.ItemColorID"); }
 	//TSubclassOf<UPrimalItem>& ItemSkinTemplateField() { return *GetNativePointerField<TSubclassOf<UPrimalItem>*>(this, "FItemNetInfo.ItemSkinTemplate"); }
 	TArray<FCustomItemData, TSizedDefaultAllocator<32> >& CustomItemDatasField() { return *GetNativePointerField<TArray<FCustomItemData, TSizedDefaultAllocator<32> >*>(this, "FItemNetInfo.CustomItemDatas"); }
 	TArray<FColor, TSizedDefaultAllocator<32> >& CustomItemColorsField() { return *GetNativePointerField<TArray<FColor, TSizedDefaultAllocator<32> >*>(this, "FItemNetInfo.CustomItemColors"); }
@@ -598,15 +598,15 @@ struct FItemNetInfo
 	long double& NextSpoilingTimeField() { return *GetNativePointerField<long double*>(this, "FItemNetInfo.NextSpoilingTime"); }
 	long double& LastSpoilingTimeField() { return *GetNativePointerField<long double*>(this, "FItemNetInfo.LastSpoilingTime"); }
 	unsigned __int64& OwnerPlayerDataIdField() { return *GetNativePointerField<unsigned __int64*>(this, "FItemNetInfo.OwnerPlayerDataId"); }
-	//TWeakObjectPtr<AShooterCharacter, FWeakObjectPtr>& LastOwnerPlayerField() { return *GetNativePointerField<TWeakObjectPtr<AShooterCharacter, FWeakObjectPtr>*>(this, "FItemNetInfo.LastOwnerPlayer"); }
+	//TWeakObjectPtr<AShooterCharacter>& LastOwnerPlayerField() { return *GetNativePointerField<TWeakObjectPtr<AShooterCharacter>*>(this, "FItemNetInfo.LastOwnerPlayer"); }
 	long double& LastAutoDurabilityDecreaseTimeField() { return *GetNativePointerField<long double*>(this, "FItemNetInfo.LastAutoDurabilityDecreaseTime"); }
 	float& ItemStatClampsMultiplierField() { return *GetNativePointerField<float*>(this, "FItemNetInfo.ItemStatClampsMultiplier"); }
 	UE::Math::TVector<double>& OriginalItemDropLocationField() { return *GetNativePointerField<UE::Math::TVector<double>*>(this, "FItemNetInfo.OriginalItemDropLocation"); }
-	//__int16[6] & PreSkinItemColorIDField() { return *GetNativePointerField<__int16[6] *>(this, "FItemNetInfo.PreSkinItemColorID"); }
-	//unsigned __int8[12] & EggNumberOfLevelUpPointsAppliedField() { return *GetNativePointerField<unsigned __int8[12] *>(this, "FItemNetInfo.EggNumberOfLevelUpPointsApplied"); }
-	//unsigned __int8[12] & EggNumberMutationsAppliedField() { return *GetNativePointerField<unsigned __int8[12] *>(this, "FItemNetInfo.EggNumberMutationsApplied"); }
+	////__int16[6] & PreSkinItemColorIDField() { return *GetNativePointerField<__int16[6] *>(this, "FItemNetInfo.PreSkinItemColorID"); }
+	////unsigned __int8[12] & EggNumberOfLevelUpPointsAppliedField() { return *GetNativePointerField<unsigned __int8[12] *>(this, "FItemNetInfo.EggNumberOfLevelUpPointsApplied"); }
+	////unsigned __int8[12] & EggNumberMutationsAppliedField() { return *GetNativePointerField<unsigned __int8[12] *>(this, "FItemNetInfo.EggNumberMutationsApplied"); }
 	float& EggTamedIneffectivenessModifierField() { return *GetNativePointerField<float*>(this, "FItemNetInfo.EggTamedIneffectivenessModifier"); }
-	//unsigned __int8[6] & EggColorSetIndicesField() { return *GetNativePointerField<unsigned __int8[6] *>(this, "FItemNetInfo.EggColorSetIndices"); }
+	////unsigned __int8[6] & EggColorSetIndicesField() { return *GetNativePointerField<unsigned __int8[6] *>(this, "FItemNetInfo.EggColorSetIndices"); }
 	int& EggGenderOverrideField() { return *GetNativePointerField<int*>(this, "FItemNetInfo.EggGenderOverride"); }
 	long double& ClusterSpoilingTimeUTCField() { return *GetNativePointerField<long double*>(this, "FItemNetInfo.ClusterSpoilingTimeUTC"); }
 	TArray<FDinoAncestorsEntry, TSizedDefaultAllocator<32> >& EggDinoAncestorsField() { return *GetNativePointerField<TArray<FDinoAncestorsEntry, TSizedDefaultAllocator<32> >*>(this, "FItemNetInfo.EggDinoAncestors"); }
