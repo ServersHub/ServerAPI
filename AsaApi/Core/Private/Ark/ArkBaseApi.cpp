@@ -110,10 +110,10 @@ namespace API
 
 	void ArkBaseApi::RegisterCommands()
 	{
-		GetCommands()->AddConsoleCommand("plugins.load", &LoadPluginCmd);
-		GetCommands()->AddConsoleCommand("plugins.unload", &UnloadPluginCmd);
-		GetCommands()->AddRconCommand("plugins.load", &LoadPluginRcon);
-		GetCommands()->AddRconCommand("plugins.unload", &UnloadPluginRcon);
+		//GetCommands()->AddConsoleCommand("plugins.load", &LoadPluginCmd);
+		//GetCommands()->AddConsoleCommand("plugins.unload", &UnloadPluginCmd);
+		//GetCommands()->AddRconCommand("plugins.load", &LoadPluginRcon);
+		//GetCommands()->AddRconCommand("plugins.unload", &UnloadPluginRcon);
 	}
 
 	FString ArkBaseApi::LoadPlugin(FString* cmd)
