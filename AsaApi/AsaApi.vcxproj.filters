@@ -156,17 +156,17 @@
     <ClCompile Include="Core\Private\PluginManager\PluginManager.cpp">
       <Filter>Source Files\Core\Private\PluginManager</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Public\API\UE\Containers\GenericPlatformString.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Core\Public\API\UE\Containers\String.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Core\Public\API\UE\Misc\CString.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Core\Public\API\UE\Serialization\Archive.cpp">
       <Filter>Source Files\Core\Public\API\UE\Serialization</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Public\API\UE\Containers\GenericPlatformString.cpp">
+      <Filter>Source Files\Core\Public\API\UE\GenericPlatform</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Public\API\UE\Misc\CString.cpp">
+      <Filter>Source Files\Core\Public\API\UE\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Public\API\UE\Containers\String.cpp">
+      <Filter>Source Files\Core\Public\API\UE\Containers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
