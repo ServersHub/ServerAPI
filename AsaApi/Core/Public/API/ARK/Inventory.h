@@ -1,4 +1,5 @@
 #pragma once
+#include "UE.h"
 
 struct UPrimalItem : UObject
 {

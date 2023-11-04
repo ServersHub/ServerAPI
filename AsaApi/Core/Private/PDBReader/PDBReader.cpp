@@ -379,7 +379,8 @@ namespace API
 	{
 		std::string parameterTypes;
 		BSTR undecorated = nullptr;
-		if (SUCCEEDED(pFunction->get_undecoratedNameEx(0x20000, &undecorated))) // 0x20000 - Don't include __ptr64 in output (just on the func sig, but the params can still output it)
+		if (SUCCEEDED(pFunction->get_undecoratedNameEx(0x20000, &undecorated)) // 0x20000 - Don't include __ptr64 in output (just on the func sig, but the params can still output it)
+			&& undecorated != nullptr) 
 		{
 			parameterTypes = Tools::Utf8Encode(undecorated);
 			const size_t start = parameterTypes.find('(');

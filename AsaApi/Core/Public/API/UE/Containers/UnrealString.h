@@ -60,7 +60,7 @@ class FString
 public:
 	using AllocatorType = TSizedDefaultAllocator<32>;
 	/** Create Ansi std::string from FString*/
-	std::string ToString()
+	std::string ToString() const
 	{
 		return std::string(TCHAR_TO_ANSI(**this));
 	}
@@ -70,7 +70,7 @@ public:
 		return FString(ANSI_TO_TCHAR(input.c_str()));
 	}
 	/** Create UTF8 std::string from FString*/
-	std::string ToStringUTF8()
+	std::string ToStringUTF8() const
 	{
 		return std::string(TCHAR_TO_UTF8(**this));
 	}
