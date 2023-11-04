@@ -56,6 +56,23 @@ struct TWeakObjectPtr
 	{}
 };
 
+template <typename T>
+struct TSubclassOf
+{
+	TSubclassOf()
+		: uClass(nullptr)
+	{
+	}
+
+	TSubclassOf(UClass* uClass)
+		: uClass(uClass)
+	{
+	}
+
+	UClass* uClass;
+};
+
+
 struct FObjectHandlePrivate
 {
 	//Stores either FPackedObjectRef or a UObject*
@@ -79,6 +96,72 @@ public:
 	FORCEINLINE T* Get() const { return (T*)(RealGet()); }
 	FORCEINLINE T* operator->() const { return Get(); }
 	FORCEINLINE T& operator*() const { return *Get(); }
+	FORCEINLINE bool operator bool() const { return Get() != nullptr; }
+	FORCEINLINE operator T* () const { return Get(); }
+};
+
+template <typename T>
+struct TSoftClassPtr
+{
+private:
+	FORCEINLINE UClass* Retrieve() const 
+	{ 
+		static UClass* resolvedClass =  NativeCall<UClass*>(this, "TSoftClassPtr<UObject>.LoadSynchronous()");
+		return resolvedClass
+	}
+public:
+
+	FORCEINLINE UClass* Get() const { return (T*)(Retrieve()); }
+	FORCEINLINE UClass* operator->() const { return Get(); }
+	FORCEINLINE UClass& operator*() const { return *Get(); }
+	FORCEINLINE bool operator bool() const { return Get() != nullptr; }
+	FORCEINLINE operator UClass* () const { return Get(); }
+};
+
+template <typename T>
+struct TSoftObjectPtr
+{
+private:
+	FORCEINLINE UObject* RealGet() const { return NativeCall<UObject*>(this, "TSoftObjectPtr<UObject>.Get()"); }
+public:
+
+	FORCEINLINE T* Get() const { return (T*)(RealGet()); }
+	FORCEINLINE T* operator->() const { return Get(); }
+	FORCEINLINE T& operator*() const { return *Get(); }
+	FORCEINLINE bool operator bool() const { return Get() != nullptr; }
+	FORCEINLINE operator T* () const { return Get(); }
+};
+
+struct FItemNetID
+{
+	// Fields
+
+	unsigned int& ItemID1Field() { return *GetNativePointerField<unsigned int*>(this, "FItemNetID.ItemID1"); }
+	unsigned int& ItemID2Field() { return *GetNativePointerField<unsigned int*>(this, "FItemNetID.ItemID2"); }
+
+	// Bitfields
+
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FItemNetID.StaticStruct()"); }
+};
+
+struct FARKDinoData
+{
+	// Fields
+
+	UClass*& DinoClassField() { return *GetNativePointerField<UClass**>(this, "FARKDinoData.DinoClass"); }
+	TArray<unsigned char, TSizedDefaultAllocator<32> >& DinoDataField() { return *GetNativePointerField<TArray<unsigned char, TSizedDefaultAllocator<32> >*>(this, "FARKDinoData.DinoData"); }
+	FString& DinoNameInMapField() { return *GetNativePointerField<FString*>(this, "FARKDinoData.DinoNameInMap"); }
+	FString& DinoNameField() { return *GetNativePointerField<FString*>(this, "FARKDinoData.DinoName"); }
+
+	// Bitfields
+
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FARKDinoData.StaticStruct()"); }
 };
 
 struct UObjectBase

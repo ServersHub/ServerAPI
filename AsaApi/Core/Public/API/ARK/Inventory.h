@@ -950,6 +950,11 @@ struct UActorComponent : UObject
     void SetIsReplicatedByDefault(const bool bNewReplicates) { NativeCall<void, const bool>(this, "UActorComponent.SetIsReplicatedByDefault(bool)", bNewReplicates); }
 };
 
+struct UStaticMeshComponent : UActorComponent
+{
+
+};
+
 struct UPrimalInventoryComponent : UActorComponent
 {
     // Fields
