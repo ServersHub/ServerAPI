@@ -96,7 +96,7 @@ public:
 	FORCEINLINE T* Get() const { return (T*)(RealGet()); }
 	FORCEINLINE T* operator->() const { return Get(); }
 	FORCEINLINE T& operator*() const { return *Get(); }
-	FORCEINLINE bool operator bool() const { return Get() != nullptr; }
+	FORCEINLINE operator bool() const { return Get() != nullptr; }
 	FORCEINLINE operator T* () const { return Get(); }
 };
 
@@ -107,14 +107,14 @@ private:
 	FORCEINLINE UClass* Retrieve() const 
 	{ 
 		static UClass* resolvedClass =  NativeCall<UClass*>(this, "TSoftClassPtr<UObject>.LoadSynchronous()");
-		return resolvedClass
+		return resolvedClass;
 	}
 public:
 
 	FORCEINLINE UClass* Get() const { return (T*)(Retrieve()); }
 	FORCEINLINE UClass* operator->() const { return Get(); }
 	FORCEINLINE UClass& operator*() const { return *Get(); }
-	FORCEINLINE bool operator bool() const { return Get() != nullptr; }
+	FORCEINLINE operator bool() const { return Get() != nullptr; }
 	FORCEINLINE operator UClass* () const { return Get(); }
 };
 
@@ -128,7 +128,7 @@ public:
 	FORCEINLINE T* Get() const { return (T*)(RealGet()); }
 	FORCEINLINE T* operator->() const { return Get(); }
 	FORCEINLINE T& operator*() const { return *Get(); }
-	FORCEINLINE bool operator bool() const { return Get() != nullptr; }
+	FORCEINLINE operator bool() const { return Get() != nullptr; }
 	FORCEINLINE operator T* () const { return Get(); }
 };
 

@@ -11,7 +11,6 @@
 #endif
 
 struct FDataSet {};
-struct FItemNetID {};
 struct APrimalPlayerController;
 struct AActor;
 struct UObject;
@@ -714,7 +713,6 @@ struct FTimerManager;
 struct UGameInstance;
 struct FBehaviorTreeSearchData;
 struct IRepChangedPropertyTracker;
-struct TSubclassOf;
 struct FAttachmentTransformRules;
 struct UCanvas;
 struct FDebugDisplayInfo;
@@ -772,8 +770,6 @@ struct IRepChangedPropertyTracker;
 struct UParticleSystem;
 struct FDecalData;
 struct FDamageTypeAdjuster;
-struct TSubclassOf;
-struct TSoftClassPtr;
 struct UCheatManagerExtension;
 struct FItemCount;
 struct FTopLevelAssetPath;
