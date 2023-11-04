@@ -55,7 +55,7 @@ namespace AsaApi
 			if (player_controller)
 			{
 				FString text(FString::Format(msg, std::forward<Args>(args)...));
-				player_controller->ClientServerChatDirectMessage(&text, msg_color, false);
+				//player_controller->ClientServerChatDirectMessage(&text, msg_color, false);
 			}
 		}
 
@@ -79,8 +79,7 @@ namespace AsaApi
 			{
 				FString text(FString::Format(msg, std::forward<Args>(args)...));
 
-				player_controller->ClientServerSOTFNotificationCustom(&text, color, display_scale, display_time, icon,
-					nullptr);
+				player_controller->ClientServerSOTFNotificationCustom_Implementation(&text, color, display_scale, display_time, icon, nullptr);
 			}
 		}
 
@@ -155,8 +154,7 @@ namespace AsaApi
 				AShooterPlayerController* shooter_pc = static_cast<AShooterPlayerController*>(player_controller.Get());
 				if (shooter_pc)
 				{
-					shooter_pc->
-						ClientServerSOTFNotificationCustom(&text, color, display_scale, display_time, icon, nullptr);
+					shooter_pc->ClientServerSOTFNotificationCustom_Implementation(&text, color, display_scale, display_time, icon, nullptr);
 				}
 			}
 		}
@@ -635,9 +633,9 @@ namespace AsaApi
 		 */
 		static FORCEINLINE FString GetBlueprint(UObjectBase* object)
 		{
-			if (object != nullptr && object->ClassField() != nullptr)
+			if (object != nullptr && object->ClassPrivateField() != nullptr)
 			{
-				return GetClassBlueprint(object->ClassField());
+				return GetClassBlueprint(object->ClassPrivateField());
 			}
 
 			return FString("");
@@ -674,7 +672,7 @@ namespace AsaApi
 		{
 			if (!SPC) return nullptr;
 
-			UCheatManager* cheat = SPC->CheatManagerField();
+			UCheatManager* cheat = SPC->CheatManagerField().Get();
 
 			if (cheat)
 			{
@@ -732,7 +730,7 @@ namespace AsaApi
 		{
 			TArray<AActor*> out_actors;
 
-			UVictoryCore::ServerOctreeOverlapActors(&out_actors, GetWorld(), &location, radius, ActorType, true);
+			//UVictoryCore::ServerOctreeOverlapActors(&out_actors, GetWorld(), &location, radius, ActorType, true);
 
 			return out_actors;
 		}
@@ -744,7 +742,7 @@ namespace AsaApi
 		{
 			TArray<AActor*> out_actors;
 
-			UVictoryCore::ServerOctreeOverlapActors(&out_actors, GetWorld(), &location, radius, ActorType, true);
+			//UVictoryCore::ServerOctreeOverlapActors(&out_actors, GetWorld(), &location, radius, ActorType, true);
 
 			for (AActor* ignore : ignores)
 				out_actors.Remove(ignore);
