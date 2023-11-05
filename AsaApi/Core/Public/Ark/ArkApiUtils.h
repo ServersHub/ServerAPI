@@ -50,12 +50,18 @@ namespace AsaApi
 		template <typename T, typename... Args>
 		FORCEINLINE void SendServerMessage(AShooterPlayerController* player_controller, FLinearColor msg_color, const T* msg,
 			Args&&... args)
-		{//void __fastcall AShooterPlayerController::ClientServerChatDirectMessage(AShooterPlayerController *this, const FString *MessageText, FLinearColor *MessageColor, bool bIsBold)
-
+		{
 			if (player_controller)
 			{
 				FString text(FString::Format(msg, std::forward<Args>(args)...));
-				//player_controller->ClientServerChatDirectMessage(&text, msg_color, false);
+				//player_controller->ClientServerChatDirectMessage(&text, msg_color, false); //need fix
+
+				//Need fix
+				//void __fastcall AShooterPlayerController::ClientServerChatDirectMessage(
+				//AShooterPlayerController* this,
+					//ShooterPlayerController_eventClientServerChatDirectMessage_Parms* MessageText,
+					//FLinearColor* MessageColor,
+					//bool bIsBold)
 			}
 		}
 
