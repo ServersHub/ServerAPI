@@ -423,6 +423,9 @@ struct AShooterGameState : AGameState
 
 struct UWorld : UPrimalWorld, FNetworkNotify {
 	//variables
+	long double& TimeSecondsField() { return *GetNativePointerField<long double*>(this, "UWorld.TimeSeconds"); }
+
+
 	APlayerController* GetFirstPlayerController() { return NativeCall<APlayerController*>(this, "UWorld.GetFirstPlayerController()"); }
 
 	//functions
