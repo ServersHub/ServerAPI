@@ -167,8 +167,8 @@
       <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>
-      </Command>
+      <Command>copy  /Y "$(TargetDir)AsaApi.lib" "..\out_lib"</Command>
+      <Message>Move lib</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
