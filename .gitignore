@@ -288,3 +288,4 @@ __pycache__/
 *.xsd.cs
 /out/build/x64-Debug
 /AsaApi/vcpkg_installed/x64-windows
+/out_lib
