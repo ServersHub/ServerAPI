@@ -30,7 +30,7 @@ namespace AsaApi
 	DECLARE_HOOK(UEngine_LoadMap, bool, UWorld*, DWORD64, DWORD64, DWORD64, DWORD64);
 	DECLARE_HOOK(UWorld_Tick, void, DWORD64, DWORD64, float);
 	DECLARE_HOOK(AShooterGameMode_InitGame, void, AShooterGameMode*, FString*, FString*, FString*);
-	DECLARE_HOOK(AShooterPlayerController_ServerSendChatMessage_Impl, void, AShooterPlayerController*, FString*, int); //EChatSendMode::Type); temporary replaced with int
+	DECLARE_HOOK(AShooterPlayerController_ServerSendChatMessage_Impl, void, AShooterPlayerController*, FString*, EChatSendMode::Type);
 	DECLARE_HOOK(APlayerController_ConsoleCommand, FString*, APlayerController*, FString*, FString*, bool);
 	DECLARE_HOOK(AShooterPlayerController_ConsoleCommand, FString*, AShooterPlayerController*, FString*, FString*, bool);
 	DECLARE_HOOK(RCONClientConnection_ProcessRCONPacket, void, RCONClientConnection*, RCONPacket*, UWorld*);
@@ -116,7 +116,7 @@ namespace AsaApi
 	}
 
 	void Hook_AShooterPlayerController_ServerSendChatMessage_Impl(
-		AShooterPlayerController* player_controller, FString* message, int mode)//EChatSendMode::Type mode)
+		AShooterPlayerController* player_controller, FString* message, EChatSendMode::Type mode)
 	{
 		//need fix
 		/*const long double last_chat_time = player_controller->LastChatMessageTimeField();

@@ -557,13 +557,13 @@ struct UTexture : UStreamableRenderAsset
 
 	static UClass* GetPrivateStaticClass() { return NativeCall<UClass*>(nullptr, "UTexture.GetPrivateStaticClass()"); }
 	const FString* GetAssetUserDataArray() { return NativeCall<const FString*>(this, "UTexture.GetAssetUserDataArray()"); }
-	//EMaterialValueType GetMaterialType() { return NativeCall<EMaterialValueType>(this, "UTexture.GetMaterialType()"); }
-	//FTextureResource* CreateResource() { return NativeCall<FTextureResource*>(this, "UTexture.CreateResource()"); }
+	EMaterialValueType GetMaterialType() { return NativeCall<EMaterialValueType>(this, "UTexture.GetMaterialType()"); }
+	FTextureResource* CreateResource() { return NativeCall<FTextureResource*>(this, "UTexture.CreateResource()"); }
 	int GetCachedLODBias() { return NativeCall<int>(this, "UTexture.GetCachedLODBias()"); }
 	static void StaticRegisterNativesUTexture() { NativeCall<void>(nullptr, "UTexture.StaticRegisterNativesUTexture()"); }
 	void Serialize(FStructuredArchiveRecord Record) { NativeCall<void, FStructuredArchiveRecord>(this, "UTexture.Serialize(FStructuredArchiveRecord)", Record); }
 	//void UTexture(const FObjectInitializer* ObjectInitializer) { NativeCall<void, const FObjectInitializer*>(this, "UTexture.UTexture(FObjectInitializer*)", ObjectInitializer); }
-	//const FTextureResource* GetResource() { return NativeCall<const FTextureResource*>(this, "UTexture.GetResource()"); }
+	const FTextureResource* GetResource() { return NativeCall<const FTextureResource*>(this, "UTexture.GetResource()"); }
 	//void ~UTexture() { NativeCall<void>(this, "UTexture.~UTexture()"); }
 	void ReleaseResource() { NativeCall<void>(this, "UTexture.ReleaseResource()"); }
 	void Serialize(FArchive* Ar) { NativeCall<void, FArchive*>(this, "UTexture.Serialize(FArchive*)", Ar); }
@@ -581,20 +581,20 @@ struct UTexture : UStreamableRenderAsset
 	void InvalidateLastRenderTimeForStreaming() { NativeCall<void>(this, "UTexture.InvalidateLastRenderTimeForStreaming()"); }
 	bool ShouldMipLevelsBeForcedResident() { return NativeCall<bool>(this, "UTexture.ShouldMipLevelsBeForcedResident()"); }
 	static void CancelPendingTextureStreaming() { NativeCall<void>(nullptr, "UTexture.CancelPendingTextureStreaming()"); }
-	//static const wchar_t* GetTextureGroupString(TextureGroup InGroup) { return NativeCall<const wchar_t*, TextureGroup>(nullptr, "UTexture.GetTextureGroupString(TextureGroup)", InGroup); }
+	static const wchar_t* GetTextureGroupString(TextureGroup InGroup) { return NativeCall<const wchar_t*, TextureGroup>(nullptr, "UTexture.GetTextureGroupString(TextureGroup)", InGroup); }
 	static UEnum* GetPixelFormatEnum() { return NativeCall<UEnum*>(nullptr, "UTexture.GetPixelFormatEnum()"); }
 	void PostCDOContruct() { NativeCall<void>(this, "UTexture.PostCDOContruct()"); }
-	//void AddAssetUserData(UAssetUserData* InUserData) { NativeCall<void, UAssetUserData*>(this, "UTexture.AddAssetUserData(UAssetUserData*)", InUserData); }
-	//UAssetUserData* GetAssetUserDataOfClass(TSubclassOf<UAssetUserData> InUserDataClass) { return NativeCall<UAssetUserData*, TSubclassOf<UAssetUserData>>(this, "UTexture.GetAssetUserDataOfClass(TSubclassOf<UAssetUserData>)", InUserDataClass); }
-	//void RemoveUserDataOfClass(TSubclassOf<UAssetUserData> InUserDataClass) { NativeCall<void, TSubclassOf<UAssetUserData>>(this, "UTexture.RemoveUserDataOfClass(TSubclassOf<UAssetUserData>)", InUserDataClass); }
-	//FStreamableRenderResourceState* GetResourcePostInitState(FStreamableRenderResourceState* result, const FTexturePlatformData* PlatformData, bool bAllowStreaming, int MinRequestMipCount, int MaxMipCount, bool bSkipCanBeLoaded) { return NativeCall<FStreamableRenderResourceState*, FStreamableRenderResourceState*, const FTexturePlatformData*, bool, int, int, bool>(this, "UTexture.GetResourcePostInitState(FStreamableRenderResourceState*,FTexturePlatformData*,bool,int,int,bool)", result, PlatformData, bAllowStreaming, MinRequestMipCount, MaxMipCount, bSkipCanBeLoaded); }
-	//void GetVirtualTextureBuildSettings(FVirtualTextureBuildSettings* OutSettings) { NativeCall<void, FVirtualTextureBuildSettings*>(this, "UTexture.GetVirtualTextureBuildSettings(FVirtualTextureBuildSettings*)", OutSettings); }
+	void AddAssetUserData(UAssetUserData* InUserData) { NativeCall<void, UAssetUserData*>(this, "UTexture.AddAssetUserData(UAssetUserData*)", InUserData); }
+	UAssetUserData* GetAssetUserDataOfClass(TSubclassOf<UAssetUserData> InUserDataClass) { return NativeCall<UAssetUserData*, TSubclassOf<UAssetUserData>>(this, "UTexture.GetAssetUserDataOfClass(TSubclassOf<UAssetUserData>)", InUserDataClass); }
+	void RemoveUserDataOfClass(TSubclassOf<UAssetUserData> InUserDataClass) { NativeCall<void, TSubclassOf<UAssetUserData>>(this, "UTexture.RemoveUserDataOfClass(TSubclassOf<UAssetUserData>)", InUserDataClass); }
+	FStreamableRenderResourceState* GetResourcePostInitState(FStreamableRenderResourceState* result, const FTexturePlatformData* PlatformData, bool bAllowStreaming, int MinRequestMipCount, int MaxMipCount, bool bSkipCanBeLoaded) { return NativeCall<FStreamableRenderResourceState*, FStreamableRenderResourceState*, const FTexturePlatformData*, bool, int, int, bool>(this, "UTexture.GetResourcePostInitState(FStreamableRenderResourceState*,FTexturePlatformData*,bool,int,int,bool)", result, PlatformData, bAllowStreaming, MinRequestMipCount, MaxMipCount, bSkipCanBeLoaded); }
+	void GetVirtualTextureBuildSettings(FVirtualTextureBuildSettings* OutSettings) { NativeCall<void, FVirtualTextureBuildSettings*>(this, "UTexture.GetVirtualTextureBuildSettings(FVirtualTextureBuildSettings*)", OutSettings); }
 	void SerializeCookedPlatformData(FArchive* Ar) { NativeCall<void, FArchive*>(this, "UTexture.SerializeCookedPlatformData(FArchive*)", Ar); }
 	unsigned int GetSurfaceArraySize() { return NativeCall<unsigned int>(this, "UTexture.GetSurfaceArraySize()"); }
 	float GetSurfaceDepth() { return NativeCall<float>(this, "UTexture.GetSurfaceDepth()"); }
 	float GetSurfaceHeight() { return NativeCall<float>(this, "UTexture.GetSurfaceHeight()"); }
 	float GetSurfaceWidth() { return NativeCall<float>(this, "UTexture.GetSurfaceWidth()"); }
-	//ETextureClass GetTextureClass() { return NativeCall<ETextureClass>(this, "UTexture.GetTextureClass()"); }
+	ETextureClass GetTextureClass() { return NativeCall<ETextureClass>(this, "UTexture.GetTextureClass()"); }
 };
 
 struct UTexture2D : UTexture
@@ -602,9 +602,9 @@ struct UTexture2D : UTexture
 	// Fields
 
 	UE::Math::TIntPoint<int>& ImportedSizeField() { return *GetNativePointerField<UE::Math::TIntPoint<int>*>(this, "UTexture2D.ImportedSize"); }
-	//FTexturePlatformData*& PrivatePlatformDataField() { return *GetNativePointerField<FTexturePlatformData**>(this, "UTexture2D.PrivatePlatformData"); }
+	FTexturePlatformData*& PrivatePlatformDataField() { return *GetNativePointerField<FTexturePlatformData**>(this, "UTexture2D.PrivatePlatformData"); }
 	//TFieldPtrAccessor<FTexturePlatformData>& PlatformDataField() { return *GetNativePointerField<TFieldPtrAccessor<FTexturePlatformData>*>(this, "UTexture2D.PlatformData"); }
-	//FTexture2DResourceMem*& ResourceMemField() { return *GetNativePointerField<FTexture2DResourceMem**>(this, "UTexture2D.ResourceMem"); }
+	FTexture2DResourceMem*& ResourceMemField() { return *GetNativePointerField<FTexture2DResourceMem**>(this, "UTexture2D.ResourceMem"); }
 
 	// Bitfields
 
@@ -612,8 +612,8 @@ struct UTexture2D : UTexture
 	// Functions
 
 	static UClass* GetPrivateStaticClass() { return NativeCall<UClass*>(nullptr, "UTexture2D.GetPrivateStaticClass()"); }
-	//TextureAddress GetTextureAddressY() { return NativeCall<TextureAddress>(this, "UTexture2D.GetTextureAddressY()"); }
-	//TextureAddress GetTextureAddressX() { return NativeCall<TextureAddress>(this, "UTexture2D.GetTextureAddressX()"); }
+	TextureAddress GetTextureAddressY() { return NativeCall<TextureAddress>(this, "UTexture2D.GetTextureAddressY()"); }
+	TextureAddress GetTextureAddressX() { return NativeCall<TextureAddress>(this, "UTexture2D.GetTextureAddressX()"); }
 	float GetSurfaceHeight() { return NativeCall<float>(this, "UTexture2D.GetSurfaceHeight()"); }
 	float GetSurfaceWidth() { return NativeCall<float>(this, "UTexture2D.GetSurfaceWidth()"); }
 	int CalcCumulativeLODSize(int NumLODs) { return NativeCall<int, int>(this, "UTexture2D.CalcCumulativeLODSize(int)", NumLODs); }
@@ -621,14 +621,14 @@ struct UTexture2D : UTexture
 	//void ~UTexture2D() { NativeCall<void>(this, "UTexture2D.~UTexture2D()"); }
 	void Serialize(FStructuredArchiveRecord Record) { NativeCall<void, FStructuredArchiveRecord>(this, "UTexture2D.Serialize(FStructuredArchiveRecord)", Record); }
 	//void UTexture2D(const FObjectInitializer* ObjectInitializer) { NativeCall<void, const FObjectInitializer*>(this, "UTexture2D.UTexture2D(FObjectInitializer*)", ObjectInitializer); }
-	//FTexturePlatformData** GetRunningPlatformData() { return NativeCall<FTexturePlatformData**>(this, "UTexture2D.GetRunningPlatformData()"); }
+	FTexturePlatformData** GetRunningPlatformData() { return NativeCall<FTexturePlatformData**>(this, "UTexture2D.GetRunningPlatformData()"); }
 	int GetNumMips() { return NativeCall<int>(this, "UTexture2D.GetNumMips()"); }
 	void Serialize(FArchive* Ar) { NativeCall<void, FArchive*>(this, "UTexture2D.Serialize(FArchive*)", Ar); }
 	int GetNumResidentMips() { return NativeCall<int>(this, "UTexture2D.GetNumResidentMips()"); }
 	bool IsReadyForAsyncPostLoad() { return NativeCall<bool>(this, "UTexture2D.IsReadyForAsyncPostLoad()"); }
 	//void PreSave(FObjectPreSaveContext ObjectSaveContext) { NativeCall<void, FObjectPreSaveContext>(this, "UTexture2D.PreSave(FObjectPreSaveContext)", ObjectSaveContext); }
 	//void GetAssetRegistryTags(TArray<UObject::FAssetRegistryTag, TSizedDefaultAllocator<32> >* OutTags) { NativeCall<void, TArray<UObject::FAssetRegistryTag, TSizedDefaultAllocator<32> >*>(this, "UTexture2D.GetAssetRegistryTags(TArray<UObject::FAssetRegistryTag,TSizedDefaultAllocator<32>>*)", OutTags); }
-	void UpdateResource() { NativeCall<void>(this, "UTexture2D.UpdateResource()"); }
+	//void UpdateResource() { NativeCall<void>(this, "UTexture2D.UpdateResource()"); }
 	void BeginDestroy() { NativeCall<void>(this, "UTexture2D.BeginDestroy()"); }
 	FString* GetDesc(FString* result) { return NativeCall<FString*, FString*>(this, "UTexture2D.GetDesc(FString&)", result); }
 	int CalcTextureMemorySize(int MipCount) { return NativeCall<int, int>(this, "UTexture2D.CalcTextureMemorySize(int)", MipCount); }

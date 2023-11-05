@@ -10,6 +10,13 @@
 #define ARK_API __declspec(dllimport)
 #endif
 
+struct FTexture2DResourceMem;
+struct FTexturePlatformData;
+struct FVirtualTextureBuildSettings;
+struct FStreamableRenderResourceState;
+struct FTextureResource;
+struct FPrimalCameraInterpParams;
+struct UPrimalUI;
 struct FDataSet {};
 struct APrimalPlayerController;
 struct AActor;

@@ -466,7 +466,7 @@ struct AActor : UPrimalActor
     bool HasActiveCameraComponent() { return NativeCall<bool>(this, "AActor.HasActiveCameraComponent()"); }
     bool HasActivePawnControlCameraComponent() { return NativeCall<bool>(this, "AActor.HasActivePawnControlCameraComponent()"); }
     void ForceNetRelevant() { NativeCall<void>(this, "AActor.ForceNetRelevant()"); }
-    //ECollisionResponse GetComponentsCollisionResponseToChannel(ECollisionChannel Channel) { return NativeCall<ECollisionResponse, ECollisionChannel>(this, "AActor.GetComponentsCollisionResponseToChannel(ECollisionChannel)", Channel); }
+    ECollisionResponse GetComponentsCollisionResponseToChannel(ECollisionChannel Channel) { return NativeCall<ECollisionResponse, ECollisionChannel>(this, "AActor.GetComponentsCollisionResponseToChannel(ECollisionChannel)", Channel); }
     void AddOwnedComponent(UActorComponent* Component) { NativeCall<void, UActorComponent*>(this, "AActor.AddOwnedComponent(UActorComponent*)", Component); }
     void RemoveOwnedComponent(UActorComponent* Component) { NativeCall<void, UActorComponent*>(this, "AActor.RemoveOwnedComponent(UActorComponent*)", Component); }
     void UpdateReplicatedComponent(UActorComponent* Component) { NativeCall<void, UActorComponent*>(this, "AActor.UpdateReplicatedComponent(UActorComponent*)", Component); }
@@ -516,7 +516,7 @@ struct AActor : UPrimalActor
     bool SetRootComponent(USceneComponent* NewRootComponent) { return NativeCall<bool, USceneComponent*>(this, "AActor.SetRootComponent(USceneComponent*)", NewRootComponent); }
     void GetActorBounds(bool bOnlyCollidingComponents, UE::Math::TVector<double>* Origin, UE::Math::TVector<double>* BoxExtent, bool bIncludeFromChildActors) { NativeCall<void, bool, UE::Math::TVector<double>*, UE::Math::TVector<double>*, bool>(this, "AActor.GetActorBounds(bool,UE::Math::TVector<double>*,UE::Math::TVector<double>*,bool)", bOnlyCollidingComponents, Origin, BoxExtent, bIncludeFromChildActors); }
     AWorldSettings* GetWorldSettings() { return NativeCall<AWorldSettings*>(this, "AActor.GetWorldSettings()"); }
-    //ENetMode InternalGetNetMode() { return NativeCall<ENetMode>(this, "AActor.InternalGetNetMode()"); }
+    ENetMode InternalGetNetMode() { return NativeCall<ENetMode>(this, "AActor.InternalGetNetMode()"); }
     UNetDriver* GetNetDriver() { return NativeCall<UNetDriver*>(this, "AActor.GetNetDriver()"); }
     void SetNetDriverName(FName NewNetDriverName) { NativeCall<void, FName>(this, "AActor.SetNetDriverName(FName)", NewNetDriverName); }
     int GetFunctionCallspace(UFunction* Function, FFrame* Stack) { return NativeCall<int, UFunction*, FFrame*>(this, "AActor.GetFunctionCallspace(UFunction*,FFrame*)", Function, Stack); }
@@ -1874,7 +1874,7 @@ struct APlayerController : APrimalController
     static UClass* GetPrivateStaticClass() { return NativeCall<UClass*>(nullptr, "APlayerController.GetPrivateStaticClass()"); }
     const UObject* GetStreamingSourceOwner() { return NativeCall<const UObject*>(this, "APlayerController.GetStreamingSourceOwner()"); }
     bool ShouldFlushKeysWhenViewportFocusChanges() { return NativeCall<bool>(this, "APlayerController.ShouldFlushKeysWhenViewportFocusChanges()"); }
-    //EStreamingSourcePriority GetStreamingSourcePriority() { return NativeCall<EStreamingSourcePriority>(this, "APlayerController.GetStreamingSourcePriority()"); }
+    EStreamingSourcePriority GetStreamingSourcePriority() { return NativeCall<EStreamingSourcePriority>(this, "APlayerController.GetStreamingSourcePriority()"); }
     bool StreamingSourceShouldBlockOnSlowStreaming() { return NativeCall<bool>(this, "APlayerController.StreamingSourceShouldBlockOnSlowStreaming()"); }
     bool StreamingSourceShouldActivate() { return NativeCall<bool>(this, "APlayerController.StreamingSourceShouldActivate()"); }
     bool IsStreamingSourceEnabled() { return NativeCall<bool>(this, "APlayerController.IsStreamingSourceEnabled()"); }
@@ -4023,12 +4023,12 @@ struct APrimalCharacter : ACharacter
     UE::Math::TVector<double>& LastApproximatePhysVolumeLocationField() { return *GetNativePointerField<UE::Math::TVector<double>*>(this, "APrimalCharacter.LastApproximatePhysVolumeLocation"); }
     FTimerHandle& UseFastInventoryHandleField() { return *GetNativePointerField<FTimerHandle*>(this, "APrimalCharacter.UseFastInventoryHandle"); }
     long double& LastTimeSubmergedField() { return *GetNativePointerField<long double*>(this, "APrimalCharacter.LastTimeSubmerged"); }
-    //EPhysicalSurface& LastFootPhysicalSurfaceTypeField() { return *GetNativePointerField<EPhysicalSurface*>(this, "APrimalCharacter.LastFootPhysicalSurfaceType"); }
+    EPhysicalSurface& LastFootPhysicalSurfaceTypeField() { return *GetNativePointerField<EPhysicalSurface*>(this, "APrimalCharacter.LastFootPhysicalSurfaceType"); }
     long double& LastFootPhysicalSurfaceCheckTimeField() { return *GetNativePointerField<long double*>(this, "APrimalCharacter.LastFootPhysicalSurfaceCheckTime"); }
     float& FootPhysicalSurfaceCheckIntervalField() { return *GetNativePointerField<float*>(this, "APrimalCharacter.FootPhysicalSurfaceCheckInterval"); }
-    //TWeakObjectPtr<APrimalCharacter>& LastHurtByNearbyPlayerField() { return *GetNativePointerField<TWeakObjectPtr<APrimalCharacter>*>(this, "APrimalCharacter.LastHurtByNearbyPlayer"); }
+    TWeakObjectPtr<APrimalCharacter>& LastHurtByNearbyPlayerField() { return *GetNativePointerField<TWeakObjectPtr<APrimalCharacter>*>(this, "APrimalCharacter.LastHurtByNearbyPlayer"); }
     long double& LastHurtByNearbyPlayerTimeField() { return *GetNativePointerField<long double*>(this, "APrimalCharacter.LastHurtByNearbyPlayerTime"); }
-    //TWeakObjectPtr<APrimalCharacter>& LastAttackedNearbyPlayerField() { return *GetNativePointerField<TWeakObjectPtr<APrimalCharacter>*>(this, "APrimalCharacter.LastAttackedNearbyPlayer"); }
+    TWeakObjectPtr<APrimalCharacter>& LastAttackedNearbyPlayerField() { return *GetNativePointerField<TWeakObjectPtr<APrimalCharacter>*>(this, "APrimalCharacter.LastAttackedNearbyPlayer"); }
     long double& LastAttackedNearbyPlayerTimeField() { return *GetNativePointerField<long double*>(this, "APrimalCharacter.LastAttackedNearbyPlayerTime"); }
     long double& LastStartFallingRagdollTimeField() { return *GetNativePointerField<long double*>(this, "APrimalCharacter.LastStartFallingRagdollTime"); }
     UE::Math::TVector<double>& RagdollLastFrameLinearVelocityField() { return *GetNativePointerField<UE::Math::TVector<double>*>(this, "APrimalCharacter.RagdollLastFrameLinearVelocity"); }
@@ -4434,7 +4434,7 @@ struct APrimalCharacter : ACharacter
 
     bool IsBeingDestroyed() { return NativeCall<bool>(this, "APrimalCharacter.IsBeingDestroyed()"); }
     UMeshComponent* GetSkeletalMeshComponent() { return NativeCall<UMeshComponent*>(this, "APrimalCharacter.GetSkeletalMeshComponent()"); }
-    //ENetRole GetRole() { return NativeCall<ENetRole>(this, "APrimalCharacter.GetRole()"); }
+    ENetRole GetRole() { return NativeCall<ENetRole>(this, "APrimalCharacter.GetRole()"); }
     bool IsReadyForDynamicBasing() { return NativeCall<bool>(this, "APrimalCharacter.IsReadyForDynamicBasing()"); }
     bool AllowOverrideSwimmingAcceleration() { return NativeCall<bool>(this, "APrimalCharacter.AllowOverrideSwimmingAcceleration()"); }
     bool IsInMission() { return NativeCall<bool>(this, "APrimalCharacter.IsInMission()"); }
@@ -4445,12 +4445,12 @@ struct APrimalCharacter : ACharacter
     static float BPAdjustDamage() { return NativeCall<float>(nullptr, "APrimalCharacter.BPAdjustDamage()"); }
     float BPModifyViewHitDir(APrimalCharacter* viewingCharacter, float InViewHitDir) { return NativeCall<float, APrimalCharacter*, float>(this, "APrimalCharacter.BPModifyViewHitDir(APrimalCharacter*,float)", viewingCharacter, InViewHitDir); }
     void BPOnStaminaDrained() { NativeCall<void>(this, "APrimalCharacter.BPOnStaminaDrained()"); }
-    //bool BPOverrideCameraArmLengthInterpParams(const FPrimalCameraParams* CameraParams, FPrimalCameraInterpParams* OutInterpParams) { return NativeCall<bool, const FPrimalCameraParams*, FPrimalCameraInterpParams*>(this, "APrimalCharacter.BPOverrideCameraArmLengthInterpParams(FPrimalCameraParams*,FPrimalCameraInterpParams*)", CameraParams, OutInterpParams); }
+    bool BPOverrideCameraArmLengthInterpParams(const FPrimalCameraParams* CameraParams, FPrimalCameraInterpParams* OutInterpParams) { return NativeCall<bool, const FPrimalCameraParams*, FPrimalCameraInterpParams*>(this, "APrimalCharacter.BPOverrideCameraArmLengthInterpParams(FPrimalCameraParams*,FPrimalCameraInterpParams*)", CameraParams, OutInterpParams); }
     void BPOverrideReleaseItemSlot(int ItemSlot) { NativeCall<void, int>(this, "APrimalCharacter.BPOverrideReleaseItemSlot(int)", ItemSlot); }
     void BPOverrideUseItemSlot(int ItemSlot) { NativeCall<void, int>(this, "APrimalCharacter.BPOverrideUseItemSlot(int)", ItemSlot); }
     void ClientOrderedAttackTarget(AActor* attackTarget) { NativeCall<void, AActor*>(this, "APrimalCharacter.ClientOrderedAttackTarget(AActor*)", attackTarget); }
     void ClientSyncAnimation(UAnimMontage* AnimMontage, float PlayRate, float ServerCurrentMontageTime, bool bForceTickPoseAndServerUpdateMesh, float BlendInTime, float BlendOutTime) { NativeCall<void, UAnimMontage*, float, float, bool, float, float>(this, "APrimalCharacter.ClientSyncAnimation(UAnimMontage*,float,float,bool,float,float)", AnimMontage, PlayRate, ServerCurrentMontageTime, bForceTickPoseAndServerUpdateMesh, BlendInTime, BlendOutTime); }
-    //TSubclassOf<UToolTipWidget>* GetCustomTooltip(TSubclassOf<UToolTipWidget>* result, UE::Math::TVector2<double>* tooltipPadding, UE::Math::TVector2<double>* tooltipScale, UE::Math::TVector<double>* tooltipLocationOffset) { return NativeCall<TSubclassOf<UToolTipWidget> *, TSubclassOf<UToolTipWidget>*, UE::Math::TVector2<double>*, UE::Math::TVector2<double>*, UE::Math::TVector<double>*>(this, "APrimalCharacter.GetCustomTooltip(TSubclassOf<UToolTipWidget>*,UE::Math::TVector2<double>*,UE::Math::TVector2<double>*,UE::Math::TVector<double>*)", result, tooltipPadding, tooltipScale, tooltipLocationOffset); }
+    TSubclassOf<UToolTipWidget>* GetCustomTooltip(TSubclassOf<UToolTipWidget>* result, UE::Math::TVector2<double>* tooltipPadding, UE::Math::TVector2<double>* tooltipScale, UE::Math::TVector<double>* tooltipLocationOffset) { return NativeCall<TSubclassOf<UToolTipWidget> *, TSubclassOf<UToolTipWidget>*, UE::Math::TVector2<double>*, UE::Math::TVector2<double>*, UE::Math::TVector<double>*>(this, "APrimalCharacter.GetCustomTooltip(TSubclassOf<UToolTipWidget>*,UE::Math::TVector2<double>*,UE::Math::TVector2<double>*,UE::Math::TVector<double>*)", result, tooltipPadding, tooltipScale, tooltipLocationOffset); }
     FName* GetOverrideSocket(FName* result, FName from) { return NativeCall<FName*, FName*, FName>(this, "APrimalCharacter.GetOverrideSocket(FName*,FName)", result, from); }
     UMeshComponent* GetPaintingMesh() { return NativeCall<UMeshComponent*>(this, "APrimalCharacter.GetPaintingMesh()"); }
     void LocalUnpossessed() { NativeCall<void>(this, "APrimalCharacter.LocalUnpossessed()"); }
@@ -4470,7 +4470,7 @@ struct APrimalCharacter : ACharacter
     void ServerCallSetAggressive() { NativeCall<void>(this, "APrimalCharacter.ServerCallSetAggressive()"); }
     void ServerCallStay() { NativeCall<void>(this, "APrimalCharacter.ServerCallStay()"); }
     void ServerCaptureDermis(APrimalCharacter* Target) { NativeCall<void, APrimalCharacter*>(this, "APrimalCharacter.ServerCaptureDermis(APrimalCharacter*)", Target); }
-    //void ServerDinoOrder(APrimalDinoCharacter* aDino, EDinoTamedOrder::Type OrderType, AActor* target) { NativeCall<void, APrimalDinoCharacter*, EDinoTamedOrder::Type, AActor*>(this, "APrimalCharacter.ServerDinoOrder(APrimalDinoCharacter*,EDinoTamedOrder::Type,AActor*)", aDino, OrderType, target); }
+    void ServerDinoOrder(APrimalDinoCharacter* aDino, EDinoTamedOrder::Type OrderType, AActor* target) { NativeCall<void, APrimalDinoCharacter*, EDinoTamedOrder::Type, AActor*>(this, "APrimalCharacter.ServerDinoOrder(APrimalDinoCharacter*,EDinoTamedOrder::Type,AActor*)", aDino, OrderType, target); }
     void ToggleWeapon() { NativeCall<void>(this, "APrimalCharacter.ToggleWeapon()"); }
     void ServerRequestDrag() { NativeCall<void>(this, "APrimalCharacter.ServerRequestDrag()"); }
     void ServerTryPoop() { NativeCall<void>(this, "APrimalCharacter.ServerTryPoop()"); }
@@ -4664,8 +4664,8 @@ struct APrimalCharacter : ACharacter
     void LocalPossessedBy(APlayerController* ByController) { NativeCall<void, APlayerController*>(this, "APrimalCharacter.LocalPossessedBy(APlayerController*)", ByController); }
     void LocalUnpossessed_Implementation() { NativeCall<void>(this, "APrimalCharacter.LocalUnpossessed_Implementation()"); }
     UAudioComponent* PlayFootstep() { return NativeCall<UAudioComponent*>(this, "APrimalCharacter.PlayFootstep()"); }
-    //EPhysicalSurface GetFootPhysicalSurfaceType(bool bForce, bool bIsForFootstepParticles) { return NativeCall<EPhysicalSurface, bool, bool>(this, "APrimalCharacter.GetFootPhysicalSurfaceType(bool,bool)", bForce, bIsForFootstepParticles); }
-    //EPhysicalSurface GetPhysMatTypeFromHits(const TArray<FHitResult, TSizedDefaultAllocator<32> >* FromHits) { return NativeCall<EPhysicalSurface, const TArray<FHitResult, TSizedDefaultAllocator<32> >*>(this, "APrimalCharacter.GetPhysMatTypeFromHits(TArray<FHitResult,TSizedDefaultAllocator<32>>*)", FromHits); }
+    EPhysicalSurface GetFootPhysicalSurfaceType(bool bForce, bool bIsForFootstepParticles) { return NativeCall<EPhysicalSurface, bool, bool>(this, "APrimalCharacter.GetFootPhysicalSurfaceType(bool,bool)", bForce, bIsForFootstepParticles); }
+    EPhysicalSurface GetPhysMatTypeFromHits(const TArray<FHitResult, TSizedDefaultAllocator<32> >* FromHits) { return NativeCall<EPhysicalSurface, const TArray<FHitResult, TSizedDefaultAllocator<32> >*>(this, "APrimalCharacter.GetPhysMatTypeFromHits(TArray<FHitResult,TSizedDefaultAllocator<32>>*)", FromHits); }
     bool ModifyInputAcceleration(UE::Math::TVector<double>* InputAcceleration) { return NativeCall<bool, UE::Math::TVector<double>*>(this, "APrimalCharacter.ModifyInputAcceleration(UE::Math::TVector<double>*)", InputAcceleration); }
     bool AnimationPreventsInput() { return NativeCall<bool>(this, "APrimalCharacter.AnimationPreventsInput()"); }
     float SetHealth(float newHealth) { return NativeCall<float, float>(this, "APrimalCharacter.SetHealth(float)", newHealth); }
@@ -5739,7 +5739,7 @@ struct APrimalDinoCharacter : APrimalCharacter
     TWeakObjectPtr<AActor>& ForcedMasterTargetField() { return *GetNativePointerField<TWeakObjectPtr<AActor>*>(this, "APrimalDinoCharacter.ForcedMasterTarget"); }
     FName& MountCharacterSocketNameField() { return *GetNativePointerField<FName*>(this, "APrimalDinoCharacter.MountCharacterSocketName"); }
     TWeakObjectPtr<APrimalCharacter>& MountCharacterField() { return *GetNativePointerField<TWeakObjectPtr<APrimalCharacter>*>(this, "APrimalDinoCharacter.MountCharacter"); }
-    //ECollisionChannel& MeshOriginalCollisionChannelField() { return *GetNativePointerField<ECollisionChannel*>(this, "APrimalDinoCharacter.MeshOriginalCollisionChannel"); }
+    ECollisionChannel& MeshOriginalCollisionChannelField() { return *GetNativePointerField<ECollisionChannel*>(this, "APrimalDinoCharacter.MeshOriginalCollisionChannel"); }
     UE::Math::TVector<double>& RidingAttackExtraVelocityField() { return *GetNativePointerField<UE::Math::TVector<double>*>(this, "APrimalDinoCharacter.RidingAttackExtraVelocity"); }
     UAnimMontage*& StartChargeAnimationField() { return *GetNativePointerField<UAnimMontage**>(this, "APrimalDinoCharacter.StartChargeAnimation"); }
     TArray<UAnimMontage*, TSizedDefaultAllocator<32> >& AttackAnimationsField() { return *GetNativePointerField<TArray<UAnimMontage*, TSizedDefaultAllocator<32> >*>(this, "APrimalDinoCharacter.AttackAnimations"); }
