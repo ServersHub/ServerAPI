@@ -6694,74 +6694,6 @@ namespace EButtonClickMethod
 	};
 }
 
-enum ERDGViewableResourceType:unsigned char
-{
-	Texture = 0x0,
-	Buffer = 0x1,
-	MAX = 0x2
-};
-
-enum EAuxSceneTextures:unsigned int
-{
-	AST_2D_00 = 0x0,
-	AST_2D_01 = 0x1,
-	AST_2D_02 = 0x2,
-	AST_2D_03 = 0x3,
-	AST_2D_04 = 0x4,
-	AST_2D_05 = 0x5,
-	AST_2D_06 = 0x6,
-	AST_2D_07 = 0x7,
-	AST_2D_08 = 0x8,
-	AST_2D_09 = 0x9,
-	AST_2D_10 = 0xA,
-	AST_2D_11 = 0xB,
-	AST_2D_12 = 0xC,
-	AST_2D_13 = 0xD,
-	AST_2D_14 = 0xE,
-	AST_2D_15 = 0xF,
-	AST_2D_16 = 0x10,
-	AST_2D_17 = 0x11,
-	AST_2D_18 = 0x12,
-	AST_2D_19 = 0x13,
-	AST_2D_20 = 0x14,
-	AST_2D_21 = 0x15,
-	AST_2D_22 = 0x16,
-	AST_2D_23 = 0x17,
-	AST_2D_24 = 0x18,
-	AST_3D_00 = 0x19,
-	AST_3D_01 = 0x1A,
-	AST_3D_02 = 0x1B,
-	AST_3D_03 = 0x1C,
-	AST_3D_04 = 0x1D,
-	AST_3D_05 = 0x1E,
-	AST_3D_06 = 0x1F,
-	AST_3D_07 = 0x20,
-	AST_3D_08 = 0x21,
-	AST_3D_09 = 0x22,
-	AST_3D_10 = 0x23,
-	AST_3D_11 = 0x24,
-	AST_3D_12 = 0x25,
-	AST_3D_13 = 0x26,
-	AST_3D_14 = 0x27,
-	AST_3D_15 = 0x28,
-	AST_3D_16 = 0x29,
-	AST_3D_17 = 0x2A,
-	AST_3D_18 = 0x2B,
-	AST_3D_19 = 0x2C,
-	AST_3D_20 = 0x2D,
-	AST_3D_21 = 0x2E,
-	AST_3D_22 = 0x2F,
-	AST_3D_23 = 0x30,
-	AST_3D_24 = 0x31,
-	AST_Tot_Num = 0x32,
-	AST_2D_Start = 0x0,
-	AST_2D_End = 0x19,
-	AST_3D_Start = 0x19,
-	AST_3D_End = 0x32,
-	AST_2D_Num = 0x19,
-	AST_3D_Num = 0x19
-};
-
 namespace EChunkLocation
 {
 	enum Type:int
@@ -6823,7 +6755,7 @@ enum ECameraShakePlaySpace:unsigned char
 	UserDefined = 0x2
 };
 
-enum ERHIAccess:unsigned int
+enum class ERHIAccess:unsigned int
 {
 	Unknown = 0x0,
 	CPURead = 0x1,
@@ -7032,7 +6964,7 @@ enum ERichCurveTangentWeightMode:int
 	RCTWM_WeightedBoth = 0x3
 };
 
-enum ETextureCreateFlags:unsigned __int64
+enum class ETextureCreateFlags:unsigned __int64
 {
 	None = 0x0,
 	RenderTargetable = 0x1,
@@ -7080,7 +7012,7 @@ namespace EAnimLinkMethod
 	};
 }
 
-enum ESkinVertexColorChannel:unsigned char
+enum class ESkinVertexColorChannel:unsigned char
 {
 	Red = 0x0,
 	Green = 0x1,
@@ -7313,7 +7245,7 @@ namespace EMaterialShaderMapUsage
 	};
 }
 
-enum ECbFieldType:unsigned char
+enum class ECbFieldType:unsigned char
 {
 	None = 0x0,
 	Null = 0x1,
@@ -7970,7 +7902,7 @@ enum EEngineNetworkVersionHistory:int
 	HISTORY_ENGINENETVERSION_LATEST = 0x20
 };
 
-enum EChaosBufferMode:unsigned char
+enum class EChaosBufferMode:unsigned char
 {
 	Double = 0x0,
 	Triple = 0x1,
@@ -8274,7 +8206,7 @@ enum EResourceLockMode:int
 	RLM_Num = 0x3
 };
 
-enum EMaterialSetParameterValueFlags:unsigned int
+enum class EMaterialSetParameterValueFlags:unsigned int
 {
 	None = 0x0,
 	SetCurveAtlas = 0x1
@@ -8285,7 +8217,7 @@ enum EStaticConstructor:int
 	EC_StaticConstructor = 0x0
 };
 
-enum EFontCacheAtlasDataType:unsigned char
+enum class EFontCacheAtlasDataType:unsigned char
 {
 	Regular = 0x0,
 	Outline = 0x1,
@@ -8315,7 +8247,7 @@ enum EMoviePlaybackType:int
 	MT_MAX = 0x3
 };
 
-enum EChannelCloseReason:unsigned char
+enum class EChannelCloseReason:unsigned char
 {
 	Destroyed = 0x0,
 	Dormancy = 0x1,
@@ -8367,7 +8299,7 @@ enum EInitStateDefaultsResult:unsigned char
 	NotInitialized = 0x1
 };
 
-enum EOnlineSharingCategory:unsigned int
+enum class EOnlineSharingCategory:unsigned int
 {
 	None = 0x0,
 	ReadPosts = 0x1,
@@ -8401,7 +8333,7 @@ enum ESleepFamily:unsigned char
 	Custom = 0x2
 };
 
-enum EQueuedWorkPriority:unsigned char
+enum class EQueuedWorkPriority:unsigned char
 {
 	Blocking = 0x0,
 	Highest = 0x1,
@@ -8412,14 +8344,14 @@ enum EQueuedWorkPriority:unsigned char
 	Count = 0x6
 };
 
-enum EQueuedWorkFlags:unsigned char
+enum class EQueuedWorkFlags:unsigned char
 {
 	None = 0x0,
 	DoNotRunInsideBusyWait = 0x1,
 	Count = 0x2
 };
 
-enum ERHITextureMetaDataAccess:unsigned char
+enum class ERHITextureMetaDataAccess:unsigned char
 {
 	None = 0x0,
 	CompressedSurface = 0x1,
@@ -8459,7 +8391,7 @@ enum EGuidFormats:int
 	Base36Encoded = 0x9
 };
 
-enum ETrackedActivityLight:unsigned char
+enum class ETrackedActivityLight:unsigned char
 {
 	None = 0x0,
 	Red = 0x1,
@@ -8589,7 +8521,7 @@ namespace ELerpInterpolationMode
 	};
 }
 
-enum EAlphaBlendOption:unsigned char
+enum class EAlphaBlendOption:unsigned char
 {
 	Linear = 0x0,
 	Cubic = 0x1,
@@ -8638,7 +8570,7 @@ enum EAnimSyncGroupScope:unsigned char
 	Component = 0x1
 };
 
-enum EVariantTypes:int
+enum class EVariantTypes:int
 {
 	Empty = 0x0,
 	Ansichar = 0x1,
@@ -8682,7 +8614,7 @@ enum EVariantTypes:int
 	Custom = 0x40
 };
 
-enum EChaosThreadingMode:unsigned char
+enum class EChaosThreadingMode:unsigned char
 {
 	DedicatedThread = 0x0,
 	TaskGraph = 0x1,
@@ -8691,7 +8623,7 @@ enum EChaosThreadingMode:unsigned char
 	Invalid = 0x4
 };
 
-enum ETeleportType:unsigned char
+enum class ETeleportType:unsigned char
 {
 	None = 0x0,
 	TeleportPhysics = 0x1,
@@ -8719,7 +8651,7 @@ enum EAnimCurveType:unsigned char
 	MaxAnimCurveType = 0x3
 };
 
-enum EUserInterfaceActionType:unsigned char
+enum class EUserInterfaceActionType:unsigned char
 {
 	None = 0x0,
 	Button = 0x1,
@@ -8729,14 +8661,14 @@ enum EUserInterfaceActionType:unsigned char
 	CollapsedButton = 0x5
 };
 
-enum ECbFieldError:unsigned char
+enum class ECbFieldError:unsigned char
 {
 	None = 0x0,
 	TypeError = 0x1,
 	RangeError = 0x2
 };
 
-enum EPhysicsProxyType:unsigned int
+enum class EPhysicsProxyType:unsigned int
 {
 	NoneType = 0x0,
 	StaticMeshType = 0x1,
@@ -8750,7 +8682,7 @@ enum EPhysicsProxyType:unsigned int
 	Count = 0xC
 };
 
-enum EParallelForFlags:int
+enum class EParallelForFlags:int
 {
 	None = 0x0,
 	ForceSingleThread = 0x1,
@@ -8759,14 +8691,14 @@ enum EParallelForFlags:int
 	BackgroundPriority = 0x8
 };
 
-enum ENetworkSmoothingMode:unsigned char
+enum class ENetworkSmoothingMode:unsigned char
 {
 	Disabled = 0x0,
 	Linear = 0x1,
 	Exponential = 0x2
 };
 
-enum EPersistentStorageManagerFileSizeFlags:unsigned char
+enum class EPersistentStorageManagerFileSizeFlags:unsigned char
 {
 	None = 0x0,
 	OnlyUpdateIfLess = 0x1,
@@ -8809,7 +8741,7 @@ enum EShrinkCapsuleExtent:int
 	SHRINK_AllCustom = 0x3
 };
 
-enum EPlaneConstraintAxisSetting:unsigned char
+enum class EPlaneConstraintAxisSetting:unsigned char
 {
 	Custom = 0x0,
 	X = 0x1,
@@ -8845,7 +8777,7 @@ namespace SplashTextType
 	};
 }
 
-enum ERHIFeatureSupport:unsigned char
+enum class ERHIFeatureSupport:unsigned char
 {
 	Unsupported = 0x0,
 	RuntimeDependent = 0x1,
@@ -8854,7 +8786,7 @@ enum ERHIFeatureSupport:unsigned char
 	NumBits = 0x2
 };
 
-enum ERHIBindlessSupport:unsigned char
+enum class ERHIBindlessSupport:unsigned char
 {
 	Unsupported = 0x0,
 	RayTracingOnly = 0x1,
@@ -8862,7 +8794,7 @@ enum ERHIBindlessSupport:unsigned char
 	NumBits = 0x2
 };
 
-enum EPlatformUserSelectorFlags:unsigned char
+enum class EPlatformUserSelectorFlags:unsigned char
 {
 	None = 0x0,
 	RequiresOnlineEnabledProfile = 0x2,
@@ -8879,7 +8811,7 @@ enum EScreenPhysicalAccuracy:int
 	Truth = 0x2
 };
 
-enum EVertexInputStreamType:unsigned char
+enum class EVertexInputStreamType:unsigned char
 {
 	Default = 0x0,
 	PositionOnly = 0x1,
