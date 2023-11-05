@@ -171,7 +171,7 @@ struct AShooterGameState : AGameState
 	long double& LastHadMusicTimeField() { return *GetNativePointerField<long double*>(this, "AShooterGameState.LastHadMusicTime"); }
 	TArray<FLevelExperienceRamp, TSizedDefaultAllocator<32> >& LevelExperienceRampOverridesField() { return *GetNativePointerField<TArray<FLevelExperienceRamp, TSizedDefaultAllocator<32> >*>(this, "AShooterGameState.LevelExperienceRampOverrides"); }
 	TArray<FEngramEntryOverride, TSizedDefaultAllocator<32> >& OverrideEngramEntriesField() { return *GetNativePointerField<TArray<FEngramEntryOverride, TSizedDefaultAllocator<32> >*>(this, "AShooterGameState.OverrideEngramEntries"); }
-// TSubclassOf<UPrimalUI>& CustomGameUITemplateField() { return *GetNativePointerField<TSubclassOf<UPrimalUI>*>(this, "AShooterGameState.CustomGameUITemplate"); }
+	TSubclassOf<UPrimalUI>& CustomGameUITemplateField() { return *GetNativePointerField<TSubclassOf<UPrimalUI>*>(this, "AShooterGameState.CustomGameUITemplate"); }
 	TArray<FString, TSizedDefaultAllocator<32> >& PreventDinoTameClassNamesField() { return *GetNativePointerField<TArray<FString, TSizedDefaultAllocator<32> >*>(this, "AShooterGameState.PreventDinoTameClassNames"); }
 	float& ListenServerTetherDistanceMultiplierField() { return *GetNativePointerField<float*>(this, "AShooterGameState.ListenServerTetherDistanceMultiplier"); }
 	FString& PGMapNameField() { return *GetNativePointerField<FString*>(this, "AShooterGameState.PGMapName"); }
@@ -423,6 +423,9 @@ struct AShooterGameState : AGameState
 
 struct UWorld : UPrimalWorld, FNetworkNotify {
 	//variables
+	long double& TimeSecondsField() { return *GetNativePointerField<long double*>(this, "UWorld.TimeSeconds"); }
+
+
 	APlayerController* GetFirstPlayerController() { return NativeCall<APlayerController*>(this, "UWorld.GetFirstPlayerController()"); }
 
 	//functions

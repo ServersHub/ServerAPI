@@ -878,7 +878,7 @@ struct UActorComponent : UObject
     void FailedToRegisterWithWorld(UWorld* InWorld) { NativeCall<void, UWorld*>(this, "UActorComponent.FailedToRegisterWithWorld(UWorld*)", InWorld); }
     UWorld* GetWorld_Uncached() { return NativeCall<UWorld*>(this, "UActorComponent.GetWorld_Uncached()"); }
     bool ComponentHasTag(FName Tag) { return NativeCall<bool, FName>(this, "UActorComponent.ComponentHasTag(FName)", Tag); }
-    //ENetMode InternalGetNetMode() { return NativeCall<ENetMode>(this, "UActorComponent.InternalGetNetMode()"); }
+    ENetMode InternalGetNetMode() { return NativeCall<ENetMode>(this, "UActorComponent.InternalGetNetMode()"); }
     FString* GetReadableName(FString* result) { return NativeCall<FString*, FString*>(this, "UActorComponent.GetReadableName(FString&)", result); }
     void BeginDestroy() { NativeCall<void>(this, "UActorComponent.BeginDestroy()"); }
     bool NeedsLoadForClient() { return NativeCall<bool>(this, "UActorComponent.NeedsLoadForClient()"); }
