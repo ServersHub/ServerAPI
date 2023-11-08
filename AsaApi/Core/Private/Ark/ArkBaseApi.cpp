@@ -38,34 +38,44 @@ namespace API
 		try
 		{
 			const fs::path filepath = fs::current_path().append("ArkAscendedServer.pdb");
-			const fs::path cacheCheckFile = fs::current_path().append(ArkBaseApi::GetApiName()+"/cache_check.txt");
-			const fs::path offsetsFile = fs::current_path().append(ArkBaseApi::GetApiName()+"/offsets_dump.map");
-			const fs::path bitfieldsFile = fs::current_path().append(ArkBaseApi::GetApiName()+"/bitfields_dump.map");
+
+			if (!fs::exists(fs::current_path().append(ArkBaseApi::GetApiName())))
+				fs::create_directory(fs::current_path().append(ArkBaseApi::GetApiName()));
+
+			if (!fs::exists(fs::current_path().append(ArkBaseApi::GetApiName() + "/Plugins")))
+				fs::create_directory(fs::current_path().append(ArkBaseApi::GetApiName() + "/Plugins"));
+
+			if (!fs::exists(fs::current_path().append(ArkBaseApi::GetApiName()+"/Cache")))
+				fs::create_directory(fs::current_path().append(ArkBaseApi::GetApiName()+"/Cache"));
+
+			const fs::path keyCacheFile = fs::current_path().append(ArkBaseApi::GetApiName()+"/Cache/cached_key.cache");
+			const fs::path offsetsCacheFile = fs::current_path().append(ArkBaseApi::GetApiName()+"/Cache/cached_offsets.cache");
+			const fs::path bitfieldsCacheFile = fs::current_path().append(ArkBaseApi::GetApiName()+"/Cache/cached_bitfields.cache");
 			const std::string fileHash = Cache::calculateSHA256(filepath);
-			const std::string storedHash = Cache::readFromFile(cacheCheckFile);
+			const std::string storedHash = Cache::readFromFile(keyCacheFile);
 
 			if (fileHash != storedHash
-				|| !fs::exists(offsetsFile)
-				|| !fs::exists(bitfieldsFile))
+				|| !fs::exists(offsetsCacheFile)
+				|| !fs::exists(bitfieldsCacheFile))
 			{
 				Log::GetLog()->info("Cache refresh required this will take several minutes to complete");
 				pdb_reader.Read(filepath, &offsets_dump, &bitfields_dump);
 
 				Log::GetLog()->info("Caching offsets for faster loading next time");
-				Cache::serializeMap(offsets_dump, offsetsFile);
+				Cache::serializeMap(offsets_dump, offsetsCacheFile);
 
 				Log::GetLog()->info("Caching bitfields for faster loading next time");
-				Cache::serializeMap(bitfields_dump, bitfieldsFile);
-				Cache::saveToFile(cacheCheckFile, fileHash);
+				Cache::serializeMap(bitfields_dump, bitfieldsCacheFile);
+				Cache::saveToFile(keyCacheFile, fileHash);
 			}
 			else
 			{
 				Log::GetLog()->info("Cache is still valid loading existing cache");
 				Log::GetLog()->info("Reading cached offsets");
-				offsets_dump = Cache::deserializeMap<intptr_t>(offsetsFile);
+				offsets_dump = Cache::deserializeMap<intptr_t>(offsetsCacheFile);
 
 				Log::GetLog()->info("Reading cached bitfields");
-				bitfields_dump = Cache::deserializeMap<BitField>(bitfieldsFile);
+				bitfields_dump = Cache::deserializeMap<BitField>(bitfieldsCacheFile);
 			}
 		}
 		catch (const std::exception& error)
