@@ -49,19 +49,19 @@ namespace AsaApi
 		hooks->SetHook("UWorld.Tick(ELevelTick,float)", &Hook_UWorld_Tick, &UWorld_Tick_original);
 		hooks->SetHook("AShooterGameMode.InitGame(FString&,FString&,FString&)", &Hook_AShooterGameMode_InitGame,
 			&AShooterGameMode_InitGame_original);
-		hooks->SetHook("AShooterPlayerController.ServerSendChatMessage_Implementation(FString&,int)",
+		hooks->SetHook("AShooterPlayerController.ServerSendChatMessage_Implementation(FString&,EChatSendMode::Type)",
 			&Hook_AShooterPlayerController_ServerSendChatMessage_Impl,
 			&AShooterPlayerController_ServerSendChatMessage_Impl_original);
-		hooks->SetHook("APlayerController.ConsoleCommand(FString&,FString&,bool)", &Hook_APlayerController_ConsoleCommand,
+		hooks->SetHook("APlayerController.ConsoleCommand(FString&,bool)", &Hook_APlayerController_ConsoleCommand,
 			&APlayerController_ConsoleCommand_original);
-		hooks->SetHook("AShooterPlayerController.ConsoleCommand(FString&,FString&,bool)", &Hook_AShooterPlayerController_ConsoleCommand,
+		hooks->SetHook("AShooterPlayerController.ConsoleCommand(FString&,bool)", &Hook_AShooterPlayerController_ConsoleCommand,
 			&AShooterPlayerController_ConsoleCommand_original);
-		hooks->SetHook("RCONClientConnection.ProcessRCONPacket(RCONPacket*,UWorld*)", &Hook_RCONClientConnection_ProcessRCONPacket,
+		hooks->SetHook("RCONClientConnection.ProcessRCONPacket(RCONPacket&,UWorld*)", &Hook_RCONClientConnection_ProcessRCONPacket,
 			&RCONClientConnection_ProcessRCONPacket_original);
 		hooks->SetHook("AGameState.DefaultTimer()", &Hook_AGameState_DefaultTimer, &AGameState_DefaultTimer_original);
 		hooks->SetHook("AShooterGameMode.BeginPlay()", &Hook_AShooterGameMode_BeginPlay,
 			&AShooterGameMode_BeginPlay_original);
-		hooks->SetHook("URCONServer.Init(FString&,int,UShooterCheatManager*)", &Hook_URCONServer_Init, &URCONServer_Init_original);
+		hooks->SetHook("URCONServer.Init(FString,int,UShooterCheatManager*)", &Hook_URCONServer_Init, &URCONServer_Init_original);
 		hooks->SetHook("APlayerController.ServerCheckClientPossessionReliable_Implementation()", &Hook_APlayerController_ServerCheckClientPossessionReliable_Implementation,
 			&APlayerController_ServerCheckClientPossessionReliable_Implementation_original);
 		//hooks->SetHook("AShooterPlayerController.Possess(APawn*)", &Hook_AShooterPlayerController_Possess,
