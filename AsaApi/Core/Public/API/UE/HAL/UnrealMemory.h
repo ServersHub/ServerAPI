@@ -243,7 +243,8 @@ struct FMemory
 	*/
 	static SIZE_T QuantizeSize(SIZE_T Count, uint32 Alignment = DEFAULT_ALIGNMENT)
 	{
-		return NativeCall<SIZE_T, SIZE_T, uint32>(nullptr, "FMallocBinned2.QuantizeSize(unsigned__int64,unsignedint)", Count, Alignment);
+		//return NativeCall<SIZE_T, SIZE_T, uint32>(nullptr, "FMallocBinned2.QuantizeSize(unsigned__int64,unsignedint)", Count, Alignment);
+		return Count;
 	}
 
 	/**
