@@ -22,7 +22,7 @@ namespace AsaApi
 		~Commands() override = default;
 
 		void AddChatCommand(const FString& command,
-			const std::function<void(AShooterPlayerController*, FString*, EChatSendMode::Type)>&
+			const std::function<void(AShooterPlayerController*, FString*, int)>&
 			callback) override;
 		void AddConsoleCommand(const FString& command,
 			const std::function<void(APlayerController*, FString*, bool)>& callback) override;
@@ -32,7 +32,7 @@ namespace AsaApi
 		void AddOnTickCallback(const FString& id, const std::function<void(float)>& callback) override;
 		void AddOnTimerCallback(const FString& id, const std::function<void()>& callback) override;
 		void AddOnChatMessageCallback(const FString& id,
-			const std::function<bool(AShooterPlayerController*, FString*, EChatSendMode::Type,
+			const std::function<bool(AShooterPlayerController*, FString*, int,
 				bool, bool)>& callback) override;
 
 		bool RemoveChatCommand(const FString& command) override;
@@ -44,14 +44,14 @@ namespace AsaApi
 		bool RemoveOnChatMessageCallback(const FString& id) override;
 
 		bool CheckChatCommands(AShooterPlayerController* shooter_player_controller, FString* message,
-			EChatSendMode::Type mode);
+			int mode);
 		bool CheckConsoleCommands(APlayerController* a_player_controller, FString* cmd, bool write_to_log);
 		bool CheckRconCommands(RCONClientConnection* rcon_client_connection, RCONPacket* rcon_packet,
 			UWorld* u_world);
 		void CheckOnTickCallbacks(float delta_seconds);
 		void CheckOnTimerCallbacks();
 		bool CheckOnChatMessageCallbacks(AShooterPlayerController* player_controller, FString* message,
-			EChatSendMode::Type mode, bool spam_check, bool command_executed);
+			int mode, bool spam_check, bool command_executed);
 
 	private:
 		template <typename T>
@@ -67,14 +67,14 @@ namespace AsaApi
 			std::function<T> callback;
 		};
 
-		using ChatCommand = Command<void(AShooterPlayerController*, FString*, EChatSendMode::Type)>;
+		using ChatCommand = Command<void(AShooterPlayerController*, FString*, int)>;
 		using ConsoleCommand = Command<void(APlayerController*, FString*, bool)>;
 		using RconCommand = Command<void(RCONClientConnection*, RCONPacket*, UWorld*)>;
 
 		using OnTickCallback = Command<void(float)>;
 		using OnTimerCallback = Command<void()>;
 		using OnChatMessageCallback = Command<bool
-		(AShooterPlayerController*, FString*, EChatSendMode::Type, bool, bool)>;
+		(AShooterPlayerController*, FString*, int, bool, bool)>;
 
 		template <typename T>
 		bool RemoveCommand(const FString& command, std::vector<std::shared_ptr<T>>& commands)
@@ -98,7 +98,6 @@ namespace AsaApi
 		template <typename T, typename... Args>
 		bool CheckCommands(const FString& message, const std::vector<std::shared_ptr<T>>& commands, Args&&... args)
 		{
-			Log::GetLog()->info("({}) {}", __FUNCTION__, message.ToString());
 			TArray<FString> parsed;
 			message.ParseIntoArray(parsed, L" ", true);
 

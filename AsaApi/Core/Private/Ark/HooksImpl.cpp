@@ -30,7 +30,7 @@ namespace AsaApi
 	DECLARE_HOOK(UEngine_LoadMap, bool, UWorld*, DWORD64, DWORD64, DWORD64, DWORD64);
 	DECLARE_HOOK(UWorld_Tick, void, DWORD64, DWORD64, float);
 	DECLARE_HOOK(AShooterGameMode_InitGame, void, AShooterGameMode*, FString*, FString*, FString*);
-	DECLARE_HOOK(AShooterPlayerController_ServerSendChatMessage_Impl, void, AShooterPlayerController*, FString*, EChatSendMode::Type);
+	DECLARE_HOOK(AShooterPlayerController_ServerSendChatMessage_Impl, void, AShooterPlayerController*, FString*, int);
 	DECLARE_HOOK(APlayerController_ConsoleCommand, FString*, APlayerController*, FString*, FString*, bool);
 	DECLARE_HOOK(AShooterPlayerController_ConsoleCommand, FString*, AShooterPlayerController*, FString*, FString*, bool);
 	DECLARE_HOOK(RCONClientConnection_ProcessRCONPacket, void, RCONClientConnection*, RCONPacket*, UWorld*);
@@ -114,31 +114,30 @@ namespace AsaApi
 	}
 
 	void Hook_AShooterPlayerController_ServerSendChatMessage_Impl(
-		AShooterPlayerController* player_controller, FString* message, EChatSendMode::Type mode)
+		AShooterPlayerController* player_controller, FString* message, int mode)
 	{
-		if (message)
+		//UNCOMMENT TO ENABLE SPAM CHECK (currently `TimeSecondsField` is not working)
+		//const long double last_chat_time = player_controller->LastChatMessageTimeField();
+		//const long double now_time = AsaApi::GetApiUtils().GetWorld()->TimeSecondsField();
+
+		const auto spam_check = false;
+		//const auto spam_check = now_time - last_chat_time < 1.0;
+		//if (last_chat_time > 0 && spam_check)
+		//{
+		//	return;
+		//}
+
+		//player_controller->LastChatMessageTimeField() = now_time;
+
+		const auto command_executed = dynamic_cast<AsaApi::Commands&>(*API::game_api->GetCommands()).
+			CheckChatCommands(player_controller, message, mode);
+
+		const auto prevent_default = dynamic_cast<AsaApi::Commands&>(*API::game_api->GetCommands()).
+			CheckOnChatMessageCallbacks(player_controller, message, mode, spam_check, command_executed);
+
+		if (command_executed || prevent_default)
 		{
-			const long double last_chat_time = player_controller->LastChatMessageTimeField();
-			const long double now_time = AsaApi::GetApiUtils().GetWorld()->TimeSecondsField();
-
-			const auto spam_check = now_time - last_chat_time < 1.0;
-			if (last_chat_time > 0 && spam_check)
-			{
-				return;
-			}
-
-			player_controller->LastChatMessageTimeField() = now_time;
-
-			const auto command_executed = dynamic_cast<AsaApi::Commands&>(*API::game_api->GetCommands()).
-				CheckChatCommands(player_controller, message, mode);
-
-			const auto prevent_default = dynamic_cast<AsaApi::Commands&>(*API::game_api->GetCommands()).
-				CheckOnChatMessageCallbacks(player_controller, message, mode, spam_check, command_executed);
-
-			if (command_executed || prevent_default)
-			{
-				return;
-			}
+			return;
 		}
 		
 		AShooterPlayerController_ServerSendChatMessage_Impl_original(player_controller, message, mode);

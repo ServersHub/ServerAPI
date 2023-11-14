@@ -5,7 +5,7 @@
 namespace AsaApi
 {
 	void Commands::AddChatCommand(const FString& command,
-		const std::function<void(AShooterPlayerController*, FString*, EChatSendMode::Type)>&
+		const std::function<void(AShooterPlayerController*, FString*, int)>&
 		callback)
 	{
 		chat_commands_.push_back(std::make_shared<ChatCommand>(command, callback));
@@ -35,7 +35,7 @@ namespace AsaApi
 
 	void Commands::AddOnChatMessageCallback(const FString& id,
 		const std::function<bool(AShooterPlayerController*, FString*,
-			EChatSendMode::Type, bool, bool)>& callback)
+			int, bool, bool)>& callback)
 	{
 		on_chat_message_callbacks_.push_back(std::make_shared<OnChatMessageCallback>(id, callback));
 	}
@@ -71,7 +71,7 @@ namespace AsaApi
 	}
 
 	bool Commands::CheckChatCommands(AShooterPlayerController* shooter_player_controller, FString* message,
-		EChatSendMode::Type mode)
+		int mode)
 	{
 		return CheckCommands<ChatCommand>(*message, chat_commands_, shooter_player_controller, message, mode);
 	}
@@ -115,7 +115,7 @@ namespace AsaApi
 	bool Commands::CheckOnChatMessageCallbacks(
 		AShooterPlayerController* player_controller,
 		FString* message,
-		EChatSendMode::Type mode,
+		int mode,
 		bool spam_check,
 		bool command_executed)
 	{
