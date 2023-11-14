@@ -10,7 +10,7 @@ FArchive& FArchive::SerializeByteOrderSwapped(unsigned int& Length)
 
 void FArchiveState::SetCriticalError() { NativeCall<void>(this, "FArchiveState.SetCriticalError()"); }
 
-float FLinearColor::sRGBToLinearTable[256] =
+ARK_API float FLinearColor::sRGBToLinearTable[256] =
 {
 	0.0f,
 	0.000303526983548838f, 0.000607053967097675f, 0.000910580950646512f, 0.00121410793419535f, 0.00151763491774419f,

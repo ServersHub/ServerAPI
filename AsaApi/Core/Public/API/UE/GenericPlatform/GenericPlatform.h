@@ -29,7 +29,7 @@ struct SelectIntPointerType<T32BITS, T64BITS, 4>
 /**
 * Generic types for almost all compilers and platforms
 **/
-struct FGenericPlatformTypes
+ARK_API struct FGenericPlatformTypes
 {
 	//~ Unsigned base types
 	

@@ -55,7 +55,7 @@ int32        GetNum(const FString& String);
  * - Use UTF8TEXTVIEW("...") for string view literals (type is FUtf8StringView).
  * - Use \uxxxx or \Uxxxxxxxx escape sequences rather than \x to specify Unicode code points.
  */
-class FString
+ARK_API class FString
 {
 public:
 	using AllocatorType = TSizedDefaultAllocator<32>;
@@ -166,10 +166,10 @@ public:
 	}
 
 	/** Construct from null-terminated C string or nullptr  */
-	FString(const ANSICHAR* Str);
-	FString(const WIDECHAR* Str);
-	FString(const UTF8CHAR* Str);
-	FString(const UCS2CHAR* Str);
+	ARK_API FString(const ANSICHAR* Str);
+	ARK_API FString(const WIDECHAR* Str);
+	ARK_API FString(const UTF8CHAR* Str);
+	ARK_API FString(const UCS2CHAR* Str);
 
 	/** Construct from null-terminated C substring or nullptr */
 	FString(int32 Len, const ANSICHAR* Str);
@@ -227,7 +227,7 @@ public:
 	}
 #endif
 
-	FString& operator=(const TCHAR* Str);
+	ARK_API FString& operator=(const TCHAR* Str);
 
 	template <typename CharRangeType, typename TEnableIf<TIsTCharRangeNotCArray<CharRangeType>::Value>::Type* = nullptr>
 	FORCEINLINE FString& operator=(CharRangeType&& Range)
@@ -386,10 +386,10 @@ public:
 	 *
 	 * @param Str can be null if Count is 0. Can be unterminated, Str[Count] isn't read.
 	 */
-	void AppendChars(const ANSICHAR* Str, int32 Count);
-	void AppendChars(const WIDECHAR* Str, int32 Count);
-	void AppendChars(const UCS2CHAR* Str, int32 Count);
-	void AppendChars(const UTF8CHAR* Str, int32 Count);
+	ARK_API void AppendChars(const ANSICHAR* Str, int32 Count);
+	ARK_API void AppendChars(const WIDECHAR* Str, int32 Count);
+	ARK_API void AppendChars(const UCS2CHAR* Str, int32 Count);
+	ARK_API void AppendChars(const UTF8CHAR* Str, int32 Count);
 
 	/** Append a string and return a reference to this */
 	template<class CharType>
@@ -460,7 +460,7 @@ public:
 	 * @param Count           The number of characters to remove.
 	 * @param bAllowShrinking Whether or not to reallocate to shrink the storage after removal.
 	 */
-	void RemoveAt(int32 Index, int32 Count = 1, bool bAllowShrinking = true);
+	ARK_API void RemoveAt(int32 Index, int32 Count = 1, bool bAllowShrinking = true);
 
 	/**
 	 * Removes the text from the start of the string if it exists.
@@ -597,18 +597,18 @@ public:
 	}
 
 private:
-	UE_NODISCARD static FString ConcatFF(const FString& Lhs, const FString& Rhs);
-	UE_NODISCARD static FString ConcatFF(FString&& Lhs, const FString& Rhs);
-	UE_NODISCARD static FString ConcatFF(const FString& Lhs, FString&& Rhs);
-	UE_NODISCARD static FString ConcatFF(FString&& Lhs,	FString&& Rhs);
-	UE_NODISCARD static FString ConcatFC(const FString& Lhs, const TCHAR* Rhs);
-	UE_NODISCARD static FString ConcatFC(FString&& Lhs,	const TCHAR* Rhs);
-	UE_NODISCARD static FString ConcatCF(const TCHAR* Lhs, const FString& Rhs);
-	UE_NODISCARD static FString ConcatCF(const TCHAR* Lhs, FString&& Rhs);
-	UE_NODISCARD static FString ConcatFR(const FString& Lhs, const TCHAR* Rhs, int32 RhsLen);
-	UE_NODISCARD static FString ConcatFR(FString&& Lhs,	const TCHAR* Rhs, int32 RhsLen);
-	UE_NODISCARD static FString ConcatRF(const TCHAR* Lhs, int32 LhsLen, const FString& Rhs);
-	UE_NODISCARD static FString ConcatRF(const TCHAR* Lhs, int32 LhsLen, FString&& Rhs);
+	UE_NODISCARD ARK_API static FString ConcatFF(const FString& Lhs, const FString& Rhs);
+	UE_NODISCARD ARK_API static FString ConcatFF(FString&& Lhs, const FString& Rhs);
+	UE_NODISCARD ARK_API static FString ConcatFF(const FString& Lhs, FString&& Rhs);
+	UE_NODISCARD ARK_API static FString ConcatFF(FString&& Lhs,	FString&& Rhs);
+	UE_NODISCARD ARK_API static FString ConcatFC(const FString& Lhs, const TCHAR* Rhs);
+	UE_NODISCARD ARK_API static FString ConcatFC(FString&& Lhs,	const TCHAR* Rhs);
+	UE_NODISCARD ARK_API static FString ConcatCF(const TCHAR* Lhs, const FString& Rhs);
+	UE_NODISCARD ARK_API static FString ConcatCF(const TCHAR* Lhs, FString&& Rhs);
+	UE_NODISCARD ARK_API static FString ConcatFR(const FString& Lhs, const TCHAR* Rhs, int32 RhsLen);
+	UE_NODISCARD ARK_API static FString ConcatFR(FString&& Lhs,	const TCHAR* Rhs, int32 RhsLen);
+	UE_NODISCARD ARK_API static FString ConcatRF(const TCHAR* Lhs, int32 LhsLen, const FString& Rhs);
+	UE_NODISCARD ARK_API static FString ConcatRF(const TCHAR* Lhs, int32 LhsLen, FString&& Rhs);
 
 public:
 	UE_NODISCARD FORCEINLINE friend FString operator+(const FString& Lhs, const FString& Rhs)	{ return ConcatFF(Lhs, Rhs); }
@@ -1707,7 +1707,7 @@ public:
 	 *
 	 * @return	The number of elements in InArray
 	 */
-	int32 ParseIntoArray( TArray<FString>& OutArray, const TCHAR* pchDelim, bool InCullEmpty = true ) const;
+	ARK_API int32 ParseIntoArray( TArray<FString>& OutArray, const TCHAR* pchDelim, bool InCullEmpty = true ) const;
 
 	/**
 	 * Breaks up a delimited string into elements of a string array, using any whitespace and an 
@@ -1719,7 +1719,7 @@ public:
 	 *
 	 * @return	The number of elements in InArray
 	 */
-	int32 ParseIntoArrayWS( TArray<FString>& OutArray, const TCHAR* pchExtraDelim = nullptr, bool InCullEmpty = true ) const;
+	ARK_API int32 ParseIntoArrayWS( TArray<FString>& OutArray, const TCHAR* pchExtraDelim = nullptr, bool InCullEmpty = true ) const;
 
 	/**
 	* Breaks up a delimited string into elements of a string array, using line ending characters
@@ -1729,7 +1729,7 @@ public:
 	*
 	* @return	The number of elements in InArray
 	*/
-	int32 ParseIntoArrayLines(TArray<FString>& OutArray, bool InCullEmpty = true) const;
+	ARK_API int32 ParseIntoArrayLines(TArray<FString>& OutArray, bool InCullEmpty = true) const;
 
 	/**
 	* Breaks up a delimited string into elements of a string array, using the given delimiters
@@ -1741,7 +1741,7 @@ public:
 	*
 	* @return	The number of elements in InArray
 	*/
-	int32 ParseIntoArray(TArray<FString>& OutArray, const TCHAR*const* DelimArray, int32 NumDelims, bool InCullEmpty = true) const;
+	ARK_API int32 ParseIntoArray(TArray<FString>& OutArray, const TCHAR*const* DelimArray, int32 NumDelims, bool InCullEmpty = true) const;
 
 	/**
 	 * Takes an array of strings and removes any zero length entries.

@@ -194,19 +194,19 @@ namespace AsaApi
 		}
 
 		/**
-		 * \brief Returns Steam ID from player controller
+		 * \brief Returns EOS ID from player controller
 		 */
-		static FORCEINLINE uint64 GetSteamIdFromController(AController* controller)
+		static FORCEINLINE FString GetEOSIDFromController(AController* controller)
 		{
-			uint64 steam_id = 0;
-			//need fix -wooly
-			/*AShooterPlayerController* playerController = static_cast<AShooterPlayerController*>(controller);
+			FString eos_id = "";
+			
+			AShooterPlayerController* playerController = static_cast<AShooterPlayerController*>(controller);
 			if (playerController != nullptr)
 			{
-				steam_id = playerController->GetUniqueNetIdAsUINT64();
-			}*/
+				playerController->GetUniqueNetIdAsString(&eos_id);
+			}
 
-			return steam_id;
+			return eos_id;
 		}
 
 		/**
@@ -309,13 +309,13 @@ namespace AsaApi
 		}
 
 		/**
-		 * \brief Finds player from the given steam id
-		 * \param steam_id Steam id
+		 * \brief Finds player from the given eos id
+		 * \param eos_id EOS id
 		 * \return Pointer to AShooterPlayerController
 		 */
-		FORCEINLINE AShooterPlayerController* FindPlayerFromSteamId(uint64 steam_id) const
+		FORCEINLINE AShooterPlayerController* FindPlayerFromSteamId(const FString& eos_id) const
 		{
-			return FindPlayerFromSteamId_Internal(steam_id);
+			return FindPlayerFromEOSID_Internal(eos_id);
 		}
 
 		/**
@@ -610,12 +610,11 @@ namespace AsaApi
 			return player != nullptr ? player->LinkedPlayerIDField() : 0;
 		}
 
-		FORCEINLINE uint64 GetSteamIDForPlayerID(int player_id) const
+		FORCEINLINE const FString GetEOSIDForPlayerID(int player_id)
 		{
-			//need fix -wooly
-			return 0;
-			/*uint64 steam_id = GetShooterGameMode()->GetSteamIDForPlayerID(player_id);
-			if (steam_id == 0)
+			FString eos_id = "";
+			GetShooterGameMode()->GetSteamIDStringForPlayerID(&eos_id, player_id);
+			if (!eos_id.IsEmpty())
 			{
 				const auto& player_controllers = GetWorld()->PlayerControllerListField();
 				for (TWeakObjectPtr<APlayerController> player_controller : player_controllers)
@@ -623,15 +622,15 @@ namespace AsaApi
 					auto* shooter_pc = static_cast<AShooterPlayerController*>(player_controller.Get());
 					if (shooter_pc != nullptr && shooter_pc->LinkedPlayerIDField() == player_id)
 					{
-						steam_id = shooter_pc->GetUniqueNetIdAsUINT64();
+						shooter_pc->GetUniqueNetIdAsString(&eos_id);
 						break;
 					}
 				}
 
-				GetShooterGameMode()->AddPlayerID(player_id, steam_id);
+				GetShooterGameMode()->AddPlayerID(player_id, &eos_id);
 			}
 
-			return steam_id;*/
+			return eos_id;
 		}
 
 		/**
@@ -789,24 +788,24 @@ namespace AsaApi
 		* \brief obtains the steam ID of an attacker, meant to be used in hooks such as TakeDamage
 		* \param tribe_check if set to true will return NULL if the target is from the same tribe as the attacker
 		*/
-		FORCEINLINE uint64 GetAttackerSteamID(AActor* target, AController* killer, AActor* damage_causer, bool tribe_check = true)
+		FORCEINLINE const FString GetAttackerEOSID(AActor* target, AController* killer, AActor* damage_causer, bool tribe_check = true)
 		{
-			uint64 steam_id = NULL;
+			FString eos_id = "";
 
 			/*if (target)
 			{
-				if (killer && !killer->IsLocalController() && killer->IsA(AShooterPlayerController::GetPrivateStaticClass())
+				if (killer && !killer->IsLocalController() && killer->IsBasedOnArchetype(AShooterPlayerController::GetPrivateStaticClass())
 					&& (!tribe_check || (tribe_check && target->TargetingTeamField() != killer->TargetingTeamField())))
-					steam_id = GetSteamIdFromController(static_cast<AShooterPlayerController*>(killer));
+					eos_id = GetEOSIDFromController(static_cast<AShooterPlayerController*>(killer));
 				else if (damage_causer && (!tribe_check || (tribe_check && target->TargetingTeamField() != damage_causer->TargetingTeamField()))
-					&& damage_causer->IsA(APrimalStructureExplosive::StaticClass()))
+					&& damage_causer->IsBasedOnArchetype(*APrimalStructureExplosive::StaticClass()))
 				{
 					APrimalStructureExplosive* explosive = static_cast<APrimalStructureExplosive*>(damage_causer);
-					steam_id = GetSteamIDForPlayerID(explosive->ConstructorPlayerDataIDField());
+					eos_id = GetEOSIDForPlayerID(explosive->ConstructorPlayerDataIDField());
 				}
-			}
-			*/
-			return steam_id;
+			}*/
+			
+			return eos_id;
 		}
 
 		void RunHiddenCommand(AShooterPlayerController* _this, FString* Command)
@@ -817,7 +816,7 @@ namespace AsaApi
 			HideCommand = false;
 		}
 	private:
-		virtual AShooterPlayerController* FindPlayerFromSteamId_Internal(uint64 steam_id) const = 0;
+		virtual AShooterPlayerController* FindPlayerFromEOSID_Internal(const FString& eos_id) const = 0;
 	};
 
 	ARK_API IApiUtils& APIENTRY GetApiUtils();

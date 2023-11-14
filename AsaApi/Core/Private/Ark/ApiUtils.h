@@ -4,6 +4,23 @@
 
 namespace AsaApi
 {
+	struct FStringHash
+	{
+		std::size_t operator()(const FString& str) const
+		{
+			const std::string stdString(TCHAR_TO_UTF8(*str));
+			return std::hash<std::string>{}(stdString);
+		}
+	};
+
+	struct FStringEqual
+	{
+		bool operator()(const FString& lhs, const FString& rhs) const
+		{
+			return lhs.Equals(rhs);
+		}
+	};
+
 	class ApiUtils : public IApiUtils
 	{
 	public:
@@ -26,7 +43,7 @@ namespace AsaApi
 		void SetStatus(ServerStatus status);
 		void SetCheatManager(UShooterCheatManager* cheatmanager);
 
-		AShooterPlayerController* FindPlayerFromSteamId_Internal(uint64 steam_id) const override;
+		AShooterPlayerController* FindPlayerFromEOSID_Internal(const FString& eos_id) const override;
 		void SetPlayerController(AShooterPlayerController* player_controller);
 		void RemovePlayerController(AShooterPlayerController* player_controller);
 
@@ -35,6 +52,6 @@ namespace AsaApi
 		AShooterGameMode* shooter_game_mode_{ nullptr };
 		ServerStatus status_{ 0 };
 		UShooterCheatManager* cheatmanager_{ nullptr };
-		std::unordered_map<uint64, AShooterPlayerController*> steam_id_map_;
+		std::unordered_map<const FString, AShooterPlayerController*, FStringHash, FStringEqual> eos_id_map_;
 	};
 } // namespace AsaApi
