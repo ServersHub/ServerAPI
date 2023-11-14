@@ -32,7 +32,7 @@ namespace AsaApi
 	DECLARE_HOOK(AShooterGameMode_InitGame, void, AShooterGameMode*, FString*, FString*, FString*);
 	DECLARE_HOOK(AShooterPlayerController_ServerSendChatMessage_Impl, void, AShooterPlayerController*, FString*, int);
 
-	DECLARE_HOOK(UPlayer_ConsoleCommand, FString*, AShooterPlayerController*, FString*, FString*, bool);
+	DECLARE_HOOK(UPlayer_ConsoleCommand, FString*, UPlayer*, FString*, FString*, bool);
 
 	DECLARE_HOOK(APlayerController_ConsoleCommand, FString*, APlayerController*, FString*, FString*, bool);
 	DECLARE_HOOK(AShooterPlayerController_ConsoleCommand, FString*, AShooterPlayerController*, FString*, FString*, bool);
@@ -148,10 +148,11 @@ namespace AsaApi
 		AShooterPlayerController_ServerSendChatMessage_Impl_original(player_controller, message, mode);
 	}
 
-	FString* Hook_UPlayer_ConsoleCommand(AShooterPlayerController* a_player_controller, FString* result,
+	FString* Hook_UPlayer_ConsoleCommand(UPlayer* a_player_controller, FString* result,
 		FString* cmd, bool write_to_log)
 	{
-		dynamic_cast<Commands&>(*API::game_api->GetCommands()).CheckConsoleCommands(a_player_controller, cmd, write_to_log);
+		auto* PC = a_player_controller->PlayerControllerField().Get();
+		dynamic_cast<Commands&>(*API::game_api->GetCommands()).CheckConsoleCommands(PC, cmd, write_to_log);
 		return UPlayer_ConsoleCommand_original(a_player_controller, result, cmd, write_to_log);
 	}
 

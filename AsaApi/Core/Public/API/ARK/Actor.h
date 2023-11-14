@@ -1430,8 +1430,12 @@ struct AInfo : AActor
     //void AInfo(const FObjectInitializer* ObjectInitializer) { NativeCall<void, const FObjectInitializer*>(this, "AInfo.AInfo(FObjectInitializer*)", ObjectInitializer); }
 };
 
-struct UPlayer {
-
+struct UPlayer : UObject{
+    TObjectPtr<APlayerController>& PlayerControllerField() { return *GetNativePointerField<TObjectPtr<APlayerController>*>(this, "UPlayer.PlayerController"); }
+   // int CurrentNetSpeed;
+   // int ConfiguredInternetSpeed;
+   // int ConfiguredLanSpeed;
+   // unsigned __int64 TransferringPlayerDataId;
 };
 
 struct FUniqueNetIdWrapper
