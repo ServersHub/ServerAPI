@@ -190,8 +190,7 @@
       <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>
-      </Command>
+      <Command>xcopy /I  /Y "$(TargetDir)AsaApi.lib" "..\out_lib\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -219,7 +218,7 @@
       <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy  /Y "$(TargetDir)AsaApi.lib" "..\out_lib"</Command>
+      <Command>xcopy /I  /Y "$(TargetDir)AsaApi.lib" "..\out_lib\"</Command>
       <Message>Move lib</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -248,7 +247,7 @@
       <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy  /Y "$(TargetDir)AsaApi.lib" "..\out_lib"
+      <Command>xcopy /I  /Y "$(TargetDir)AsaApi.lib" "..\out_lib\"
 
 copy "$(SolutionDir)$(PlatformName)\$(ConfigurationName)\$(ProjectName).dll" "F:\ASA-Dedicated\asa-server\ShooterGame\Binaries\Win64\ArkApi\" /y
 copy "$(SolutionDir)$(PlatformName)\$(ConfigurationName)\$(ProjectName).pdb" "F:\ASA-Dedicated\asa-server\ShooterGame\Binaries\Win64\ArkApi\" /y</Command>
