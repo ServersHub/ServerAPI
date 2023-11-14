@@ -147,8 +147,7 @@ namespace AsaApi
 	FString* Hook_APlayerController_ConsoleCommand(APlayerController* a_player_controller, FString* result,
 		FString* cmd, bool write_to_log)
 	{
-		if (cmd)
-			dynamic_cast<Commands&>(*API::game_api->GetCommands()).CheckConsoleCommands(a_player_controller, cmd, write_to_log);
+		dynamic_cast<Commands&>(*API::game_api->GetCommands()).CheckConsoleCommands(a_player_controller, cmd, write_to_log);
 
 		return APlayerController_ConsoleCommand_original(a_player_controller, result, cmd, write_to_log);
 	}
@@ -163,7 +162,7 @@ namespace AsaApi
 
 	void Hook_RCONClientConnection_ProcessRCONPacket(RCONClientConnection* _this, RCONPacket* packet, UWorld* in_world)
 	{
-		if (_this->IsAuthenticatedField() && packet)
+		if (_this->IsAuthenticatedField())
 		{
 			dynamic_cast<Commands&>(*API::game_api->GetCommands()).CheckRconCommands(_this, packet, in_world);
 		}
