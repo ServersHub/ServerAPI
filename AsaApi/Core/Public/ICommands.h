@@ -17,7 +17,7 @@ namespace AsaApi
 		 * \param callback Callback function
 		 */
 		virtual void AddChatCommand(const FString& command,
-			const std::function<void(AShooterPlayerController*, FString*, EChatSendMode::Type)>&
+			const std::function<void(AShooterPlayerController*, FString*, int)>&
 			callback) = 0;
 		/**
 		* \brief Adds a console command
@@ -57,7 +57,7 @@ namespace AsaApi
 		*/
 		virtual void AddOnChatMessageCallback(const FString& id,
 			const std::function<bool(AShooterPlayerController*, FString*,
-				EChatSendMode::Type, bool, bool)>& callback) = 0;
+				int, bool, bool)>& callback) = 0;
 
 		/**
 		 * \brief Removes a chat command

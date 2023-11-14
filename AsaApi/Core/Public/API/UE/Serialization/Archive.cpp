@@ -71,5 +71,5 @@ const FColor FColorList::Green(0, 255, 0);
 
 bool FToBoolHelper::FromCStringWide(wchar_t const* str) { return NativeCall<bool, wchar_t const*>(nullptr, "FToBoolHelper.FromCStringWide(wchar_t*)", str); }
 
-int FGenericPlatformStricmp::Stricmp(wchar_t const* str1, wchar_t const* str2) { return NativeCall<int, wchar_t const*, wchar_t const*>(nullptr, "FGenericPlatformStricmp.Stricmp(wchar_t*,char*)", str1, str2); }
-int FGenericPlatformStricmp::Strnicmp(wchar_t const* str1, wchar_t const* str2, unsigned __int64 count) { return NativeCall<int, wchar_t const*, wchar_t const*, unsigned __int64>(nullptr, "FGenericPlatformStricmp.Strnicmp(FGenericPlatformTypes::UTF8CHAR*,FGenericPlatformTypes::UTF8CHAR*,unsigned__int64)", str1, str2, count); }
+int FGenericPlatformStricmp::Stricmp(wchar_t const* str1, wchar_t const* str2) { return NativeCall<int, wchar_t const*, wchar_t const*>(nullptr, "FGenericPlatformStricmp.Stricmp(wchar_t*,wchar_t*)", str1, str2); }
+int FGenericPlatformStricmp::Strnicmp(wchar_t const* str1, wchar_t const* str2, unsigned __int64 count) { return NativeCall<int, wchar_t const*, wchar_t const*, unsigned __int64>(nullptr, "FGenericPlatformStricmp.Strnicmp(wchar_t*,wchar_t*,unsigned__int64)", str1, str2, count); }
