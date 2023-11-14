@@ -612,7 +612,7 @@ namespace AsaApi
 
 		FORCEINLINE const FString GetEOSIDForPlayerID(int player_id)
 		{
-			FString eos_id = "";
+			FString eos_id;
 			GetShooterGameMode()->GetSteamIDStringForPlayerID(&eos_id, player_id);
 			if (!eos_id.IsEmpty())
 			{
