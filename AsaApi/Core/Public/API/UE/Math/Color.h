@@ -44,7 +44,7 @@ enum class EGammaSpace : uint8
 /**
  * A linear, 32-bit/component floating point RGBA color.
  */
-struct FLinearColor
+ARK_API struct FLinearColor
 {
 	union
 	{
@@ -64,7 +64,7 @@ struct FLinearColor
 	static float Pow22OneOver255Table[256];
 
 	/** Static lookup table used for FColor -> FLinearColor conversion. sRGB */
-	static float sRGBToLinearTable[256];
+	ARK_API static float sRGBToLinearTable[256];
 
 	FORCEINLINE FLinearColor() {}
 	FORCEINLINE explicit FLinearColor(EForceInit)
@@ -480,7 +480,7 @@ FORCEINLINE FLinearColor operator*(float Scalar,const FLinearColor& Color)
 //	This can be done with FLinearColor::ToFColor(true) 
 //
 
-struct FColor
+ARK_API struct FColor
 {
 public:
 	// Variables.
@@ -763,20 +763,20 @@ public:
 	}
 
 	/** Some pre-inited colors, useful for debug code */
-	static const FColor White;
-	static const FColor Black;
-	static const FColor Transparent;
-	static const FColor Red;
-	static const FColor Green;
-	static const FColor Blue;
-	static const FColor Yellow;
-	static const FColor Cyan;
-	static const FColor Magenta;
-	static const FColor Orange;
-	static const FColor Purple;
-	static const FColor Turquoise;
-	static const FColor Silver;
-	static const FColor Emerald;
+	ARK_API static const FColor White;
+	ARK_API static const FColor Black;
+	ARK_API static const FColor Transparent;
+	ARK_API static const FColor Red;
+	ARK_API static const FColor Green;
+	ARK_API static const FColor Blue;
+	ARK_API static const FColor Yellow;
+	ARK_API static const FColor Cyan;
+	ARK_API static const FColor Magenta;
+	ARK_API static const FColor Orange;
+	ARK_API static const FColor Purple;
+	ARK_API static const FColor Turquoise;
+	ARK_API static const FColor Silver;
+	ARK_API static const FColor Emerald;
 
 	friend FORCEINLINE uint32 GetTypeHash( const FColor& Color )
 	{
@@ -791,7 +791,7 @@ private:
 	 * Note: Do not implement or make public.  We don't want people needlessly and implicitly converting between
 	 * FLinearColor and FColor.  It's not a free conversion.
 	 */
-	explicit FColor(const FLinearColor& LinearColor);
+	ARK_API explicit FColor(const FLinearColor& LinearColor);
 };
 DECLARE_INTRINSIC_TYPE_LAYOUT(FColor);
 

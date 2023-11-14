@@ -1423,9 +1423,22 @@ struct AInfo : AActor
 struct UPlayer {
 
 };
+
+struct FUniqueNetIdWrapper
+{
+
+};
+
+struct FUniqueNetIdRepl : FUniqueNetIdWrapper
+{
+    TArray<unsigned char, TSizedDefaultAllocator<32> > ReplicationBytes;
+};
+
 struct UNetConnection : UPlayer
 {
+    FUniqueNetIdRepl& UniqueIdField() { return *GetNativePointerField<FUniqueNetIdRepl*>(this, "UNetConnection.PlayerId"); }
 };
+
 struct APlayerState : AInfo
 {
     // Fields

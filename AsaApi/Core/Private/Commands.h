@@ -98,6 +98,7 @@ namespace AsaApi
 		template <typename T, typename... Args>
 		bool CheckCommands(const FString& message, const std::vector<std::shared_ptr<T>>& commands, Args&&... args)
 		{
+			Log::GetLog()->info("({}) {}", __FUNCTION__, message.ToString());
 			TArray<FString> parsed;
 			message.ParseIntoArray(parsed, L" ", true);
 

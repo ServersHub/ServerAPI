@@ -529,80 +529,80 @@ namespace UE::Core::Private
 	 *
 	 * @return The length of the string in UTF-16 code units.
 	 */
-	int32 GetConvertedLength(const UTF8CHAR*, const WIDECHAR* Source)
+	ARK_API int32 GetConvertedLength(const UTF8CHAR*, const WIDECHAR* Source)
 	{
 		TCountingOutputIterator<UTF8CHAR> Dest;
 		int32 Result = ConvertToUTF8(Dest, INT32_MAX, Source, FNullTerminal{});
 		return Result;
 	}
-	int32 GetConvertedLength(const UTF8CHAR*, const WIDECHAR* Source, int32 SourceLen)
+	ARK_API int32 GetConvertedLength(const UTF8CHAR*, const WIDECHAR* Source, int32 SourceLen)
 	{
 		TCountingOutputIterator<UTF8CHAR> Dest;
 		int32 Result = ConvertToUTF8(Dest, INT32_MAX, Source, SourceLen);
 		return Result;
 	}
-	int32 GetConvertedLength(const UTF8CHAR*, const UCS2CHAR* Source)
+	ARK_API int32 GetConvertedLength(const UTF8CHAR*, const UCS2CHAR* Source)
 	{
 		TCountingOutputIterator<UTF8CHAR> Dest;
 		int32 Result = ConvertToUTF8(Dest, INT32_MAX, Source, FNullTerminal{});
 		return Result;
 	}
-	int32 GetConvertedLength(const UTF8CHAR*, const UCS2CHAR* Source, int32 SourceLen)
+	ARK_API int32 GetConvertedLength(const UTF8CHAR*, const UCS2CHAR* Source, int32 SourceLen)
 	{
 		TCountingOutputIterator<UTF8CHAR> Dest;
 		int32 Result = ConvertToUTF8(Dest, INT32_MAX, Source, SourceLen);
 		return Result;
 	}
-	int32 GetConvertedLength(const UTF8CHAR*, const UTF32CHAR* Source)
+	ARK_API int32 GetConvertedLength(const UTF8CHAR*, const UTF32CHAR* Source)
 	{
 		TCountingOutputIterator<UTF8CHAR> Dest;
 		int32 Result = ConvertToUTF8(Dest, INT32_MAX, Source, FNullTerminal{});
 		return Result;
 	}
-	int32 GetConvertedLength(const UTF8CHAR*, const UTF32CHAR* Source, int32 SourceLen)
+	ARK_API int32 GetConvertedLength(const UTF8CHAR*, const UTF32CHAR* Source, int32 SourceLen)
 	{
 		TCountingOutputIterator<UTF8CHAR> Dest;
 		int32 Result = ConvertToUTF8(Dest, INT32_MAX, Source, SourceLen);
 		return Result;
 	}
-	int32 GetConvertedLength(const ANSICHAR*, const UTF8CHAR* Source)
+	ARK_API int32 GetConvertedLength(const ANSICHAR*, const UTF8CHAR* Source)
 	{
 		TCountingOutputIterator<ANSICHAR> Dest;
 		int32 Result = ConvertFromUTF8<ANSICHAR>(Dest, INT32_MAX, Source, FNullTerminal{});
 		return Result;
 	}
-	int32 GetConvertedLength(const ANSICHAR*, const UTF8CHAR* Source, int32 SourceLen)
+	ARK_API int32 GetConvertedLength(const ANSICHAR*, const UTF8CHAR* Source, int32 SourceLen)
 	{
 		TCountingOutputIterator<ANSICHAR> Dest;
 		int32 Result = ConvertFromUTF8<ANSICHAR>(Dest, INT32_MAX, Source, SourceLen);
 		return Result;
 	}
-	int32 GetConvertedLength(const WIDECHAR*, const UTF8CHAR* Source)
+	ARK_API int32 GetConvertedLength(const WIDECHAR*, const UTF8CHAR* Source)
 	{
 		TCountingOutputIterator<WIDECHAR> Dest;
 		int32 Result = ConvertFromUTF8<WIDECHAR>(Dest, INT32_MAX, Source, FNullTerminal{});
 		return Result;
 	}
-	int32 GetConvertedLength(const WIDECHAR*, const UTF8CHAR* Source, int32 SourceLen)
+	ARK_API int32 GetConvertedLength(const WIDECHAR*, const UTF8CHAR* Source, int32 SourceLen)
 	{
 		TCountingOutputIterator<WIDECHAR> Dest;
 		int32 Result = ConvertFromUTF8<WIDECHAR>(Dest, INT32_MAX, Source, SourceLen);
 		return Result;
 	}
-	int32 GetConvertedLength(const UCS2CHAR*, const UTF8CHAR* Source)
+	ARK_API int32 GetConvertedLength(const UCS2CHAR*, const UTF8CHAR* Source)
 	{
 		TCountingOutputIterator<UCS2CHAR> Dest;
 		int32 Result = ConvertFromUTF8<UCS2CHAR>(Dest, INT32_MAX, Source, FNullTerminal{});
 		return Result;
 	}
-	int32 GetConvertedLength(const UCS2CHAR*, const UTF8CHAR* Source, int32 SourceLen)
+	ARK_API int32 GetConvertedLength(const UCS2CHAR*, const UTF8CHAR* Source, int32 SourceLen)
 	{
 		TCountingOutputIterator<UCS2CHAR> Dest;
 		int32 Result = ConvertFromUTF8<UCS2CHAR>(Dest, INT32_MAX, Source, SourceLen);
 		return Result;
 	}
 
-	UTF8CHAR* Convert(UTF8CHAR* Dest, int32 DestLen, const WIDECHAR* Src)
+	ARK_API UTF8CHAR* Convert(UTF8CHAR* Dest, int32 DestLen, const WIDECHAR* Src)
 	{
 		if (ConvertToUTF8(Dest, DestLen, Src, FNullTerminal{}) == -1)
 		{
@@ -610,7 +610,7 @@ namespace UE::Core::Private
 		}
 		return Dest;
 	}
-	UTF8CHAR* Convert(UTF8CHAR* Dest, int32 DestLen, const WIDECHAR* Src, int32 SrcLen)
+	ARK_API UTF8CHAR* Convert(UTF8CHAR* Dest, int32 DestLen, const WIDECHAR* Src, int32 SrcLen)
 	{
 		if (ConvertToUTF8(Dest, DestLen, Src, SrcLen) == -1)
 		{
@@ -618,7 +618,7 @@ namespace UE::Core::Private
 		}
 		return Dest;
 	}
-	UTF8CHAR* Convert(UTF8CHAR* Dest, int32 DestLen, const UCS2CHAR* Src)
+	ARK_API UTF8CHAR* Convert(UTF8CHAR* Dest, int32 DestLen, const UCS2CHAR* Src)
 	{
 		if (ConvertToUTF8(Dest, DestLen, Src, FNullTerminal{}) == -1)
 		{
@@ -626,7 +626,7 @@ namespace UE::Core::Private
 		}
 		return Dest;
 	}
-	UTF8CHAR* Convert(UTF8CHAR* Dest, int32 DestLen, const UCS2CHAR* Src, int32 SrcLen)
+	ARK_API UTF8CHAR* Convert(UTF8CHAR* Dest, int32 DestLen, const UCS2CHAR* Src, int32 SrcLen)
 	{
 		if (ConvertToUTF8(Dest, DestLen, Src, SrcLen) == -1)
 		{
@@ -634,7 +634,7 @@ namespace UE::Core::Private
 		}
 		return Dest;
 	}
-	UTF8CHAR* Convert(UTF8CHAR* Dest, int32 DestLen, const UTF32CHAR* Src)
+	ARK_API UTF8CHAR* Convert(UTF8CHAR* Dest, int32 DestLen, const UTF32CHAR* Src)
 	{
 		if (ConvertToUTF8(Dest, DestLen, Src, FNullTerminal{}) == -1)
 		{
@@ -642,7 +642,7 @@ namespace UE::Core::Private
 		}
 		return Dest;
 	}
-	UTF8CHAR* Convert(UTF8CHAR* Dest, int32 DestLen, const UTF32CHAR* Src, int32 SrcLen)
+	ARK_API UTF8CHAR* Convert(UTF8CHAR* Dest, int32 DestLen, const UTF32CHAR* Src, int32 SrcLen)
 	{
 		if (ConvertToUTF8(Dest, DestLen, Src, SrcLen) == -1)
 		{
@@ -650,7 +650,7 @@ namespace UE::Core::Private
 		}
 		return Dest;
 	}
-	ANSICHAR* Convert(ANSICHAR* Dest, int32 DestLen, const UTF8CHAR* Src)
+	ARK_API ANSICHAR* Convert(ANSICHAR* Dest, int32 DestLen, const UTF8CHAR* Src)
 	{
 		if (ConvertFromUTF8<ANSICHAR>(Dest, DestLen, Src, FNullTerminal{}) == -1)
 		{
@@ -658,7 +658,7 @@ namespace UE::Core::Private
 		}
 		return Dest;
 	}
-	ANSICHAR* Convert(ANSICHAR* Dest, int32 DestLen, const UTF8CHAR* Src, int32 SrcLen)
+	ARK_API ANSICHAR* Convert(ANSICHAR* Dest, int32 DestLen, const UTF8CHAR* Src, int32 SrcLen)
 	{
 		if (ConvertFromUTF8<ANSICHAR>(Dest, DestLen, Src, SrcLen) == -1)
 		{
@@ -666,7 +666,7 @@ namespace UE::Core::Private
 		}
 		return Dest;
 	}
-	WIDECHAR* Convert(WIDECHAR* Dest, int32 DestLen, const UTF8CHAR* Src)
+	ARK_API WIDECHAR* Convert(WIDECHAR* Dest, int32 DestLen, const UTF8CHAR* Src)
 	{
 		if (ConvertFromUTF8<WIDECHAR>(Dest, DestLen, Src, FNullTerminal{}) == -1)
 		{
@@ -674,7 +674,7 @@ namespace UE::Core::Private
 		}
 		return Dest;
 	}
-	WIDECHAR* Convert(WIDECHAR* Dest, int32 DestLen, const UTF8CHAR* Src, int32 SrcLen)
+	ARK_API WIDECHAR* Convert(WIDECHAR* Dest, int32 DestLen, const UTF8CHAR* Src, int32 SrcLen)
 	{
 		if (ConvertFromUTF8<WIDECHAR>(Dest, DestLen, Src, SrcLen) == -1)
 		{
@@ -682,7 +682,7 @@ namespace UE::Core::Private
 		}
 		return Dest;
 	}
-	UCS2CHAR* Convert(UCS2CHAR* Dest, int32 DestLen, const UTF8CHAR* Src)
+	ARK_API UCS2CHAR* Convert(UCS2CHAR* Dest, int32 DestLen, const UTF8CHAR* Src)
 	{
 		if (ConvertFromUTF8<UCS2CHAR>(Dest, DestLen, Src, FNullTerminal{}) == -1)
 		{
@@ -690,7 +690,7 @@ namespace UE::Core::Private
 		}
 		return Dest;
 	}
-	UCS2CHAR* Convert(UCS2CHAR* Dest, int32 DestLen, const UTF8CHAR* Src, int32 SrcLen)
+	ARK_API UCS2CHAR* Convert(UCS2CHAR* Dest, int32 DestLen, const UTF8CHAR* Src, int32 SrcLen)
 	{
 		if (ConvertFromUTF8<UCS2CHAR>(Dest, DestLen, Src, SrcLen) == -1)
 		{

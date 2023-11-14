@@ -37,8 +37,8 @@ namespace AsaApi
 	DECLARE_HOOK(AGameState_DefaultTimer, void, AGameState*);
 	DECLARE_HOOK(AShooterGameMode_BeginPlay, void, AShooterGameMode*);
 	DECLARE_HOOK(URCONServer_Init, bool, URCONServer*, FString*, unsigned int, UShooterCheatManager*);
-	DECLARE_HOOK(APlayerController_ServerReceivedPlayerControllerAck_Implementation, void, APlayerController*);
-	DECLARE_HOOK(AShooterPlayerController_Possess, void, AShooterPlayerController*, APawn*);
+	DECLARE_HOOK(APlayerController_ServerCheckClientPossessionReliable_Implementation, void, APlayerController*);
+	//DECLARE_HOOK(AShooterPlayerController_Possess, void, AShooterPlayerController*, APawn*);
 	DECLARE_HOOK(AShooterGameMode_Logout, void, AShooterGameMode*, AController*);
 
 	void InitHooks()
@@ -62,10 +62,10 @@ namespace AsaApi
 		hooks->SetHook("AShooterGameMode.BeginPlay()", &Hook_AShooterGameMode_BeginPlay,
 			&AShooterGameMode_BeginPlay_original);
 		hooks->SetHook("URCONServer.Init(FString&,int,UShooterCheatManager*)", &Hook_URCONServer_Init, &URCONServer_Init_original);
-		hooks->SetHook("APlayerController.ServerReceivedPlayerControllerAck_Implementation()", &Hook_APlayerController_ServerReceivedPlayerControllerAck_Implementation,
-			&APlayerController_ServerReceivedPlayerControllerAck_Implementation_original);
-		hooks->SetHook("AShooterPlayerController.Possess(APawn*)", &Hook_AShooterPlayerController_Possess,
-			&AShooterPlayerController_Possess_original);
+		hooks->SetHook("APlayerController.ServerCheckClientPossessionReliable_Implementation()", &Hook_APlayerController_ServerCheckClientPossessionReliable_Implementation,
+			&APlayerController_ServerCheckClientPossessionReliable_Implementation_original);
+		//hooks->SetHook("AShooterPlayerController.Possess(APawn*)", &Hook_AShooterPlayerController_Possess,
+		//	&AShooterPlayerController_Possess_original);
 		hooks->SetHook("AShooterGameMode.Logout(AController*)", &Hook_AShooterGameMode_Logout, &AShooterGameMode_Logout_original);
 
 		Log::GetLog()->info("Initialized hooks\n");
@@ -116,26 +116,29 @@ namespace AsaApi
 	void Hook_AShooterPlayerController_ServerSendChatMessage_Impl(
 		AShooterPlayerController* player_controller, FString* message, EChatSendMode::Type mode)
 	{
-		const long double last_chat_time = player_controller->LastChatMessageTimeField();
-		const long double now_time = AsaApi::GetApiUtils().GetWorld()->TimeSecondsField();
-
-		const auto spam_check = now_time - last_chat_time < 1.0;
-		if (last_chat_time > 0 && spam_check)
+		if (message)
 		{
-			return;
-		}
+			const long double last_chat_time = player_controller->LastChatMessageTimeField();
+			const long double now_time = AsaApi::GetApiUtils().GetWorld()->TimeSecondsField();
 
-		player_controller->LastChatMessageTimeField() = now_time;
+			const auto spam_check = now_time - last_chat_time < 1.0;
+			if (last_chat_time > 0 && spam_check)
+			{
+				return;
+			}
 
-		const auto command_executed = dynamic_cast<AsaApi::Commands&>(*API::game_api->GetCommands()).
-			CheckChatCommands(player_controller, message, mode);
+			player_controller->LastChatMessageTimeField() = now_time;
 
-		const auto prevent_default = dynamic_cast<AsaApi::Commands&>(*API::game_api->GetCommands()).
-			CheckOnChatMessageCallbacks(player_controller, message, mode, spam_check, command_executed);
+			const auto command_executed = dynamic_cast<AsaApi::Commands&>(*API::game_api->GetCommands()).
+				CheckChatCommands(player_controller, message, mode);
 
-		if (command_executed || prevent_default)
-		{
-			return;
+			const auto prevent_default = dynamic_cast<AsaApi::Commands&>(*API::game_api->GetCommands()).
+				CheckOnChatMessageCallbacks(player_controller, message, mode, spam_check, command_executed);
+
+			if (command_executed || prevent_default)
+			{
+				return;
+			}
 		}
 		
 		AShooterPlayerController_ServerSendChatMessage_Impl_original(player_controller, message, mode);
@@ -144,7 +147,8 @@ namespace AsaApi
 	FString* Hook_APlayerController_ConsoleCommand(APlayerController* a_player_controller, FString* result,
 		FString* cmd, bool write_to_log)
 	{
-		dynamic_cast<Commands&>(*API::game_api->GetCommands()).CheckConsoleCommands(a_player_controller, cmd, write_to_log);
+		if (cmd)
+			dynamic_cast<Commands&>(*API::game_api->GetCommands()).CheckConsoleCommands(a_player_controller, cmd, write_to_log);
 
 		return APlayerController_ConsoleCommand_original(a_player_controller, result, cmd, write_to_log);
 	}
@@ -159,7 +163,7 @@ namespace AsaApi
 
 	void Hook_RCONClientConnection_ProcessRCONPacket(RCONClientConnection* _this, RCONPacket* packet, UWorld* in_world)
 	{
-		if (_this->IsAuthenticatedField())
+		if (_this->IsAuthenticatedField() && packet)
 		{
 			dynamic_cast<Commands&>(*API::game_api->GetCommands()).CheckRconCommands(_this, packet, in_world);
 		}
@@ -193,9 +197,10 @@ namespace AsaApi
 		return URCONServer_Init_original(_this, Password, InPort, SCheatManager);
 	}
 
-	void Hook_APlayerController_ServerReceivedPlayerControllerAck_Implementation(APlayerController* _this)
+	void Hook_APlayerController_ServerCheckClientPossessionReliable_Implementation(APlayerController* _this)
 	{
-		APlayerController_ServerReceivedPlayerControllerAck_Implementation_original(_this);
+
+		APlayerController_ServerCheckClientPossessionReliable_Implementation_original(_this);
 		
 		if (_this)
 		{
@@ -205,12 +210,12 @@ namespace AsaApi
 		
 	}
 
-	void  Hook_AShooterPlayerController_Possess(AShooterPlayerController* _this, APawn* inPawn)
-	{
-		dynamic_cast<ApiUtils&>(*API::game_api->GetApiUtils()).SetPlayerController(_this);
+	//void  Hook_AShooterPlayerController_Possess(AShooterPlayerController* _this, APawn* inPawn)
+	//{
+	//	dynamic_cast<ApiUtils&>(*API::game_api->GetApiUtils()).SetPlayerController(_this);
 
-		AShooterPlayerController_Possess_original(_this, inPawn);
-	}
+	//	AShooterPlayerController_Possess_original(_this, inPawn);
+	//}
 
 	void  Hook_AShooterGameMode_Logout(AShooterGameMode* _this, AController* Exiting)
 	{

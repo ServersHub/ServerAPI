@@ -51,11 +51,11 @@ namespace AsaApi
 		if (!player_controller)
 			return;
 
-		const uint64 steam_id = AsaApi::IApiUtils::GetSteamIdFromController(player_controller);
+		const FString eos_id = AsaApi::IApiUtils::GetEOSIDFromController(player_controller);
 
-		if (steam_id != 0)
+		if (!eos_id.IsEmpty())
 		{
-			steam_id_map_[steam_id] = player_controller;
+			eos_id_map_[eos_id] = player_controller;
 		}
 	}
 
@@ -64,25 +64,25 @@ namespace AsaApi
 		if (!player_controller)
 			return;
 
-		const uint64 steam_id = AsaApi::IApiUtils::GetSteamIdFromController(player_controller);
+		const FString eos_id = AsaApi::IApiUtils::GetEOSIDFromController(player_controller);
 
-		if (steam_id != 0)
+		if (!eos_id.IsEmpty())
 		{
-			steam_id_map_.erase(steam_id);
+			eos_id_map_.erase(eos_id);
 		}
 	}
 
-	AShooterPlayerController* ApiUtils::FindPlayerFromSteamId_Internal(uint64 steam_id) const
+	AShooterPlayerController* ApiUtils::FindPlayerFromEOSID_Internal(const FString& eos_id) const
 	{
 		AShooterPlayerController* found_player = nullptr;
 
-		if (steam_id == 0)
+		if (!eos_id.IsEmpty())
 			return found_player;
 
-		auto iter = steam_id_map_.find(steam_id);
+		auto iter = eos_id_map_.find(eos_id);
 
-		if (iter != steam_id_map_.end()
-			&& iter->first == steam_id)
+		if (iter != eos_id_map_.end()
+			&& iter->first == eos_id)
 		{
 			found_player = iter->second;
 		}

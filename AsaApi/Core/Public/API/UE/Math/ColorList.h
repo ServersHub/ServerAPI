@@ -12,136 +12,136 @@
 
 class FString;
 
-class FColorList
+ARK_API class FColorList
 {
 public:
 	typedef TMap< FString, const FColor* > TColorsMap;
 	typedef TArray< const FColor* > TColorsLookup;
 
 	// Common colors.	
-	static const FColor White;
-	static const FColor Red;
-	static const FColor Green;
-	static const FColor Blue;
-	static const FColor Magenta;
-	static const FColor Cyan;
-	static const FColor Yellow;
-	static const FColor Black;
-	static const FColor Aquamarine;
-	static const FColor BakerChocolate;
-	static const FColor BlueViolet;
-	static const FColor Brass;
-	static const FColor BrightGold;
-	static const FColor Brown;
-	static const FColor Bronze;
-	static const FColor BronzeII;
-	static const FColor CadetBlue;
-	static const FColor CoolCopper;
-	static const FColor Copper;
-	static const FColor Coral;
-	static const FColor CornFlowerBlue;
-	static const FColor DarkBrown;
-	static const FColor DarkGreen;
-	static const FColor DarkGreenCopper;
-	static const FColor DarkOliveGreen;
-	static const FColor DarkOrchid;
-	static const FColor DarkPurple;
-	static const FColor DarkSlateBlue;
-	static const FColor DarkSlateGrey;
-	static const FColor DarkTan;
-	static const FColor DarkTurquoise;
-	static const FColor DarkWood;
-	static const FColor DimGrey;
-	static const FColor DustyRose;
-	static const FColor Feldspar;
-	static const FColor Firebrick;
-	static const FColor ForestGreen;
-	static const FColor Gold;
-	static const FColor Goldenrod;
-	static const FColor Grey;
-	static const FColor GreenCopper;
-	static const FColor GreenYellow;
-	static const FColor HunterGreen;
-	static const FColor IndianRed;
-	static const FColor Khaki;
-	static const FColor LightBlue;
-	static const FColor LightGrey;
-	static const FColor LightSteelBlue;
-	static const FColor LightWood;
-	static const FColor LimeGreen;
-	static const FColor MandarianOrange;
-	static const FColor Maroon;
-	static const FColor MediumAquamarine;
-	static const FColor MediumBlue;
-	static const FColor MediumForestGreen;
-	static const FColor MediumGoldenrod;
-	static const FColor MediumOrchid;
-	static const FColor MediumSeaGreen;
-	static const FColor MediumSlateBlue;
-	static const FColor MediumSpringGreen;
-	static const FColor MediumTurquoise;
-	static const FColor MediumVioletRed;
-	static const FColor MediumWood;
-	static const FColor MidnightBlue;
-	static const FColor NavyBlue;
-	static const FColor NeonBlue;
-	static const FColor NeonPink;
-	static const FColor NewMidnightBlue;
-	static const FColor NewTan;
-	static const FColor OldGold;
-	static const FColor Orange;
-	static const FColor OrangeRed;
-	static const FColor Orchid;
-	static const FColor PaleGreen;
-	static const FColor Pink;
-	static const FColor Plum;
-	static const FColor Quartz;
-	static const FColor RichBlue;
-	static const FColor Salmon;
-	static const FColor Scarlet;
-	static const FColor SeaGreen;
-	static const FColor SemiSweetChocolate;
-	static const FColor Sienna;
-	static const FColor Silver;
-	static const FColor SkyBlue;
-	static const FColor SlateBlue;
-	static const FColor SpicyPink;
-	static const FColor SpringGreen;
-	static const FColor SteelBlue;
-	static const FColor SummerSky;
-	static const FColor Tan;
-	static const FColor Thistle;
-	static const FColor Turquoise;
-	static const FColor VeryDarkBrown;
-	static const FColor VeryLightGrey;
-	static const FColor Violet;
-	static const FColor VioletRed;
-	static const FColor Wheat;
-	static const FColor YellowGreen;
+	ARK_API static const FColor White;
+	ARK_API static const FColor Red;
+	ARK_API static const FColor Green;
+	ARK_API static const FColor Blue;
+	ARK_API static const FColor Magenta;
+	ARK_API static const FColor Cyan;
+	ARK_API static const FColor Yellow;
+	ARK_API static const FColor Black;
+	ARK_API static const FColor Aquamarine;
+	ARK_API static const FColor BakerChocolate;
+	ARK_API static const FColor BlueViolet;
+	ARK_API static const FColor Brass;
+	ARK_API static const FColor BrightGold;
+	ARK_API static const FColor Brown;
+	ARK_API static const FColor Bronze;
+	ARK_API static const FColor BronzeII;
+	ARK_API static const FColor CadetBlue;
+	ARK_API static const FColor CoolCopper;
+	ARK_API static const FColor Copper;
+	ARK_API static const FColor Coral;
+	ARK_API static const FColor CornFlowerBlue;
+	ARK_API static const FColor DarkBrown;
+	ARK_API static const FColor DarkGreen;
+	ARK_API static const FColor DarkGreenCopper;
+	ARK_API static const FColor DarkOliveGreen;
+	ARK_API static const FColor DarkOrchid;
+	ARK_API static const FColor DarkPurple;
+	ARK_API static const FColor DarkSlateBlue;
+	ARK_API static const FColor DarkSlateGrey;
+	ARK_API static const FColor DarkTan;
+	ARK_API static const FColor DarkTurquoise;
+	ARK_API static const FColor DarkWood;
+	ARK_API static const FColor DimGrey;
+	ARK_API static const FColor DustyRose;
+	ARK_API static const FColor Feldspar;
+	ARK_API static const FColor Firebrick;
+	ARK_API static const FColor ForestGreen;
+	ARK_API static const FColor Gold;
+	ARK_API static const FColor Goldenrod;
+	ARK_API static const FColor Grey;
+	ARK_API static const FColor GreenCopper;
+	ARK_API static const FColor GreenYellow;
+	ARK_API static const FColor HunterGreen;
+	ARK_API static const FColor IndianRed;
+	ARK_API static const FColor Khaki;
+	ARK_API static const FColor LightBlue;
+	ARK_API static const FColor LightGrey;
+	ARK_API static const FColor LightSteelBlue;
+	ARK_API static const FColor LightWood;
+	ARK_API static const FColor LimeGreen;
+	ARK_API static const FColor MandarianOrange;
+	ARK_API static const FColor Maroon;
+	ARK_API static const FColor MediumAquamarine;
+	ARK_API static const FColor MediumBlue;
+	ARK_API static const FColor MediumForestGreen;
+	ARK_API static const FColor MediumGoldenrod;
+	ARK_API static const FColor MediumOrchid;
+	ARK_API static const FColor MediumSeaGreen;
+	ARK_API static const FColor MediumSlateBlue;
+	ARK_API static const FColor MediumSpringGreen;
+	ARK_API static const FColor MediumTurquoise;
+	ARK_API static const FColor MediumVioletRed;
+	ARK_API static const FColor MediumWood;
+	ARK_API static const FColor MidnightBlue;
+	ARK_API static const FColor NavyBlue;
+	ARK_API static const FColor NeonBlue;
+	ARK_API static const FColor NeonPink;
+	ARK_API static const FColor NewMidnightBlue;
+	ARK_API static const FColor NewTan;
+	ARK_API static const FColor OldGold;
+	ARK_API static const FColor Orange;
+	ARK_API static const FColor OrangeRed;
+	ARK_API static const FColor Orchid;
+	ARK_API static const FColor PaleGreen;
+	ARK_API static const FColor Pink;
+	ARK_API static const FColor Plum;
+	ARK_API static const FColor Quartz;
+	ARK_API static const FColor RichBlue;
+	ARK_API static const FColor Salmon;
+	ARK_API static const FColor Scarlet;
+	ARK_API static const FColor SeaGreen;
+	ARK_API static const FColor SemiSweetChocolate;
+	ARK_API static const FColor Sienna;
+	ARK_API static const FColor Silver;
+	ARK_API static const FColor SkyBlue;
+	ARK_API static const FColor SlateBlue;
+	ARK_API static const FColor SpicyPink;
+	ARK_API static const FColor SpringGreen;
+	ARK_API static const FColor SteelBlue;
+	ARK_API static const FColor SummerSky;
+	ARK_API static const FColor Tan;
+	ARK_API static const FColor Thistle;
+	ARK_API static const FColor Turquoise;
+	ARK_API static const FColor VeryDarkBrown;
+	ARK_API static const FColor VeryLightGrey;
+	ARK_API static const FColor Violet;
+	ARK_API static const FColor VioletRed;
+	ARK_API static const FColor Wheat;
+	ARK_API static const FColor YellowGreen;
 
 	/** Initializes list of common colors. */
 	void CreateColorMap();
 
 	/** Returns a color based on ColorName. If not found, returns White. */
-	const FColor& GetFColorByName( const TCHAR* ColorName ) const;
+	ARK_API const FColor& GetFColorByName( const TCHAR* ColorName ) const;
 
 	/** Returns a linear color based on ColorName. If not found, returns White. */
-	const FLinearColor GetFLinearColorByName( const TCHAR* ColorName ) const;
+	ARK_API const FLinearColor GetFLinearColorByName( const TCHAR* ColorName ) const;
 
 	/** Returns true if color is valid common colors. If not found returns false. */
 	bool IsValidColorName( const TCHAR* ColorName ) const;
 
 	/** Returns index of color based on ColorName. If not found returns 0. */
-	int32 GetColorIndex( const TCHAR* ColorName ) const;
+	ARK_API int32 GetColorIndex( const TCHAR* ColorName ) const;
 
 	/** Returns a color based on index. If index is invalid, returns White. */
-	const FColor& GetFColorByIndex( int32 ColorIndex ) const;
+	ARK_API const FColor& GetFColorByIndex( int32 ColorIndex ) const;
 
 	/** Returns color's name based on index. If index is invalid, returns BadIndex. */
-	const FString& GetColorNameByIndex( int32 ColorIndex ) const;
+	ARK_API const FString& GetColorNameByIndex( int32 ColorIndex ) const;
 
 	/** Returns the number of colors. */
-	int32 GetColorsNum() const
+	ARK_API int32 GetColorsNum() const
 	{
 		return ColorsMap.Num();
 	}
@@ -160,4 +160,4 @@ protected:
 };
 
 
-extern FColorList GColorList;
+ARK_API extern FColorList GColorList;

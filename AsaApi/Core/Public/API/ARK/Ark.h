@@ -10,6 +10,12 @@
 #define ARK_GAME
 #endif
 
+#ifdef ARK_EXPORTS
+#define ARK_API __declspec(dllexport)
+#else
+#define ARK_API __declspec(dllimport)
+#endif
+
 #include "../Base.h"
 #include "../Enums.h"
 #include "../UE/Math/Vector.h"
