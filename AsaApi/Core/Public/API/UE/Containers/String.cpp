@@ -276,7 +276,7 @@ FString& FString::operator=( const TCHAR* Other )
 }
 
 
-void FString::AssignRange(const TCHAR* OtherData, int32 OtherLen)
+ARK_API void FString::AssignRange(const TCHAR* OtherData, int32 OtherLen)
 {
 	if (OtherLen == 0)
 	{

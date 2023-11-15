@@ -270,3 +270,122 @@ struct UVictoryCore : UVictoryCoreHighest
 	//static int IsChildOfClassesSoftRefT<class APrimalStructure>(TSubclassOf<UObject> childClass, const //TArray<//TSoftClassPtr<APrimalStructure>, TSizedDefaultAllocator<32> >* ParentClassesArray) { return NativeCall<int, TSubclassOf<UObject>, const //TArray<//TSoftClassPtr<APrimalStructure>, TSizedDefaultAllocator<32> >*>(nullptr, "UVictoryCore.IsChildOfClassesSoftRefT<class APrimalStructure>(TSubclassOf<UObject>,//TArray<//TSoftClassPtr<APrimalStructure>,TSizedDefaultAllocator<32>>*)", childClass, ParentClassesArray); }
 	//static int IsChildOfClassesT<class APrimalStructure>(TSubclassOf<UObject> childClass, const //TArray<TSubclassOf<APrimalStructure>, TSizedDefaultAllocator<32> >* ParentClassesArray) { return NativeCall<int, TSubclassOf<UObject>, const //TArray<TSubclassOf<APrimalStructure>, TSizedDefaultAllocator<32> >*>(nullptr, "UVictoryCore.IsChildOfClassesT<class APrimalStructure>(TSubclassOf<UObject>,//TArray<TSubclassOf<APrimalStructure>,TSizedDefaultAllocator<32>>*)", childClass, ParentClassesArray); }
 };
+
+struct FTribeGovernment
+{
+	int TribeGovern_PINCode;
+	int TribeGovern_DinoOwnership;
+	int TribeGovern_StructureOwnership;
+	int TribeGovern_DinoTaming;
+	int TribeGovern_DinoUnclaimAdminOnly;
+};
+
+struct FCustomTrackedActorInfo
+{
+	FString Name;
+	float TameAffinityPercent;
+	float HealthPercent;
+	float HealthCurrent;
+	float HealthMax;
+	float HungerPercent;
+	float HungerCurrent;
+	float HungerMax;
+	float TorpidityPercent;
+	float TameEffectivenessPercent;
+	int TameEffectivenessLvlModifier;
+	UE::Math::TVector<double> Location;
+	bool bIsConcious;
+	bool bUseGender;
+	bool bIsFemale;
+	bool bIsTamed;
+	float DinoImprintingQuality;
+	float BabyNextCuddleTime;
+	float BabyAge;
+	float TimeUntilNextNamedAge;
+	long double LastTameConsumedFoodTime;
+	FString ImprinterName;
+	int DataID1;
+	int DataID2;
+	FString TargetName;
+	bool bIsPlayer;
+	bool bIsFavorited;
+	bool bIsTrackedWaypoint;
+	TSubclassOf<UPrimalDinoEntry> DinoEntry;
+	bool bHideFromTrackListAndOnlyShowOnMap;
+	FString TribeName;
+	int TargetingTeam;
+	bool bIsVehicle;
+	bool bIsValidForCurrentFilter;
+	int Level;
+	long double TamedAtTime;
+	bool POIVisible;
+};
+
+struct FTrackedActorPlusInfoStruct
+{
+	AActor* TrackedActor;
+	FCustomTrackedActorInfo ReplicatedInfo;
+	UE::Math::TVector<double> ActorLastKnownLocation;
+	UE::Math::TVector<double> LastPOILocation;
+	int PreviousLinkedListTrackedActorID;
+	unsigned __int8 PreviousLinkedListTrackedActorCategory;
+	int NextLinkedListTrackedActorID;
+	unsigned __int8 NextLinkedListTrackedActorCategory;
+};
+
+const struct FTeamPingData
+{
+	unsigned __int8 PingID;
+	UE::Math::TVector<double> Location;
+	AActor* ToActor;
+	int ByPlayerID;
+	int TargetingTeam;
+	long double CreationTime;
+	TEnumAsByte<enum ETeamPingType::Type> PingType;
+	FString PlayerName;
+};
+
+struct FTribeData
+{
+	FString& TribeNameField() { return *GetNativePointerField<FString*>(this, "FTribeData.TribeName"); }
+	long double& LastNameChangeTimeField() { return *GetNativePointerField<long double*>(this, "FTribeData.LastNameChangeTime"); }
+	unsigned int& OwnerPlayerDataIDField() { return *GetNativePointerField<unsigned int*>(this, "FTribeData.OwnerPlayerDataID"); }
+	int& TribeIDField() { return *GetNativePointerField<int*>(this, "FTribeData.TribeID"); }
+	TArray<FString>& MembersPlayerNameField() { return *GetNativePointerField<TArray<FString>*>(this, "FTribeData.MembersPlayerName"); }
+	TArray<unsigned int>& MembersPlayerDataIDField() { return *GetNativePointerField<TArray<unsigned int>*>(this, "FTribeData.MembersPlayerDataID"); }
+	TArray<unsigned char>& MembersRankGroupsField() { return *GetNativePointerField<TArray<unsigned char>*>(this, "FTribeData.MembersRankGroups"); }
+	TArray<double>& SlotFreedTimeField() { return *GetNativePointerField<TArray<double>*>(this, "FTribeData.SlotFreedTime"); }
+	TArray<unsigned int>& TribeAdminsField() { return *GetNativePointerField<TArray<unsigned int>*>(this, "FTribeData.TribeAdmins"); }
+	TArray<FTribeAlliance>& TribeAlliancesField() { return *GetNativePointerField<TArray<FTribeAlliance>*>(this, "FTribeData.TribeAlliances"); }
+	bool& bSetGovernmentField() { return *GetNativePointerField<bool*>(this, "FTribeData.bSetGovernment"); }
+	FTribeGovernment& TribeGovernmentField() { return *GetNativePointerField<FTribeGovernment*>(this, "FTribeData.TribeGovernment"); }
+	TArray<FPrimalPlayerCharacterConfigStruct>& MembersConfigsField() { return *GetNativePointerField<TArray<FPrimalPlayerCharacterConfigStruct>*>(this, "FTribeData.MembersConfigs"); }
+	TArray<FTribeWar>& TribeWarsField() { return *GetNativePointerField<TArray<FTribeWar>*>(this, "FTribeData.TribeWars"); }
+	TArray<FString>& TribeLogField() { return *GetNativePointerField<TArray<FString>*>(this, "FTribeData.TribeLog"); }
+	int& LogIndexField() { return *GetNativePointerField<int*>(this, "FTribeData.LogIndex"); }
+	TArray<FTribeRankGroup>& TribeRankGroupsField() { return *GetNativePointerField<TArray<FTribeRankGroup>*>(this, "FTribeData.TribeRankGroups"); }
+	int& NumTribeDinosField() { return *GetNativePointerField<int*>(this, "FTribeData.NumTribeDinos"); }
+	TSet<unsigned __int64, DefaultKeyFuncs<unsigned __int64, 0>, FDefaultSetAllocator>& MembersPlayerDataIDSet_ServerField() { return *GetNativePointerField<TSet<unsigned __int64, DefaultKeyFuncs<unsigned __int64, 0>, FDefaultSetAllocator>*>(this, "FTribeData.MembersPlayerDataIDSet_Server"); }
+	TArray<FTrackedActorPlusInfoStruct, TSizedDefaultAllocator<32>>& CachedTeamTameList_UpdatedOnIntervalField() { return *GetNativePointerField<TArray<FTrackedActorPlusInfoStruct, TSizedDefaultAllocator<32>>*>(this, "FTribeData.CachedTeamTameList_UpdatedOnInterval"); }
+	long double& LastNetworkTimeUpdatedCachedTeamTameListField() { return *GetNativePointerField<long double*>(this, "FTribeData.LastNetworkTimeUpdatedCachedTeamTameList"); }
+	FTeamPingData& RallyPointDataField() { return *GetNativePointerField<FTeamPingData*>(this, "FTribeData.RallyPointData"); }
+	bool& bHaveRallyPointDataField() { return *GetNativePointerField<bool*>(this, "FTribeData.bHaveRallyPointData"); }
+	TSet<unsigned __int64, DefaultKeyFuncs<unsigned __int64, 0>, FDefaultSetAllocator> MembersPlayerDataIDSet_Server;
+};
+
+struct FStringHash
+{
+	std::size_t operator()(const FString& str) const
+	{
+		const std::string stdString(TCHAR_TO_UTF8(*str));
+		return std::hash<std::string>{}(stdString);
+	}
+};
+
+struct FStringEqual
+{
+	bool operator()(const FString& lhs, const FString& rhs) const
+	{
+		return lhs.Equals(rhs);
+	}
+};

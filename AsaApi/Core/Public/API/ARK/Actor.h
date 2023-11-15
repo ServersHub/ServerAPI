@@ -1561,13 +1561,13 @@ struct AShooterPlayerState : APlayerState
     void ServerAcceptTribeWar(int EnemyTeamID) { NativeCall<void, int>(this, "AShooterPlayerState.ServerAcceptTribeWar(int)", EnemyTeamID); }
     void ServerDinoOrderGroup_AddOrRemoveDinoCharacter(int groupIndex, APrimalDinoCharacter* DinoCharacter, bool bAdd) { NativeCall<void, int, APrimalDinoCharacter*, bool>(this, "AShooterPlayerState.ServerDinoOrderGroup_AddOrRemoveDinoCharacter(int,APrimalDinoCharacter*,bool)", groupIndex, DinoCharacter, bAdd); }
     void ServerGetAllPlayerNamesAndLocations() { NativeCall<void>(this, "AShooterPlayerState.ServerGetAllPlayerNamesAndLocations()"); }
-    //void ServerRequestApplyEngramPoints(TSubclassOf<UPrimalItem> forItemEntry) { NativeCall<void, TSubclassOf<UPrimalItem>>(this, "AShooterPlayerState.ServerRequestApplyEngramPoints(TSubclassOf<UPrimalItem>)", forItemEntry); }
+    void ServerRequestApplyEngramPoints(TSubclassOf<UPrimalItem> forItemEntry) { NativeCall<void, TSubclassOf<UPrimalItem>>(this, "AShooterPlayerState.ServerRequestApplyEngramPoints(TSubclassOf<UPrimalItem>)", forItemEntry); }
     static void ServerRequestCreateNewTribe() { NativeCall<void>(nullptr, "AShooterPlayerState.ServerRequestCreateNewTribe()"); }
     void ServerRequestLeaveTribe() { NativeCall<void>(this, "AShooterPlayerState.ServerRequestLeaveTribe()"); }
     void ServerRequestRenameTribe(const FString* ServerRequestRenameTribe) { NativeCall<void, const FString*>(this, "AShooterPlayerState.ServerRequestRenameTribe(FString&)", ServerRequestRenameTribe); }
     void ServerRequestSetTribeMemberGroupRank(int PlayerIndexInTribe, int RankGroupIndex) { NativeCall<void, int, int>(this, "AShooterPlayerState.ServerRequestSetTribeMemberGroupRank(int,int)", PlayerIndexInTribe, RankGroupIndex); }
     void ServerRequestSpawnPointsForDownloadedCharacters(unsigned __int64 PlayerDataID, int IgnoreBedID) { NativeCall<void, unsigned __int64, int>(this, "AShooterPlayerState.ServerRequestSpawnPointsForDownloadedCharacters(unsigned__int64,int)", PlayerDataID, IgnoreBedID); }
-    //void ServerSetDefaultItemSlotClass(int slotNum, TSubclassOf<UPrimalItem> ItemClass, bool bIsEngram) { NativeCall<void, int, TSubclassOf<UPrimalItem>, bool>(this, "AShooterPlayerState.ServerSetDefaultItemSlotClass(int,TSubclassOf<UPrimalItem>,bool)", slotNum, ItemClass, bIsEngram); }
+    void ServerSetDefaultItemSlotClass(int slotNum, TSubclassOf<UPrimalItem> ItemClass, bool bIsEngram) { NativeCall<void, int, TSubclassOf<UPrimalItem>, bool>(this, "AShooterPlayerState.ServerSetDefaultItemSlotClass(int,TSubclassOf<UPrimalItem>,bool)", slotNum, ItemClass, bIsEngram); }
     static void StaticRegisterNativesAShooterPlayerState() { NativeCall<void>(nullptr, "AShooterPlayerState.StaticRegisterNativesAShooterPlayerState()"); }
     static UClass* GetPrivateStaticClass() { return NativeCall<UClass*>(nullptr, "AShooterPlayerState.GetPrivateStaticClass()"); }
     void ValidateGeneratedRepEnums(const TArray<FRepRecord, TSizedDefaultAllocator<32> >* ClassReps) { NativeCall<void, const TArray<FRepRecord, TSizedDefaultAllocator<32> >*>(this, "AShooterPlayerState.ValidateGeneratedRepEnums(TArray<FRepRecord,TSizedDefaultAllocator<32>>*)", ClassReps); }
@@ -3562,7 +3562,7 @@ struct APawn : AActor
     float& BaseEyeHeightField() { return *GetNativePointerField<float*>(this, "APawn.BaseEyeHeight"); }
     //_BYTE[1] & AutoPossessAIField() { return *GetNativePointerField<_BYTE[1] *>(this, "APawn.AutoPossessAI"); }
     //TSubclassOf<AController>& AIControllerClassField() { return *GetNativePointerField<TSubclassOf<AController>*>(this, "APawn.AIControllerClass"); }
-   // TObjectPtr<APlayerState>& PlayerStateField() { return *GetNativePointerField<TObjectPtr<APlayerState>*>(this, "APawn.PlayerState"); }
+    TObjectPtr<APlayerState>& PlayerStateField() { return *GetNativePointerField<TObjectPtr<APlayerState>*>(this, "APawn.PlayerState"); }
     float& BlendedReplayViewPitchField() { return *GetNativePointerField<float*>(this, "APawn.BlendedReplayViewPitch"); }
     //TObjectPtr<AController>& LastHitByField() { return *GetNativePointerField<TObjectPtr<AController>*>(this, "APawn.LastHitBy"); }
    // TObjectPtr<AController>& ControllerField() { return *GetNativePointerField<TObjectPtr<AController>*>(this, "APawn.Controller"); }

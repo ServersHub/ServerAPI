@@ -4,23 +4,6 @@
 
 namespace AsaApi
 {
-	struct FStringHash
-	{
-		std::size_t operator()(const FString& str) const
-		{
-			const std::string stdString(TCHAR_TO_UTF8(*str));
-			return std::hash<std::string>{}(stdString);
-		}
-	};
-
-	struct FStringEqual
-	{
-		bool operator()(const FString& lhs, const FString& rhs) const
-		{
-			return lhs.Equals(rhs);
-		}
-	};
-
 	class ApiUtils : public IApiUtils
 	{
 	public:
