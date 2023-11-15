@@ -855,7 +855,7 @@ struct APrimalStructure : APrimalTargetableActor
     //TSubclassOf<APrimalEmitterSpawnable>& DestructionEmitterField() { return *GetNativePointerField<TSubclassOf<APrimalEmitterSpawnable>*>(this, "APrimalStructure.DestructionEmitter"); }
     UE::Math::TVector<double>& SpawnEmitterLocationOffsetField() { return *GetNativePointerField<UE::Math::TVector<double>*>(this, "APrimalStructure.SpawnEmitterLocationOffset"); }
     UE::Math::TRotator<double>& SpawnEmitterRotationOffsetField() { return *GetNativePointerField<UE::Math::TRotator<double>*>(this, "APrimalStructure.SpawnEmitterRotationOffset"); }
-    //TSubclassOf<UPrimalItem>& PickupGivesItemField() { return *GetNativePointerField<TSubclassOf<UPrimalItem>*>(this, "APrimalStructure.PickupGivesItem"); }
+    TSubclassOf<UPrimalItem>& PickupGivesItemField() { return *GetNativePointerField<TSubclassOf<UPrimalItem>*>(this, "APrimalStructure.PickupGivesItem"); }
     float& ExcludeInStructuresRadiusField() { return *GetNativePointerField<float*>(this, "APrimalStructure.ExcludeInStructuresRadius"); }
     ////TArray<TSubclassOf<APrimalStructure>, TSizedDefaultAllocator<32> >& ExcludeInStructuresRadiusClassesField() { return *GetNativePointerField<//TArray<TSubclassOf<APrimalStructure>, TSizedDefaultAllocator<32> >*>(this, "APrimalStructure.ExcludeInStructuresRadiusClasses"); }
     TArray<FName, TSizedDefaultAllocator<32> >& ExcludeInStructuresRadiusTagsField() { return *GetNativePointerField<TArray<FName, TSizedDefaultAllocator<32> >*>(this, "APrimalStructure.ExcludeInStructuresRadiusTags"); }
@@ -5164,6 +5164,8 @@ struct AShooterCharacter : APrimalCharacter
     float& LastTaggedTimeField() { return *GetNativePointerField<float*>(this, "AShooterCharacter.LastTaggedTime"); }
     float& LastTaggedTimeExtraField() { return *GetNativePointerField<float*>(this, "AShooterCharacter.LastTaggedTimeExtra"); }
     float& LastTaggedTimeThirdField() { return *GetNativePointerField<float*>(this, "AShooterCharacter.LastTaggedTimeThird"); }
+    TWeakObjectPtr<AController>& LastControllerField() { return *GetNativePointerField<TWeakObjectPtr<AController>*>(this, "AShooterCharacter.LastController"); }
+    TWeakObjectPtr<AShooterPlayerController>& LastValidPlayerControllerField() { return *GetNativePointerField<TWeakObjectPtr<AShooterPlayerController>*>(this, "AShooterCharacter.LastValidPlayerController"); }
     float& ExtraFloatVarField() { return *GetNativePointerField<float*>(this, "AShooterCharacter.ExtraFloatVar"); }
     UE::Math::TVector<double>& ExtraVectorVarField() { return *GetNativePointerField<UE::Math::TVector<double>*>(this, "AShooterCharacter.ExtraVectorVar"); }
     UE::Math::TVector<double>& ExtraExtraVectorVarField() { return *GetNativePointerField<UE::Math::TVector<double>*>(this, "AShooterCharacter.ExtraExtraVectorVar"); }
