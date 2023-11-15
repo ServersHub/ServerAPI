@@ -1436,6 +1436,8 @@ struct UPlayer : UObject{
    // int ConfiguredInternetSpeed;
    // int ConfiguredLanSpeed;
    // unsigned __int64 TransferringPlayerDataId;
+
+    FString* ConsoleCommand(FString* result, const FString* Cmd, bool bWriteToLog) { return NativeCall<FString*, FString*, const FString*, bool>(this, "UPlayer.ConsoleCommand(FString&,bool)", result, Cmd, bWriteToLog); }
 };
 
 struct FUniqueNetIdWrapper
