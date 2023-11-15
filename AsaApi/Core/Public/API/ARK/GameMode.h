@@ -424,7 +424,7 @@ struct AShooterGameState : AGameState
 struct UWorld : UPrimalWorld, FNetworkNotify {
 	//variables
 	long double& TimeSecondsField() { return *GetNativePointerField<long double*>(this, "UWorld.TimeSeconds"); }
-
+	TObjectPtr<ULevel>& PersistentLevelField() { return *GetNativePointerField<TObjectPtr<ULevel>*>(this, "UWorld.PersistentLevel"); }
 
 	APlayerController* GetFirstPlayerController() { return NativeCall<APlayerController*>(this, "UWorld.GetFirstPlayerController()"); }
 

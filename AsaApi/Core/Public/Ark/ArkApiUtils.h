@@ -313,7 +313,7 @@ namespace AsaApi
 		 * \param eos_id EOS id
 		 * \return Pointer to AShooterPlayerController
 		 */
-		FORCEINLINE AShooterPlayerController* FindPlayerFromSteamId(const FString& eos_id) const
+		FORCEINLINE AShooterPlayerController* FindPlayerFromEOSID(const FString& eos_id) const
 		{
 			return FindPlayerFromEOSID_Internal(eos_id);
 		}
@@ -651,13 +651,13 @@ namespace AsaApi
 		 */
 		static FORCEINLINE FString GetClassBlueprint(UClass* the_class)
 		{
-			//need fix -wooly
-			/*if (the_class != nullptr)
+			if (the_class != nullptr)
 			{
 				FString path;
-				UVictoryCore::ClassToStringReference(&path, TSubclassOf<UObject>(the_class));
+				auto the_object = UVictoryCore::GetClassDefaultObject(the_class);
+				the_object->GetPathName(nullptr, &path);
 				return "Blueprint'" + path.LeftChop(2) + "'";
-			}*/
+			}
 
 			return FString("");
 		}
