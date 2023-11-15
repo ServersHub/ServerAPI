@@ -237,7 +237,7 @@ public:
 	}
 
 private:
-	void AssignRange(const TCHAR* Str, int32 Len);
+	ARK_API void AssignRange(const TCHAR* Str, int32 Len);
 
 public:
 	/**
