@@ -110,7 +110,10 @@ public:
 	/**
 	 * Sets the archiver IsCriticalError and IsError to true. Also sets CriticalError in the proxy archiver if one is wrapping this.
 	 */
-	void SetCriticalError();
+	void SetCriticalError()
+	{
+		NativeCall<void>(this, "FArchiveState.SetCriticalError()");
+	}
 
 	/**
 	 * Called to get the computed size from a size-detecting archive after it has finished serializing.
@@ -2016,10 +2019,22 @@ private:
 	}
 
 	// Not inlined to keep ByteOrderSerialize(), small and fast.
-	FArchive& SerializeByteOrderSwapped(void* V, int32 Length);
-	FArchive& SerializeByteOrderSwapped(uint16& Value);
-	FArchive& SerializeByteOrderSwapped(uint32& Value);
-	FArchive& SerializeByteOrderSwapped(uint64& Value);
+	FArchive& SerializeByteOrderSwapped(void* V, int32 Length)
+	{
+		return NativeCall<FArchive&, int32&>(this, "FArchive.SerializeByteOrderSwapped(void*,int)", Length);
+	}
+	FArchive& SerializeByteOrderSwapped(uint16& Value)
+	{
+		return NativeCall<FArchive&, uint16&>(this, "FArchive.SerializeByteOrderSwapped(void*,int)", Value);
+	}
+	FArchive& SerializeByteOrderSwapped(uint32& Value)
+	{
+		return NativeCall<FArchive&, uint32&>(this, "FArchive.SerializeByteOrderSwapped(void*,int)", Value);
+	}
+	FArchive& SerializeByteOrderSwapped(uint64& Value)
+	{
+		return NativeCall<FArchive&, uint64&>(this, "FArchive.SerializeByteOrderSwapped(void*,int)", Value);
+	}
 #if PLATFORM_COMPILER_DISTINGUISHES_INT_AND_LONG
 	FArchive& SerializeByteOrderSwapped(unsigned long& Value)
 	{

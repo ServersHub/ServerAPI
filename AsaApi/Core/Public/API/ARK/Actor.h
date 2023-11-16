@@ -2707,7 +2707,7 @@ struct AShooterPlayerController : ABasePlayerController
     static void ClientProcessItemNetExecCommandUnreliableBP() { NativeCall<void>(nullptr, "AShooterPlayerController.ClientProcessItemNetExecCommandUnreliableBP()"); }
     void ClientProgressAchievement(const FString* AchievementID, float Progress, bool savePlayerData) { NativeCall<void, const FString*, float, bool>(this, "AShooterPlayerController.ClientProgressAchievement(FString&,float,bool)", AchievementID, Progress, savePlayerData); }
     static void ClientSendArkDataPayloadBegin() { NativeCall<void>(nullptr, "AShooterPlayerController.ClientSendArkDataPayloadBegin()"); }
-    static void ClientServerChatDirectMessage() { NativeCall<void>(nullptr, "AShooterPlayerController.ClientServerChatDirectMessage()"); }
+    void ClientServerChatDirectMessage(FString* MessageText, FLinearColor MessageColor, bool bIsBold) { NativeCall<void, FString*, FLinearColor, bool>(this, "AShooterPlayerController.ClientServerChatDirectMessage(FString&,FLinearColor,bool)", MessageText, MessageColor, bIsBold); }
     static void ClientServerNotification() { NativeCall<void>(nullptr, "AShooterPlayerController.ClientServerNotification()"); }
     static void ClientServerNotificationSingle() { NativeCall<void>(nullptr, "AShooterPlayerController.ClientServerNotificationSingle()"); }
     void ClientSetArkTributeLimits(bool LimitItems, bool LimitDinos, bool LimitCharacters, int MaxItems, int MaxDinos, int MaxCharacters) { NativeCall<void, bool, bool, bool, int, int, int>(this, "AShooterPlayerController.ClientSetArkTributeLimits(bool,bool,bool,int,int,int)", LimitItems, LimitDinos, LimitCharacters, MaxItems, MaxDinos, MaxCharacters); }

@@ -22,7 +22,7 @@
 #include "Templates/RemoveReference.h"
 #include "Templates/UnrealTemplate.h"
 #include "UObject/NameTypes.h"
-#include "..\Fields.h"
+#include "API/Fields.h"
 
 /* FString implementation
  *****************************************************************************/

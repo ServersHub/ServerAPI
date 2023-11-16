@@ -12,6 +12,7 @@
 #include "Templates/IsArrayOrRefOfTypeByPredicate.h"
 #include "Templates/IsValidVariadicFunctionArg.h"
 #include "Traits/IsCharEncodingCompatibleWith.h"
+#include "API/Fields.h"
 
 #define MAX_SPRINTF 1024
 
@@ -1050,7 +1051,8 @@ inline int32 TCString<WIDECHAR>::SnprintfImpl(CharType* Dest, int32 DestSize, co
 template <> 
 FORCEINLINE bool TCString<WIDECHAR>::ToBool(const WIDECHAR* Str)
 {
-	return FToBoolHelper::FromCStringWide(Str);
+	return NativeCall<bool, const WIDECHAR*>(nullptr, "FToBoolHelper.FromCStringWide(wchar_t*)", Str);
+	//return FToBoolHelper::FromCStringWide(Str);
 }
 
 /*-----------------------------------------------------------------------------
