@@ -18,6 +18,7 @@
 
 #include "../Base.h"
 #include "../Enums.h"
+#include "../UE/GenericPlatform/GenericPlatformStricmp.h"
 #include "../UE/Math/Vector.h"
 #include "../UE/Math/Rotator.h"
 //#include "../UE/NetSerialization.h"

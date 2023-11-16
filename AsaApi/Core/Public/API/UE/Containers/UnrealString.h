@@ -172,16 +172,16 @@ public:
 	ARK_API FString(const UCS2CHAR* Str);
 
 	/** Construct from null-terminated C substring or nullptr */
-	FString(int32 Len, const ANSICHAR* Str);
-	FString(int32 Len, const WIDECHAR* Str);
-	FString(int32 Len, const UTF8CHAR* Str);
-	FString(int32 Len, const UCS2CHAR* Str);
+	ARK_API FString(int32 Len, const ANSICHAR* Str);
+	ARK_API FString(int32 Len, const WIDECHAR* Str);
+	ARK_API FString(int32 Len, const UTF8CHAR* Str);
+	ARK_API FString(int32 Len, const UCS2CHAR* Str);
 
 	/** Construct from null-terminated C string or nullptr with extra slack on top of original string length */
-	FString(const ANSICHAR* Str, int32 ExtraSlack);
-	FString(const WIDECHAR* Str, int32 ExtraSlack);
-	FString(const UTF8CHAR* Str, int32 ExtraSlack);
-	FString(const UCS2CHAR* Str, int32 ExtraSlack);
+	ARK_API FString(const ANSICHAR* Str, int32 ExtraSlack);
+	ARK_API FString(const WIDECHAR* Str, int32 ExtraSlack);
+	ARK_API FString(const UTF8CHAR* Str, int32 ExtraSlack);
+	ARK_API FString(const UCS2CHAR* Str, int32 ExtraSlack);
 
 	/** Construct from contiguous range of characters such as FStringView or FStringBuilderBase */
 	template <typename CharRangeType, typename TEnableIf<TIsCharRangeNotCArrayNotFString<CharRangeType>::Value>::Type* = nullptr>
