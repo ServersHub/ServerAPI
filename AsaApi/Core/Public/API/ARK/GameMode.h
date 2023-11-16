@@ -2008,7 +2008,7 @@ struct AShooterGameMode : APrimalGameMode
 	void RemoveTribe(unsigned __int64 TribeID) { NativeCall<void, unsigned __int64>(this, "AShooterGameMode.RemoveTribe(unsigned__int64)", TribeID); }
 	static void UpdateTribeData() { NativeCall<void>(nullptr, "AShooterGameMode.UpdateTribeData()"); }
 	void RemovePlayerFromTribe(unsigned __int64 TribeID, unsigned __int64 PlayerDataID, bool bDontUpdatePlayerState) { NativeCall<void, unsigned __int64, unsigned __int64, bool>(this, "AShooterGameMode.RemovePlayerFromTribe(unsigned__int64,unsigned__int64,bool)", TribeID, PlayerDataID, bDontUpdatePlayerState); }
-	const FTribeData* GetTribeData(const FTribeData* result, unsigned __int64 TribeID) { return NativeCall<const FTribeData*, const FTribeData*, unsigned __int64>(this, "AShooterGameMode.GetTribeData(FTribeData*,unsigned__int64)", result, TribeID); }
+	const FTribeData* GetTribeData(const FTribeData* result, unsigned __int64 TribeID) { return NativeCall<const FTribeData*, const FTribeData*, unsigned __int64>(this, "AShooterGameMode.GetTribeData(unsigned__int64)", result, TribeID); }
 	void InitializeDatabaseRefs() { NativeCall<void>(this, "AShooterGameMode.InitializeDatabaseRefs()"); }
 	void BeginPlay() { NativeCall<void>(this, "AShooterGameMode.BeginPlay()"); }
 	void DoMaintenanceRestartWarning() { NativeCall<void>(this, "AShooterGameMode.DoMaintenanceRestartWarning()"); }
