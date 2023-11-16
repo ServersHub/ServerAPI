@@ -354,7 +354,7 @@ struct AShooterGameState : AGameState
 	void WorldCompositionRescan() { NativeCall<void>(this, "AShooterGameState.WorldCompositionRescan()"); }
 	static void HTTPGetRequest() { NativeCall<void>(nullptr, "AShooterGameState.HTTPGetRequest()"); }
 	static void HTTPGetRequestCompleted() { NativeCall<void>(nullptr, "AShooterGameState.HTTPGetRequestCompleted()"); }
-	static void HTTPPostRequest() { NativeCall<void>(nullptr, "AShooterGameState.HTTPPostRequest()"); }
+	void HTTPPostRequest(FString InURL, FString Content) { NativeCall<void, FString, FString>(this, "AShooterGameState.HTTPPostRequest", InURL, Content); }
 	static void HTTPPostRequestCompleted() { NativeCall<void>(nullptr, "AShooterGameState.HTTPPostRequestCompleted()"); }
 	static TArray<FGameIniData, TSizedDefaultAllocator<32> >* GetIniArray() { return NativeCall<TArray<FGameIniData, TSizedDefaultAllocator<32> >*>(nullptr, "AShooterGameState.GetIniArray()"); }
 	//bool IsUniqueDinoAlreadySpawned(const //TSoftClassPtr<APrimalDinoCharacter>* UniqueDino) { return NativeCall<bool, const //TSoftClassPtr<APrimalDinoCharacter>*>(this, "AShooterGameState.IsUniqueDinoAlreadySpawned(//TSoftClassPtr<APrimalDinoCharacter>*)", UniqueDino); }
@@ -430,6 +430,7 @@ struct UWorld : UPrimalWorld, FNetworkNotify {
 
 	//functions
 	AShooterGameState *GameStateField() { return (AShooterGameState*)GetNativePointerField <TObjectPtr<AGameStateBase>*> (this, "UWorld.GameState()")->Get(); }
+	FString* GetMapName(FString* result) { return NativeCall<FString*, FString*>(this, "UWorld.GetMapName()", result); }
 	//TArray<TAutoWeakObjectPtr<APlayerController>>& PlayerControllerListField() { return *GetNativePointerField<TArray<TAutoWeakObjectPtr<APlayerController>>*>(this, "UWorld.PlayerControllerList"); }
 
 	TArray<TWeakObjectPtr<APlayerController>, TSizedDefaultAllocator<32>> PlayerControllerListField() { 
@@ -1480,6 +1481,7 @@ struct AShooterGameMode : APrimalGameMode
 	FString& LaunchOptionsField() { return *GetNativePointerField<FString*>(this, "AShooterGameMode.LaunchOptions"); }
 	TArray<FTribeData, TSizedDefaultAllocator<32> >& TribesDataField() { return *GetNativePointerField<TArray<FTribeData, TSizedDefaultAllocator<32> >*>(this, "AShooterGameMode.TribesData"); }
 	TArray<APrimalDinoCharacter*, TSizedDefaultAllocator<32> >& ActivelyTamingDinosField() { return *GetNativePointerField<TArray<APrimalDinoCharacter*, TSizedDefaultAllocator<32> >*>(this, "AShooterGameMode.ActivelyTamingDinos"); }
+	bool& bAdminLoggingField() { return *GetNativePointerField<bool*>(this, "AShooterGameMode.bAdminLogging"); }
 	bool& bIsRestartingField() { return *GetNativePointerField<bool*>(this, "AShooterGameMode.bIsRestarting"); }
 	bool& bProximityChatField() { return *GetNativePointerField<bool*>(this, "AShooterGameMode.bProximityChat"); }
 	float& DifficultyValueField() { return *GetNativePointerField<float*>(this, "AShooterGameMode.DifficultyValue"); }

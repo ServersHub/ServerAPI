@@ -104,14 +104,14 @@ template <typename T>
 struct TSoftClassPtr
 {
 private:
-	FORCEINLINE UClass* Retrieve() const 
+	/*FORCEINLINE UClass* Retrieve() const
 	{ 
 		static UClass* resolvedClass =  NativeCall<UClass*>(this, "TSoftClassPtr<UObject>.LoadSynchronous()");
 		return resolvedClass;
-	}
+	}*/
 public:
 
-	FORCEINLINE UClass* Get() const { return (T*)(Retrieve()); }
+	FORCEINLINE UClass* Get() const { return NativeCall<UClass*>(this, "TSoftClassPtr<UObject>.LoadSynchronous()"); }
 	FORCEINLINE UClass* operator->() const { return Get(); }
 	FORCEINLINE UClass& operator*() const { return *Get(); }
 	FORCEINLINE operator bool() const { return Get() != nullptr; }

@@ -632,19 +632,30 @@ public:
 	const FNameEntry* GetComparisonNameEntry() const;
 	const FNameEntry* GetDisplayNameEntry() const;
 
+
+	
+
 	/**
 	 * Converts an FName to a readable format
 	 *
 	 * @return String representation of the name
 	 */
-	FString ToString() const;
+	FString ToString() const
+	{
+		FString Out;
+		ToString(Out);
+		return Out;
+	}
 
 	/**
 	 * Converts an FName to a readable format, in place
 	 * 
 	 * @param Out String to fill with the string representation of the name
 	 */
-	void ToString(FString& Out) const;
+	void ToString(FString& Out) const
+	{
+		NativeCall<void, FString*>(this, "FName.ToString(FString&)", &Out);
+	}
 
 	/**
 	 * Converts an FName to a readable format, in place
@@ -969,8 +980,14 @@ public:
 	 * @param FindType		Action to take (see EFindName)
 	 */
 	FName(const WIDECHAR* Name, EFindName FindType=FNAME_Add);
-	FName(const ANSICHAR* Name, EFindName FindType=FNAME_Add);
+	//FName(const ANSICHAR* Name, EFindName FindType=FNAME_Add);
 	FName(const UTF8CHAR* Name, EFindName FindType=FNAME_Add);
+
+	FName(const char* Name, EFindName FindType = FNAME_Add)
+	{
+		NativeCall<void, const char*, EFindName>(this, "FName.FName(char*,EFindName)", Name, FindType);
+	}
+
 
 	/** Create FName from non-null string with known length  */
 	FName(int32 Len, const WIDECHAR* Name, EFindName FindType=FNAME_Add);

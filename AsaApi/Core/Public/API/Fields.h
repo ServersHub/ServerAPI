@@ -8,6 +8,13 @@
 #include "Base.h"
 
 template <typename RT, typename... ArgsTypes, typename... Args>
+RT NativeCall(const void* _this, const std::string& func_name, Args&&... args)
+{
+	return static_cast<RT(__fastcall*)(DWORD64, ArgsTypes ...)>(GetAddress(func_name))(
+		reinterpret_cast<DWORD64>(_this), std::forward<Args>(args)...);
+}
+
+template <typename RT, typename... ArgsTypes, typename... Args>
 RT NativeCall(void* _this, const std::string& func_name, Args&&... args)
 {
 	return static_cast<RT(__fastcall*)(DWORD64, ArgsTypes ...)>(GetAddress(func_name))(

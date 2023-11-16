@@ -79,6 +79,20 @@ public:
 	{
 		return FString(UTF8_TO_TCHAR(input.c_str()));
 	}
+	/**
+	* Constructor to create FString from std::wstring
+	*/
+	FORCEINLINE explicit FString(const std::wstring& str)
+		: FString(str.c_str())
+	{
+	}
+	/**
+	* Constructor to create FString from std::string
+	*/
+	FORCEINLINE explicit FString(const std::string& str)
+		: FString(str.c_str())
+	{
+	}
 	template <typename T, typename... Args>
 	static FString Format(const T* format, Args&&... args)
 	{
@@ -330,7 +344,15 @@ public:
 	 *
 	 * @param NewReservedSize The expected usage size (in characters, not including the terminator) after calling this function.
 	 */
-	void Reset(int32 NewReservedSize = 0);
+	void Reset(int32 NewReservedSize = 0)
+	{
+		const int32 NewSizeIncludingTerminator = (NewReservedSize > 0) ? (NewReservedSize + 1) : 0;
+		Data.Reset(NewSizeIncludingTerminator);
+		if (TCHAR* DataPtr = Data.GetData())
+		{
+			*DataPtr = TEXT('\0');
+		}
+	}
 
 	/**
 	 * Remove unallocated empty character space from the end of this string
@@ -423,7 +445,26 @@ public:
 	}
 
 	/** Append a single character and return a reference to this */
-	FString& AppendChar(TCHAR InChar);
+	FString& AppendChar(TCHAR InChar)
+	{
+		CheckInvariants();
+
+		if (InChar != 0)
+		{
+			// position to insert the character.  
+			// At the end of the string if we have existing characters, otherwise at the 0 position
+			int32 InsertIndex = (Data.Num() > 0) ? Data.Num() - 1 : 0;
+
+			// number of characters to add.  If we don't have any existing characters, 
+			// we'll need to append the terminating zero as well.
+			int32 InsertCount = (Data.Num() > 0) ? 1 : 2;
+
+			Data.AddUninitialized(InsertCount);
+			Data[InsertIndex] = InChar;
+			Data[InsertIndex + 1] = TEXT('\0');
+		}
+		return *this;
+	}
 
 	/** Append a string and return a reference to this */
 	template <typename StrType>
@@ -1067,7 +1108,12 @@ public:
 	}
 
 	/** Returns the string to the right of the specified location, counting forward from the left (from the beginning of the word). */
-	UE_NODISCARD FString RightChop( int32 Count ) const &;
+	UE_NODISCARD FString RightChop(int32 Count) const&
+	{
+		const int32 Length = Len();
+		const int32 Skip = FMath::Clamp(Count, 0, Length);
+		return FString(Length - Skip, **this + Skip);
+	}
 
 	UE_NODISCARD FORCEINLINE FString RightChop(int32 Count) &&
 	{
@@ -1082,8 +1128,24 @@ public:
 	}
 
 	/** Returns the substring from Start position for Count characters. */
-	UE_NODISCARD FString Mid(int32 Start, int32 Count) const &;
-	UE_NODISCARD FString Mid(int32 Start, int32 Count) &&;
+	UE_NODISCARD FString Mid(int32 Start, int32 Count) const&
+	{
+		if (Count >= 0)
+		{
+			const int32 Length = Len();
+			const int32 RequestedStart = Start;
+			Start = FMath::Clamp(Start, 0, Length);
+			const int32 End = (int32)FMath::Clamp((int64)Count + RequestedStart, (int64)Start, (int64)Length);
+			return FString(End - Start, **this + Start);
+		}
+
+		return FString();
+	}
+	UE_NODISCARD FString Mid(int32 Start, int32 Count)&&
+	{
+		MidInline(Start, Count, false);
+		return MoveTemp(*this);
+	}
 
 	/** Returns the substring from Start position to the end */
 	UE_NODISCARD FORCEINLINE FString Mid(int32 Start) const & { return RightChop(Start); }
@@ -1115,6 +1177,9 @@ public:
 	 *
 	 *        Consider using UE::String::FindLast() as an alternative.
 	 */
+
+
+
 	template <typename TCharRangeType, std::enable_if_t<TIsCharRangeNotCArrayNotFString<TCharRangeType>::Value>* = nullptr>
 	UE_NODISCARD int32 Find(TCharRangeType&& SubStr, ESearchCase::Type SearchCase = ESearchCase::IgnoreCase,
 		ESearchDir::Type SearchDir = ESearchDir::FromStart, int32 StartPosition = INDEX_NONE) const
@@ -1177,9 +1242,65 @@ public:
 	 *
 	 *        Consider using UE::String::FindLast() as an alternative.
 	 */
-	UE_NODISCARD int32 Find(const TCHAR* SubStr, int32 InSubStrLen, ESearchCase::Type SearchCase = ESearchCase::IgnoreCase,
-		ESearchDir::Type SearchDir = ESearchDir::FromStart, int32 StartPosition = INDEX_NONE) const;
+	UE_NODISCARD int32 Find(const TCHAR* SubStr, int32 SubStrLen, ESearchCase::Type SearchCase = ESearchCase::IgnoreCase,
+		ESearchDir::Type SearchDir = ESearchDir::FromStart, int32 StartPosition = INDEX_NONE) const 
+	{
+		checkf(SubStrLen >= 0, TEXT("Invalid SubStrLen: %d"), SubStrLen);
 
+		if (SearchDir == ESearchDir::FromStart)
+		{
+			const TCHAR* Start = **this;
+			int32 RemainingLength = Len();
+			if (StartPosition != INDEX_NONE && RemainingLength > 0)
+			{
+				const TCHAR* End = Start + RemainingLength;
+				Start += FMath::Clamp(StartPosition, 0, RemainingLength - 1);
+				RemainingLength = UE_PTRDIFF_TO_INT32(End - Start);
+			}
+			const TCHAR* Tmp = SearchCase == ESearchCase::IgnoreCase
+				? FCString::Strnistr(Start, RemainingLength, SubStr, SubStrLen)
+				: FCString::Strnstr(Start, RemainingLength, SubStr, SubStrLen);
+
+			return Tmp ? UE_PTRDIFF_TO_INT32(Tmp - **this) : INDEX_NONE;
+		}
+		else
+		{
+			// if ignoring, do a onetime ToUpper on both strings, to avoid ToUppering multiple
+			// times in the loop below
+			if (SearchCase == ESearchCase::IgnoreCase)
+			{
+				return ToUpper().Find(FString(SubStrLen, SubStr).ToUpper(), ESearchCase::CaseSensitive, SearchDir, StartPosition);
+			}
+			else
+			{
+				const int32 SearchStringLength = FMath::Max(1, SubStrLen);
+
+				if (StartPosition == INDEX_NONE || StartPosition >= Len())
+				{
+					StartPosition = Len();
+				}
+
+				for (int32 i = StartPosition - SearchStringLength; i >= 0; i--)
+				{
+					int32 j;
+					for (j = 0; j != SubStrLen; j++)
+					{
+						if ((*this)[i + j] != SubStr[j])
+						{
+							break;
+						}
+					}
+
+					if (j == SubStrLen)
+					{
+						return i;
+					}
+				}
+				return INDEX_NONE;
+			}
+		}
+	}
+	
 
 	/**
 	 * Returns whether this string contains the specified substring.
@@ -1361,28 +1482,62 @@ public:
 	bool Split(const FString& InS, FString* LeftS, FString* RightS) const;
 
 	/** Returns a new string with the characters of this converted to uppercase */
-	UE_NODISCARD FString ToUpper() const &;
+	UE_NODISCARD FString ToUpper() const&
+	{
+		FString New = *this;
+		New.ToUpperInline();
+		return New;
+	}
 
 	/**
 	 * Converts all characters in this rvalue string to uppercase and moves it into the returned string.
 	 * @return a new string with the characters of this converted to uppercase
 	 */
-	UE_NODISCARD FString ToUpper() &&;
+	UE_NODISCARD FString ToUpper()&&
+	{
+		this->ToUpperInline();
+		return MoveTemp(*this);
+	}
 
 	/** Converts all characters in this string to uppercase */
-	void ToUpperInline();
+	void ToUpperInline()
+	{
+		const int32 StringLength = Len();
+		TCHAR* RawData = Data.GetData();
+		for (int32 i = 0; i < StringLength; ++i)
+		{
+			RawData[i] = FChar::ToUpper(RawData[i]);
+		}
+	}
 
 	/** Returns a new string with the characters of this converted to lowercase */
-	UE_NODISCARD FString ToLower() const &;
+	UE_NODISCARD FString ToLower() const&
+	{
+		FString New = *this;
+		New.ToLowerInline();
+		return New;
+	}
 
 	/**
 	 * Converts all characters in this rvalue string to lowercase and moves it into the returned string.
 	 * @return a new string with the characters of this converted to lowercase
 	 */
-	UE_NODISCARD FString ToLower() &&;
+	UE_NODISCARD FString ToLower()&&
+	{
+		this->ToLowerInline();
+		return MoveTemp(*this);
+	}
 
 	/** Converts all characters in this string to lowercase */
-	void ToLowerInline();
+	void ToLowerInline()
+	{
+		const int32 StringLength = Len();
+		TCHAR* RawData = Data.GetData();
+		for (int32 i = 0; i < StringLength; ++i)
+		{
+			RawData[i] = FChar::ToLower(RawData[i]);
+		}
+	}
 
 	/** Pad the left of this string for ChCount characters */
 	UE_NODISCARD FString LeftPad( int32 ChCount ) const;
@@ -1391,7 +1546,14 @@ public:
 	UE_NODISCARD FString RightPad( int32 ChCount ) const;
 	
 	/** Returns true if the string only contains numeric characters */
-	UE_NODISCARD bool IsNumeric() const;
+	UE_NODISCARD bool IsNumeric() const
+	{
+		if (IsEmpty())
+		{
+			return 0;
+		}
+		return FCString::IsNumeric(Data.GetData());
+	}
 	
 	/** Removes spaces from the string.  I.E. "Spaces Are Cool" --> "SpacesAreCool". */
 	void RemoveSpacesInline();
@@ -1472,6 +1634,18 @@ public:
 	friend FArchive& operator<<( FArchive& Ar, FString& S );
 
 
+	bool StartsWith(const TCHAR* InPrefix, int32 InPrefixLen, ESearchCase::Type SearchCase) const
+	{
+		if (SearchCase == ESearchCase::IgnoreCase)
+		{
+			return InPrefixLen > 0 && !FCString::Strnicmp(**this, InPrefix, InPrefixLen);
+		}
+		else
+		{
+			return InPrefixLen > 0 && !FCString::Strncmp(**this, InPrefix, InPrefixLen);
+		}
+	}
+
 	/**
 	 * Test whether this string starts with given prefix.
 	 *
@@ -1507,13 +1681,29 @@ public:
 		return StartsWith(*InPrefix, InPrefix.Len(), SearchCase);
 	}
 
+
 	/**
-	 * Test whether this string starts with given prefix.
+	 * Test whether this string ends with given suffix.
 	 *
 	 * @param SearchCase		Indicates whether the search is case sensitive or not ( defaults to ESearchCase::IgnoreCase )
-	 * @return true if this string begins with specified text, false otherwise
+	 * @return true if this string ends with specified text, false otherwise
 	 */
-	UE_NODISCARD bool StartsWith(const TCHAR* InPrefix, int32 InPrefixLen, ESearchCase::Type SearchCase = ESearchCase::IgnoreCase) const;
+	
+	bool EndsWith(const TCHAR* InSuffix, int32 InSuffixLen, ESearchCase::Type SearchCase = ESearchCase::IgnoreCase) const
+	{
+		if (SearchCase == ESearchCase::IgnoreCase)
+		{
+			return InSuffixLen > 0 &&
+				Len() >= InSuffixLen &&
+				!FCString::Stricmp(&(*this)[Len() - InSuffixLen], InSuffix);
+		}
+		else
+		{
+			return InSuffixLen > 0 &&
+				Len() >= InSuffixLen &&
+				!FCString::Strcmp(&(*this)[Len() - InSuffixLen], InSuffix);
+		}
+	}
 
 	/**
 	 * Test whether this string ends with given suffix.
@@ -1550,14 +1740,7 @@ public:
 		return EndsWith(*InSuffix, InSuffix.Len(), SearchCase);
 	}
 
-	/**
-	 * Test whether this string ends with given suffix.
-	 *
-	 * @param SearchCase		Indicates whether the search is case sensitive or not ( defaults to ESearchCase::IgnoreCase )
-	 * @return true if this string ends with specified text, false otherwise
-	 */
-	UE_NODISCARD bool EndsWith(const TCHAR* InSuffix, int32 InSuffixLen, ESearchCase::Type SearchCase = ESearchCase::IgnoreCase ) const;
-
+	
 	/**
 	 * Searches this string for a given wild card
 	 *
@@ -1775,7 +1958,48 @@ public:
 	 * @param SearchCase	Indicates whether the search is case sensitive or not ( defaults to ESearchCase::IgnoreCase )
 	 * @return a copy of this string with the replacement made
 	 */
-	UE_NODISCARD FString Replace(const TCHAR* From, const TCHAR* To, ESearchCase::Type SearchCase = ESearchCase::IgnoreCase) const &;
+	UE_NODISCARD FString Replace(const TCHAR* From, const TCHAR* To, ESearchCase::Type SearchCase = ESearchCase::IgnoreCase) const&
+	{
+		// Previous code used to accidentally accept a nullptr replacement string - this is no longer accepted.
+		check(To);
+
+		if (IsEmpty() || !From || !*From)
+		{
+			return *this;
+		}
+
+		// get a pointer into the character data
+		const TCHAR* Travel = Data.GetData();
+
+		// precalc the lengths of the replacement strings
+		int32 FromLength = FCString::Strlen(From);
+		int32 ToLength = FCString::Strlen(To);
+
+		FString Result;
+		while (true)
+		{
+			// look for From in the remaining string
+			const TCHAR* FromLocation = SearchCase == ESearchCase::IgnoreCase ? FCString::Stristr(Travel, From) : FCString::Strstr(Travel, From);
+			if (!FromLocation)
+			{
+				break;
+			}
+
+			// copy everything up to FromLocation
+			Result.AppendChars(Travel, UE_PTRDIFF_TO_INT32(FromLocation - Travel));
+
+			// copy over the To
+			Result.AppendChars(To, ToLength);
+
+			Travel = FromLocation + FromLength;
+		}
+
+		// copy anything left over
+		Result += Travel;
+
+		return Result;
+	}
+		
 
 	/**
 	 * Replace all occurrences of a substring in this string
@@ -1785,7 +2009,12 @@ public:
 	 * @param SearchCase	Indicates whether the search is case sensitive or not ( defaults to ESearchCase::IgnoreCase )
 	 * @return a copy of this string with the replacement made
 	 */
-	UE_NODISCARD FString Replace(const TCHAR* From, const TCHAR* To, ESearchCase::Type SearchCase = ESearchCase::IgnoreCase) &&;
+	UE_NODISCARD FString Replace(const TCHAR* From, const TCHAR* To, ESearchCase::Type SearchCase = ESearchCase::IgnoreCase)&&
+	{
+		ReplaceInline(From, To, SearchCase);
+		return MoveTemp(*this);
+	}
+	
 
 	/**
 	 * Replace all occurrences of SearchText with ReplacementText in this string.
@@ -1796,7 +2025,75 @@ public:
 	 *
 	 * @return	the number of occurrences of SearchText that were replaced.
 	 */
-	int32 ReplaceInline( const TCHAR* SearchText, const TCHAR* ReplacementText, ESearchCase::Type SearchCase = ESearchCase::IgnoreCase );
+	int32 ReplaceInline(const TCHAR* SearchText, const TCHAR* ReplacementText, ESearchCase::Type SearchCase = ESearchCase::IgnoreCase)
+	{
+		int32 ReplacementCount = 0;
+
+		if (Len() > 0
+			&& SearchText != nullptr && *SearchText != 0
+			&& ReplacementText != nullptr && (SearchCase == ESearchCase::IgnoreCase || FCString::Strcmp(SearchText, ReplacementText) != 0))
+		{
+			const int32 NumCharsToReplace = FCString::Strlen(SearchText);
+			const int32 NumCharsToInsert = FCString::Strlen(ReplacementText);
+
+			if (NumCharsToInsert == NumCharsToReplace)
+			{
+				TCHAR* Pos = SearchCase == ESearchCase::IgnoreCase ? FCString::Stristr(&(*this)[0], SearchText) : FCString::Strstr(&(*this)[0], SearchText);
+				while (Pos != nullptr)
+				{
+					ReplacementCount++;
+
+					// FCString::Strcpy now inserts a terminating zero so can't use that
+					for (int32 i = 0; i < NumCharsToInsert; i++)
+					{
+						Pos[i] = ReplacementText[i];
+					}
+
+					if (Pos + NumCharsToReplace - **this < Len())
+					{
+						Pos = SearchCase == ESearchCase::IgnoreCase ? FCString::Stristr(Pos + NumCharsToReplace, SearchText) : FCString::Strstr(Pos + NumCharsToReplace, SearchText);
+					}
+					else
+					{
+						break;
+					}
+				}
+			}
+			else if (Contains(SearchText, SearchCase))
+			{
+				FString Copy(MoveTemp(*this));
+
+				// get a pointer into the character data
+				TCHAR* WritePosition = (TCHAR*)Copy.Data.GetData();
+				// look for From in the remaining string
+				TCHAR* SearchPosition = SearchCase == ESearchCase::IgnoreCase ? FCString::Stristr(WritePosition, SearchText) : FCString::Strstr(WritePosition, SearchText);
+				while (SearchPosition != nullptr)
+				{
+					ReplacementCount++;
+
+					// replace the first letter of the From with 0 so we can do a strcpy (FString +=)
+					*SearchPosition = TEXT('\0');
+
+					// copy everything up to the SearchPosition
+					(*this) += WritePosition;
+
+					// copy over the ReplacementText
+					(*this) += ReplacementText;
+
+					// restore the letter, just so we don't have 0's in the string
+					*SearchPosition = *SearchText;
+
+					WritePosition = SearchPosition + NumCharsToReplace;
+					SearchPosition = SearchCase == ESearchCase::IgnoreCase ? FCString::Stristr(WritePosition, SearchText) : FCString::Strstr(WritePosition, SearchText);
+				}
+
+				// copy anything left over
+				(*this) += WritePosition;
+			}
+		}
+
+		return ReplacementCount;
+	};
 
 	/**
 	 * Replace all occurrences of a character with another.
@@ -1959,7 +2256,31 @@ public:
 	}
 
 	/** appends the integer InNum to this string */
-	void AppendInt( int32 InNum );
+	void AppendInt(int32 InNum)
+	{
+		const TCHAR* DigitToChar = TEXT("9876543210123456789");
+		constexpr int32 ZeroDigitIndex = 9;
+		bool bIsNumberNegative = InNum < 0;
+		const int32 TempBufferSize = 16; // 16 is big enough
+		TCHAR TempNum[TempBufferSize];
+		int32 TempAt = TempBufferSize; // fill the temp string from the top down.
+
+		// Convert to string assuming base ten.
+		do
+		{
+			TempNum[--TempAt] = DigitToChar[ZeroDigitIndex + (InNum % 10)];
+			InNum /= 10;
+		} while (InNum);
+
+		if (bIsNumberNegative)
+		{
+			TempNum[--TempAt] = TEXT('-');
+		}
+
+		const TCHAR* CharPtr = TempNum + TempAt;
+		const int32 NumChars = TempBufferSize - TempAt;
+		Append(CharPtr, NumChars);
+	}
 
 	/**
 	 * Converts a string into a boolean value
@@ -1968,7 +2289,10 @@ public:
 	 *
 	 * @return The boolean value
 	 */
-	UE_NODISCARD bool ToBool() const;
+	UE_NODISCARD bool ToBool() const
+	{
+		return FCString::ToBool(**this);
+	}
 
 	/**
 	 * Converts a buffer to a string
@@ -2561,7 +2885,8 @@ int32 FindMatchingClosingParenthesis(const FString& TargetString, const int32 St
 *
 * @return	The slugged string
 */
-FString SlugStringForValidName(const FString& DisplayString, const TCHAR* ReplaceWith = TEXT(""));
+ARK_API FString SlugStringForValidName(const FString& DisplayString, const TCHAR* ReplaceWith = TEXT(""));
+
 
 struct FTextRange
 {
