@@ -3449,7 +3449,7 @@ enum class FWPS_DISCARD_MODULE0_:int
 	FWPS_DISCARD_MODULE_MAX = 0x3
 };
 
-enum class SCOPE_LEVEL:int
+/*enum class SCOPE_LEVEL :int
 {
 	ScopeLevelInterface = 0x1,
 	ScopeLevelLink = 0x2,
@@ -3459,7 +3459,7 @@ enum class SCOPE_LEVEL:int
 	ScopeLevelOrganization = 0x8,
 	ScopeLevelGlobal = 0xE,
 	ScopeLevelCount = 0x10
-};
+};*/
 
 enum class IPSEC_TOKEN_TYPE_:int
 {
@@ -3730,7 +3730,7 @@ enum class _WHEA_EVENT_LOG_ENTRY_TYPE:int
 	WheaEventLogEntryTypeError = 0x2
 };
 
-enum class IPPROTO:int
+/*enum class IPPROTO :int
 {
 	IPPROTO_HOPOPTS = 0x0,
 	IPPROTO_ICMP = 0x1,
@@ -3767,7 +3767,7 @@ enum class IPPROTO:int
 	IPPROTO_RESERVED_IPSECOFFLOAD = 0x103,
 	IPPROTO_RESERVED_WNV = 0x104,
 	IPPROTO_RESERVED_MAX = 0x105
-};
+};*/
 
 enum class FWPS_NET_BUFFER_LIST_TYPE_:int
 {

@@ -191,6 +191,14 @@ ARK_API struct FLinearColor
 	PRAGMA_ENABLE_DEPRECATION_WARNINGS
 	}
 
+	FORCEINLINE void operator=(const FLinearColor& ColorB) 
+	{		
+		this->R = ColorB.R;
+		this->G = ColorB.G;
+		this->B = ColorB.B;
+		this->A = ColorB.A;
+	}
+
 	FORCEINLINE FLinearColor operator+(const FLinearColor& ColorB) const
 	{
 		return FLinearColor(

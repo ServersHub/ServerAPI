@@ -4,7 +4,8 @@
 struct UPrimalItem : UObject
 {
     // Fields
-
+   
+    TSoftClassPtr<APrimalStructure>& StructureToBuildField() { return *GetNativePointerField<TSoftClassPtr<APrimalStructure>*>(this, "UPrimalItem.StructureToBuild"); }
     //_BYTE[7] & _padding_71Field() { return *GetNativePointerField<_BYTE[7] *>(this, "UPrimalItem._padding_71"); }
     ////TSoftObjectPtr<USkeletalMesh>& CostumeDinoSaddleOverrideMeshField() { return *GetNativePointerField<//TSoftObjectPtr<USkeletalMesh>*>(this, "UPrimalItem.CostumeDinoSaddleOverrideMesh"); }
     ////TSoftObjectPtr<USkeletalMesh>& CostumeDinoSaddleOverrideTorchMeshField() { return *GetNativePointerField<//TSoftObjectPtr<USkeletalMesh>*>(this, "UPrimalItem.CostumeDinoSaddleOverrideTorchMesh"); }

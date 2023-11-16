@@ -721,7 +721,9 @@ struct APrimalTargetableActor : AActor
 struct APrimalStructure : APrimalTargetableActor
 {
     // Fields
-
+    //wooly test additions
+    TSubclassOf<UPrimalItem>& ConsumesPrimalItemField() { return *GetNativePointerField<TSubclassOf<UPrimalItem>*>(this, "APrimalStructure.ConsumesPrimalItem"); }
+    //end of wooly test
     UE::Math::TVector2<double>& OverlayTooltipPaddingField() { return *GetNativePointerField<UE::Math::TVector2<double>*>(this, "APrimalStructure.OverlayTooltipPadding"); }
     UE::Math::TVector2<double>& OverlayTooltipScaleField() { return *GetNativePointerField<UE::Math::TVector2<double>*>(this, "APrimalStructure.OverlayTooltipScale"); }
     float& MaxTooltipPawnSpeedField() { return *GetNativePointerField<float*>(this, "APrimalStructure.MaxTooltipPawnSpeed"); }
@@ -2359,6 +2361,7 @@ struct AShooterPlayerController : ABasePlayerController
     long double& LastTimeSentCarriedRotationField() { return *GetNativePointerField<long double*>(this, "AShooterPlayerController.LastTimeSentCarriedRotation"); }
     //TMap<FGuid, FARKTributeData, FDefaultSetAllocator, TDefaultMapHashableKeyFuncs<FGuid, FARKTributeData, 0> >& LastArkTributeDataField() { return *GetNativePointerField<TMap<FGuid, FARKTributeData, FDefaultSetAllocator, TDefaultMapHashableKeyFuncs<FGuid, FARKTributeData, 0> >*>(this, "AShooterPlayerController.LastArkTributeData"); }
     //TMap<unsigned __int64, FNonClusterCharacterUploadData, FDefaultSetAllocator, TDefaultMapHashableKeyFuncs<unsigned __int64, FNonClusterCharacterUploadData, 0> >& InProgressNonClusterCharacterUploadsField() { return *GetNativePointerField<TMap<unsigned __int64, FNonClusterCharacterUploadData, FDefaultSetAllocator, TDefaultMapHashableKeyFuncs<unsigned __int64, FNonClusterCharacterUploadData, 0> >*>(this, "AShooterPlayerController.InProgressNonClusterCharacterUploads"); }
+    TWeakObjectPtr<AShooterCharacter>& LastControlledPlayerCharacterField() { return *GetNativePointerField<TWeakObjectPtr<AShooterCharacter>*>(this, "AShooterPlayerController.LastControlledPlayerCharacter"); }
     FItemNetID& LastSteamItemIDToRemoveField() { return *GetNativePointerField<FItemNetID*>(this, "AShooterPlayerController.LastSteamItemIDToRemove"); }
     FItemNetID& LastSteamItemIDToAddField() { return *GetNativePointerField<FItemNetID*>(this, "AShooterPlayerController.LastSteamItemIDToAdd"); }
     bool& bRefreshedInvetoryForRemoveField() { return *GetNativePointerField<bool*>(this, "AShooterPlayerController.bRefreshedInvetoryForRemove"); }
@@ -2665,7 +2668,9 @@ struct AShooterPlayerController : ABasePlayerController
     BitFieldValue<bool, unsigned __int32> bEnablingSpectator() { return { this, "AShooterPlayerController.bEnablingSpectator" }; }
 
     // Functions
-
+    //wooly add (testing)    
+    void ClientServerSOTFNotificationCustom(FString* MessageText, FLinearColor MessageColor, float DisplayScale, float DisplayTime, UTexture2D* MessageIcon, USoundBase* SoundToPlay) { NativeCall<void, FString*, FLinearColor, float, float, UTexture2D*, USoundBase*>(this, "AShooterPlayerController.ClientServerSOTFNotificationCustom_Implementation(FString&,FLinearColor,float,float,UTexture2D*,USoundBase*,int)", MessageText, MessageColor, DisplayScale, DisplayTime, MessageIcon, SoundToPlay); }
+    //end of wooly additions
     static void ClientPlayForceFeedback() { NativeCall<void>(nullptr, "AShooterPlayerController.ClientPlayForceFeedback()"); }
     static UClass* GetPrivateStaticClass() { return NativeCall<UClass*>(nullptr, "AShooterPlayerController.GetPrivateStaticClass()"); }
     bool AllowedToSpectateAllTeams() { return NativeCall<bool>(this, "AShooterPlayerController.AllowedToSpectateAllTeams()"); }
@@ -3073,7 +3078,7 @@ struct AShooterPlayerController : ABasePlayerController
     static void ClientServerNotification_Implementation() { NativeCall<void>(nullptr, "AShooterPlayerController.ClientServerNotification_Implementation()"); }
     static void ClientServerNotificationSingle_Implementation() { NativeCall<void>(nullptr, "AShooterPlayerController.ClientServerNotificationSingle_Implementation()"); }
     static void ClientServerSOTFNotification_Implementation() { NativeCall<void>(nullptr, "AShooterPlayerController.ClientServerSOTFNotification_Implementation()"); }
-    static void ClientServerSOTFNotificationCustom_Implementation() { NativeCall<void>(nullptr, "AShooterPlayerController.ClientServerSOTFNotificationCustom_Implementation()"); }
+    void ClientServerSOTFNotificationCustom_Implementation(FString* MessageText, FLinearColor MessageColor, float DisplayScale, float DisplayTime, UTexture2D* MessageIcon, USoundBase* SoundToPlay) { NativeCall<void, FString*, FLinearColor, float, float, UTexture2D*, USoundBase*>(this, "AShooterPlayerController.ClientServerSOTFNotificationCustom_Implementation(FString&,FLinearColor,float,float,UTexture2D*,USoundBase*,int)", MessageText, MessageColor, DisplayScale, DisplayTime, MessageIcon, SoundToPlay); }
     void ServerGetOriginalHairColor_Implementation() { NativeCall<void>(this, "AShooterPlayerController.ServerGetOriginalHairColor_Implementation()"); }
     static void ClientReceiveOriginalHairColor_Implementation() { NativeCall<void>(nullptr, "AShooterPlayerController.ClientReceiveOriginalHairColor_Implementation()"); }
     static void OrganizeSOTFQueue() { NativeCall<void>(nullptr, "AShooterPlayerController.OrganizeSOTFQueue()"); }
@@ -4453,7 +4458,9 @@ struct APrimalCharacter : ACharacter
     BitFieldValue<bool, unsigned __int32> bUsesWaterFinLocking() { return { this, "APrimalCharacter.bUsesWaterFinLocking" }; }
 
     // Functions
-
+    //wooly additions - testing
+    bool HasBuff(TSubclassOf<APrimalBuff> BuffClass, bool useExactMatch) { return NativeCall<bool, TSubclassOf<APrimalBuff>, bool>(this, "APrimalCharacter.HasBuff(TSubclassOf<APrimalBuff>,bool)", BuffClass, useExactMatch); }
+    //endof wooly test
     bool IsBeingDestroyed() { return NativeCall<bool>(this, "APrimalCharacter.IsBeingDestroyed()"); }
     UMeshComponent* GetSkeletalMeshComponent() { return NativeCall<UMeshComponent*>(this, "APrimalCharacter.GetSkeletalMeshComponent()"); }
     ENetRole GetRole() { return NativeCall<ENetRole>(this, "APrimalCharacter.GetRole()"); }
