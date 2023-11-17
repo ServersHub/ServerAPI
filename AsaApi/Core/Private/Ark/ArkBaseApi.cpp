@@ -51,6 +51,7 @@ namespace API
 			const fs::path keyCacheFile = fs::current_path().append(ArkBaseApi::GetApiName()+"/Cache/cached_key.cache");
 			const fs::path offsetsCacheFile = fs::current_path().append(ArkBaseApi::GetApiName()+"/Cache/cached_offsets.cache");
 			const fs::path bitfieldsCacheFile = fs::current_path().append(ArkBaseApi::GetApiName()+"/Cache/cached_bitfields.cache");
+			const fs::path offsetsCacheFilePlain = fs::current_path().append(ArkBaseApi::GetApiName() + "/Cache/cached_offsets.txt");
 			const std::string fileHash = Cache::calculateSHA256(filepath);
 			const std::string storedHash = Cache::readFromFile(keyCacheFile);
 
@@ -73,6 +74,7 @@ namespace API
 				Log::GetLog()->info("Cache is still valid loading existing cache");
 				Log::GetLog()->info("Reading cached offsets");
 				offsets_dump = Cache::deserializeMap<intptr_t>(offsetsCacheFile);
+				Cache::saveToFilePlain(offsetsCacheFilePlain, offsets_dump);
 
 				Log::GetLog()->info("Reading cached bitfields");
 				bitfields_dump = Cache::deserializeMap<BitField>(bitfieldsCacheFile);
@@ -83,6 +85,8 @@ namespace API
 			Log::GetLog()->critical("Failed to read pdb - {}", error.what());
 			return false;
 		}
+
+
 
 		Offsets::Get().Init(move(offsets_dump), move(bitfields_dump));
 		Sleep(10);

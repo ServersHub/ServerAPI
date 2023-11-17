@@ -433,8 +433,7 @@ struct UWorld : UPrimalWorld, FNetworkNotify {
 	FString* GetMapName(FString* result) { return NativeCall<FString*, FString*>(this, "UWorld.GetMapName()", result); }
 	//TArray<TAutoWeakObjectPtr<APlayerController>>& PlayerControllerListField() { return *GetNativePointerField<TArray<TAutoWeakObjectPtr<APlayerController>>*>(this, "UWorld.PlayerControllerList"); }
 
-	TArray<TWeakObjectPtr<APlayerController>, TSizedDefaultAllocator<32>> PlayerControllerListField() { 
-		return *GetNativePointerField<TArray<TWeakObjectPtr<APlayerController>, TSizedDefaultAllocator<32>>*>(this, "UWorld.PlayerControllerList()"); }
+	TArray<TWeakObjectPtr<APlayerController>>& PlayerControllerListField() { return *GetNativePointerField<TArray<TWeakObjectPtr<APlayerController>>*>(this, "UWorld.PlayerControllerList"); }
 };
 
 struct UPrimalGameData : UObject

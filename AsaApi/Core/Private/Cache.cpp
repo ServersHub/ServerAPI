@@ -89,4 +89,24 @@ namespace Cache
 
 		return "";
 	}
+
+	void saveToFilePlain(const std::filesystem::path& filename, const std::unordered_map<std::string, intptr_t>& map)
+	{
+		std::ofstream file(filename, std::ios::trunc);
+		if (file.is_open())
+		{
+			std::vector<std::pair<std::string, intptr_t>> sortedVec(map.begin(), map.end());
+			std::sort(sortedVec.begin(), sortedVec.end(), [](const auto& a, const auto& b) { return a.first < b.first; });
+
+			for (const auto& pair : sortedVec)
+			{
+				std::string data(fmt::format("{}:{}\n", pair.first, pair.second));
+				file.write(data.data(), data.size());
+			}
+			file.close();
+			return;
+		}
+
+		Log::GetLog()->error("Error opening file for writing: " + filename.string());
+	}
 }
