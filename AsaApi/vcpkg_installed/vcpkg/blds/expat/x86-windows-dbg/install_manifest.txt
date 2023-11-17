@@ -1,0 +1,12 @@
+D:/ArkAscendedApi/ServerAPI/AsaApi/vcpkg_installed/vcpkg/pkgs/expat_x86-windows/debug/include/expat_config.h
+D:/ArkAscendedApi/ServerAPI/AsaApi/vcpkg_installed/vcpkg/pkgs/expat_x86-windows/debug/lib/libexpatd.lib
+D:/ArkAscendedApi/ServerAPI/AsaApi/vcpkg_installed/vcpkg/pkgs/expat_x86-windows/debug/bin/libexpatd.dll
+D:/ArkAscendedApi/ServerAPI/AsaApi/vcpkg_installed/vcpkg/pkgs/expat_x86-windows/debug/include/expat.h
+D:/ArkAscendedApi/ServerAPI/AsaApi/vcpkg_installed/vcpkg/pkgs/expat_x86-windows/debug/include/expat_external.h
+D:/ArkAscendedApi/ServerAPI/AsaApi/vcpkg_installed/vcpkg/pkgs/expat_x86-windows/debug/lib/pkgconfig/expat.pc
+D:/ArkAscendedApi/ServerAPI/AsaApi/vcpkg_installed/vcpkg/pkgs/expat_x86-windows/debug/share/doc/expat/AUTHORS
+D:/ArkAscendedApi/ServerAPI/AsaApi/vcpkg_installed/vcpkg/pkgs/expat_x86-windows/debug/share/doc/expat/changelog
+D:/ArkAscendedApi/ServerAPI/AsaApi/vcpkg_installed/vcpkg/pkgs/expat_x86-windows/debug/lib/cmake/expat-2.5.0/expat-config.cmake
+D:/ArkAscendedApi/ServerAPI/AsaApi/vcpkg_installed/vcpkg/pkgs/expat_x86-windows/debug/lib/cmake/expat-2.5.0/expat-config-version.cmake
+D:/ArkAscendedApi/ServerAPI/AsaApi/vcpkg_installed/vcpkg/pkgs/expat_x86-windows/debug/lib/cmake/expat-2.5.0/expat.cmake
+D:/ArkAscendedApi/ServerAPI/AsaApi/vcpkg_installed/vcpkg/pkgs/expat_x86-windows/debug/lib/cmake/expat-2.5.0/expat-debug.cmake

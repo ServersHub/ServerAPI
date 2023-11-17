@@ -41509,3 +41509,11 @@ enum class EObjectFlag :unsigned __int64
 	RF_Garbage = 0x40000000,
 	RF_AllocatedInSharedPage = 0x80000000
 };
+
+enum class ELevelTick:int
+{
+	LEVELTICK_TimeOnly = 0x0,
+	LEVELTICK_ViewportsOnly = 0x1,
+	LEVELTICK_All = 0x2,
+	LEVELTICK_PauseTick = 0x3,
+};

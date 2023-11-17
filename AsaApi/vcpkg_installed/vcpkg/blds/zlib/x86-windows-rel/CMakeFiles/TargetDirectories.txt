@@ -1,0 +1,7 @@
+D:/ArkAscendedApi/ServerAPI/AsaApi/vcpkg_installed/vcpkg/blds/zlib/x86-windows-rel/CMakeFiles/zlib.dir
+D:/ArkAscendedApi/ServerAPI/AsaApi/vcpkg_installed/vcpkg/blds/zlib/x86-windows-rel/CMakeFiles/test.dir
+D:/ArkAscendedApi/ServerAPI/AsaApi/vcpkg_installed/vcpkg/blds/zlib/x86-windows-rel/CMakeFiles/edit_cache.dir
+D:/ArkAscendedApi/ServerAPI/AsaApi/vcpkg_installed/vcpkg/blds/zlib/x86-windows-rel/CMakeFiles/rebuild_cache.dir
+D:/ArkAscendedApi/ServerAPI/AsaApi/vcpkg_installed/vcpkg/blds/zlib/x86-windows-rel/CMakeFiles/list_install_components.dir
+D:/ArkAscendedApi/ServerAPI/AsaApi/vcpkg_installed/vcpkg/blds/zlib/x86-windows-rel/CMakeFiles/install.dir
+D:/ArkAscendedApi/ServerAPI/AsaApi/vcpkg_installed/vcpkg/blds/zlib/x86-windows-rel/CMakeFiles/install/local.dir

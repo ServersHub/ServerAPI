@@ -9,7 +9,8 @@
       "name": "openssl"
     },
     {
-      "name": "poco"
+      "name": "poco",
+      "features": [ "netssl" ]
     },
     {
       "name": "detours"

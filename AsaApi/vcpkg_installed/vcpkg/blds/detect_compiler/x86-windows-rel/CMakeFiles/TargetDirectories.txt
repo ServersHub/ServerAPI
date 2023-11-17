@@ -1,0 +1,2 @@
+D:/ArkAscendedApi/ServerAPI/AsaApi/vcpkg_installed/vcpkg/blds/detect_compiler/x86-windows-rel/CMakeFiles/edit_cache.dir
+D:/ArkAscendedApi/ServerAPI/AsaApi/vcpkg_installed/vcpkg/blds/detect_compiler/x86-windows-rel/CMakeFiles/rebuild_cache.dir

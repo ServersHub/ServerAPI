@@ -747,7 +747,6 @@ struct FInstigatedAnyDamageSignature;
 struct FOnPossessedPawnChanged;
 struct FNavAgentProperties;
 struct IPathFollowingAgentInterface;
-struct ELevelTick;
 struct UInterpTrackInstDirector;
 struct FActiveForceFeedbackEffect;
 struct UAsyncPhysicsData;

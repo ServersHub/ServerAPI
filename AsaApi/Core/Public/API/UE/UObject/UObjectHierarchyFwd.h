@@ -5,11 +5,11 @@
 struct UObjectBase;
 struct UObjectBaseUtility;
 struct	UObject;
-class		UField;
+struct		UField;
 class			UEnum;
 class			FProperty;
 class				FObjectProperty;
-class			UStruct;
+struct			UStruct;
 class				UFunction;
 struct				UClass;
 class				UScriptStruct;

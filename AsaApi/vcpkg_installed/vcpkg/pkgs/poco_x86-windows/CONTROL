@@ -1,0 +1,22 @@
+Package: poco
+Version: 1.12.4
+Port-Version: 4
+Depends: expat, pcre2, vcpkg-cmake:x64-windows, vcpkg-cmake-config:x64-windows, zlib
+Architecture: x86-windows
+Multi-Arch: same
+Abi: 5890330da195893820eaf596736cfe5cfa87507f7622dd41b7122e3c47254389
+Description: Modern, powerful open source C++ class libraries for building network and internet-based applications that run on desktop, server, mobile and embedded systems.
+
+Package: poco
+Feature: crypto
+Depends: openssl
+Architecture: x86-windows
+Multi-Arch: same
+Description: Crypto support
+
+Package: poco
+Feature: netssl
+Architecture: x86-windows
+Multi-Arch: same
+Description: NetSSL support for POCO
+    By default, this feature uses the OpenSSL implementation. The `POCO_ENABLE_NETSSL_WIN` triplet variable can be used to switch to the NetSSL_Win module.
