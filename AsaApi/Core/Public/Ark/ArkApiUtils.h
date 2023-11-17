@@ -550,7 +550,8 @@ namespace AsaApi
 		 */
 		static FORCEINLINE FString GetIPAddress(AShooterPlayerController* player)
 		{
-			return player && player->GetNetConnection() && !player->GetNetConnection()->ClientGivenIPField().IsEmpty() ? player->GetNetConnection()->ClientGivenIPField() : "";
+			return "";
+			//return player && player->GetNetConnection() && !player->GetNetConnection()->ClientGivenIPField().IsEmpty() ? player->GetNetConnection()->ClientGivenIPField() : "";
 		}
 
 		/**
