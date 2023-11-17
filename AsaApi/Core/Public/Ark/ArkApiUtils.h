@@ -77,8 +77,7 @@ namespace AsaApi
 			if (player_controller)
 			{
 				FString text(FString::Format(msg, std::forward<Args>(args)...));
-
-				player_controller->ClientServerSOTFNotificationCustom_Implementation(&text, color, display_scale, display_time, icon, nullptr);
+				player_controller->ClientServerNotification(&text, color, display_scale, display_time, icon, nullptr, 1);				
 			}
 		}
 
