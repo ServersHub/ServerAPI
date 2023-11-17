@@ -408,6 +408,9 @@ struct UObjectBaseUtility : UObjectBase
 	//bool IsA<class AWorldSettings>() { return NativeCall<bool>(this, "UObjectBaseUtility.IsA<class AWorldSettings>()"); }
 };
 
+struct UClass;
+struct UProperty;
+
 struct UObject : UObjectBaseUtility
 {
 	// Fields
@@ -501,7 +504,6 @@ struct UField : UObject
 
 struct UStruct : UField
 {
-public:
 	// Fields
 
 	UStruct*& SuperStructField() { return *GetNativePointerField<UStruct**>(this, "UStruct.SuperStruct"); }

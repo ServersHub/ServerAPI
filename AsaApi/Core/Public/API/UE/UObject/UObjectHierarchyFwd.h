@@ -10,7 +10,7 @@ class			UEnum;
 class			FProperty;
 class				FObjectProperty;
 struct			UStruct;
-class				UFunction;
+struct				UFunction;
 struct				UClass;
 class				UScriptStruct;
 class		FLinker;
