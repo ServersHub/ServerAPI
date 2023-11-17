@@ -77,4 +77,6 @@ namespace Cache
 		file.close();
 		return data;
 	}
+
+	void saveToFilePlain(const std::filesystem::path& filename, const std::unordered_map<std::string, intptr_t>& map);
 }
