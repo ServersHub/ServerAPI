@@ -1,7 +1,0 @@
-Package: poco
-Feature: crypto
-Depends: openssl
-Architecture: x86-windows
-Multi-Arch: same
-Description: Crypto support
-Status: install ok installed

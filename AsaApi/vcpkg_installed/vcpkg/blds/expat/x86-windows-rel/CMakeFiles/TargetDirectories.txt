@@ -1,8 +1,0 @@
-D:/ArkAscendedApi/ServerAPI/AsaApi/vcpkg_installed/vcpkg/blds/expat/x86-windows-rel/CMakeFiles/expat.dir
-D:/ArkAscendedApi/ServerAPI/AsaApi/vcpkg_installed/vcpkg/blds/expat/x86-windows-rel/CMakeFiles/package.dir
-D:/ArkAscendedApi/ServerAPI/AsaApi/vcpkg_installed/vcpkg/blds/expat/x86-windows-rel/CMakeFiles/package_source.dir
-D:/ArkAscendedApi/ServerAPI/AsaApi/vcpkg_installed/vcpkg/blds/expat/x86-windows-rel/CMakeFiles/edit_cache.dir
-D:/ArkAscendedApi/ServerAPI/AsaApi/vcpkg_installed/vcpkg/blds/expat/x86-windows-rel/CMakeFiles/rebuild_cache.dir
-D:/ArkAscendedApi/ServerAPI/AsaApi/vcpkg_installed/vcpkg/blds/expat/x86-windows-rel/CMakeFiles/list_install_components.dir
-D:/ArkAscendedApi/ServerAPI/AsaApi/vcpkg_installed/vcpkg/blds/expat/x86-windows-rel/CMakeFiles/install.dir
-D:/ArkAscendedApi/ServerAPI/AsaApi/vcpkg_installed/vcpkg/blds/expat/x86-windows-rel/CMakeFiles/install/local.dir

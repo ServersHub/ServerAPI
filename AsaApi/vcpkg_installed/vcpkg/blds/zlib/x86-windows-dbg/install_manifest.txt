@@ -1,2 +1,0 @@
-D:/ArkAscendedApi/ServerAPI/AsaApi/vcpkg_installed/vcpkg/pkgs/zlib_x86-windows/debug/lib/zlibd.lib
-D:/ArkAscendedApi/ServerAPI/AsaApi/vcpkg_installed/vcpkg/pkgs/zlib_x86-windows/debug/bin/zlibd1.dll

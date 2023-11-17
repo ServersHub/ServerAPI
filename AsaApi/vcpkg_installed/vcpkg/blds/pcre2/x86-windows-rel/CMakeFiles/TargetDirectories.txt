@@ -1,9 +1,0 @@
-D:/ArkAscendedApi/ServerAPI/AsaApi/vcpkg_installed/vcpkg/blds/pcre2/x86-windows-rel/CMakeFiles/pcre2-8-shared.dir
-D:/ArkAscendedApi/ServerAPI/AsaApi/vcpkg_installed/vcpkg/blds/pcre2/x86-windows-rel/CMakeFiles/pcre2-posix-shared.dir
-D:/ArkAscendedApi/ServerAPI/AsaApi/vcpkg_installed/vcpkg/blds/pcre2/x86-windows-rel/CMakeFiles/pcre2-16-shared.dir
-D:/ArkAscendedApi/ServerAPI/AsaApi/vcpkg_installed/vcpkg/blds/pcre2/x86-windows-rel/CMakeFiles/pcre2-32-shared.dir
-D:/ArkAscendedApi/ServerAPI/AsaApi/vcpkg_installed/vcpkg/blds/pcre2/x86-windows-rel/CMakeFiles/edit_cache.dir
-D:/ArkAscendedApi/ServerAPI/AsaApi/vcpkg_installed/vcpkg/blds/pcre2/x86-windows-rel/CMakeFiles/rebuild_cache.dir
-D:/ArkAscendedApi/ServerAPI/AsaApi/vcpkg_installed/vcpkg/blds/pcre2/x86-windows-rel/CMakeFiles/list_install_components.dir
-D:/ArkAscendedApi/ServerAPI/AsaApi/vcpkg_installed/vcpkg/blds/pcre2/x86-windows-rel/CMakeFiles/install.dir
-D:/ArkAscendedApi/ServerAPI/AsaApi/vcpkg_installed/vcpkg/blds/pcre2/x86-windows-rel/CMakeFiles/install/local.dir

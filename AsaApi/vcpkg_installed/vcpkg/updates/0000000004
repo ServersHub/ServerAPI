@@ -1,7 +1,0 @@
-Package: poco
-Feature: netssl
-Architecture: x86-windows
-Multi-Arch: same
-Description: NetSSL support for POCO
-    By default, this feature uses the OpenSSL implementation. The `POCO_ENABLE_NETSSL_WIN` triplet variable can be used to switch to the NetSSL_Win module.
-Status: install ok half-installed

@@ -1,4 +1,0 @@
-D:/ArkAscendedApi/ServerAPI/AsaApi/vcpkg_installed/vcpkg/pkgs/zlib_x86-windows/lib/zlib.lib
-D:/ArkAscendedApi/ServerAPI/AsaApi/vcpkg_installed/vcpkg/pkgs/zlib_x86-windows/bin/zlib1.dll
-D:/ArkAscendedApi/ServerAPI/AsaApi/vcpkg_installed/vcpkg/pkgs/zlib_x86-windows/include/zconf.h
-D:/ArkAscendedApi/ServerAPI/AsaApi/vcpkg_installed/vcpkg/pkgs/zlib_x86-windows/include/zlib.h
