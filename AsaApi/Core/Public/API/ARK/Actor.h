@@ -1627,7 +1627,7 @@ struct AShooterPlayerState : APlayerState
     static void ServerTribeRequestNewRallyPoint_Implementation() { NativeCall<void>(nullptr, "AShooterPlayerState.ServerTribeRequestNewRallyPoint_Implementation()"); }
     static void ClientUpdateNewRallyPoint_Implementation() { NativeCall<void>(nullptr, "AShooterPlayerState.ClientUpdateNewRallyPoint_Implementation()"); }
     void ServerRequestTransferOwnershipInMyTribe_Implementation(int PlayerIndexInTribe) { NativeCall<void, int>(this, "AShooterPlayerState.ServerRequestTransferOwnershipInMyTribe_Implementation(int)", PlayerIndexInTribe); }
-    FString* GetPlayerName(FString* result) { return NativeCall<FString*, FString*>(this, "AShooterPlayerState.GetPlayerName(FString&)", result); }
+    FString* GetPlayerName(FString* result) { return NativeCall<FString*, FString*>(this, "AShooterPlayerState.GetPlayerName()", result); }
     //void ServerRequestMySpawnPoints_Implementation(int IgnoreBedID, TSubclassOf<APrimalStructure> FilterClass) { NativeCall<void, int, TSubclassOf<APrimalStructure>>(this, "AShooterPlayerState.ServerRequestMySpawnPoints_Implementation(int,TSubclassOf<APrimalStructure>)", IgnoreBedID, FilterClass); }
     void ClientReceiveSpawnPoints_Implementation(const TArray<FSpawnPointInfo, TSizedDefaultAllocator<32> >* SpawnPointsInfos) { NativeCall<void, const TArray<FSpawnPointInfo, TSizedDefaultAllocator<32> >*>(this, "AShooterPlayerState.ClientReceiveSpawnPoints_Implementation(TArray<FSpawnPointInfo,TSizedDefaultAllocator<32>>*)", SpawnPointsInfos); }
     static void ServerRequestCreateNewPlayer_Implementation() { NativeCall<void>(nullptr, "AShooterPlayerState.ServerRequestCreateNewPlayer_Implementation()"); }
