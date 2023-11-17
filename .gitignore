@@ -288,5 +288,5 @@ __pycache__/
 *.odx.cs
 *.xsd.cs
 /out/build/x64-Debug
-/AsaApi/vcpkg_installed/x64-windows
+/AsaApi/vcpkg_installed
 /out_lib
