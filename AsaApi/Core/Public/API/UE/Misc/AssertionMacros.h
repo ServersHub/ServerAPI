@@ -307,7 +307,7 @@ RetType FORCENOINLINE UE_DEBUG_SECTION DispatchCheckVerify(InnerType&& Inner, Ar
 	#define checkNoEntry()
 	#define checkNoReentry()
 	#define checkNoRecursion()
-	#define verify(expr)				{ if(UNLIKELY(!(expr))){ CA_ASSUME(false); } }
+	//#define verify(expr)				{ if(UNLIKELY(!(expr))){ CA_ASSUME(false); } }
 	#define verifyf(expr, format, ...)	{ if(UNLIKELY(!(expr))){ CA_ASSUME(false); } }
 	#define unimplemented()				{ CA_ASSUME(false); }
 #endif
