@@ -23,7 +23,7 @@ public:
 	 * @param InProperty			Pointer to the property that is currently being serialized
 	 * @param bIsEditorOnlyProperty True if the property is editor only (call FProperty::IsEditorOnlyProperty to work this out, as the archive can't since it can't access CoreUObject types)
 	 */
-	void PushProperty(class FProperty* InProperty, const bool bIsEditorOnlyProperty)
+	void PushProperty(struct FProperty* InProperty, const bool bIsEditorOnlyProperty)
 	{
 		check(InProperty);
 		SerializedPropertyChain.Push(InProperty);
@@ -44,7 +44,7 @@ public:
 	 * @param InProperty			Pointer to the property that was previously being serialized
 	 * @param bIsEditorOnlyProperty True if the property is editor only (call FProperty::IsEditorOnlyProperty to work this out, as the archive can't since it can't access CoreUObject types)
 	 */
-	void PopProperty(class FProperty* InProperty, const bool bIsEditorOnlyProperty)
+	void PopProperty(struct FProperty* InProperty, const bool bIsEditorOnlyProperty)
 	{
 		check(InProperty);
 		check(SerializedPropertyChain.Num() > 0 && SerializedPropertyChain.Last() == InProperty);
@@ -65,7 +65,7 @@ public:
 	 * Get the property at the given index on the stack
 	 * @note This index is in stack order, so the 0th index with be the leaf property on the stack
 	 */
-	class FProperty* GetPropertyFromStack(const int32 InStackIndex) const
+	struct FProperty* GetPropertyFromStack(const int32 InStackIndex) const
 	{
 		return SerializedPropertyChain.Last(InStackIndex);
 	}
@@ -74,7 +74,7 @@ public:
 	 * Get the property at the given index from the root
 	 * @note This index is in array order, so the 0th index with be the root property on the stack
 	 */
-	class FProperty* GetPropertyFromRoot(const int32 InRootIndex) const
+	struct FProperty* GetPropertyFromRoot(const int32 InRootIndex) const
 	{
 		return SerializedPropertyChain[InRootIndex];
 	}
@@ -114,7 +114,7 @@ private:
 	}
 
 	/** Array of properties on the stack */
-	TArray<class FProperty*, TInlineAllocator<8>> SerializedPropertyChain;
+	TArray<struct FProperty*, TInlineAllocator<8>> SerializedPropertyChain;
 
 	/** Counter for the number of times that SerializedPropertyChain has been updated */
 	uint32 SerializedPropertyChainUpdateCount;

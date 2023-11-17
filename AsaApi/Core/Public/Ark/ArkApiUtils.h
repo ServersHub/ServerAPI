@@ -488,7 +488,7 @@ namespace AsaApi
 				return "Player location is invalid";
 			}
 
-			me->SetPlayerPos(him_position.X, him_position.Y, him_position.Z);
+			me->SetPlayerPos((float)him_position.X, (float)him_position.Y, (float)him_position.Z);
 
 			return {};
 		}
@@ -550,8 +550,10 @@ namespace AsaApi
 		 */
 		static FORCEINLINE FString GetIPAddress(AShooterPlayerController* player)
 		{
-			return "";
-			//return player && player->GetNetConnection() && !player->GetNetConnection()->ClientGivenIPField().IsEmpty() ? player->GetNetConnection()->ClientGivenIPField() : "";
+			FString addr;
+			if (player)
+				player->GetPlayerNetworkAddress(&addr);
+			return addr;
 		}
 
 		/**
@@ -712,7 +714,7 @@ namespace AsaApi
 		{
 			TArray<AActor*> out_actors;
 
-			//UVictoryCore::ServerOctreeOverlapActors(&out_actors, GetWorld(), &location, radius, ActorType, true);
+			UVictoryCore::ServerOctreeOverlapActors(&out_actors, GetWorld(), &location, radius, ActorType, true);
 
 			return out_actors;
 		}
@@ -724,7 +726,7 @@ namespace AsaApi
 		{
 			TArray<AActor*> out_actors;
 
-			//UVictoryCore::ServerOctreeOverlapActors(&out_actors, GetWorld(), &location, radius, ActorType, true);
+			UVictoryCore::ServerOctreeOverlapActors(&out_actors, GetWorld(), &location, radius, ActorType, true);
 
 			for (AActor* ignore : ignores)
 				out_actors.Remove(ignore);
@@ -748,10 +750,10 @@ namespace AsaApi
 			float lon_origin = p_world_settings->LongitudeOriginField() != 0 ? p_world_settings->LongitudeOriginField() : -400000.0f;
 
 			float lat_div = 100.f / lat_scale;
-			float lat = (lat_div * actor_position.Y + lat_div * abs(lat_origin)) / 1000.f;
+			float lat = (lat_div * (float)actor_position.Y + lat_div * abs(lat_origin)) / 1000.f;
 
 			float lon_div = 100.f / lon_scale;
-			float lon = (lon_div * actor_position.X + lon_div * abs(lon_origin)) / 1000.f;
+			float lon = (lon_div * (float)actor_position.X + lon_div * abs(lon_origin)) / 1000.f;
 
 			coords.x = std::floor(lon * 10.0f) / 10.0f;
 			coords.y = std::floor(lat * 10.0f) / 10.0f;

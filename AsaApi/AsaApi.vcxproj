@@ -268,6 +268,7 @@ copy "$(SolutionDir)$(PlatformName)\$(ConfigurationName)\$(ProjectName).pdb" "F:
     <ClCompile Include="Core\Private\PDBReader\PDBReader.cpp" />
     <ClCompile Include="Core\Private\PluginManager\PluginManager.cpp" />
     <ClCompile Include="Core\Private\Tools\Tools.cpp" />
+    <ClCompile Include="Core\Private\UE\UE.cpp" />
     <ClCompile Include="Core\Public\API\UE\Containers\GenericPlatformString.cpp" />
     <ClCompile Include="Core\Public\API\UE\Containers\String.cpp" />
     <ClCompile Include="Core\Public\API\UE\Misc\CString.cpp" />
