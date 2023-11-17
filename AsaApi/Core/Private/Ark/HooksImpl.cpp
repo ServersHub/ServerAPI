@@ -27,7 +27,6 @@ namespace AsaApi
 {
 	// Hooks declaration
 	DECLARE_HOOK(UEngine_Init, void, DWORD64, DWORD64);
-	DECLARE_HOOK(UEngine_LoadMap, bool, UWorld*, DWORD64, DWORD64, DWORD64, DWORD64);
 	DECLARE_HOOK(UWorld_Tick, void, DWORD64, DWORD64, float);
 	DECLARE_HOOK(AShooterGameMode_InitGame, void, AShooterGameMode*, FString*, FString*, FString*);
 	DECLARE_HOOK(AShooterPlayerController_ServerSendChatMessage_Impl, void, AShooterPlayerController*, FString*, int);
@@ -43,7 +42,6 @@ namespace AsaApi
 	{
 		auto& hooks = API::game_api->GetHooks();
 		hooks->SetHook("UEngine.Init(IEngineLoop*)", &Hook_UEngine_Init, &UEngine_Init_original);
-		hooks->SetHook("UEngine.LoadMap(FWorldContext&,FURL,UPendingNetGame*,FString&)", &Hook_UEngine_LoadMap, &UEngine_LoadMap_original);
 		hooks->SetHook("UWorld.Tick(ELevelTick,float)", &Hook_UWorld_Tick, &UWorld_Tick_original);
 		hooks->SetHook("AShooterGameMode.InitGame(FString&,FString&,FString&)", &Hook_AShooterGameMode_InitGame, &AShooterGameMode_InitGame_original);
 		hooks->SetHook("AShooterPlayerController.ServerSendChatMessage_Implementation(FString&,EChatSendMode::Type)", &Hook_AShooterPlayerController_ServerSendChatMessage_Impl, &AShooterPlayerController_ServerSendChatMessage_Impl_original);
@@ -72,14 +70,6 @@ namespace AsaApi
 		dynamic_cast<API::IBaseApi&>(*API::game_api).RegisterCommands();
 	}
 
-	bool Hook_UEngine_LoadMap(UWorld* world, DWORD64 WorldContext, DWORD64 URL, DWORD64 Pending, DWORD64 Error)
-	{
-		Log::GetLog()->info("UEngine::LoadMap was called");
-		dynamic_cast<ApiUtils&>(*API::game_api->GetApiUtils()).SetWorld(world);
-
-		return UEngine_LoadMap_original(world, WorldContext, URL, Pending, Error);
-	}
-
 	void Hook_UWorld_Tick(DWORD64 world, DWORD64 tick_type, float delta_seconds)
 	{
 		Commands* command = dynamic_cast<Commands*>(API::game_api->GetCommands().get());
@@ -91,25 +81,23 @@ namespace AsaApi
 
 	void Hook_AShooterGameMode_InitGame(AShooterGameMode* a_shooter_game_mode, FString* map_name, FString* options, FString* error_message)
 	{
+		Log::GetLog()->info("AShooterGameMode::InitGame was called");
 		dynamic_cast<ApiUtils&>(*API::game_api->GetApiUtils()).SetShooterGameMode(a_shooter_game_mode);
+		dynamic_cast<ApiUtils&>(*API::game_api->GetApiUtils()).SetWorld(a_shooter_game_mode->GetWorld());
 
 		AShooterGameMode_InitGame_original(a_shooter_game_mode, map_name, options, error_message);
 	}
 
 	void Hook_AShooterPlayerController_ServerSendChatMessage_Impl(AShooterPlayerController* player_controller, FString* message, int mode)
 	{
-		//UNCOMMENT TO ENABLE SPAM CHECK (currently `TimeSecondsField` is not working)
-		//const long double last_chat_time = player_controller->LastChatMessageTimeField();
-		//const long double now_time = AsaApi::GetApiUtils().GetWorld()->TimeSecondsField();
+		const long double last_chat_time = player_controller->LastChatMessageTimeField();
+		const long double now_time = AsaApi::GetApiUtils().GetWorld()->TimeSecondsField();
 
-		const auto spam_check = false;
-		//const auto spam_check = now_time - last_chat_time < 1.0;
-		//if (last_chat_time > 0 && spam_check)
-		//{
-		//	return;
-		//}
+		const auto spam_check = now_time - last_chat_time < 1.0;
+		if (last_chat_time > 0 && spam_check)
+			return;
 
-		//player_controller->LastChatMessageTimeField() = now_time;
+		player_controller->LastChatMessageTimeField() = now_time;
 
 		const auto command_executed = dynamic_cast<AsaApi::Commands&>(*API::game_api->GetCommands()).CheckChatCommands(player_controller, message, mode);
 
