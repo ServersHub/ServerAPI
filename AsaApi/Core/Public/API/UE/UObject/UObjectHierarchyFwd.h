@@ -5,12 +5,12 @@
 struct UObjectBase;
 struct UObjectBaseUtility;
 struct	UObject;
-class		UField;
+struct		UField;
 class			UEnum;
 class			FProperty;
 class				FObjectProperty;
-class			UStruct;
-class				UFunction;
+struct			UStruct;
+struct				UFunction;
 struct				UClass;
 class				UScriptStruct;
 class		FLinker;
