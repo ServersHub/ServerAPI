@@ -262,20 +262,20 @@ public:
 		InnerArchive.SetSerializedProperty(InProperty);
 	}
 
-	void SetSerializedPropertyChain(const FArchiveSerializedPropertyChain* InSerializedPropertyChain, class FProperty* InSerializedPropertyOverride = nullptr) override
+	void SetSerializedPropertyChain(const FArchiveSerializedPropertyChain* InSerializedPropertyChain, struct FProperty* InSerializedPropertyOverride = nullptr) override
 	{
 		FArchive::SetSerializedPropertyChain(InSerializedPropertyChain, InSerializedPropertyOverride);
 		InnerArchive.SetSerializedPropertyChain(InSerializedPropertyChain, InSerializedPropertyOverride);
 	}
 
 	/** Pushes editor-only marker to the stack of currently serialized properties */
-	virtual FORCEINLINE void PushSerializedProperty(class FProperty* InProperty, const bool bIsEditorOnlyProperty)
+	virtual FORCEINLINE void PushSerializedProperty(struct FProperty* InProperty, const bool bIsEditorOnlyProperty)
 	{
 		FArchive::PushSerializedProperty(InProperty, bIsEditorOnlyProperty);
 		InnerArchive.PushSerializedProperty(InProperty, bIsEditorOnlyProperty);
 	}
 	/** Pops editor-only marker from the stack of currently serialized properties */
-	virtual FORCEINLINE void PopSerializedProperty(class FProperty* InProperty, const bool bIsEditorOnlyProperty)
+	virtual FORCEINLINE void PopSerializedProperty(struct FProperty* InProperty, const bool bIsEditorOnlyProperty)
 	{
 		FArchive::PopSerializedProperty(InProperty, bIsEditorOnlyProperty);
 		InnerArchive.PopSerializedProperty(InProperty, bIsEditorOnlyProperty);

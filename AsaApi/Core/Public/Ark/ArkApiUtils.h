@@ -202,18 +202,17 @@ namespace AsaApi
 		}
 
 		/**
-		 * \brief Finds player from the given steam name
-		 * \param steam_name Steam name
+		 * \brief Finds player from the given platform name (can be steam, Playstation, Xbox, etc...)
+		 * \param steam_name Platform name
 		 * \return Pointer to AShooterPlayerController
 		 */
-		FORCEINLINE AShooterPlayerController* FindPlayerFromSteamName(const FString& steam_name) const
+		FORCEINLINE AShooterPlayerController* FindPlayerFromPlatformName(const FString& steam_name) const
 		{
 			AShooterPlayerController* result = nullptr;
-			//need fix -wooly
-			/*const auto& player_controllers = GetWorld()->PlayerControllerListField();
+			const auto& player_controllers = GetWorld()->PlayerControllerListField();
 			for (TWeakObjectPtr<APlayerController> player_controller : player_controllers)
 			{
-				const FString current_name = player_controller->PlayerStateField()->PlayerNameField();
+				const FString current_name = player_controller->PlayerStateField()->PlayerNamePrivateField();
 				if (current_name == steam_name)
 				{
 					auto* shooter_pc = static_cast<AShooterPlayerController*>(player_controller.Get());
@@ -221,7 +220,7 @@ namespace AsaApi
 					result = shooter_pc;
 					break;
 				}
-			}*/
+			}
 
 			return result;
 		}
@@ -256,8 +255,6 @@ namespace AsaApi
 			bool full_match) const
 		{
 			TArray<AShooterPlayerController*> found_players;
-			//need fix -wooly
-			/*
 			const auto& player_controllers = GetWorld()->PlayerControllerListField();
 			for (TWeakObjectPtr<APlayerController> player_controller : player_controllers)
 			{
@@ -271,7 +268,6 @@ namespace AsaApi
 					found_players.Add(shooter_player);
 				}
 			}
-			*/
 			return found_players;
 		}
 
@@ -324,26 +320,21 @@ namespace AsaApi
 		FORCEINLINE bool SpawnDrop(const wchar_t* blueprint, FVector pos, int amount, float item_quality = 0.0f,
 			bool force_blueprint = false, float life_span = 0.0f) const
 		{
-			//Need fix -wooly
 			return false;
-			/*APlayerController* player = GetWorld()->GetFirstPlayerController();
+			APlayerController* player = GetWorld()->GetFirstPlayerController();
 			if (!player)
 			{
 				return false;
 			}
 
-			UObject* object = Globals::
-				StaticLoadObject(UObject::StaticClass(), nullptr, blueprint, nullptr, 0, 0, true);
-			if (!object)
-			{
-				return false;
-			}
+			FString bpFstr(blueprint);
 
 			TSubclassOf<UPrimalItem> archetype;
-			archetype.uClass = reinterpret_cast<UClass*>(object);
+			archetype.uClass = UVictoryCore::BPLoadClass(&bpFstr);
 
 			UPrimalItem* item = UPrimalItem::AddNewItem(archetype, nullptr, false, false, item_quality, false, amount,
-				force_blueprint, 0, false, nullptr, 0, 0, 0);
+				force_blueprint, 0, false, nullptr, 0, 0, 0, true);
+
 			if (!item)
 			{
 				return false;
@@ -355,7 +346,7 @@ namespace AsaApi
 			item->GetItemNetInfo(info, false);
 
 			TSubclassOf<ADroppedItem> archetype_dropped;
-			archetype_dropped.uClass = reinterpret_cast<UClass*>(object);
+			archetype_dropped.uClass = archetype.uClass;
 
 			FVector zero_vector{ 0, 0, 0 };
 			FRotator rot{ 0, 0, 0 };
@@ -364,7 +355,6 @@ namespace AsaApi
 				false, false, true, nullptr, &zero_vector, nullptr, life_span);
 
 			FMemory::Free(info);
-			*/
 			return true;
 		}
 
@@ -389,8 +379,7 @@ namespace AsaApi
 					return nullptr;
 				}
 			}
-			//needs fix -wooly
-			/*
+
 			AActor* actor = player->SpawnActor(&blueprint, 100, 0, 0, true);
 			if (actor != nullptr && actor->IsA(APrimalDinoCharacter::GetPrivateStaticClass()))
 			{
@@ -406,10 +395,10 @@ namespace AsaApi
 				{
 					dino->TamingTeamIDField() = player->TargetingTeamField();
 
-					auto* state = static_cast<AShooterPlayerState*>(player->PlayerStateField());
+					auto* state = static_cast<AShooterPlayerState*>(player->PlayerStateField().Get());
 
 					FString player_name;
-					state->GetPlayerName(&player_name);
+					player->GetPlayerCharacterName(&player_name);
 
 					dino->TamerStringField() = player_name;
 
@@ -429,7 +418,6 @@ namespace AsaApi
 
 				return dino;
 			}
-			*/
 			return nullptr;
 		}
 
@@ -462,9 +450,7 @@ namespace AsaApi
 		*/
 		static FORCEINLINE FVector GetPosition(APlayerController* player_controller)
 		{
-			return FVector{ 0, 0, 0 };
-			// need fix -wooly
-			//return player_controller != nullptr ? player_controller->DefaultActorLocationField() : FVector{ 0, 0, 0 };
+			return player_controller != nullptr && player_controller->PawnField() != nullptr ? player_controller->PawnField()->RootComponentField()->RelativeLocationField() : FVector{0, 0, 0};
 		}
 
 		/**
@@ -477,9 +463,8 @@ namespace AsaApi
 		static FORCEINLINE std::optional<FString> TeleportToPlayer(AShooterPlayerController* me, AShooterPlayerController* him,
 			bool check_for_dino, float max_dist)
 		{
-			return "function in api needs fix.";
-			//need fix -wooly
-			/*if (!(me != nullptr && him != nullptr && me->GetPlayerCharacter() != nullptr && him->
+			FVector him_position = GetPosition(him);
+			if (!(me != nullptr && him != nullptr && me->GetPlayerCharacter() != nullptr && him->
 				GetPlayerCharacter()
 				!= nullptr
 				&& !me->GetPlayerCharacter()->IsDead() && !him->GetPlayerCharacter()->IsDead())
@@ -493,16 +478,19 @@ namespace AsaApi
 				return "One of players is riding a dino";
 			}
 
-			if (max_dist != -1 && FVector::Distance(GetPosition(me), GetPosition(him)) > max_dist)
+			if (max_dist != -1 && FVector::Distance(GetPosition(me), him_position) > max_dist)
 			{
 				return "Person is too far away";
 			}
 
-			const FVector pos = him->DefaultActorLocationField();
+			if (him_position.IsNearlyZero())
+			{
+				return "Player location is invalid";
+			}
 
-			me->SetPlayerPos(pos.X, pos.Y, pos.Z);
+			me->SetPlayerPos((float)him_position.X, (float)him_position.Y, (float)him_position.Z);
 
-			return {};*/
+			return {};
 		}
 
 		/**
@@ -562,9 +550,10 @@ namespace AsaApi
 		 */
 		static FORCEINLINE FString GetIPAddress(AShooterPlayerController* player)
 		{
-			//Needs fix -wooly
-			return "function not implemented.";
-			//return player && player->GetNetConnection() && !player->GetNetConnection()->ClientGivenIPField().IsEmpty() ? player->GetNetConnection()->ClientGivenIPField() : "";
+			FString addr;
+			if (player)
+				player->GetPlayerNetworkAddress(&addr);
+			return addr;
 		}
 
 		/**
@@ -659,7 +648,7 @@ namespace AsaApi
 		*/
 		FORCEINLINE AShooterGameState* GetGameState()
 		{
-			return static_cast<AShooterGameState*>(GetWorld()->GameStateField());
+			return static_cast<AShooterGameState*>(GetWorld()->GameStateField().Get());
 		}
 
 		/**
@@ -714,10 +703,8 @@ namespace AsaApi
 		*/
 		FORCEINLINE UPrimalGameData* GetGameData()
 		{
-			//need fix -wooly
-			return nullptr;
-			//UPrimalGlobals* singleton = static_cast<UPrimalGlobals*>(Globals::GEngine()()->GameSingletonField());
-			//return (singleton->PrimalGameDataOverrideField() != nullptr) ? singleton->PrimalGameDataOverrideField() : singleton->PrimalGameDataField();
+			UPrimalGlobals* singleton = static_cast<UPrimalGlobals*>(Globals::GEngine()()->GameSingletonField().Get());
+			return (singleton->PrimalGameDataOverrideField() != nullptr) ? singleton->PrimalGameDataOverrideField() : singleton->PrimalGameDataField();
 		}
 
 		/**
@@ -727,7 +714,7 @@ namespace AsaApi
 		{
 			TArray<AActor*> out_actors;
 
-			//UVictoryCore::ServerOctreeOverlapActors(&out_actors, GetWorld(), &location, radius, ActorType, true);
+			UVictoryCore::ServerOctreeOverlapActors(&out_actors, GetWorld(), &location, radius, ActorType, true);
 
 			return out_actors;
 		}
@@ -739,7 +726,7 @@ namespace AsaApi
 		{
 			TArray<AActor*> out_actors;
 
-			//UVictoryCore::ServerOctreeOverlapActors(&out_actors, GetWorld(), &location, radius, ActorType, true);
+			UVictoryCore::ServerOctreeOverlapActors(&out_actors, GetWorld(), &location, radius, ActorType, true);
 
 			for (AActor* ignore : ignores)
 				out_actors.Remove(ignore);
@@ -753,8 +740,6 @@ namespace AsaApi
 		FORCEINLINE MapCoords FVectorToCoords(FVector actor_position)
 		{
 			MapCoords coords;
-			// Need Fix
-			/*
 			AWorldSettings* world_settings = GetWorld()->GetWorldSettings(false, true);
 			APrimalWorldSettings* p_world_settings = static_cast<APrimalWorldSettings*>(world_settings);			
 
@@ -765,14 +750,13 @@ namespace AsaApi
 			float lon_origin = p_world_settings->LongitudeOriginField() != 0 ? p_world_settings->LongitudeOriginField() : -400000.0f;
 
 			float lat_div = 100.f / lat_scale;
-			float lat = (lat_div * actor_position.Y + lat_div * abs(lat_origin)) / 1000.f;
+			float lat = (lat_div * (float)actor_position.Y + lat_div * abs(lat_origin)) / 1000.f;
 
 			float lon_div = 100.f / lon_scale;
-			float lon = (lon_div * actor_position.X + lon_div * abs(lon_origin)) / 1000.f;
+			float lon = (lon_div * (float)actor_position.X + lon_div * abs(lon_origin)) / 1000.f;
 
 			coords.x = std::floor(lon * 10.0f) / 10.0f;
 			coords.y = std::floor(lat * 10.0f) / 10.0f;
-			*/
 			return coords;
 		}
 
@@ -784,18 +768,18 @@ namespace AsaApi
 		{
 			FString eos_id = "";
 
-			/*if (target)
+			if (target)
 			{
-				if (killer && !killer->IsLocalController() && killer->IsBasedOnArchetype(AShooterPlayerController::GetPrivateStaticClass())
+				if (killer && !killer->IsLocalController() && killer->IsA(AShooterPlayerController::GetPrivateStaticClass())
 					&& (!tribe_check || (tribe_check && target->TargetingTeamField() != killer->TargetingTeamField())))
 					eos_id = GetEOSIDFromController(static_cast<AShooterPlayerController*>(killer));
 				else if (damage_causer && (!tribe_check || (tribe_check && target->TargetingTeamField() != damage_causer->TargetingTeamField()))
-					&& damage_causer->IsBasedOnArchetype(*APrimalStructureExplosive::StaticClass()))
+					&& damage_causer->IsA(APrimalStructureExplosive::StaticClass()))
 				{
 					APrimalStructureExplosive* explosive = static_cast<APrimalStructureExplosive*>(damage_causer);
 					eos_id = GetEOSIDForPlayerID(explosive->ConstructorPlayerDataIDField());
 				}
-			}*/
+			}
 			
 			return eos_id;
 		}

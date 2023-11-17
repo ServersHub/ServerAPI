@@ -29,7 +29,7 @@ class FBulkData;
 class FCustomVersionContainer;
 class FLinker;
 class FName;
-class FProperty;
+struct  FProperty;
 class FString;
 class FText;
 class ITargetPlatform;
@@ -39,7 +39,7 @@ struct FArchiveSerializedPropertyChain;
 template<class TEnum> class TEnumAsByte;
 
 typedef TFunction<bool (double RemainingTime)> FExternalReadCallback;
-class FField;
+struct FField;
 struct FUObjectSerializeContext;
 
 enum class EFileRegionType : uint8;
@@ -666,7 +666,7 @@ public:
 	 *
 	 * @return Pointer to the property that is currently being serialized
 	 */
-	FORCEINLINE class FProperty* GetSerializedProperty() const
+	FORCEINLINE struct FProperty* GetSerializedProperty() const
 	{
 		return SerializedProperty;
 	}
@@ -675,7 +675,7 @@ public:
 	 * Gets the chain of properties that are currently being serialized
 	 * @note This populates the array in stack order, so the 0th entry in the array is the top of the stack of properties
 	 */
-	void GetSerializedPropertyChain(TArray<class FProperty*>& OutProperties) const;
+	void GetSerializedPropertyChain(TArray<struct FProperty*>& OutProperties) const;
 
 	/**
 	 * Get the raw serialized property chain for this archive
@@ -689,7 +689,7 @@ public:
 	/**
 	 * Set the raw serialized property chain for this archive, optionally overriding the serialized property too (or null to use the head of the property chain)
 	 */
-	virtual void SetSerializedPropertyChain(const FArchiveSerializedPropertyChain* InSerializedPropertyChain, class FProperty* InSerializedPropertyOverride = nullptr);
+	virtual void SetSerializedPropertyChain(const FArchiveSerializedPropertyChain* InSerializedPropertyChain, struct FProperty* InSerializedPropertyOverride = nullptr);
 
 #if WITH_EDITORONLY_DATA
 	/** Returns true if the stack of currently serialized properties contains an editor-only property */
@@ -1921,7 +1921,7 @@ public:
 	 * @param InProperty			Pointer to the property that is currently being serialized
 	 * @param bIsEditorOnlyProperty True if the property is editor only (call FProperty::IsEditorOnlyProperty to work this out, as the archive can't since it can't access CoreUObject types)
 	 */
-	virtual void PushSerializedProperty(class FProperty* InProperty, const bool bIsEditorOnlyProperty);
+	virtual void PushSerializedProperty(struct FProperty* InProperty, const bool bIsEditorOnlyProperty);
 
 	/**
 	 * Pop a property that was previously being serialized off the property stack
@@ -1929,7 +1929,7 @@ public:
 	 * @param InProperty			Pointer to the property that was previously being serialized
 	 * @param bIsEditorOnlyProperty True if the property is editor only (call FProperty::IsEditorOnlyProperty to work this out, as the archive can't since it can't access CoreUObject types)
 	 */
-	virtual void PopSerializedProperty(class FProperty* InProperty, const bool bIsEditorOnlyProperty);
+	virtual void PopSerializedProperty(struct FProperty* InProperty, const bool bIsEditorOnlyProperty);
 
 #if WITH_EDITORONLY_DATA
 	using FArchiveState::IsEditorOnlyPropertyOnTheStack;

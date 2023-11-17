@@ -106,6 +106,9 @@
     <Filter Include="Source Files\Core\Public\API\UE\Hash">
       <UniqueIdentifier>{be27673e-d777-4124-9ecf-54087f6deda0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Core\Private\UE">
+      <UniqueIdentifier>{f1b840ad-6bee-4a69-b9ca-20346e129b27}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -167,6 +170,9 @@
     </ClCompile>
     <ClCompile Include="Core\Public\API\UE\Containers\String.cpp">
       <Filter>Source Files\Core\Public\API\UE\Containers</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Private\UE\UE.cpp">
+      <Filter>Source Files\Core\Private\UE</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

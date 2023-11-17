@@ -2143,7 +2143,7 @@ struct APlayerController : APrimalController
     bool IsNetRelevantFor(const AActor* RealViewer, const AActor* ViewTarget, const UE::Math::TVector<double>* SrcLocation) { return NativeCall<bool, const AActor*, const AActor*, const UE::Math::TVector<double>*>(this, "APlayerController.IsNetRelevantFor(AActor*,AActor*,UE::Math::TVector<double>*)", RealViewer, ViewTarget, SrcLocation); }
     static void ClientTravel() { NativeCall<void>(nullptr, "APlayerController.ClientTravel()"); }
     static void ClientTravelInternal_Implementation() { NativeCall<void>(nullptr, "APlayerController.ClientTravelInternal_Implementation()"); }
-    FString* GetPlayerNetworkAddress(FString* result) { return NativeCall<FString*, FString*>(this, "APlayerController.GetPlayerNetworkAddress(FString&)", result); }
+    FString* GetPlayerNetworkAddress(FString* result) { return NativeCall<FString*, FString*>(this, "APlayerController.GetPlayerNetworkAddress()", result); }
     bool DefaultCanUnpause() { return NativeCall<bool>(this, "APlayerController.DefaultCanUnpause()"); }
     void StartSpectatingOnly() { NativeCall<void>(this, "APlayerController.StartSpectatingOnly()"); }
     void EndPlayingState() { NativeCall<void>(this, "APlayerController.EndPlayingState()"); }
@@ -2191,12 +2191,6 @@ struct APrimalPlayerController : APlayerController
     float& LastTeleportDistanceField() { return *GetNativePointerField<float*>(this, "APrimalPlayerController.LastTeleportDistance"); }
     UE::Math::TRotator<double>& PreviousRotationInputField() { return *GetNativePointerField<UE::Math::TRotator<double>*>(this, "APrimalPlayerController.PreviousRotationInput"); }
     UE::Math::TVector<double>& LastCharacterMovementTeleportUnstasisLocationField() { return *GetNativePointerField<UE::Math::TVector<double>*>(this, "APrimalPlayerController.LastCharacterMovementTeleportUnstasisLocation"); }
-    __int8& _padding_ad9Field() { return *GetNativePointerField<__int8*>(this, "APrimalPlayerController._padding_ad9"); }
-    __int16& _padding_adaField() { return *GetNativePointerField<__int16*>(this, "APrimalPlayerController._padding_ada"); }
-    __int8& _padding_addField() { return *GetNativePointerField<__int8*>(this, "APrimalPlayerController._padding_add"); }
-    __int16& _padding_adeField() { return *GetNativePointerField<__int16*>(this, "APrimalPlayerController._padding_ade"); }
-    __int8& _padding_ae1Field() { return *GetNativePointerField<__int8*>(this, "APrimalPlayerController._padding_ae1"); }
-    __int16& _padding_ae2Field() { return *GetNativePointerField<__int16*>(this, "APrimalPlayerController._padding_ae2"); }
 
     // Bitfields
 
@@ -2289,12 +2283,6 @@ struct AShooterPlayerController : ABasePlayerController
     UE::Math::TVector<double>& CurrentPlayerCharacterLocationField() { return *GetNativePointerField<UE::Math::TVector<double>*>(this, "AShooterPlayerController.CurrentPlayerCharacterLocation"); }
     AActor*& TargetAimMagnetismField() { return *GetNativePointerField<AActor**>(this, "AShooterPlayerController.TargetAimMagnetism"); }
     float& MaxDragWeightToAimBoneField() { return *GetNativePointerField<float*>(this, "AShooterPlayerController.MaxDragWeightToAimBone"); }
-    __int8& _padding_c9dField() { return *GetNativePointerField<__int8*>(this, "AShooterPlayerController._padding_c9d"); }
-    __int16& _padding_c9eField() { return *GetNativePointerField<__int16*>(this, "AShooterPlayerController._padding_c9e"); }
-    __int8& _padding_ca1Field() { return *GetNativePointerField<__int8*>(this, "AShooterPlayerController._padding_ca1"); }
-    __int16& _padding_ca2Field() { return *GetNativePointerField<__int16*>(this, "AShooterPlayerController._padding_ca2"); }
-    __int8& _padding_ca5Field() { return *GetNativePointerField<__int8*>(this, "AShooterPlayerController._padding_ca5"); }
-    __int16& _padding_ca6Field() { return *GetNativePointerField<__int16*>(this, "AShooterPlayerController._padding_ca6"); }
     //_BYTE[3] & _padding_ca9Field() { return *GetNativePointerField<_BYTE[3] *>(this, "AShooterPlayerController._padding_ca9"); }
     int& ModifedButtonCountField() { return *GetNativePointerField<int*>(this, "AShooterPlayerController.ModifedButtonCount"); }
     int& nArkTributeLoadIndexField() { return *GetNativePointerField<int*>(this, "AShooterPlayerController.nArkTributeLoadIndex"); }
