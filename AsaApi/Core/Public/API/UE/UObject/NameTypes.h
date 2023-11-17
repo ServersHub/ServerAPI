@@ -618,7 +618,10 @@ public:
 #endif //UE_FNAME_OUTLINE_NUMBER
 	
 	/** Get name without number part as a dynamically allocated string */
-	FString GetPlainNameString() const;
+	FString GetPlainNameString()
+	{
+		return *NativeCall<FString*>(this, "FName.GetPlainNameString()");
+	}
 
 	/** Convert name without number part into TCHAR buffer and returns string length. Doesn't allocate. */
 	uint32 GetPlainNameString(TCHAR(&OutName)[NAME_SIZE]) const;
