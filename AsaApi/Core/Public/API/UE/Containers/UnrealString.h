@@ -326,8 +326,8 @@ public:
 	 *
 	 * @param Slack length of empty string to create
 	 */
-	ARK_API void Empty();
-	ARK_API void Empty(int32 Slack);
+	void Empty();
+	void Empty(int32 Slack);
 
 	/**
 	 * Test whether this string is empty
