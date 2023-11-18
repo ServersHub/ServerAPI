@@ -334,6 +334,8 @@ copy  /Y "$(TargetDir)AsaApi.dll" "E:\ASA\TestingServer\ShooterGame\Binaries\Win
     </Link>
     <PostBuildEvent>
       <Command>xcopy /I  /Y "$(TargetDir)AsaApi.lib" "..\out_lib\"
+xcopy /I  /Y "$(TargetDir)AsaApi.lib" $(SolutionDir)..\ARK-API-Stable-Libs\
+xcopy /I  /Y "$(TargetDir)AsaApi.lib" $(SolutionDir)..\ARK-API-Stable-Libs\1.00\
 
 copy "$(SolutionDir)$(PlatformName)\$(ConfigurationName)\$(ProjectName).dll" "F:\ASA-Dedicated\asa-server\ShooterGame\Binaries\Win64\ArkApi\" /y
 copy "$(SolutionDir)$(PlatformName)\$(ConfigurationName)\$(ProjectName).pdb" "F:\ASA-Dedicated\asa-server\ShooterGame\Binaries\Win64\ArkApi\" /y</Command>

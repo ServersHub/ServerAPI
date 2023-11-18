@@ -65,6 +65,17 @@ struct TWeakObjectPtr
 };
 
 template <typename T>
+TWeakObjectPtr<T> GetWeakReference(T* object)
+{
+	FWeakObjectPtr tempWeak;
+	tempWeak.operator=(object);
+	TWeakObjectPtr<T> tempTWeak(tempWeak.ObjectIndex, tempWeak.ObjectSerialNumber);
+	return tempTWeak;
+}
+template <typename T>
+using TAutoWeakObjectPtr = TWeakObjectPtr<T>;
+
+template <typename T>
 struct TSubclassOf
 {
 	TSubclassOf()
@@ -491,6 +502,11 @@ struct UObject : UObjectBaseUtility
 	ARK_API FProperty* FindProperty(FName name);
 };
 
+struct ULevel : UObject
+{
+	TArray<AActor*> ActorsField() const { return GetNativeField<TArray<AActor*>>(this, "ULevel.Actors"); }
+};
+
 struct UField : UObject
 {
 	// Fields
@@ -561,6 +577,18 @@ struct UStruct : UField
 	FString* GetAuthoredNameForField(FString* result, const FField* Field) { return NativeCall<FString*, FString*, const FField*>(this, "UStruct.GetAuthoredNameForField(FString&,FField*)", result, Field); }
 	EExprToken SerializeExpr(int* iCode, FArchive* Ar) { return NativeCall<EExprToken, int*, FArchive*>(this, "UStruct.SerializeExpr(int*,FArchive*)", iCode, Ar); }
 	FProperty* FindPropertyByName(FName InName) { return NativeCall<FProperty*, FName>(this, "UStruct.FindPropertyByName(FName)", InName); }
+};
+
+struct UFunction : UStruct
+{
+	unsigned int FunctionFlags;
+	unsigned __int16 RepOffset;
+	char NumParms;
+	unsigned __int16 ParmsSize;
+	unsigned __int16 ReturnValueOffset;
+	unsigned __int16 RPCId;
+	unsigned __int16 RPCResponseId;
+	UProperty* FirstPropertyToInit;
 };
 
 struct UClass : UStruct
