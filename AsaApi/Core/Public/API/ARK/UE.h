@@ -563,6 +563,18 @@ struct UStruct : UField
 	FProperty* FindPropertyByName(FName InName) { return NativeCall<FProperty*, FName>(this, "UStruct.FindPropertyByName(FName)", InName); }
 };
 
+struct UFunction : UStruct
+{
+	unsigned int FunctionFlags;
+	unsigned __int16 RepOffset;
+	char NumParms;
+	unsigned __int16 ParmsSize;
+	unsigned __int16 ReturnValueOffset;
+	unsigned __int16 RPCId;
+	unsigned __int16 RPCResponseId;
+	UProperty* FirstPropertyToInit;
+};
+
 struct UClass : UStruct
 {
 	// Fields
@@ -1436,3 +1448,41 @@ struct UEngine : UObject
 	//static void FEngineStatFuncs() { NativeCall<void>(nullptr, "UEngine.FEngineStatFuncs()"); }
 	struct UContentBundleEngineSubsystem* GetEngineSubsystem() { return NativeCall<UContentBundleEngineSubsystem*>(this, "UEngine.GetEngineSubsystem<class UContentBundleEngineSubsystem>()"); }
 };
+
+/*
+* \brief Gets the size in bytes of an Object class. Example: GetObjectClassSize<AActor>()
+*
+* tparam T - Object class
+* \return The size of the class in bytes
+*/
+template <typename T>
+int GetObjectClassSize()
+{
+	// Credits to Substitute#0001 for the idea
+	UClass* objClass = T::StaticClass();
+	if (objClass)
+	{
+		return objClass->PropertiesSizeField();
+	}
+
+	return 0;
+}
+
+/*
+* \brief Gets the size in bytes of an struct class. Example: GetObjectClassSize<FTribeData>()
+*
+* \tparam T - Struct class
+* \return The size in bytes
+*/
+template <typename T>
+int GetStructSize()
+{
+	// Credits to Substitute#0001 for the idea
+	int size = 0;
+	UScriptStruct* staticStruct = T::StaticStruct();
+	if (staticStruct)
+	{
+		return staticStruct->PropertiesSizeField();
+	}
+	return 0;
+}

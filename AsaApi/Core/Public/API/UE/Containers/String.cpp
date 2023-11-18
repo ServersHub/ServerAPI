@@ -486,7 +486,7 @@ void FString::RemoveAt(int32 Index, int32 Count, bool bAllowShrinking)
 	Data.RemoveAt(Index, FMath::Clamp(Count, 0, Len()-Index), bAllowShrinking);
 }
 
-bool FString::RemoveFromStart(const TCHAR* InPrefix, int32 InPrefixLen, ESearchCase::Type SearchCase)
+ARK_API bool FString::RemoveFromStart(const TCHAR* InPrefix, int32 InPrefixLen, ESearchCase::Type SearchCase)
 {
 	if (InPrefixLen == 0 )
 	{

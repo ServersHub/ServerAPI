@@ -100,7 +100,7 @@ namespace Cache
 
 			for (const auto& pair : sortedVec)
 			{
-				std::string data(fmt::format("{}:{}\n", pair.first, pair.second));
+				std::string data(fmt::format("{}\n", pair.first));
 				file.write(data.data(), data.size());
 			}
 			file.close();
