@@ -2445,7 +2445,7 @@
       <Filter>Source Files\Core\Public\API\ARK</Filter>
     </ClInclude>
     <ClInclude Include="Core\Public\Requests.h">
-      <Filter>Header Files</Filter>
+      <Filter>Source Files\Core\Public</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
