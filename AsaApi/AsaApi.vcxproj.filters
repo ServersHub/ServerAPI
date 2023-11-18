@@ -174,9 +174,6 @@
     <ClCompile Include="Core\Private\UE\UE.cpp">
       <Filter>Source Files\Core\Private\UE</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Private\Tools\Requests.cpp">
-      <Filter>Source Files\Core\Private\Tools</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Private\PDBReader\PDBReader.h">
@@ -2443,9 +2440,6 @@
     </ClInclude>
     <ClInclude Include="Core\Public\API\ARK\GameMode.h">
       <Filter>Source Files\Core\Public\API\ARK</Filter>
-    </ClInclude>
-    <ClInclude Include="Core\Public\Requests.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
