@@ -40,12 +40,49 @@ namespace API
 
 	template <typename T>
 	using CComPtr = ScopedDiaType<T>;
+	static const std::unordered_set<std::string> filters = {
+		"$",
+		"<",
+		"Z_",
+		"_",
+		"TSet",
+		"TSQVisitor",
+		"TReversePredicate",
+		"TResourceArray",
+		"TResizableCircularQueue",
+		"TRenderThreadStruct",
+		"TRenderResourcePool",
+		"TRenderAssetUpdate",
+		"TRemove",
+		"TRHILambdaCommand",
+		"TRDGLambdaPass",
+		"TQueue",
+		"TProperty",
+		"TPrivateObjectPtr",
+		"TPairInitializer",
+		"TObjectPtr",
+		"TMapBase",
+		"TBase",
+		"TArray",
+		"SharedPointerInternals",
+		"TSharedRef",
+		"TSizedInlineAllocator",
+		"TSparseArray",
+		"TTypedElementList",
+		"TUniquePtr",
+		"TWeakPtr",
+		"UE.",
+		"UScriptStruct"
+	};
 
 	void PdbReader::Read(const std::wstring& path, std::unordered_map<std::string, intptr_t>* offsets_dump,
 	                     std::unordered_map<std::string, BitField>* bitfields_dump)
 	{
 		offsets_dump_ = offsets_dump;
 		bitfields_dump_ = bitfields_dump;
+
+		offsets_dump_->reserve(700000);
+		bitfields_dump_->reserve(11000);
 
 		std::ifstream f{path};
 		if (!f.good())
@@ -160,7 +197,8 @@ namespace API
 			visited_.insert(sym_id);
 
 			std::string str_name = GetSymbolNameString(sym);
-			if (str_name.empty())
+
+			if (FilterSymbols(str_name))
 				continue;
 
 			DumpType(sym, str_name, 0);
@@ -176,6 +214,7 @@ namespace API
 			throw std::runtime_error("Failed to find symbols");
 
 		ULONG celt = 0;
+		std::stringstream ss;
 		while (SUCCEEDED(enum_symbols->Next(1, &symbol, &celt)) && celt == 1)
 		{
 			CComPtr<IDiaSymbol> sym(symbol);
@@ -185,6 +224,9 @@ namespace API
 				continue;
 
 			std::string str_name = GetSymbolNameString(sym);
+
+			if (FilterSymbols(str_name))
+				continue;
 
 			const uint32_t sym_id = GetSymbolId(sym);
 
@@ -200,19 +242,22 @@ namespace API
 			if (sym->get_addressOffset(&offset) != S_OK)
 				continue;
 
-			// Filter out some useless functions
-			if (str_name.find('`') != std::string::npos)
-				continue;
+			ss.clear();
+			ss.str(std::string());
 
 			// Check if it's a member function
 			if (str_name.find(':') != std::string::npos)
 			{
-				const std::string new_str = ReplaceString(str_name, "::", ".") + "(" + GetFunctionSymbolParams(sym) + ")";
-				(*offsets_dump_)[new_str] = offset;
+				ss << ReplaceString(str_name, "::", ".") << "(" << GetFunctionSymbolParams(sym) << ")";
+				(*offsets_dump_)[ss.str()] = offset;
+				//const std::string new_str = ReplaceString(str_name, "::", ".") + "(" + GetFunctionSymbolParams(sym) + ")";
+				//(*offsets_dump_)[new_str] = offset;
 			}
 			else
 			{
-				(*offsets_dump_)["Global." + str_name + "(" + GetFunctionSymbolParams(sym) + ")"] = offset;
+				ss << "Global." << str_name << "(" << GetFunctionSymbolParams(sym) << ")";
+				(*offsets_dump_)[ss.str()] = offset;
+				//(*offsets_dump_)["Global." + str_name + "(" + GetFunctionSymbolParams(sym) + ")"] = offset;
 			}
 		}
 	}
@@ -237,7 +282,7 @@ namespace API
 			visited_.insert(sym_id);
 
 			std::string str_name = GetSymbolNameString(sym);
-			if (str_name.empty())
+			if (FilterSymbols(str_name))
 				continue;
 
 			DWORD sym_tag;
@@ -333,6 +378,22 @@ namespace API
 		{
 			(*offsets_dump_)[structure + "." + str_name] = offset;
 		}
+	}
+
+	bool PdbReader::FilterSymbols(const std::string input)
+	{
+		if (input.empty())
+			return true;
+
+		for (const auto& filter : filters) {
+			if (input.starts_with(filter))
+				return true;
+		}
+
+		if (input.find('`') != std::string::npos)
+			return true;
+
+		return false;
 	}
 
 	std::string PdbReader::GetSymbolNameString(IDiaSymbol* symbol)
