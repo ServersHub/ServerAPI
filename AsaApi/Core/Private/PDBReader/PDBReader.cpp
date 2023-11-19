@@ -40,112 +40,13 @@ namespace API
 
 	template <typename T>
 	using CComPtr = ScopedDiaType<T>;
-	static const std::unordered_set<std::string> filters = {
-		"$",
-		"<",
-		"Z_",
-		"z_",
-		"zlib",
-		"xatlas",
-		"_",
-		"TSet",
-		"TSQVisitor",
-		"TReversePredicate",
-		"TResourceArray",
-		"TResizableCircularQueue",
-		"TRenderThreadStruct",
-		"TRenderResourcePool",
-		"TRenderAssetUpdate",
-		"TRemove",
-		"TRHILambdaCommand",
-		"TRDGLambdaPass",
-		"TQueue",
-		"TProperty",
-		"TPrivateObjectPtr",
-		"TPairInitializer",
-		"TObjectPtr",
-		"TMapBase",
-		"TBase",
-		"TArray",
-		"SharedPointerInternals",
-		"TSharedRef",
-		"TSizedInlineAllocator",
-		"TSparseArray",
-		"TTypedElementList",
-		"TUniquePtr",
-		"TWeakPtr",
-		"UE.",
-		"UScriptStruct",
-		"oo2::",
-		"std::",
-		"ogg",
-		"oidn",
-		"ngx",
-		"curl",
-		"dt",
-		"cpp",
-		"Vulkan",
-		"USynth",
-		"UUI",
-		"TType",
-		"UE.",
-		"UE:",
-		"TkDOP",
-		"TStatic",
-		"TSlateBaseNamedArgs",
-		"TSharedFromThis",
-		"TShaderRefBase",
-		"TMeshProcessorShaders",
-		"TMaterialCHS",
-		"TGraphTask",
-		"TDelegate",
-		"TCommon",
-		"STableRow",
-		"SNotification",
-		"Nanite",
-		"Metasound",
-		"IPCGAttributeAccessorT",
-		"ITyped",
-		"FWide",
-		"FView",
-		"FSource",
-		"FShader",
-		"FRig",
-		"FRender",
-		"FRecast",
-		"FRDG",
-		"FPixel",
-		"FOpen",
-		"FOnlineFriendsSpec",
-		"FNiagara",
-		"FNDI",
-		"FMovie",
-		"FLumen",
-		"FD3D",
-		"FComputeShaderUtils",
-		"FCombine",
-		"Eigen",
-		"D3D",
-		"Chaos",
-		"Build",
-		"BINK",
-		"Aws",
-		"Audio",
-		"Add",
-		"Algo",
-		"PCG",
-		"TInd",
-		"TSha",
-		"TSlate",
-		"TWeakBase",
-		"UWi"
-	};
 
 	void PdbReader::Read(const std::wstring& path, std::unordered_map<std::string, intptr_t>* offsets_dump,
-	                     std::unordered_map<std::string, BitField>* bitfields_dump)
+	                     std::unordered_map<std::string, BitField>* bitfields_dump, const std::unordered_set<std::string> filter_set)
 	{
 		offsets_dump_ = offsets_dump;
 		bitfields_dump_ = bitfields_dump;
+		filter_set_ = filter_set;
 
 		offsets_dump_->reserve(550000);
 		bitfields_dump_->reserve(11000);
@@ -451,7 +352,8 @@ namespace API
 		if (input.empty())
 			return true;
 
-		for (const auto& filter : filters) {
+		for (const auto& filter : filter_set_)
+		{
 			if (input.starts_with(filter))
 				return true;
 		}
