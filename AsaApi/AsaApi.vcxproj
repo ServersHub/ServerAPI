@@ -354,6 +354,7 @@ copy "$(SolutionDir)$(PlatformName)\$(ConfigurationName)\$(ProjectName).pdb" "F:
     <ClCompile Include="Core\Private\PDBReader\PDBReader.cpp" />
     <ClCompile Include="Core\Private\PluginManager\PluginManager.cpp" />
     <ClCompile Include="Core\Private\Tools\Requests.cpp" />
+    <ClCompile Include="Core\Private\Tools\Timer.cpp" />
     <ClCompile Include="Core\Private\Tools\Tools.cpp" />
     <ClCompile Include="Core\Private\UE\UE.cpp" />
     <ClCompile Include="Core\Public\API\UE\Containers\GenericPlatformString.cpp" />
@@ -384,6 +385,7 @@ copy "$(SolutionDir)$(PlatformName)\$(ConfigurationName)\$(ProjectName).pdb" "F:
     <ClInclude Include="Core\Public\API\Base.h" />
     <ClInclude Include="Core\Public\API\Enums.h" />
     <ClInclude Include="Core\Public\API\Fields.h" />
+    <ClInclude Include="Core\Public\API\Helpers\Helpers.h" />
     <ClInclude Include="Core\Public\API\UE\Algo\Accumulate.h" />
     <ClInclude Include="Core\Public\API\UE\Algo\AllOf.h" />
     <ClInclude Include="Core\Public\API\UE\Algo\AnyOf.h" />
@@ -1117,6 +1119,7 @@ copy "$(SolutionDir)$(PlatformName)\$(ConfigurationName)\$(ProjectName).pdb" "F:
     <ClInclude Include="Core\Public\ICommands.h" />
     <ClInclude Include="Core\Public\IHooks.h" />
     <ClInclude Include="Core\Public\Requests.h" />
+    <ClInclude Include="Core\Public\Timer.h" />
     <ClInclude Include="Core\Public\Tools.h" />
     <ClInclude Include="D:\Spill\UE_5.2\Engine\Source\Runtime\Core\Public\Delegates\IntegerSequence.h" />
   </ItemGroup>
