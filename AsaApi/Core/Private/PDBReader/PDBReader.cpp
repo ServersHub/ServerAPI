@@ -131,7 +131,14 @@ namespace API
 		"BINK",
 		"Aws",
 		"Audio",
-		"Add"
+		"Add",
+		"Algo",
+		"PCG",
+		"TInd",
+		"TSha",
+		"TSlate",
+		"TWeakBase",
+		"UWi"
 	};
 
 	void PdbReader::Read(const std::wstring& path, std::unordered_map<std::string, intptr_t>* offsets_dump,
@@ -511,7 +518,7 @@ namespace API
 				parameterTypes = ReplaceString(parameterTypes, "struct ", "");
 				parameterTypes = ReplaceString(parameterTypes, "class ", "");
 				parameterTypes = ReplaceString(parameterTypes, "enum ", "");
-				parameterTypes = ReplaceString(parameterTypes, "& __ptr64", "*"); // pointers
+				//parameterTypes = ReplaceString(parameterTypes, "& __ptr64", "*"); // pointers
 				parameterTypes = ReplaceString(parameterTypes, "const ", "");
 				parameterTypes = ReplaceString(parameterTypes, " ", "");
 				parameterTypes = ReplaceString(parameterTypes, "__ptr64", "");

@@ -304,7 +304,8 @@
     </Link>
     <PostBuildEvent>
       <Command>xcopy /I  /Y "$(TargetDir)$(ProjectName).lib" "$(SolutionDir)out_lib\"
-copy  /Y "$(TargetDir)AsaApi.dll" "E:\ASA\TestingServer\ShooterGame\Binaries\Win64\ArkApi"</Command>
+copy  /Y "$(TargetDir)AsaApi.dll" "E:\ASA\TestingServer\ShooterGame\Binaries\Win64\ArkApi"
+copy  /Y "$(TargetDir)AsaApi.dll" "E:\ASA\Testing Server 2\ShooterGame\Binaries\Win64\ArkApi"</Command>
       <Message>Move lib</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
