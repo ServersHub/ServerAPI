@@ -9,6 +9,7 @@
 
 #include "../Helpers.h"
 #include "../IBaseApi.h"
+#include <Timer.h>
 
 namespace API
 {
@@ -220,6 +221,8 @@ namespace API
 		{
 			pfn_unload();
 		}
+
+		API::Timer::Get().UnloadTimersFromModule(FString(full_dll_path).Replace(L"/", L"\\"));
 
 		const BOOL result = FreeLibrary((*iter)->h_module);
 		if (result == 0)
