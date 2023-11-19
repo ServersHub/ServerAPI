@@ -109,4 +109,22 @@ namespace Cache
 
 		Log::GetLog()->error("Error opening file for writing: " + filename.string());
 	}
+
+	std::unordered_set<std::string> readFileIntoSet(const std::filesystem::path& filename)
+	{
+		std::unordered_set<std::string> set;
+
+		std::ifstream file(filename);
+		if (!file.is_open())
+			return default_filters;
+
+		std::string line;
+		while (std::getline(file, line))
+		{
+			set.insert(line);
+		}
+
+		file.close();
+		return set;
+	}
 }

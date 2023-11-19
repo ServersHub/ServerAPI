@@ -1134,6 +1134,9 @@ copy "$(SolutionDir)$(PlatformName)\$(ConfigurationName)\$(ProjectName).pdb" "F:
     <None Include="Core\Public\API\UE\Templates\SharedPointerTesting.inl" />
     <None Include="vcpkg.json" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="Core\Private\PDBReader\pdbignores.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

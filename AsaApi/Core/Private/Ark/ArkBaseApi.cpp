@@ -48,19 +48,21 @@ namespace API
 			if (!fs::exists(fs::current_path().append(ArkBaseApi::GetApiName()+"/Cache")))
 				fs::create_directory(fs::current_path().append(ArkBaseApi::GetApiName()+"/Cache"));
 
+			const fs::path pdbIgnoreFile = fs::current_path().append(ArkBaseApi::GetApiName() + "/pdbignores.txt");
 			const fs::path keyCacheFile = fs::current_path().append(ArkBaseApi::GetApiName()+"/Cache/cached_key.cache");
 			const fs::path offsetsCacheFile = fs::current_path().append(ArkBaseApi::GetApiName()+"/Cache/cached_offsets.cache");
 			const fs::path bitfieldsCacheFile = fs::current_path().append(ArkBaseApi::GetApiName()+"/Cache/cached_bitfields.cache");
 			const fs::path offsetsCacheFilePlain = fs::current_path().append(ArkBaseApi::GetApiName() + "/Cache/cached_offsets.txt");
 			const std::string fileHash = Cache::calculateSHA256(filepath);
 			const std::string storedHash = Cache::readFromFile(keyCacheFile);
+			std::unordered_set<std::string> pdbIgnoreSet = Cache::readFileIntoSet(pdbIgnoreFile);
 
 			if (fileHash != storedHash
 				|| !fs::exists(offsetsCacheFile)
 				|| !fs::exists(bitfieldsCacheFile))
 			{
 				Log::GetLog()->info("Cache refresh required this will take several minutes to complete");
-				pdb_reader.Read(filepath, &offsets_dump, &bitfields_dump);
+				pdb_reader.Read(filepath, &offsets_dump, &bitfields_dump, pdbIgnoreSet);
 
 				Log::GetLog()->info("Caching offsets for faster loading next time");
 				Cache::serializeMap(offsets_dump, offsetsCacheFile);
