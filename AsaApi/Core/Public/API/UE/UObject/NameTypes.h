@@ -620,7 +620,7 @@ public:
 	/** Get name without number part as a dynamically allocated string */
 	FString* GetPlainNameString(FString *result) const
 	{
-		return *NativeCall<FString**, FString*>(this, "FName.GetPlainNameString()", result);
+		return NativeCall<FString*, FString*>(this, "FName.GetPlainNameString()", result);
 	}
 
 	/** Convert name without number part into TCHAR buffer and returns string length. Doesn't allocate. */
