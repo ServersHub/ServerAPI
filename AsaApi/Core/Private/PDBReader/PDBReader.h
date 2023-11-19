@@ -28,6 +28,7 @@ namespace API
 		void DumpType(IDiaSymbol* /*symbol*/, const std::string& /*structure*/, int /*indent*/) const;
 		void DumpData(IDiaSymbol* /*symbol*/, const std::string& /*structure*/) const;
 
+		static bool FilterSymbols(const std::string input);
 		static std::string GetSymbolNameString(IDiaSymbol* /*symbol*/);
 		static uint32_t GetSymbolId(IDiaSymbol* /*symbol*/);
 		static void Cleanup(IDiaSymbol* /*symbol*/, IDiaSession* /*session*/, IDiaDataSource* /*source*/);

@@ -68,13 +68,13 @@ namespace API
 				Log::GetLog()->info("Caching bitfields for faster loading next time");
 				Cache::serializeMap(bitfields_dump, bitfieldsCacheFile);
 				Cache::saveToFile(keyCacheFile, fileHash);
+				Cache::saveToFilePlain(offsetsCacheFilePlain, offsets_dump);
 			}
 			else
 			{
 				Log::GetLog()->info("Cache is still valid loading existing cache");
 				Log::GetLog()->info("Reading cached offsets");
 				offsets_dump = Cache::deserializeMap<intptr_t>(offsetsCacheFile);
-				Cache::saveToFilePlain(offsetsCacheFilePlain, offsets_dump);
 
 				Log::GetLog()->info("Reading cached bitfields");
 				bitfields_dump = Cache::deserializeMap<BitField>(bitfieldsCacheFile);

@@ -1582,6 +1582,11 @@ struct APrimalWorldSettings : AARKNXWorldSettings
 	static void AddReferencedObjects(UObject* InThis, FReferenceCollector* Collector) { NativeCall<void, UObject*, FReferenceCollector*>(nullptr, "APrimalWorldSettings.AddReferencedObjects(UObject*,FReferenceCollector*)", InThis, Collector); }
 };
 
+struct ULevel : UObject
+{
+	TArray<AActor*> ActorsField() const { return GetNativeField<TArray<AActor*>>(this, "ULevelBase.Actors"); }
+};
+
 struct AGameModeBase : AInfo
 {
 	// Fields
