@@ -1584,7 +1584,7 @@ struct APrimalWorldSettings : AARKNXWorldSettings
 
 struct ULevel : UObject
 {
-	TArray<AActor*> ActorsField() const { return GetNativeField<TArray<AActor*>>(this, "ULevelBase.Actors"); }
+	TArray<AActor*> ActorsField() const { return GetNativeField<TArray<AActor*>>(this, "ULevel.Actors"); }
 };
 
 struct AGameModeBase : AInfo

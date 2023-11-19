@@ -21,20 +21,20 @@
 	Definitions.
 ----------------------------------------------------------------------------*/
 
-/** 
+/**
  * Do we want to support case-variants for FName?
- * This will add an extra NAME_INDEX variable to FName, but means that ToString() will return you the exact same 
+ * This will add an extra NAME_INDEX variable to FName, but means that ToString() will return you the exact same
  * string that FName::Init was called with (which is useful if your FNames are shown to the end user)
  * Currently this is enabled for the Editor and any Programs (such as UHT), but not the Runtime
  */
 #ifndef WITH_CASE_PRESERVING_NAME
-	#define WITH_CASE_PRESERVING_NAME WITH_EDITORONLY_DATA
+#define WITH_CASE_PRESERVING_NAME WITH_EDITORONLY_DATA
 #endif
 
-// Should the number part of the fname be stored in the name table or in the FName instance?
-// Storing it in the name table may save memory overall but new number suffixes will cause the name table to grow like unique strings do.
+ // Should the number part of the fname be stored in the name table or in the FName instance?
+ // Storing it in the name table may save memory overall but new number suffixes will cause the name table to grow like unique strings do.
 #ifndef UE_FNAME_OUTLINE_NUMBER
-	#define UE_FNAME_OUTLINE_NUMBER 0
+#define UE_FNAME_OUTLINE_NUMBER 0
 #endif // UE_FNAME_OUTLINE_NUMBER
 
 class FText;
@@ -78,9 +78,9 @@ struct FNameEntryId
 	explicit operator bool() const { return Value != 0; }
 
 	UE_DEPRECATED(4.23, "NAME_INDEX is replaced by FNameEntryId, which is no longer a contiguous integer. "
-						"Please use 'GetTypeHash(MyId)' instead of 'MyId' for hash functions. "
-						"ToUnstableInt() can be used in other advanced cases.")
-	operator int32() const;
+		"Please use 'GetTypeHash(MyId)' instead of 'MyId' for hash functions. "
+		"ToUnstableInt() can be used in other advanced cases.")
+		operator int32() const;
 
 	/** Get process specific integer */
 	uint32 ToUnstableInt() const { return Value; }
@@ -129,12 +129,12 @@ typedef FNameEntryId NAME_INDEX;
 
 #define checkName checkSlow
 
-/** Externally, the instance number to represent no instance number is NAME_NO_NUMBER, 
-    but internally, we add 1 to indices, so we use this #define internally for 
+/** Externally, the instance number to represent no instance number is NAME_NO_NUMBER,
+	but internally, we add 1 to indices, so we use this #define internally for
 	zero'd memory initialization will still make NAME_None as expected */
 #define NAME_NO_NUMBER_INTERNAL	0
 
-/** Conversion routines between external representations and internal */
+	/** Conversion routines between external representations and internal */
 #define NAME_INTERNAL_TO_EXTERNAL(x) (x - 1)
 #define NAME_EXTERNAL_TO_INTERNAL(x) (x + 1)
 
@@ -175,7 +175,7 @@ enum ELinkerNameTableConstructor    {ENAME_LinkerConstructor};
 /** Enumeration for finding name. */
 enum EFindName
 {
-	/** 
+	/**
 	* Find a name; return 0/NAME_None/FName() if it doesn't exist.
 	* When UE_FNAME_OUTLINE_NUMBER is set, we search for the exact name including the number suffix.
 	* Otherwise we search only for the string part.
@@ -185,7 +185,7 @@ enum EFindName
 	/** Find a name or add it if it doesn't exist. */
 	FNAME_Add,
 
-	/** Finds a name and replaces it. Adds it if missing. This is only used by UHT and is generally not safe for threading. 
+	/** Finds a name and replaces it. Adds it if missing. This is only used by UHT and is generally not safe for threading.
 	 * All this really is used for is correcting the case of names. In MT conditions you might get a half-changed name.
 	 */
 	FNAME_Replace_Not_Safe_For_Threading,
@@ -226,7 +226,7 @@ private:
 		// These fields are valid when Header.Len == 0.
 		// Stores a (string, number) fname pair to construct the string "string_(number-1)" on demand.
 		// Id is a reference to another entry with Header.Len != 0 (no recursion).
-		struct 
+		struct
 		{
 			FNameEntryId	Id;
 			uint32			Number;
@@ -252,7 +252,7 @@ public:
 		return Header.Len;
 	}
 
-	FORCEINLINE bool IsNumbered() const 
+	FORCEINLINE bool IsNumbered() const
 	{
 #if UE_FNAME_OUTLINE_NUMBER
 		return Header.Len == 0;
@@ -377,7 +377,7 @@ struct FNameEntrySerialized
 	/**
 	 * Returns FString of name portion minus number.
 	 */
-	FString GetPlainNameString() const;	
+	FString GetPlainNameString() const;
 
 	friend FArchive& operator<<(FArchive& Ar, FNameEntrySerialized& E);
 	friend FArchive& operator<<(FArchive& Ar, FNameEntrySerialized* E)
@@ -396,7 +396,7 @@ struct FMinimalName
 	friend FName;
 
 	FMinimalName() {}
-	
+
 	FMinimalName(EName N)
 		: Index(FNameEntryId::FromEName(N))
 	{
@@ -405,7 +405,7 @@ struct FMinimalName
 	FORCEINLINE explicit FMinimalName(const FName& Name);
 	FORCEINLINE bool IsNone() const;
 	FORCEINLINE bool operator<(FMinimalName Rhs) const;
-	
+
 private:
 	/** Index into the Names array (used to find String portion of the string/number pair) */
 	FNameEntryId	Index;
@@ -452,7 +452,7 @@ struct FScriptName
 	friend FName;
 
 	FScriptName() {}
-	
+
 	FScriptName(EName Ename)
 		: ComparisonIndex(FNameEntryId::FromEName(Ename))
 		, DisplayIndex(ComparisonIndex)
@@ -466,7 +466,7 @@ struct FScriptName
 	FString ToString() const;
 
 	// The internal structure of FScriptName is private in order to handle UE_FNAME_OUTLINE_NUMBER
-private: 
+private:
 	/** Encoded address of name entry  (used to find String portion of the string/number pair used for comparison) */
 	FNameEntryId	ComparisonIndex;
 	/** Encoded address of name entry  (used to find String portion of the string/number pair used for display) */
@@ -616,9 +616,13 @@ public:
 		Number = NewNumber;
 	}
 #endif //UE_FNAME_OUTLINE_NUMBER
-	
+
 	/** Get name without number part as a dynamically allocated string */
 	FString GetPlainNameString() const;
+	//FString GetPlainNameString()
+	//{
+	//	return *NativeCall<FString*>(this, "FName.GetPlainNameString()");
+	//}
 
 	/** Convert name without number part into TCHAR buffer and returns string length. Doesn't allocate. */
 	uint32 GetPlainNameString(TCHAR(&OutName)[NAME_SIZE]) const;
@@ -633,7 +637,7 @@ public:
 	const FNameEntry* GetDisplayNameEntry() const;
 
 
-	
+
 
 	/**
 	 * Converts an FName to a readable format
@@ -646,10 +650,14 @@ public:
 		ToString(Out);
 		return Out;
 	}
+	//FString ToString() const
+	//{
+	//	NativeCall<FString*, FString*>(this, "FName.ToString()");
+	//}
 
 	/**
 	 * Converts an FName to a readable format, in place
-	 * 
+	 *
 	 * @param Out String to fill with the string representation of the name
 	 */
 	void ToString(FString& Out) const
@@ -659,7 +667,7 @@ public:
 
 	/**
 	 * Converts an FName to a readable format, in place
-	 * 
+	 *
 	 * @param Out StringBuilder to fill with the string representation of the name
 	 */
 	void ToString(FWideStringBuilderBase& Out) const;
@@ -692,14 +700,14 @@ public:
 
 	/**
 	 * Converts an FName to a readable format, in place, appending to an existing string (ala GetFullName)
-	 * 
+	 *
 	 * @param Out String to append with the string representation of the name
 	 */
 	void AppendString(FString& Out) const;
 
 	/**
 	 * Converts an FName to a readable format, in place, appending to an existing string (ala GetFullName)
-	 * 
+	 *
 	 * @param Out StringBuilder to append with the string representation of the name
 	 */
 	void AppendString(FWideStringBuilderBase& Out) const;
@@ -730,7 +738,7 @@ public:
 	}
 
 	FORCEINLINE bool operator==(EName Ename) const;
-	
+
 	FORCEINLINE bool operator!=(EName Ename) const;
 
 	UE_DEPRECATED(4.23, "Please use FastLess() / FNameFastLess or LexicalLess() / FNameLexicalLess instead. "
@@ -741,7 +749,7 @@ public:
 	}
 
 	UE_DEPRECATED(4.23, "Please use B.FastLess(A) or B.LexicalLess(A) instead of A > B.")
-	FORCEINLINE bool operator>(const FName& Other) const
+		FORCEINLINE bool operator>(const FName& Other) const
 	{
 		return Other.LexicalLess(*this);
 	}
@@ -856,7 +864,7 @@ public:
 	 * showing in a log or on screen omitted.
 	 */
 	static FString SanitizeWhitespace(const FString& FNameString);
-	
+
 	/**
 	 * Compares name to passed in one. Sort is alphabetical ascending.
 	 *
@@ -970,7 +978,7 @@ public:
 	FORCEINLINE FName(FMemoryImageName InName);
 
 	/**
-	 * Create an FName. If FindType is FNAME_Find, and the name 
+	 * Create an FName. If FindType is FNAME_Find, and the name
 	 * doesn't already exist, then the name will be NAME_None.
 	 * The check for existance or not depends on UE_FNAME_OUTLINE_NUMBER.
 	 * When UE_FNAME_OUTLINE_NUMBER is 0, we only check for the string part.
@@ -1019,17 +1027,17 @@ public:
 	 * @param Number Value for the number portion of the name
 	 */
 	UE_DEPRECATED(5.1, "EFindName has been removed from constructors taking a Number argument to add clarity around UE_FNAME_OUTLINE_NUMBER.")
-	FName(const WIDECHAR* Name, int32 Number, EFindName FindType);
+		FName(const WIDECHAR* Name, int32 Number, EFindName FindType);
 	UE_DEPRECATED(5.1, "EFindName has been removed from constructors taking a Number argument to add clarity around UE_FNAME_OUTLINE_NUMBER.")
-	FName(const ANSICHAR* Name, int32 Number, EFindName FindType);
+		FName(const ANSICHAR* Name, int32 Number, EFindName FindType);
 	UE_DEPRECATED(5.1, "EFindName has been removed from constructors taking a Number argument to add clarity around UE_FNAME_OUTLINE_NUMBER.")
-	FName(const UTF8CHAR* Name, int32 Number, EFindName FindType);
+		FName(const UTF8CHAR* Name, int32 Number, EFindName FindType);
 	UE_DEPRECATED(5.1, "EFindName has been removed from constructors taking a Number argument to add clarity around UE_FNAME_OUTLINE_NUMBER.")
-	FName(int32 Len, const WIDECHAR* Name, int32 Number, EFindName FindType);
+		FName(int32 Len, const WIDECHAR* Name, int32 Number, EFindName FindType);
 	UE_DEPRECATED(5.1, "EFindName has been removed from constructors taking a Number argument to add clarity around UE_FNAME_OUTLINE_NUMBER.")
-	FName(int32 Len, const ANSICHAR* Name, int32 Number, EFindName FindType);
+		FName(int32 Len, const ANSICHAR* Name, int32 Number, EFindName FindType);
 	UE_DEPRECATED(5.1, "EFindName has been removed from constructors taking a Number argument to add clarity around UE_FNAME_OUTLINE_NUMBER.")
-	FName(int32 Len, const UTF8CHAR* Name, int32 Number, EFindName FindType);
+		FName(int32 Len, const UTF8CHAR* Name, int32 Number, EFindName FindType);
 	FName(const WIDECHAR* Name, int32 Number);
 	FName(const ANSICHAR* Name, int32 Number);
 	FName(const UTF8CHAR* Name, int32 Number);
@@ -1038,28 +1046,28 @@ public:
 	FName(int32 Len, const UTF8CHAR* Name, int32 Number);
 
 	UE_DEPRECATED(5.1, "EFindName has been removed from constructors taking a Number argument to add clarity around UE_FNAME_OUTLINE_NUMBER.")
-	inline FName(TStringView<ANSICHAR> View, int32 InNumber, EFindName FindType)
+		inline FName(TStringView<ANSICHAR> View, int32 InNumber, EFindName FindType)
 		: FName(NoInit)
 	{
-PRAGMA_DISABLE_DEPRECATION_WARNINGS
+		PRAGMA_DISABLE_DEPRECATION_WARNINGS
 		*this = FName(View.Len(), View.GetData(), InNumber, FindType);
-PRAGMA_ENABLE_DEPRECATION_WARNINGS
+		PRAGMA_ENABLE_DEPRECATION_WARNINGS
 	}
 	UE_DEPRECATED(5.1, "EFindName has been removed from constructors taking a Number argument to add clarity around UE_FNAME_OUTLINE_NUMBER.")
-	inline FName(TStringView<WIDECHAR> View, int32 InNumber, EFindName FindType)
+		inline FName(TStringView<WIDECHAR> View, int32 InNumber, EFindName FindType)
 		: FName(NoInit)
 	{
-PRAGMA_DISABLE_DEPRECATION_WARNINGS
+		PRAGMA_DISABLE_DEPRECATION_WARNINGS
 		*this = FName(View.Len(), View.GetData(), InNumber, FindType);
-PRAGMA_ENABLE_DEPRECATION_WARNINGS
+		PRAGMA_ENABLE_DEPRECATION_WARNINGS
 	}
 	UE_DEPRECATED(5.1, "EFindName has been removed from constructors taking a Number argument to add clarity around UE_FNAME_OUTLINE_NUMBER.")
-	inline FName(TStringView<UTF8CHAR> View, int32 InNumber, EFindName FindType)
+		inline FName(TStringView<UTF8CHAR> View, int32 InNumber, EFindName FindType)
 		: FName(NoInit)
 	{
-PRAGMA_DISABLE_DEPRECATION_WARNINGS
+		PRAGMA_DISABLE_DEPRECATION_WARNINGS
 		*this = FName(View.Len(), View.GetData(), InNumber, FindType);
-PRAGMA_ENABLE_DEPRECATION_WARNINGS
+		PRAGMA_ENABLE_DEPRECATION_WARNINGS
 	}
 
 	inline FName(TStringView<ANSICHAR> View, int32 InNumber)
@@ -1079,7 +1087,7 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 	}
 
 	/**
-	 * Create an FName. If FindType is FNAME_Find, and the string part of the name 
+	 * Create an FName. If FindType is FNAME_Find, and the string part of the name
 	 * doesn't already exist, then the name will be NAME_None
 	 *
 	 * @param Name Value for the string portion of the name
@@ -1088,7 +1096,7 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 	 * @param bSplitName true if the trailing number should be split from the name when Number == NAME_NO_NUMBER_INTERNAL, or false to always use the name as-is
 	 */
 	UE_DEPRECATED(5.1, "EFindName has been removed from constructors taking a Number argument to add clarity around UE_FNAME_OUTLINE_NUMBER.")
-	FName(const TCHAR* Name, int32 InNumber, EFindName FindType, bool bSplitName);
+		FName(const TCHAR* Name, int32 InNumber, EFindName FindType, bool bSplitName);
 	FName(const TCHAR* Name, int32 InNumber, bool bSplitName);
 
 	/**
@@ -1163,11 +1171,11 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
 	/** Run autotest on FNames. */
 	static void AutoTest();
-	
+
 	/**
 	 * Takes a string and breaks it down into a human readable string.
 	 * For example - "bCreateSomeStuff" becomes "Create Some Stuff?" and "DrawScale3D" becomes "Draw Scale 3D".
-	 * 
+	 *
 	 * @param	InDisplayName	[In, Out] The name to sanitize
 	 * @param	bIsBool				True if the name is a bool
 	 *
@@ -1186,9 +1194,9 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 	/** Get the EName that this FName represents or nullptr */
 	const EName* ToEName() const;
 
-	/** 
-		Tear down system and free all allocated memory 
-	
+	/**
+		Tear down system and free all allocated memory
+
 		FName must not be used after teardown
 	 */
 	static void TearDown();
@@ -1303,7 +1311,7 @@ private:
 
 	/**
 	 * Equality operator with CharType* on left hand side and FName on right hand side
-	 * 
+	 *
 	 * @param	LHS		CharType to compare to FName
 	 * @param	RHS		FName to compare to CharType
 	 * @return True if strings match, false otherwise.
@@ -1753,7 +1761,7 @@ public:
 		: Either(Name.GetComparisonIndex())
 		, Number(Name.GetNumber())
 	{}
-	
+
 	operator FName() const
 	{
 		return Resolve();
@@ -1770,7 +1778,7 @@ private:
 		explicit FLiteralOrName(const ANSICHAR* Literal)
 			: Int(reinterpret_cast<uint64>(Literal) | LiteralFlag)
 		{}
-		
+
 		explicit FLiteralOrName(const WIDECHAR* Literal)
 			: Int(reinterpret_cast<uint64>(Literal) | LiteralFlag)
 		{}
@@ -1793,7 +1801,7 @@ private:
 		{
 			return FNameEntryId::FromUnstableInt(static_cast<uint32>(Int));
 		}
-		
+
 		const ANSICHAR* AsAnsiLiteral() const
 		{
 			return reinterpret_cast<const ANSICHAR*>(Int & ~LiteralFlag);
@@ -1812,7 +1820,7 @@ private:
 
 	// Distinguishes WIDECHAR* and ANSICHAR* literals, doesn't indicate if literal contains any wide characters 
 	bool bLiteralIsWide = false;
-	
+
 	static uint32 ParseNumber(const WIDECHAR* Literal, int32 Len);
 	static uint32 ParseNumber(const ANSICHAR* Literal, int32 Len);
 

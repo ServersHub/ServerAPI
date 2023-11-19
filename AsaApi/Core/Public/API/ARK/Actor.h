@@ -35,6 +35,26 @@ struct FPrimalChatMessage {
     FPrimalChatMessage* operator=(FPrimalChatMessage* __that) { return NativeCall<FPrimalChatMessage*, FPrimalChatMessage*>(this, "FPrimalChatMessage.operator=(FPrimalChatMessage&)", __that); }
 };
 
+struct  FPrimalPlayerCharacterConfigStructReplicated
+{
+    unsigned __int8 bIsFemale : 1;
+    FLinearColor BodyColors[4];
+    FString PlayerCharacterName;
+    unsigned __int8 FacialHairIndex;
+    unsigned __int8 HeadHairIndex;
+    unsigned __int8 EyebrowIndex;
+    float PercentOfFullHeadHairGrowth;
+    float PercentOfFullFacialHairGrowth;
+    float RawBoneModifiers[26];
+    int PlayerSpawnRegionIndex;
+    unsigned __int8 OverrideHeadHairColor[2];
+    unsigned __int8 OverrideFacialHairColor[2];
+    unsigned __int8 DynamicMaterialBytes[50];
+    int PlayerVoiceCollectionIndex;
+    unsigned __int8 bUsingCustomPlayerVoiceCollection : 1;
+};
+
+
 struct UPrimalActor : UObject
 {
     // Fields
@@ -587,11 +607,11 @@ struct AActor : UPrimalActor
     void ClearNetworkSpatializationParent() { NativeCall<void>(this, "AActor.ClearNetworkSpatializationParent()"); }
     void SetNetworkSpatializationParent(AActor* NewParent) { NativeCall<void, AActor*>(this, "AActor.SetNetworkSpatializationParent(AActor*)", NewParent); }
     void PostInitializeComponents() { NativeCall<void>(this, "AActor.PostInitializeComponents()"); }
-   // UMovementComponent* FindComponentByClass<class UMovementComponent>() { return NativeCall<UMovementComponent*>(this, "AActor.FindComponentByClass<class UMovementComponent>()"); }
+    // UMovementComponent* FindComponentByClass<class UMovementComponent>() { return NativeCall<UMovementComponent*>(this, "AActor.FindComponentByClass<class UMovementComponent>()"); }
     bool IsInOrOwnedBy(const UObject* SomeOuter) { return NativeCall<bool, const UObject*>(this, "AActor.IsInOrOwnedBy(UObject*)", SomeOuter); }
     UActorComponent* GetComponentByCustomTag(FName TheTag) { return NativeCall<UActorComponent*, FName>(this, "AActor.GetComponentByCustomTag(FName)", TheTag); }
-   // UPrimitiveComponent* GetVisibleComponentByClass(TSubclassOf<UPrimitiveComponent> ComponentClass) { return NativeCall<UPrimitiveComponent*, TSubclassOf<UPrimitiveComponent>>(this, "AActor.GetVisibleComponentByClass(TSubclassOf<UPrimitiveComponent>)", ComponentClass); }
-    //UPrimitiveComponent* GetVisibleUnhiddenComponentByClass(TSubclassOf<UPrimitiveComponent> ComponentClass) { return NativeCall<UPrimitiveComponent*, TSubclassOf<UPrimitiveComponent>>(this, "AActor.GetVisibleUnhiddenComponentByClass(TSubclassOf<UPrimitiveComponent>)", ComponentClass); }
+    // UPrimitiveComponent* GetVisibleComponentByClass(TSubclassOf<UPrimitiveComponent> ComponentClass) { return NativeCall<UPrimitiveComponent*, TSubclassOf<UPrimitiveComponent>>(this, "AActor.GetVisibleComponentByClass(TSubclassOf<UPrimitiveComponent>)", ComponentClass); }
+     //UPrimitiveComponent* GetVisibleUnhiddenComponentByClass(TSubclassOf<UPrimitiveComponent> ComponentClass) { return NativeCall<UPrimitiveComponent*, TSubclassOf<UPrimitiveComponent>>(this, "AActor.GetVisibleUnhiddenComponentByClass(TSubclassOf<UPrimitiveComponent>)", ComponentClass); }
     TArray<UActorComponent*, TSizedDefaultAllocator<32> >* GetComponentsByCustomTag(TArray<UActorComponent*, TSizedDefaultAllocator<32> >* result, FName TheTag) { return NativeCall<TArray<UActorComponent*, TSizedDefaultAllocator<32> >*, TArray<UActorComponent*, TSizedDefaultAllocator<32> >*, FName>(this, "AActor.GetComponentsByCustomTag(TArray<UActorComponent*,TSizedDefaultAllocator<32>>*,FName)", result, TheTag); }
     void SendExecCommand(FName CommandName, const FNetExecParams* ExecParams, bool bIsReliable) { NativeCall<void, FName, const FNetExecParams*, bool>(this, "AActor.SendExecCommand(FName,FNetExecParams*,bool)", CommandName, ExecParams, bIsReliable); }
     void ServerSendExecCommandToEveryone(FName CommandName, const FBPNetExecParams* ExecParams, bool bIsReliable, bool bForceSendToLocalPlayer, bool bIgnoreRelevancy) { NativeCall<void, FName, const FBPNetExecParams*, bool, bool, bool>(this, "AActor.ServerSendExecCommandToEveryone(FName,FBPNetExecParams*,bool,bool,bool)", CommandName, ExecParams, bIsReliable, bForceSendToLocalPlayer, bIgnoreRelevancy); }
@@ -605,7 +625,7 @@ struct AActor : UPrimalActor
     static void MulticastDrawDebugLine_Implementation() { NativeCall<void>(nullptr, "AActor.MulticastDrawDebugLine_Implementation()"); }
     static void MulticastDrawDebugLineTraceHitResult_Implementation() { NativeCall<void>(nullptr, "AActor.MulticastDrawDebugLineTraceHitResult_Implementation()"); }
     //UPathFollowingComponent* FindComponentByClass<class UPathFollowingComponent>() { return NativeCall<UPathFollowingComponent*>(this, "AActor.FindComponentByClass<class UPathFollowingComponent>()"); }
-    
+
     bool IsA(UClass* someClass) { return this->ClassPrivateField()->IsChildOf(someClass); }
 };
 
@@ -1270,7 +1290,7 @@ struct APrimalStructure : APrimalTargetableActor
     void FadeInEffectTick() { NativeCall<void>(this, "APrimalStructure.FadeInEffectTick()"); }
     void ProcessEditText(AShooterPlayerController* ForPC, const FString* TextToUse, bool bCheckedBox) { NativeCall<void, AShooterPlayerController*, const FString*, bool>(this, "APrimalStructure.ProcessEditText(AShooterPlayerController*,FString&,bool)", ForPC, TextToUse, bCheckedBox); }
     static __int64 GetNumStructuresInRange() { return NativeCall<__int64>(nullptr, "APrimalStructure.GetNumStructuresInRange()"); }
-    static void GetStructuresInRange() { NativeCall<void>(nullptr, "APrimalStructure.GetStructuresInRange()"); }
+    static void GetStructuresInRange(UWorld* theWorld, FVector AtLocation, float WithinRange, TSubclassOf<APrimalStructure> StructureClass, TArray<APrimalStructure*>* StructuresOut, bool bUseInternalOctree, APrimalStructure* IgnoreStructure) { NativeCall<void, UWorld*, FVector, float, TSubclassOf<APrimalStructure>, TArray<APrimalStructure*>*, bool, APrimalStructure*>(nullptr, "APrimalStructure.GetStructuresInRange(UWorld*,UE::Math::TVector<double>,float,TSubclassOf<APrimalStructure>,TArray<APrimalStructure*,TSizedDefaultAllocator<32>>&,bool,APrimalStructure*)", theWorld, AtLocation, WithinRange, StructureClass, StructuresOut, bUseInternalOctree, IgnoreStructure); }
     static __int64 GetNumStructuresInRangeStructureTypeFlag() { return NativeCall<__int64>(nullptr, "APrimalStructure.GetNumStructuresInRangeStructureTypeFlag()"); }
     bool AllowPickupForItem(AShooterPlayerController* ForPC) { return NativeCall<bool, AShooterPlayerController*>(this, "APrimalStructure.AllowPickupForItem(AShooterPlayerController*)", ForPC); }
     bool CanPickupStructureFromRecentPlacement() { return NativeCall<bool>(this, "APrimalStructure.CanPickupStructureFromRecentPlacement()"); }
@@ -1356,6 +1376,300 @@ struct APrimalStructure : APrimalTargetableActor
     AActor* GetBasedOnDinoAsActor(bool bUseReplicatedData, bool bOnlyConsciousDino) { return NativeCall<AActor*, bool, bool>(this, "APrimalStructure.GetBasedOnDinoAsActor(bool,bool)", bUseReplicatedData, bOnlyConsciousDino); }
 };
 
+struct APrimalStructureItemContainer : APrimalStructure
+{
+    // Fields
+
+    UPrimalInventoryComponent*& MyInventoryComponentField() { return *GetNativePointerField<UPrimalInventoryComponent**>(this, "APrimalStructureItemContainer.MyInventoryComponent"); }
+    float& SolarRefreshIntervalMinField() { return *GetNativePointerField<float*>(this, "APrimalStructureItemContainer.SolarRefreshIntervalMin"); }
+    float& SolarRefreshIntervalMaxField() { return *GetNativePointerField<float*>(this, "APrimalStructureItemContainer.SolarRefreshIntervalMax"); }
+    float& SolarRefreshIntervalField() { return *GetNativePointerField<float*>(this, "APrimalStructureItemContainer.SolarRefreshInterval"); }
+    long double& LastSolarRefreshTimeField() { return *GetNativePointerField<long double*>(this, "APrimalStructureItemContainer.LastSolarRefreshTime"); }
+    TSubclassOf<UPrimalItem>& BatteryClassOverrideField() { return *GetNativePointerField<TSubclassOf<UPrimalItem>*>(this, "APrimalStructureItemContainer.BatteryClassOverride"); }
+    int& PoweredOverrideCounterField() { return *GetNativePointerField<int*>(this, "APrimalStructureItemContainer.PoweredOverrideCounter"); }
+    TArray<UMaterialInterface*, TSizedDefaultAllocator<32> >& ActivateMaterialsField() { return *GetNativePointerField<TArray<UMaterialInterface*, TSizedDefaultAllocator<32> >*>(this, "APrimalStructureItemContainer.ActivateMaterials"); }
+    TArray<UMaterialInterface*, TSizedDefaultAllocator<32> >& InActivateMaterialsField() { return *GetNativePointerField<TArray<UMaterialInterface*, TSizedDefaultAllocator<32> >*>(this, "APrimalStructureItemContainer.InActivateMaterials"); }
+    //TArray<FItemToDisplayInStructureTooltip, TSizedDefaultAllocator<32> >& ItemsToDisplayInStructureTooltipField() { return *GetNativePointerField<TArray<FItemToDisplayInStructureTooltip, TSizedDefaultAllocator<32> >*>(this, "APrimalStructureItemContainer.ItemsToDisplayInStructureTooltip"); }
+    UChildActorComponent*& MyChildEmitterSpawnableField() { return *GetNativePointerField<UChildActorComponent**>(this, "APrimalStructureItemContainer.MyChildEmitterSpawnable"); }
+    FString& BoxNameField() { return *GetNativePointerField<FString*>(this, "APrimalStructureItemContainer.BoxName"); }
+    int& MaxBoxNameLengthField() { return *GetNativePointerField<int*>(this, "APrimalStructureItemContainer.MaxBoxNameLength"); }
+    float& InsulationRangeField() { return *GetNativePointerField<float*>(this, "APrimalStructureItemContainer.InsulationRange"); }
+    float& HyperThermiaInsulationField() { return *GetNativePointerField<float*>(this, "APrimalStructureItemContainer.HyperThermiaInsulation"); }
+    float& HypoThermiaInsulationField() { return *GetNativePointerField<float*>(this, "APrimalStructureItemContainer.HypoThermiaInsulation"); }
+    float& ContainerActiveDecreaseHealthSpeedField() { return *GetNativePointerField<float*>(this, "APrimalStructureItemContainer.ContainerActiveDecreaseHealthSpeed"); }
+    float& FuelConsumptionIntervalsMultiplierField() { return *GetNativePointerField<float*>(this, "APrimalStructureItemContainer.FuelConsumptionIntervalsMultiplier"); }
+    float& DropInventoryOnDestructionLifespanField() { return *GetNativePointerField<float*>(this, "APrimalStructureItemContainer.DropInventoryOnDestructionLifespan"); }
+    FString& ActivateContainerStringField() { return *GetNativePointerField<FString*>(this, "APrimalStructureItemContainer.ActivateContainerString"); }
+    TObjectPtr<UTexture2D>& ActivateContainerIconField() { return *GetNativePointerField<TObjectPtr<UTexture2D>*>(this, "APrimalStructureItemContainer.ActivateContainerIcon"); }
+    FString& DeactivateContainerStringField() { return *GetNativePointerField<FString*>(this, "APrimalStructureItemContainer.DeactivateContainerString"); }
+    TObjectPtr<UTexture2D>& DeactivateContainerIconField() { return *GetNativePointerField<TObjectPtr<UTexture2D>*>(this, "APrimalStructureItemContainer.DeactivateContainerIcon"); }
+    TSubclassOf<UDamageType>& ContainerActiveHealthDecreaseDamageTypePassiveField() { return *GetNativePointerField<TSubclassOf<UDamageType>*>(this, "APrimalStructureItemContainer.ContainerActiveHealthDecreaseDamageTypePassive"); }
+    TArray<TSubclassOf<UPrimalItem>, TSizedDefaultAllocator<32> >& ActiveRequiresFuelItemsField() { return *GetNativePointerField<TArray<TSubclassOf<UPrimalItem>, TSizedDefaultAllocator<32> >*>(this, "APrimalStructureItemContainer.ActiveRequiresFuelItems"); }
+    TArray<float, TSizedDefaultAllocator<32> >& FuelItemsConsumeIntervalField() { return *GetNativePointerField<TArray<float, TSizedDefaultAllocator<32> >*>(this, "APrimalStructureItemContainer.FuelItemsConsumeInterval"); }
+    TArray<TSubclassOf<UPrimalItem>, TSizedDefaultAllocator<32> >& FuelItemsConsumedGiveItemsField() { return *GetNativePointerField<TArray<TSubclassOf<UPrimalItem>, TSizedDefaultAllocator<32> >*>(this, "APrimalStructureItemContainer.FuelItemsConsumedGiveItems"); }
+    long double& NetDestructionTimeField() { return *GetNativePointerField<long double*>(this, "APrimalStructureItemContainer.NetDestructionTime"); }
+    unsigned int& CurrentPinCodeField() { return *GetNativePointerField<unsigned int*>(this, "APrimalStructureItemContainer.CurrentPinCode"); }
+    long double& CurrentFuelTimeCacheField() { return *GetNativePointerField<long double*>(this, "APrimalStructureItemContainer.CurrentFuelTimeCache"); }
+    long double& LastCheckedFuelTimeField() { return *GetNativePointerField<long double*>(this, "APrimalStructureItemContainer.LastCheckedFuelTime"); }
+    int& LinkedPowerJunctionStructureIDField() { return *GetNativePointerField<int*>(this, "APrimalStructureItemContainer.LinkedPowerJunctionStructureID"); }
+    int& CurrentItemCountField() { return *GetNativePointerField<int*>(this, "APrimalStructureItemContainer.CurrentItemCount"); }
+    int& BlacklistedItemCountField() { return *GetNativePointerField<int*>(this, "APrimalStructureItemContainer.BlacklistedItemCount"); }
+    int& MaxItemCountField() { return *GetNativePointerField<int*>(this, "APrimalStructureItemContainer.MaxItemCount"); }
+    int& EmitterColorRegionIndexField() { return *GetNativePointerField<int*>(this, "APrimalStructureItemContainer.EmitterColorRegionIndex"); }
+    TWeakObjectPtr<APrimalStructure>& LinkedPowerJunctionStructureField() { return *GetNativePointerField<TWeakObjectPtr<APrimalStructure>*>(this, "APrimalStructureItemContainer.LinkedPowerJunctionStructure"); }
+    TSubclassOf<UPrimalItem>& NextConsumeFuelGiveItemTypeField() { return *GetNativePointerField<TSubclassOf<UPrimalItem>*>(this, "APrimalStructureItemContainer.NextConsumeFuelGiveItemType"); }
+    long double& LastLockStateChangeTimeField() { return *GetNativePointerField<long double*>(this, "APrimalStructureItemContainer.LastLockStateChangeTime"); }
+    long double& LastActiveStateChangeTimeField() { return *GetNativePointerField<long double*>(this, "APrimalStructureItemContainer.LastActiveStateChangeTime"); }
+    int& LastPowerJunctionLinkIDField() { return *GetNativePointerField<int*>(this, "APrimalStructureItemContainer.LastPowerJunctionLinkID"); }
+    FPrimalMapMarkerEntryData& MapMarkerLocationInfoField() { return *GetNativePointerField<FPrimalMapMarkerEntryData*>(this, "APrimalStructureItemContainer.MapMarkerLocationInfo"); }
+    FTimerHandle& UpdateContainerActiveHealthDecreaseHandleField() { return *GetNativePointerField<FTimerHandle*>(this, "APrimalStructureItemContainer.UpdateContainerActiveHealthDecreaseHandle"); }
+    float& BasedCharacterDamageIntervalField() { return *GetNativePointerField<float*>(this, "APrimalStructureItemContainer.BasedCharacterDamageInterval"); }
+    float& BasedCharacterDamageAmountField() { return *GetNativePointerField<float*>(this, "APrimalStructureItemContainer.BasedCharacterDamageAmount"); }
+    TSubclassOf<UDamageType>& BasedCharacterDamageTypeField() { return *GetNativePointerField<TSubclassOf<UDamageType>*>(this, "APrimalStructureItemContainer.BasedCharacterDamageType"); }
+    TSubclassOf<UPrimalItem>& EngramRequirementClassOverrideField() { return *GetNativePointerField<TSubclassOf<UPrimalItem>*>(this, "APrimalStructureItemContainer.EngramRequirementClassOverride"); }
+    AActor*& LinkedBlueprintSpawnActorPointField() { return *GetNativePointerField<AActor**>(this, "APrimalStructureItemContainer.LinkedBlueprintSpawnActorPoint"); }
+    TSoftClassPtr<APrimalStructureItemContainer>& PoweredNearbyStructureTemplateField() { return *GetNativePointerField<TSoftClassPtr<APrimalStructureItemContainer>*>(this, "APrimalStructureItemContainer.PoweredNearbyStructureTemplate"); }
+    float& PoweredNearbyStructureRangeField() { return *GetNativePointerField<float*>(this, "APrimalStructureItemContainer.PoweredNearbyStructureRange"); }
+    UParticleSystem*& JunctionLinkParticleTemplateField() { return *GetNativePointerField<UParticleSystem**>(this, "APrimalStructureItemContainer.JunctionLinkParticleTemplate"); }
+    TSubclassOf<UPrimalUI>& UISceneTemplateField() { return *GetNativePointerField<TSubclassOf<UPrimalUI>*>(this, "APrimalStructureItemContainer.UISceneTemplate"); }
+    FString& OpenSceneActionNameField() { return *GetNativePointerField<FString*>(this, "APrimalStructureItemContainer.OpenSceneActionName"); }
+    TObjectPtr<UTexture2D>& OpenSceneActionIconField() { return *GetNativePointerField<TObjectPtr<UTexture2D>*>(this, "APrimalStructureItemContainer.OpenSceneActionIcon"); }
+    FString& DisabledOpenSceneActionNameField() { return *GetNativePointerField<FString*>(this, "APrimalStructureItemContainer.DisabledOpenSceneActionName"); }
+    TObjectPtr<UTexture2D>& DisabledOpenSceneActionIconField() { return *GetNativePointerField<TObjectPtr<UTexture2D>*>(this, "APrimalStructureItemContainer.DisabledOpenSceneActionIcon"); }
+    TSubclassOf<UPrimalItem>& RequiresItemForOpenSceneActionField() { return *GetNativePointerField<TSubclassOf<UPrimalItem>*>(this, "APrimalStructureItemContainer.RequiresItemForOpenSceneAction"); }
+    //_BYTE[6] & _padding_123aField() { return *GetNativePointerField<_BYTE[6] *>(this, "APrimalStructureItemContainer._padding_123a"); }
+    long double& DeathCacheCreationTimeField() { return *GetNativePointerField<long double*>(this, "APrimalStructureItemContainer.DeathCacheCreationTime"); }
+    long double& LastBasedCharacterDamageTimeField() { return *GetNativePointerField<long double*>(this, "APrimalStructureItemContainer.LastBasedCharacterDamageTime"); }
+    int& LastBasedCharacterDamageFrameField() { return *GetNativePointerField<int*>(this, "APrimalStructureItemContainer.LastBasedCharacterDamageFrame"); }
+    long double& LastSignNamingTimeField() { return *GetNativePointerField<long double*>(this, "APrimalStructureItemContainer.LastSignNamingTime"); }
+    UParticleSystemComponent*& JunctionLinkCableParticleField() { return *GetNativePointerField<UParticleSystemComponent**>(this, "APrimalStructureItemContainer.JunctionLinkCableParticle"); }
+    UE::Math::TVector<double>& JunctionCableBeamOffsetStartField() { return *GetNativePointerField<UE::Math::TVector<double>*>(this, "APrimalStructureItemContainer.JunctionCableBeamOffsetStart"); }
+    UE::Math::TVector<double>& JunctionCableBeamOffsetEndField() { return *GetNativePointerField<UE::Math::TVector<double>*>(this, "APrimalStructureItemContainer.JunctionCableBeamOffsetEnd"); }
+    USoundBase*& ContainerActivatedSoundField() { return *GetNativePointerField<USoundBase**>(this, "APrimalStructureItemContainer.ContainerActivatedSound"); }
+    USoundBase*& ContainerDeactivatedSoundField() { return *GetNativePointerField<USoundBase**>(this, "APrimalStructureItemContainer.ContainerDeactivatedSound"); }
+    TSubclassOf<APrimalStructureItemContainer>& DemolishInventoryDepositClassField() { return *GetNativePointerField<TSubclassOf<APrimalStructureItemContainer>*>(this, "APrimalStructureItemContainer.DemolishInventoryDepositClass"); }
+    TSubclassOf<UPrimalItem>& FuelItemTrueClassField() { return *GetNativePointerField<TSubclassOf<UPrimalItem>*>(this, "APrimalStructureItemContainer.FuelItemTrueClass"); }
+    TSubclassOf<UPrimalItem>& ReplicatedFuelItemClassField() { return *GetNativePointerField<TSubclassOf<UPrimalItem>*>(this, "APrimalStructureItemContainer.ReplicatedFuelItemClass"); }
+    float& CurrentFuelQuantityField() { return *GetNativePointerField<float*>(this, "APrimalStructureItemContainer.CurrentFuelQuantity"); }
+    float& DrawFuelRemainingOffsetField() { return *GetNativePointerField<float*>(this, "APrimalStructureItemContainer.DrawFuelRemainingOffset"); }
+    float& TimeCooldownRequestFuelRemainingField() { return *GetNativePointerField<float*>(this, "APrimalStructureItemContainer.TimeCooldownRequestFuelRemaining"); }
+    __int16& ReplicatedFuelItemColorIndexField() { return *GetNativePointerField<__int16*>(this, "APrimalStructureItemContainer.ReplicatedFuelItemColorIndex"); }
+    //UFXSystemAsset*& DefaultParticleTemplateField() { return *GetNativePointerField<UFXSystemAsset**>(this, "APrimalStructureItemContainer.DefaultParticleTemplate"); }
+    FLinearColor& DefaultParticleLightColorField() { return *GetNativePointerField<FLinearColor*>(this, "APrimalStructureItemContainer.DefaultParticleLightColor"); }
+    USoundBase*& DefaultAudioTemplateField() { return *GetNativePointerField<USoundBase**>(this, "APrimalStructureItemContainer.DefaultAudioTemplate"); }
+    TArray<TSubclassOf<UPrimalItem>, TSizedDefaultAllocator<32> >& OverrideParticleTemplateItemClassesField() { return *GetNativePointerField<TArray<TSubclassOf<UPrimalItem>, TSizedDefaultAllocator<32> >*>(this, "APrimalStructureItemContainer.OverrideParticleTemplateItemClasses"); }
+    //TArray<UFXSystemAsset*, TSizedDefaultAllocator<32> >& OverrideParticleTemplatesField() { return *GetNativePointerField<TArray<UFXSystemAsset*, TSizedDefaultAllocator<32> >*>(this, "APrimalStructureItemContainer.OverrideParticleTemplates"); }
+    bool& bHideUnusedParticleTypesOnRefreshActiveEffectsField() { return *GetNativePointerField<bool*>(this, "APrimalStructureItemContainer.bHideUnusedParticleTypesOnRefreshActiveEffects"); }
+    TArray<FLinearColor, TSizedDefaultAllocator<32> >& OverrideParticleLightColorField() { return *GetNativePointerField<TArray<FLinearColor, TSizedDefaultAllocator<32> >*>(this, "APrimalStructureItemContainer.OverrideParticleLightColor"); }
+    TArray<USoundBase*, TSizedDefaultAllocator<32> >& OverrideAudioTemplatesField() { return *GetNativePointerField<TArray<USoundBase*, TSizedDefaultAllocator<32> >*>(this, "APrimalStructureItemContainer.OverrideAudioTemplates"); }
+    float& MaxActivationDistanceField() { return *GetNativePointerField<float*>(this, "APrimalStructureItemContainer.MaxActivationDistance"); }
+    FString& BoxNamePrefaceStringField() { return *GetNativePointerField<FString*>(this, "APrimalStructureItemContainer.BoxNamePrefaceString"); }
+    TArray<float, TSizedDefaultAllocator<32> >& FuelConsumeDecreaseDurabilityAmountsField() { return *GetNativePointerField<TArray<float, TSizedDefaultAllocator<32> >*>(this, "APrimalStructureItemContainer.FuelConsumeDecreaseDurabilityAmounts"); }
+    float& RandomFuelUpdateTimeMinField() { return *GetNativePointerField<float*>(this, "APrimalStructureItemContainer.RandomFuelUpdateTimeMin"); }
+    float& RandomFuelUpdateTimeMaxField() { return *GetNativePointerField<float*>(this, "APrimalStructureItemContainer.RandomFuelUpdateTimeMax"); }
+    long double& LastDeactivatedTimeField() { return *GetNativePointerField<long double*>(this, "APrimalStructureItemContainer.LastDeactivatedTime"); }
+    long double& LastActivatedTimeField() { return *GetNativePointerField<long double*>(this, "APrimalStructureItemContainer.LastActivatedTime"); }
+    float& ValidCraftingResourceMaxDurabilityField() { return *GetNativePointerField<float*>(this, "APrimalStructureItemContainer.ValidCraftingResourceMaxDurability"); }
+    float& ActivationCooldownTimeField() { return *GetNativePointerField<float*>(this, "APrimalStructureItemContainer.ActivationCooldownTime"); }
+    unsigned __int64& DeathCacheCharacterIDField() { return *GetNativePointerField<unsigned __int64*>(this, "APrimalStructureItemContainer.DeathCacheCharacterID"); }
+    UParticleSystemComponent*& LocalCorpseEmitterField() { return *GetNativePointerField<UParticleSystemComponent**>(this, "APrimalStructureItemContainer.LocalCorpseEmitter"); }
+    float& SinglePlayerFuelConsumptionIntervalsMultiplierField() { return *GetNativePointerField<float*>(this, "APrimalStructureItemContainer.SinglePlayerFuelConsumptionIntervalsMultiplier"); }
+    float& PoweredBatteryDurabilityToDecreasePerSecondField() { return *GetNativePointerField<float*>(this, "APrimalStructureItemContainer.PoweredBatteryDurabilityToDecreasePerSecond"); }
+    float& DropInventoryDepositTraceDistanceField() { return *GetNativePointerField<float*>(this, "APrimalStructureItemContainer.DropInventoryDepositTraceDistance"); }
+    //TMap<FName, FPrimalWirelessReferences, FDefaultSetAllocator, TDefaultMapHashableKeyFuncs<FName, FPrimalWirelessReferences, 0> >& WirelessExchangeRefsField() { return *GetNativePointerField<TMap<FName, FPrimalWirelessReferences, FDefaultSetAllocator, TDefaultMapHashableKeyFuncs<FName, FPrimalWirelessReferences, 0> >*>(this, "APrimalStructureItemContainer.WirelessExchangeRefs"); }
+    TArray<TWeakObjectPtr<AShooterPlayerController>, TSizedDefaultAllocator<32> >& ValidatedByPinCodePlayerControllersField() { return *GetNativePointerField<TArray<TWeakObjectPtr<AShooterPlayerController>, TSizedDefaultAllocator<32> >*>(this, "APrimalStructureItemContainer.ValidatedByPinCodePlayerControllers"); }
+    FTimerHandle& AdjustNetDestructionTimeHandleField() { return *GetNativePointerField<FTimerHandle*>(this, "APrimalStructureItemContainer.AdjustNetDestructionTimeHandle"); }
+    FColor& ActivatedIconColorField() { return *GetNativePointerField<FColor*>(this, "APrimalStructureItemContainer.ActivatedIconColor"); }
+    FColor& DeactivatedIconColorField() { return *GetNativePointerField<FColor*>(this, "APrimalStructureItemContainer.DeactivatedIconColor"); }
+    TObjectPtr<UTexture2D>& EnableUnpoweredAutoActivationIconField() { return *GetNativePointerField<TObjectPtr<UTexture2D>*>(this, "APrimalStructureItemContainer.EnableUnpoweredAutoActivationIcon"); }
+    TObjectPtr<UTexture2D>& DisableUnpoweredAutoActivationIconField() { return *GetNativePointerField<TObjectPtr<UTexture2D>*>(this, "APrimalStructureItemContainer.DisableUnpoweredAutoActivationIcon"); }
+    TObjectPtr<UTexture2D>& EnableAutoCraftIconField() { return *GetNativePointerField<TObjectPtr<UTexture2D>*>(this, "APrimalStructureItemContainer.EnableAutoCraftIcon"); }
+    TObjectPtr<UTexture2D>& DisableAutoCraftIconField() { return *GetNativePointerField<TObjectPtr<UTexture2D>*>(this, "APrimalStructureItemContainer.DisableAutoCraftIcon"); }
+    TObjectPtr<UTexture2D>& AllowWirelessCraftingIconField() { return *GetNativePointerField<TObjectPtr<UTexture2D>*>(this, "APrimalStructureItemContainer.AllowWirelessCraftingIcon"); }
+    TObjectPtr<UTexture2D>& PreventWirelessCraftingIconField() { return *GetNativePointerField<TObjectPtr<UTexture2D>*>(this, "APrimalStructureItemContainer.PreventWirelessCraftingIcon"); }
+    TObjectPtr<UTexture2D>& DrinkWaterIconField() { return *GetNativePointerField<TObjectPtr<UTexture2D>*>(this, "APrimalStructureItemContainer.DrinkWaterIcon"); }
+
+    // Bitfields
+
+    BitFieldValue<bool, unsigned __int32> bAdjustDamageAsPlayerWithEquipment() { return { this, "APrimalStructureItemContainer.bAdjustDamageAsPlayerWithEquipment" }; }
+    BitFieldValue<bool, unsigned __int32> bUseCollisionCompsForFloatingDPS() { return { this, "APrimalStructureItemContainer.bUseCollisionCompsForFloatingDPS" }; }
+    BitFieldValue<bool, unsigned __int32> bOnlyConsumeDurabilityOnEquipmentForEnemies() { return { this, "APrimalStructureItemContainer.bOnlyConsumeDurabilityOnEquipmentForEnemies" }; }
+    BitFieldValue<bool, unsigned __int32> bAutoActivateContainer() { return { this, "APrimalStructureItemContainer.bAutoActivateContainer" }; }
+    BitFieldValue<bool, unsigned __int32> bCanToggleActivation() { return { this, "APrimalStructureItemContainer.bCanToggleActivation" }; }
+    BitFieldValue<bool, unsigned __int32> bAutoActivateWhenFueled() { return { this, "APrimalStructureItemContainer.bAutoActivateWhenFueled" }; }
+    BitFieldValue<bool, unsigned __int32> bAllowCustomName() { return { this, "APrimalStructureItemContainer.bAllowCustomName" }; }
+    BitFieldValue<bool, unsigned __int32> bContainerActivated() { return { this, "APrimalStructureItemContainer.bContainerActivated" }; }
+    BitFieldValue<bool, unsigned __int32> bOnlyUseSpoilingMultipliersIfActivated() { return { this, "APrimalStructureItemContainer.bOnlyUseSpoilingMultipliersIfActivated" }; }
+    BitFieldValue<bool, unsigned __int32> bCraftingSubstractConnectedWater() { return { this, "APrimalStructureItemContainer.bCraftingSubstractConnectedWater" }; }
+    BitFieldValue<bool, unsigned __int32> bForceNoPinLocking() { return { this, "APrimalStructureItemContainer.bForceNoPinLocking" }; }
+    BitFieldValue<bool, unsigned __int32> bServerBPNotifyInventoryItemChanges() { return { this, "APrimalStructureItemContainer.bServerBPNotifyInventoryItemChanges" }; }
+    BitFieldValue<bool, unsigned __int32> bClientBPNotifyInventoryItemChanges() { return { this, "APrimalStructureItemContainer.bClientBPNotifyInventoryItemChanges" }; }
+    BitFieldValue<bool, unsigned __int32> bDisplayActivationOnInventoryUI() { return { this, "APrimalStructureItemContainer.bDisplayActivationOnInventoryUI" }; }
+    BitFieldValue<bool, unsigned __int32> bUseBPGetFuelConsumptionMultiplier() { return { this, "APrimalStructureItemContainer.bUseBPGetFuelConsumptionMultiplier" }; }
+    BitFieldValue<bool, unsigned __int32> bPreventToggleActivation() { return { this, "APrimalStructureItemContainer.bPreventToggleActivation" }; }
+    BitFieldValue<bool, unsigned __int32> bServerBPNotifyInventoryItemChangesUseQuantity() { return { this, "APrimalStructureItemContainer.bServerBPNotifyInventoryItemChangesUseQuantity" }; }
+    BitFieldValue<bool, unsigned __int32> bStartedUnderwater() { return { this, "APrimalStructureItemContainer.bStartedUnderwater" }; }
+    BitFieldValue<bool, unsigned __int32> bCheckStartedUnderwater() { return { this, "APrimalStructureItemContainer.bCheckStartedUnderwater" }; }
+    BitFieldValue<bool, unsigned __int32> bDisplayActivationOnInventoryUISecondary() { return { this, "APrimalStructureItemContainer.bDisplayActivationOnInventoryUISecondary" }; }
+    BitFieldValue<bool, unsigned __int32> bDisplayActivationOnInventoryUITertiary() { return { this, "APrimalStructureItemContainer.bDisplayActivationOnInventoryUITertiary" }; }
+    BitFieldValue<bool, unsigned __int32> bFuelAllowActivationWhenNoPower() { return { this, "APrimalStructureItemContainer.bFuelAllowActivationWhenNoPower" }; }
+    BitFieldValue<bool, unsigned __int32> bPoweredAllowBattery() { return { this, "APrimalStructureItemContainer.bPoweredAllowBattery" }; }
+    BitFieldValue<bool, unsigned __int32> bPoweredUsingBattery() { return { this, "APrimalStructureItemContainer.bPoweredUsingBattery" }; }
+    BitFieldValue<bool, unsigned __int32> bPoweredHasBattery() { return { this, "APrimalStructureItemContainer.bPoweredHasBattery" }; }
+    BitFieldValue<bool, unsigned __int32> bPoweredAllowSolar() { return { this, "APrimalStructureItemContainer.bPoweredAllowSolar" }; }
+    BitFieldValue<bool, unsigned __int32> bPoweredUsingSolar() { return { this, "APrimalStructureItemContainer.bPoweredUsingSolar" }; }
+    BitFieldValue<bool, unsigned __int32> bUseColorRegionForEmitterColor() { return { this, "APrimalStructureItemContainer.bUseColorRegionForEmitterColor" }; }
+    BitFieldValue<bool, unsigned __int32> UseBPApplyPinCode() { return { this, "APrimalStructureItemContainer.UseBPApplyPinCode" }; }
+    BitFieldValue<bool, unsigned __int32> bIsLocked() { return { this, "APrimalStructureItemContainer.bIsLocked" }; }
+    BitFieldValue<bool, unsigned __int32> bIsPinLocked() { return { this, "APrimalStructureItemContainer.bIsPinLocked" }; }
+    BitFieldValue<bool, unsigned __int32> bHasFuel() { return { this, "APrimalStructureItemContainer.bHasFuel" }; }
+    BitFieldValue<bool, unsigned __int32> bIsUnderwater() { return { this, "APrimalStructureItemContainer.bIsUnderwater" }; }
+    BitFieldValue<bool, unsigned __int32> bDisableActivationUnderwater() { return { this, "APrimalStructureItemContainer.bDisableActivationUnderwater" }; }
+    BitFieldValue<bool, unsigned __int32> bForcePreventAutoActivateWhenConnectedToWater() { return { this, "APrimalStructureItemContainer.bForcePreventAutoActivateWhenConnectedToWater" }; }
+    BitFieldValue<bool, unsigned __int32> bSupportsLocking() { return { this, "APrimalStructureItemContainer.bSupportsLocking" }; }
+    BitFieldValue<bool, unsigned __int32> bSupportsPinLocking() { return { this, "APrimalStructureItemContainer.bSupportsPinLocking" }; }
+    BitFieldValue<bool, unsigned __int32> bDropInventoryOnDestruction() { return { this, "APrimalStructureItemContainer.bDropInventoryOnDestruction" }; }
+    BitFieldValue<bool, unsigned __int32> bDestroyWhenAllItemsRemoved() { return { this, "APrimalStructureItemContainer.bDestroyWhenAllItemsRemoved" }; }
+    BitFieldValue<bool, unsigned __int32> bDrinkingWater() { return { this, "APrimalStructureItemContainer.bDrinkingWater" }; }
+    BitFieldValue<bool, unsigned __int32> bPoweredWaterSourceWhenActive() { return { this, "APrimalStructureItemContainer.bPoweredWaterSourceWhenActive" }; }
+    BitFieldValue<bool, unsigned __int32> bActiveRequiresPower() { return { this, "APrimalStructureItemContainer.bActiveRequiresPower" }; }
+    BitFieldValue<bool, unsigned __int32> bIsPowerJunction() { return { this, "APrimalStructureItemContainer.bIsPowerJunction" }; }
+    BitFieldValue<bool, unsigned __int32> bHidePowerJunctionConnection() { return { this, "APrimalStructureItemContainer.bHidePowerJunctionConnection" }; }
+    BitFieldValue<bool, unsigned __int32> bAutoActivateIfPowered() { return { this, "APrimalStructureItemContainer.bAutoActivateIfPowered" }; }
+    BitFieldValue<bool, unsigned __int32> bLastToggleActivated() { return { this, "APrimalStructureItemContainer.bLastToggleActivated" }; }
+    BitFieldValue<bool, unsigned __int32> bSupportsPinActivation() { return { this, "APrimalStructureItemContainer.bSupportsPinActivation" }; }
+    BitFieldValue<bool, unsigned __int32> bIsPowered() { return { this, "APrimalStructureItemContainer.bIsPowered" }; }
+    BitFieldValue<bool, unsigned __int32> bOnlyAllowTeamActivation() { return { this, "APrimalStructureItemContainer.bOnlyAllowTeamActivation" }; }
+    BitFieldValue<bool, unsigned __int32> bReplicateItemFuelClass() { return { this, "APrimalStructureItemContainer.bReplicateItemFuelClass" }; }
+    BitFieldValue<bool, unsigned __int32> bUseOpenSceneAction() { return { this, "APrimalStructureItemContainer.bUseOpenSceneAction" }; }
+    BitFieldValue<bool, unsigned __int32> bHandledDestruction() { return { this, "APrimalStructureItemContainer.bHandledDestruction" }; }
+    BitFieldValue<bool, unsigned __int32> bUseBPActivated() { return { this, "APrimalStructureItemContainer.bUseBPActivated" }; }
+    BitFieldValue<bool, unsigned __int32> bUseBPCanBeActivated() { return { this, "APrimalStructureItemContainer.bUseBPCanBeActivated" }; }
+    BitFieldValue<bool, unsigned __int32> bUseBPCanBeActivatedByPlayer() { return { this, "APrimalStructureItemContainer.bUseBPCanBeActivatedByPlayer" }; }
+    BitFieldValue<bool, unsigned __int32> bBPOnContainerActiveHealthDecrease() { return { this, "APrimalStructureItemContainer.bBPOnContainerActiveHealthDecrease" }; }
+    BitFieldValue<bool, unsigned __int32> bBPIsValidWaterSourceForPipe() { return { this, "APrimalStructureItemContainer.bBPIsValidWaterSourceForPipe" }; }
+    BitFieldValue<bool, unsigned __int32> bAllowAutoActivateWhenNoPower() { return { this, "APrimalStructureItemContainer.bAllowAutoActivateWhenNoPower" }; }
+    BitFieldValue<bool, unsigned __int32> bAutoActivateWhenNoPower() { return { this, "APrimalStructureItemContainer.bAutoActivateWhenNoPower" }; }
+    BitFieldValue<bool, unsigned __int32> bPreventUsingAsWirelessCraftingSource() { return { this, "APrimalStructureItemContainer.bPreventUsingAsWirelessCraftingSource" }; }
+    BitFieldValue<bool, unsigned __int32> bRequiresItemExactClass() { return { this, "APrimalStructureItemContainer.bRequiresItemExactClass" }; }
+    BitFieldValue<bool, unsigned __int32> bDestroyWhenAllItemsRemovedExceptDefaults() { return { this, "APrimalStructureItemContainer.bDestroyWhenAllItemsRemovedExceptDefaults" }; }
+    BitFieldValue<bool, unsigned __int32> bInventoryForcePreventRemoteAddItems() { return { this, "APrimalStructureItemContainer.bInventoryForcePreventRemoteAddItems" }; }
+    BitFieldValue<bool, unsigned __int32> bInventoryForcePreventItemAppends() { return { this, "APrimalStructureItemContainer.bInventoryForcePreventItemAppends" }; }
+    BitFieldValue<bool, unsigned __int32> bDidSetContainerActive() { return { this, "APrimalStructureItemContainer.bDidSetContainerActive" }; }
+    BitFieldValue<bool, unsigned __int32> bUseDeathCacheCharacterID() { return { this, "APrimalStructureItemContainer.bUseDeathCacheCharacterID" }; }
+    BitFieldValue<bool, unsigned __int32> bHideAutoActivateToggle() { return { this, "APrimalStructureItemContainer.bHideAutoActivateToggle" }; }
+    BitFieldValue<bool, unsigned __int32> bUseCooldownOnTransferAll() { return { this, "APrimalStructureItemContainer.bUseCooldownOnTransferAll" }; }
+    BitFieldValue<bool, unsigned __int32> bUseAmmoContainerBuff() { return { this, "APrimalStructureItemContainer.bUseAmmoContainerBuff" }; }
+    BitFieldValue<bool, unsigned __int32> bDrawFuelRemaining() { return { this, "APrimalStructureItemContainer.bDrawFuelRemaining" }; }
+    BitFieldValue<bool, unsigned __int32> bUseBPGetQuantityOfItemWithoutCheckingInventory() { return { this, "APrimalStructureItemContainer.bUseBPGetQuantityOfItemWithoutCheckingInventory" }; }
+    BitFieldValue<bool, unsigned __int32> bUseBPSetPlayerConstructor() { return { this, "APrimalStructureItemContainer.bUseBPSetPlayerConstructor" }; }
+    BitFieldValue<bool, unsigned __int32> bReplicateLastActivatedTime() { return { this, "APrimalStructureItemContainer.bReplicateLastActivatedTime" }; }
+    BitFieldValue<bool, unsigned __int32> bIsAmmoContainer() { return { this, "APrimalStructureItemContainer.bIsAmmoContainer" }; }
+    BitFieldValue<bool, unsigned __int32> bServerBPNotifyInventoryItemChangesUseSwapped() { return { this, "APrimalStructureItemContainer.bServerBPNotifyInventoryItemChangesUseSwapped" }; }
+    BitFieldValue<bool, unsigned __int32> bBPNotifyRemoteViewerChange() { return { this, "APrimalStructureItemContainer.bBPNotifyRemoteViewerChange" }; }
+    BitFieldValue<bool, unsigned __int32> bUseMeshOriginForInventoryAccessTrace() { return { this, "APrimalStructureItemContainer.bUseMeshOriginForInventoryAccessTrace" }; }
+
+    // Functions
+
+    bool IsPowered() { return NativeCall<bool>(this, "APrimalStructureItemContainer.IsPowered()"); }
+    static UClass* StaticClass() { return NativeCall<UClass*>(nullptr, "APrimalStructureItemContainer.StaticClass()"); }
+    bool BPApplyPinCode(AShooterPlayerController* ForPC, int appledPinCode, bool bIsSetting, int TheCustomIndex) { return NativeCall<bool, AShooterPlayerController*, int, bool, int>(this, "APrimalStructureItemContainer.BPApplyPinCode(AShooterPlayerController*,int,bool,int)", ForPC, appledPinCode, bIsSetting, TheCustomIndex); }
+    void NetUpdateBoxName(const FString* NewName) { NativeCall<void, const FString*>(this, "APrimalStructureItemContainer.NetUpdateBoxName(FString&)", NewName); }
+    void OnContainerRenamed() { NativeCall<void>(this, "APrimalStructureItemContainer.OnContainerRenamed()"); }
+    static void StaticRegisterNativesAPrimalStructureItemContainer() { NativeCall<void>(nullptr, "APrimalStructureItemContainer.StaticRegisterNativesAPrimalStructureItemContainer()"); }
+    void ValidateGeneratedRepEnums(const TArray<FRepRecord, TSizedDefaultAllocator<32> >* ClassReps) { NativeCall<void, const TArray<FRepRecord, TSizedDefaultAllocator<32> >*>(this, "APrimalStructureItemContainer.ValidateGeneratedRepEnums(TArray<FRepRecord,TSizedDefaultAllocator<32>>*)", ClassReps); }
+    //void ~APrimalStructureItemContainer() { NativeCall<void>(this, "APrimalStructureItemContainer.~APrimalStructureItemContainer()"); }
+    //void APrimalStructureItemContainer(const FObjectInitializer* ObjectInitializer) { NativeCall<void, const FObjectInitializer*>(this, "APrimalStructureItemContainer.APrimalStructureItemContainer(FObjectInitializer*)", ObjectInitializer); }
+    bool CanBeActivated() { return NativeCall<bool>(this, "APrimalStructureItemContainer.CanBeActivated()"); }
+    bool AllowToggleActivation(AShooterPlayerController* ForPC) { return NativeCall<bool, AShooterPlayerController*>(this, "APrimalStructureItemContainer.AllowToggleActivation(AShooterPlayerController*)", ForPC); }
+    void GetMultiUseEntries(APlayerController* ForPC, TArray<FMultiUseEntry, TSizedDefaultAllocator<32> >* MultiUseEntries, int hitBodyIndex) { NativeCall<void, APlayerController*, TArray<FMultiUseEntry, TSizedDefaultAllocator<32> >*, int>(this, "APrimalStructureItemContainer.GetMultiUseEntries(APlayerController*,TArray<FMultiUseEntry,TSizedDefaultAllocator<32>>*,int)", ForPC, MultiUseEntries, hitBodyIndex); }
+    bool TryMultiUse(APlayerController* ForPC, int UseIndex, int hitBodyIndex) { return NativeCall<bool, APlayerController*, int, int>(this, "APrimalStructureItemContainer.TryMultiUse(APlayerController*,int,int)", ForPC, UseIndex, hitBodyIndex); }
+    void ClientMultiUse(APlayerController* ForPC, int UseIndex, int hitBodyIndex) { NativeCall<void, APlayerController*, int, int>(this, "APrimalStructureItemContainer.ClientMultiUse(APlayerController*,int,int)", ForPC, UseIndex, hitBodyIndex); }
+    void PreInitializeComponents() { NativeCall<void>(this, "APrimalStructureItemContainer.PreInitializeComponents()"); }
+    void BeginPlay() { NativeCall<void>(this, "APrimalStructureItemContainer.BeginPlay()"); }
+    void PreviewClosestWirelessSources(APrimalDinoCharacter* PlacingOnSaddleDino) { NativeCall<void, APrimalDinoCharacter*>(this, "APrimalStructureItemContainer.PreviewClosestWirelessSources(APrimalDinoCharacter*)", PlacingOnSaddleDino); }
+    void AdjustDamage(float* Damage, const FDamageEvent* DamageEvent, AController* EventInstigator, AActor* DamageCauser) { NativeCall<void, float*, const FDamageEvent*, AController*, AActor*>(this, "APrimalStructureItemContainer.AdjustDamage(float*,FDamageEvent*,AController*,AActor*)", Damage, DamageEvent, EventInstigator, DamageCauser); }
+    void CheckForDeathCacheEmitter() { NativeCall<void>(this, "APrimalStructureItemContainer.CheckForDeathCacheEmitter()"); }
+    void PlacedStructureLocation() { NativeCall<void>(this, "APrimalStructureItemContainer.PlacedStructureLocation()"); }
+    void Stasis() { NativeCall<void>(this, "APrimalStructureItemContainer.Stasis()"); }
+    void Unstasis() { NativeCall<void>(this, "APrimalStructureItemContainer.Unstasis()"); }
+    void PlacedStructure(AShooterPlayerController* PC) { NativeCall<void, AShooterPlayerController*>(this, "APrimalStructureItemContainer.PlacedStructure(AShooterPlayerController*)", PC); }
+    void GetLifetimeReplicatedProps(TArray<FLifetimeProperty, TSizedDefaultAllocator<32> >* OutLifetimeProps) { NativeCall<void, TArray<FLifetimeProperty, TSizedDefaultAllocator<32> >*>(this, "APrimalStructureItemContainer.GetLifetimeReplicatedProps(TArray<FLifetimeProperty,TSizedDefaultAllocator<32>>*)", OutLifetimeProps); }
+    //UFXSystemAsset* GetOverrideParticleTemplate() { return NativeCall<UFXSystemAsset*>(this, "APrimalStructureItemContainer.GetOverrideParticleTemplate()"); }
+    FLinearColor* GetOverrideParticleLightColor(FLinearColor* result) { return NativeCall<FLinearColor*, FLinearColor*>(this, "APrimalStructureItemContainer.GetOverrideParticleLightColor(FLinearColor*)", result); }
+    USoundBase* GetOverrideAudioTemplate() { return NativeCall<USoundBase*>(this, "APrimalStructureItemContainer.GetOverrideAudioTemplate()"); }
+    float GetTimeFuelRemaining() { return NativeCall<float>(this, "APrimalStructureItemContainer.GetTimeFuelRemaining()"); }
+    bool CanDrawFuelRemaining() { return NativeCall<bool>(this, "APrimalStructureItemContainer.CanDrawFuelRemaining()"); }
+    bool IsValidWaterSourceForPipe(APrimalStructureWaterPipe* ForWaterPipe) { return NativeCall<bool, APrimalStructureWaterPipe*>(this, "APrimalStructureItemContainer.IsValidWaterSourceForPipe(APrimalStructureWaterPipe*)", ForWaterPipe); }
+    void SetDelayedActivation() { NativeCall<void>(this, "APrimalStructureItemContainer.SetDelayedActivation()"); }
+    void TryActivation() { NativeCall<void>(this, "APrimalStructureItemContainer.TryActivation()"); }
+    void SetContainerActive(bool bNewActive) { NativeCall<void, bool>(this, "APrimalStructureItemContainer.SetContainerActive(bool)", bNewActive); }
+    FString* GetDebugInfoString(FString* result) { return NativeCall<FString*, FString*>(this, "APrimalStructureItemContainer.GetDebugInfoString(FString&)", result); }
+    bool CanOpen(APlayerController* ForPC) { return NativeCall<bool, APlayerController*>(this, "APrimalStructureItemContainer.CanOpen(APlayerController*)", ForPC); }
+    bool IsPinLocked() { return NativeCall<bool>(this, "APrimalStructureItemContainer.IsPinLocked()"); }
+    int GetPinCode() { return NativeCall<int>(this, "APrimalStructureItemContainer.GetPinCode()"); }
+    FString* GetDescriptiveName(FString* result) { return NativeCall<FString*, FString*>(this, "APrimalStructureItemContainer.GetDescriptiveName(FString&)", result); }
+    bool ApplyPinCode(AShooterPlayerController* ForPC, int appledPinCode, bool bIsSetting, int TheCustomIndex) { return NativeCall<bool, AShooterPlayerController*, int, bool, int>(this, "APrimalStructureItemContainer.ApplyPinCode(AShooterPlayerController*,int,bool,int)", ForPC, appledPinCode, bIsSetting, TheCustomIndex); }
+    bool RemoteInventoryAllowViewing(APlayerController* ForPC) { return NativeCall<bool, APlayerController*>(this, "APrimalStructureItemContainer.RemoteInventoryAllowViewing(APlayerController*)", ForPC); }
+    bool RemoteInventoryAllowActivation(AShooterPlayerController* ForPC) { return NativeCall<bool, AShooterPlayerController*>(this, "APrimalStructureItemContainer.RemoteInventoryAllowActivation(AShooterPlayerController*)", ForPC); }
+    void UpdateContainerActiveHealthDecrease() { NativeCall<void>(this, "APrimalStructureItemContainer.UpdateContainerActiveHealthDecrease()"); }
+    void CheckAutoReactivate() { NativeCall<void>(this, "APrimalStructureItemContainer.CheckAutoReactivate()"); }
+    void ConsumeFuel(bool bGiveItem) { NativeCall<void, bool>(this, "APrimalStructureItemContainer.ConsumeFuel(bool)", bGiveItem); }
+    void NotifyItemQuantityUpdated(UPrimalItem* anItem, int amount) { NativeCall<void, UPrimalItem*, int>(this, "APrimalStructureItemContainer.NotifyItemQuantityUpdated(UPrimalItem*,int)", anItem, amount); }
+    void NotifyInventoryItemsSwapped(UPrimalItem* anItem1, UPrimalItem* anItem2) { NativeCall<void, UPrimalItem*, UPrimalItem*>(this, "APrimalStructureItemContainer.NotifyInventoryItemsSwapped(UPrimalItem*,UPrimalItem*)", anItem1, anItem2); }
+    void NotifyItemAdded(UPrimalItem* anItem, bool bEquipItem) { NativeCall<void, UPrimalItem*, bool>(this, "APrimalStructureItemContainer.NotifyItemAdded(UPrimalItem*,bool)", anItem, bEquipItem); }
+    void DeferredNotifyItemAdded() { NativeCall<void>(this, "APrimalStructureItemContainer.DeferredNotifyItemAdded()"); }
+    void CheckFuelSetActive() { NativeCall<void>(this, "APrimalStructureItemContainer.CheckFuelSetActive()"); }
+    void NotifyItemRemoved(UPrimalItem* anItem) { NativeCall<void, UPrimalItem*>(this, "APrimalStructureItemContainer.NotifyItemRemoved(UPrimalItem*)", anItem); }
+    void ClientNotifyInventoryItemChange(bool bIsItemAdd, UPrimalItem* theItem, bool bEquipItem) { NativeCall<void, bool, UPrimalItem*, bool>(this, "APrimalStructureItemContainer.ClientNotifyInventoryItemChange(bool,UPrimalItem*,bool)", bIsItemAdd, theItem, bEquipItem); }
+    void RefreshFuelState() { NativeCall<void>(this, "APrimalStructureItemContainer.RefreshFuelState()"); }
+    bool UseItemSpoilingTimeMultipliers() { return NativeCall<bool>(this, "APrimalStructureItemContainer.UseItemSpoilingTimeMultipliers()"); }
+    void UpdateSolarPower() { NativeCall<void>(this, "APrimalStructureItemContainer.UpdateSolarPower()"); }
+    void CharacterBasedOnUpdate(AActor* characterBasedOnMe, float DeltaSeconds) { NativeCall<void, AActor*, float>(this, "APrimalStructureItemContainer.CharacterBasedOnUpdate(AActor*,float)", characterBasedOnMe, DeltaSeconds); }
+    void ProcessEditText(AShooterPlayerController* ForPC, const FString* TextToUse, bool bCheckedBox) { NativeCall<void, AShooterPlayerController*, const FString*, bool>(this, "APrimalStructureItemContainer.ProcessEditText(AShooterPlayerController*,FString&,bool)", ForPC, TextToUse, bCheckedBox); }
+    static void NetUpdateLocation_Implementation() { NativeCall<void>(nullptr, "APrimalStructureItemContainer.NetUpdateLocation_Implementation()"); }
+    void NetSetContainerActive_Implementation(bool bSetActive, TSubclassOf<UPrimalItem> NetReplicatedFuelItemClass, __int16 NetReplicatedFuelItemColorIndex) { NativeCall<void, bool, TSubclassOf<UPrimalItem>, __int16>(this, "APrimalStructureItemContainer.NetSetContainerActive_Implementation(bool,TSubclassOf<UPrimalItem>,__int16)", bSetActive, NetReplicatedFuelItemClass, NetReplicatedFuelItemColorIndex); }
+    void NetUpdateBoxName_Implementation(const FString* NewName) { NativeCall<void, const FString*>(this, "APrimalStructureItemContainer.NetUpdateBoxName_Implementation(FString&)", NewName); }
+    void PlayDying(float KillingDamage, const FDamageEvent* DamageEvent, APawn* InstigatingPawn, AActor* DamageCauser) { NativeCall<void, float, const FDamageEvent*, APawn*, AActor*>(this, "APrimalStructureItemContainer.PlayDying(float,FDamageEvent*,APawn*,AActor*)", KillingDamage, DamageEvent, InstigatingPawn, DamageCauser); }
+    void SetDisabledTimer(float DisabledTime) { NativeCall<void, float>(this, "APrimalStructureItemContainer.SetDisabledTimer(float)", DisabledTime); }
+    void EnableActive() { NativeCall<void>(this, "APrimalStructureItemContainer.EnableActive()"); }
+    void GetBlueprintSpawnActorTransform(UE::Math::TVector<double>* spawnLoc, UE::Math::TRotator<double>* spawnRot) { NativeCall<void, UE::Math::TVector<double>*, UE::Math::TRotator<double>*>(this, "APrimalStructureItemContainer.GetBlueprintSpawnActorTransform(UE::Math::TVector<double>*,UE::Math::TRotator<double>*)", spawnLoc, spawnRot); }
+    void UpdateWirelessExchanges() { NativeCall<void>(this, "APrimalStructureItemContainer.UpdateWirelessExchanges()"); }
+    void UpdateWirelessExchange(UPrimalWirelessExchangeData* myExchange) { NativeCall<void, UPrimalWirelessExchangeData*>(this, "APrimalStructureItemContainer.UpdateWirelessExchange(UPrimalWirelessExchangeData*)", myExchange); }
+    TMap<APrimalStructureItemContainer*, UPrimalWirelessExchangeData*, FDefaultSetAllocator, TDefaultMapHashableKeyFuncs<APrimalStructureItemContainer*, UPrimalWirelessExchangeData*, 0> >* GetNearbyWirelessStructures(TMap<APrimalStructureItemContainer*, UPrimalWirelessExchangeData*, FDefaultSetAllocator, TDefaultMapHashableKeyFuncs<APrimalStructureItemContainer*, UPrimalWirelessExchangeData*, 0> >* result, UPrimalWirelessExchangeData* myExchange) { return NativeCall<TMap<APrimalStructureItemContainer*, UPrimalWirelessExchangeData*, FDefaultSetAllocator, TDefaultMapHashableKeyFuncs<APrimalStructureItemContainer*, UPrimalWirelessExchangeData*, 0> >*, TMap<APrimalStructureItemContainer*, UPrimalWirelessExchangeData*, FDefaultSetAllocator, TDefaultMapHashableKeyFuncs<APrimalStructureItemContainer*, UPrimalWirelessExchangeData*, 0> >*, UPrimalWirelessExchangeData*>(this, "APrimalStructureItemContainer.GetNearbyWirelessStructures(TMap<APrimalStructureItemContainer*,UPrimalWirelessExchangeData*,FDefaultSetAllocator,TDefaultMapHashableKeyFuncs<APrimalStructureItemContainer*,UPrimalWirelessExchangeData*,0>>*,UPrimalWirelessExchangeData*)", result, myExchange); }
+    void RemoveWirelessConnections() { NativeCall<void>(this, "APrimalStructureItemContainer.RemoveWirelessConnections()"); }
+    bool OverrideHasWaterSource() { return NativeCall<bool>(this, "APrimalStructureItemContainer.OverrideHasWaterSource()"); }
+    float SubtractWaterFromConnections(float Amount, bool bAllowNetworking) { return NativeCall<float, float, bool>(this, "APrimalStructureItemContainer.SubtractWaterFromConnections(float,bool)", Amount, bAllowNetworking); }
+    float SubtractWaterFromPipes(float Amount, bool bAllowNetworking) { return NativeCall<float, float, bool>(this, "APrimalStructureItemContainer.SubtractWaterFromPipes(float,bool)", Amount, bAllowNetworking); }
+    void SubtractWaterFromWireless(float Amount, float* AmountRemoved, bool bAllowNetworking) { NativeCall<void, float, float*, bool>(this, "APrimalStructureItemContainer.SubtractWaterFromWireless(float,float*,bool)", Amount, AmountRemoved, bAllowNetworking); }
+    void RefreshWatered() { NativeCall<void>(this, "APrimalStructureItemContainer.RefreshWatered()"); }
+    void SetWaterState(bool bValue) { NativeCall<void, bool>(this, "APrimalStructureItemContainer.SetWaterState(bool)", bValue); }
+    bool CheckForWirelessWater(APrimalStructureItemContainer* ForStructure, bool IncrementTagger) { return NativeCall<bool, APrimalStructureItemContainer*, bool>(this, "APrimalStructureItemContainer.CheckForWirelessWater(APrimalStructureItemContainer*,bool)", ForStructure, IncrementTagger); }
+    bool IsValidWirelessWaterSource(APrimalStructureItemContainer* ForStructure) { return NativeCall<bool, APrimalStructureItemContainer*>(this, "APrimalStructureItemContainer.IsValidWirelessWaterSource(APrimalStructureItemContainer*)", ForStructure); }
+    void GetBestWirelessWaterSource(APrimalStructureItemContainer* ForStructure, APrimalStructureItemContainer** OutBestSource, bool IncrementTagger) { NativeCall<void, APrimalStructureItemContainer*, APrimalStructureItemContainer**, bool>(this, "APrimalStructureItemContainer.GetBestWirelessWaterSource(APrimalStructureItemContainer*,APrimalStructureItemContainer**,bool)", ForStructure, OutBestSource, IncrementTagger); }
+    void RefreshPowered(APrimalStructureItemContainer* InDirectPower) { NativeCall<void, APrimalStructureItemContainer*>(this, "APrimalStructureItemContainer.RefreshPowered(APrimalStructureItemContainer*)", InDirectPower); }
+    void MovePowerJunctionLink() { NativeCall<void>(this, "APrimalStructureItemContainer.MovePowerJunctionLink()"); }
+    void RefreshPowerJunctionLink() { NativeCall<void>(this, "APrimalStructureItemContainer.RefreshPowerJunctionLink()"); }
+    void AddPowerJunctionLinkParticle(APrimalStructure* MyOutlet) { NativeCall<void, APrimalStructure*>(this, "APrimalStructureItemContainer.AddPowerJunctionLinkParticle(APrimalStructure*)", MyOutlet); }
+    void NotifyCraftedItem(UPrimalItem* anItem) { NativeCall<void, UPrimalItem*>(this, "APrimalStructureItemContainer.NotifyCraftedItem(UPrimalItem*)", anItem); }
+    void OnDeserializedByGame(EOnDeserializationType::Type DeserializationType) { NativeCall<void, EOnDeserializationType::Type>(this, "APrimalStructureItemContainer.OnDeserializedByGame(EOnDeserializationType::Type)", DeserializationType); }
+    void CopyStructureValuesFrom(APrimalStructureItemContainer* otherItemContainer) { NativeCall<void, APrimalStructureItemContainer*>(this, "APrimalStructureItemContainer.CopyStructureValuesFrom(APrimalStructureItemContainer*)", otherItemContainer); }
+    void PostSpawnInitialize() { NativeCall<void>(this, "APrimalStructureItemContainer.PostSpawnInitialize()"); }
+    void TargetingTeamChanged() { NativeCall<void>(this, "APrimalStructureItemContainer.TargetingTeamChanged()"); }
+    FSpawnPointInfo* GetSpawnPointInfo(FSpawnPointInfo* result) { return NativeCall<FSpawnPointInfo*, FSpawnPointInfo*>(this, "APrimalStructureItemContainer.GetSpawnPointInfo(FSpawnPointInfo*)", result); }
+    void SetPlayerConstructor(APlayerController* PC) { NativeCall<void, APlayerController*>(this, "APrimalStructureItemContainer.SetPlayerConstructor(APlayerController*)", PC); }
+    void RefreshInventoryItemCounts() { NativeCall<void>(this, "APrimalStructureItemContainer.RefreshInventoryItemCounts()"); }
+    //TArray<FTooltipTextInfo, TSizedDefaultAllocator<32> >* GetTooltipStructureInfo(TArray<FTooltipTextInfo, TSizedDefaultAllocator<32> >* result, AShooterPlayerController* PlayerOwner) { return NativeCall<TArray<FTooltipTextInfo, TSizedDefaultAllocator<32> >*, TArray<FTooltipTextInfo, TSizedDefaultAllocator<32> >*, AShooterPlayerController*>(this, "APrimalStructureItemContainer.GetTooltipStructureInfo(TArray<FTooltipTextInfo,TSizedDefaultAllocator<32>>*,AShooterPlayerController*)", result, PlayerOwner); }
+    bool AdjustNetDestructionTime(float Delta) { return NativeCall<bool, float>(this, "APrimalStructureItemContainer.AdjustNetDestructionTime(float)", Delta); }
+    void DrawStructureTooltip(AShooterHUD* HUD, bool bForMultiUseSelector) { NativeCall<void, AShooterHUD*, bool>(this, "APrimalStructureItemContainer.DrawStructureTooltip(AShooterHUD*,bool)", HUD, bForMultiUseSelector); }
+    void UpdateTribeGroupInventoryRank_Implementation(unsigned __int8 NewRank) { NativeCall<void, unsigned __int8>(this, "APrimalStructureItemContainer.UpdateTribeGroupInventoryRank_Implementation(unsigned__int8)", NewRank); }
+    void NetRefreshActiveEffects_Implementation() { NativeCall<void>(this, "APrimalStructureItemContainer.NetRefreshActiveEffects_Implementation()"); }
+    void RefreshActiveEffects() { NativeCall<void>(this, "APrimalStructureItemContainer.RefreshActiveEffects()"); }
+    void RefreshStructureColors(UMeshComponent* ForceRefreshComponent) { NativeCall<void, UMeshComponent*>(this, "APrimalStructureItemContainer.RefreshStructureColors(UMeshComponent*)", ForceRefreshComponent); }
+    void SetDefaultBlacklistedItemCount(int BlacklistedCount) { NativeCall<void, int>(this, "APrimalStructureItemContainer.SetDefaultBlacklistedItemCount(int)", BlacklistedCount); }
+    int GetDefaultBlacklistedItemCount() { return NativeCall<int>(this, "APrimalStructureItemContainer.GetDefaultBlacklistedItemCount()"); }
+};
+
 struct APrimalStructureExplosive : APrimalStructure
 {
     // Fields
@@ -1424,12 +1738,12 @@ struct AInfo : AActor
     //void AInfo(const FObjectInitializer* ObjectInitializer) { NativeCall<void, const FObjectInitializer*>(this, "AInfo.AInfo(FObjectInitializer*)", ObjectInitializer); }
 };
 
-struct UPlayer : UObject{
+struct UPlayer : UObject {
     TObjectPtr<APlayerController>& PlayerControllerField() { return *GetNativePointerField<TObjectPtr<APlayerController>*>(this, "UPlayer.PlayerController"); }
-   // int CurrentNetSpeed;
-   // int ConfiguredInternetSpeed;
-   // int ConfiguredLanSpeed;
-   // unsigned __int64 TransferringPlayerDataId;
+    // int CurrentNetSpeed;
+    // int ConfiguredInternetSpeed;
+    // int ConfiguredLanSpeed;
+    // unsigned __int64 TransferringPlayerDataId;
 
     FString* ConsoleCommand(FString* result, const FString* Cmd, bool bWriteToLog) { return NativeCall<FString*, FString*, const FString*, bool>(this, "UPlayer.ConsoleCommand(FString&,bool)", result, Cmd, bWriteToLog); }
 };
@@ -1961,12 +2275,12 @@ struct AController : AActor
     void FailedToSpawnPawn() { NativeCall<void>(this, "AController.FailedToSpawnPawn()"); }
     static void ClientSetRotation() { NativeCall<void>(nullptr, "AController.ClientSetRotation()"); }
     static void StaticRegisterNativesAController() { NativeCall<void>(nullptr, "AController.StaticRegisterNativesAController()"); }
-    void ValidateGeneratedRepEnums(const TArray<FRepRecord, TSizedDefaultAllocator<32> > *ClassReps) { NativeCall<void, const TArray<FRepRecord, TSizedDefaultAllocator<32> >*>(this, "AController.ValidateGeneratedRepEnums(TArray<FRepRecord,TSizedDefaultAllocator<32>>*)", ClassReps); }
+    void ValidateGeneratedRepEnums(const TArray<FRepRecord, TSizedDefaultAllocator<32> >* ClassReps) { NativeCall<void, const TArray<FRepRecord, TSizedDefaultAllocator<32> >*>(this, "AController.ValidateGeneratedRepEnums(TArray<FRepRecord,TSizedDefaultAllocator<32>>*)", ClassReps); }
     //void ~AController() { NativeCall<void>(this, "AController.~AController()"); }
     //void AController(const FObjectInitializer * ObjectInitializer) { NativeCall<void, const FObjectInitializer*>(this, "AController.AController(FObjectInitializer*)", ObjectInitializer); }
     bool IsLocalController() { return NativeCall<bool>(this, "AController.IsLocalController()"); }
-    void SetInitialLocationAndRotation(const UE::Math::TVector<double> *NewLocation, const UE::Math::TRotator<double> *NewRotation) { NativeCall<void, const UE::Math::TVector<double>*, const UE::Math::TRotator<double>*>(this, "AController.SetInitialLocationAndRotation(UE::Math::TVector<double>*,UE::Math::TRotator<double>*)", NewLocation, NewRotation); }
-    void SetControlRotation(const UE::Math::TRotator<double> *NewRotation) { NativeCall<void, const UE::Math::TRotator<double>*>(this, "AController.SetControlRotation(UE::Math::TRotator<double>*)", NewRotation); }
+    void SetInitialLocationAndRotation(const UE::Math::TVector<double>* NewLocation, const UE::Math::TRotator<double>* NewRotation) { NativeCall<void, const UE::Math::TVector<double>*, const UE::Math::TRotator<double>*>(this, "AController.SetInitialLocationAndRotation(UE::Math::TVector<double>*,UE::Math::TRotator<double>*)", NewLocation, NewRotation); }
+    void SetControlRotation(const UE::Math::TRotator<double>* NewRotation) { NativeCall<void, const UE::Math::TRotator<double>*>(this, "AController.SetControlRotation(UE::Math::TRotator<double>*)", NewRotation); }
     void SetIgnoreMoveInput(bool bNewMoveInput) { NativeCall<void, bool>(this, "AController.SetIgnoreMoveInput(bool)", bNewMoveInput); }
     void ResetIgnoreMoveInput() { NativeCall<void>(this, "AController.ResetIgnoreMoveInput()"); }
     bool IsMoveInputIgnored() { return NativeCall<bool>(this, "AController.IsMoveInputIgnored()"); }
@@ -1974,41 +2288,41 @@ struct AController : AActor
     void ResetIgnoreLookInput() { NativeCall<void>(this, "AController.ResetIgnoreLookInput()"); }
     bool IsLookInputIgnored() { return NativeCall<bool>(this, "AController.IsLookInputIgnored()"); }
     void ResetIgnoreInputFlags() { NativeCall<void>(this, "AController.ResetIgnoreInputFlags()"); }
-    void AttachToPawn(APawn * InPawn) { NativeCall<void, APawn*>(this, "AController.AttachToPawn(APawn*)", InPawn); }
+    void AttachToPawn(APawn* InPawn) { NativeCall<void, APawn*>(this, "AController.AttachToPawn(APawn*)", InPawn); }
     void DetachFromPawn() { NativeCall<void>(this, "AController.DetachFromPawn()"); }
     AActor* GetViewTarget() { return NativeCall<AActor*>(this, "AController.GetViewTarget()"); }
-    void GetPlayerViewPoint(UE::Math::TVector<double> *out_Location, UE::Math::TRotator<double> *out_Rotation) { NativeCall<void, UE::Math::TVector<double>*, UE::Math::TRotator<double>*>(this, "AController.GetPlayerViewPoint(UE::Math::TVector<double>*,UE::Math::TRotator<double>*)", out_Location, out_Rotation); }
+    void GetPlayerViewPoint(UE::Math::TVector<double>* out_Location, UE::Math::TRotator<double>* out_Rotation) { NativeCall<void, UE::Math::TVector<double>*, UE::Math::TRotator<double>*>(this, "AController.GetPlayerViewPoint(UE::Math::TVector<double>*,UE::Math::TRotator<double>*)", out_Location, out_Rotation); }
     static bool LineOfSightTo() { return NativeCall<bool>(nullptr, "AController.LineOfSightTo()"); }
     void PostInitializeComponents() { NativeCall<void>(this, "AController.PostInitializeComponents()"); }
-    void Possess(APawn * InPawn) { NativeCall<void, APawn*>(this, "AController.Possess(APawn*)", InPawn); }
-    void OnPossess(APawn * InPawn) { NativeCall<void, APawn*>(this, "AController.OnPossess(APawn*)", InPawn); }
+    void Possess(APawn* InPawn) { NativeCall<void, APawn*>(this, "AController.Possess(APawn*)", InPawn); }
+    void OnPossess(APawn* InPawn) { NativeCall<void, APawn*>(this, "AController.OnPossess(APawn*)", InPawn); }
     void UnPossess() { NativeCall<void>(this, "AController.UnPossess()"); }
     void OnUnPossess() { NativeCall<void>(this, "AController.OnUnPossess()"); }
-    void PawnPendingDestroy(APawn * inPawn) { NativeCall<void, APawn*>(this, "AController.PawnPendingDestroy(APawn*)", inPawn); }
+    void PawnPendingDestroy(APawn* inPawn) { NativeCall<void, APawn*>(this, "AController.PawnPendingDestroy(APawn*)", inPawn); }
     void Reset() { NativeCall<void>(this, "AController.Reset()"); }
     static void ClientSetLocation_Implementation() { NativeCall<void>(nullptr, "AController.ClientSetLocation_Implementation()"); }
     static void ClientSetRotation_Implementation() { NativeCall<void>(nullptr, "AController.ClientSetRotation_Implementation()"); }
-    void RemovePawnTickDependency(APawn * InOldPawn) { NativeCall<void, APawn*>(this, "AController.RemovePawnTickDependency(APawn*)", InOldPawn); }
-    void AddPawnTickDependency(APawn * NewPawn) { NativeCall<void, APawn*>(this, "AController.AddPawnTickDependency(APawn*)", NewPawn); }
-    void SetPawn(APawn * InPawn) { NativeCall<void, APawn*>(this, "AController.SetPawn(APawn*)", InPawn); }
+    void RemovePawnTickDependency(APawn* InOldPawn) { NativeCall<void, APawn*>(this, "AController.RemovePawnTickDependency(APawn*)", InOldPawn); }
+    void AddPawnTickDependency(APawn* NewPawn) { NativeCall<void, APawn*>(this, "AController.AddPawnTickDependency(APawn*)", NewPawn); }
+    void SetPawn(APawn* InPawn) { NativeCall<void, APawn*>(this, "AController.SetPawn(APawn*)", InPawn); }
     void OnRep_Pawn() { NativeCall<void>(this, "AController.OnRep_Pawn()"); }
     void OnRep_PlayerState() { NativeCall<void>(this, "AController.OnRep_PlayerState()"); }
     void Destroyed() { NativeCall<void>(this, "AController.Destroyed()"); }
     void CleanupPlayerState() { NativeCall<void>(this, "AController.CleanupPlayerState()"); }
-    void InstigatedAnyDamage(float Damage, const UDamageType * DamageType, AActor * DamagedActor, AActor * DamageCauser) { NativeCall<void, float, const UDamageType*, AActor*, AActor*>(this, "AController.InstigatedAnyDamage(float,UDamageType*,AActor*,AActor*)", Damage, DamageType, DamagedActor, DamageCauser); }
+    void InstigatedAnyDamage(float Damage, const UDamageType* DamageType, AActor* DamagedActor, AActor* DamageCauser) { NativeCall<void, float, const UDamageType*, AActor*, AActor*>(this, "AController.InstigatedAnyDamage(float,UDamageType*,AActor*,AActor*)", Damage, DamageType, DamagedActor, DamageCauser); }
     void InitPlayerState() { NativeCall<void>(this, "AController.InitPlayerState()"); }
-    void GetActorEyesViewPoint(UE::Math::TVector<double> *out_Location, UE::Math::TRotator<double> *out_Rotation) { NativeCall<void, UE::Math::TVector<double>*, UE::Math::TRotator<double>*>(this, "AController.GetActorEyesViewPoint(UE::Math::TVector<double>*,UE::Math::TRotator<double>*)", out_Location, out_Rotation); }
-    void DisplayDebug(UCanvas * Canvas, const FDebugDisplayInfo * DebugDisplay, float* YL, float* YPos) { NativeCall<void, UCanvas*, const FDebugDisplayInfo*, float*, float*>(this, "AController.DisplayDebug(UCanvas*,FDebugDisplayInfo*,float*,float*)", Canvas, DebugDisplay, YL, YPos); }
-    FString* GetHumanReadableName(FString * result) { return NativeCall<FString*, FString*>(this, "AController.GetHumanReadableName(FString&)", result); }
+    void GetActorEyesViewPoint(UE::Math::TVector<double>* out_Location, UE::Math::TRotator<double>* out_Rotation) { NativeCall<void, UE::Math::TVector<double>*, UE::Math::TRotator<double>*>(this, "AController.GetActorEyesViewPoint(UE::Math::TVector<double>*,UE::Math::TRotator<double>*)", out_Location, out_Rotation); }
+    void DisplayDebug(UCanvas* Canvas, const FDebugDisplayInfo* DebugDisplay, float* YL, float* YPos) { NativeCall<void, UCanvas*, const FDebugDisplayInfo*, float*, float*>(this, "AController.DisplayDebug(UCanvas*,FDebugDisplayInfo*,float*,float*)", Canvas, DebugDisplay, YL, YPos); }
+    FString* GetHumanReadableName(FString* result) { return NativeCall<FString*, FString*>(this, "AController.GetHumanReadableName(FString&)", result); }
     void ChangeState(FName NewState) { NativeCall<void, FName>(this, "AController.ChangeState(FName)", NewState); }
     bool IsInState(FName InStateName) { return NativeCall<bool, FName>(this, "AController.IsInState(FName)", InStateName); }
     const FNavAgentProperties* GetNavAgentPropertiesRef() { return NativeCall<const FNavAgentProperties*>(this, "AController.GetNavAgentPropertiesRef()"); }
-    void GetMoveGoalReachTest(const AActor * MovingActor, const UE::Math::TVector<double> *MoveOffset, UE::Math::TVector<double> *GoalOffset, float* GoalRadius, float* GoalHalfHeight) { NativeCall<void, const AActor*, const UE::Math::TVector<double>*, UE::Math::TVector<double>*, float*, float*>(this, "AController.GetMoveGoalReachTest(AActor*,UE::Math::TVector<double>*,UE::Math::TVector<double>*,float*,float*)", MovingActor, MoveOffset, GoalOffset, GoalRadius, GoalHalfHeight); }
+    void GetMoveGoalReachTest(const AActor* MovingActor, const UE::Math::TVector<double>* MoveOffset, UE::Math::TVector<double>* GoalOffset, float* GoalRadius, float* GoalHalfHeight) { NativeCall<void, const AActor*, const UE::Math::TVector<double>*, UE::Math::TVector<double>*, float*, float*>(this, "AController.GetMoveGoalReachTest(AActor*,UE::Math::TVector<double>*,UE::Math::TVector<double>*,float*,float*)", MovingActor, MoveOffset, GoalOffset, GoalRadius, GoalHalfHeight); }
     bool ShouldPostponePathUpdates() { return NativeCall<bool>(this, "AController.ShouldPostponePathUpdates()"); }
     bool IsFollowingAPath() { return NativeCall<bool>(this, "AController.IsFollowingAPath()"); }
     IPathFollowingAgentInterface* GetPathFollowingAgent() { return NativeCall<IPathFollowingAgentInterface*>(this, "AController.GetPathFollowingAgent()"); }
     void StopMovement() { NativeCall<void>(this, "AController.StopMovement()"); }
-    void GetLifetimeReplicatedProps(TArray<FLifetimeProperty, TSizedDefaultAllocator<32> > *OutLifetimeProps) { NativeCall<void, TArray<FLifetimeProperty, TSizedDefaultAllocator<32> >*>(this, "AController.GetLifetimeReplicatedProps(TArray<FLifetimeProperty,TSizedDefaultAllocator<32>>*)", OutLifetimeProps); }
+    void GetLifetimeReplicatedProps(TArray<FLifetimeProperty, TSizedDefaultAllocator<32> >* OutLifetimeProps) { NativeCall<void, TArray<FLifetimeProperty, TSizedDefaultAllocator<32> >*>(this, "AController.GetLifetimeReplicatedProps(TArray<FLifetimeProperty,TSizedDefaultAllocator<32>>*)", OutLifetimeProps); }
     bool ShouldParticipateInSeamlessTravel() { return NativeCall<bool>(this, "AController.ShouldParticipateInSeamlessTravel()"); }
     //void TickActor(float DeltaSeconds, ELevelTick TickType, FActorTickFunction * ThisTickFunction) { NativeCall<void, float, ELevelTick, FActorTickFunction*>(this, "AController.TickActor(float,ELevelTick,FActorTickFunction*)", DeltaSeconds, TickType, ThisTickFunction); }
 };
@@ -2499,7 +2813,7 @@ struct ABasePlayerController : APrimalPlayerController
     void ClientGameEnded_Implementation(AActor* EndGameFocus, bool bIsWinner) { NativeCall<void, AActor*, bool>(this, "ABasePlayerController.ClientGameEnded_Implementation(AActor*,bool)", EndGameFocus, bIsWinner); }
     void ResetIntroCinematicsAndItems() { NativeCall<void>(this, "ABasePlayerController.ResetIntroCinematicsAndItems()"); }
     void ClientSendRoundEndEvent_Implementation(bool bIsWinner, int ExpendedTimeInSeconds) { NativeCall<void, bool, int>(this, "ABasePlayerController.ClientSendRoundEndEvent_Implementation(bool,int)", bIsWinner, ExpendedTimeInSeconds); }
-   // void PreClientTravel(const FString* PendingURL, ETravelType TravelType, bool bIsSeamlessTravel) { NativeCall<void, const FString*, ETravelType, bool>(this, "ABasePlayerController.PreClientTravel(FString&,ETravelType,bool)", PendingURL, TravelType, bIsSeamlessTravel); }
+    // void PreClientTravel(const FString* PendingURL, ETravelType TravelType, bool bIsSeamlessTravel) { NativeCall<void, const FString*, ETravelType, bool>(this, "ABasePlayerController.PreClientTravel(FString&,ETravelType,bool)", PendingURL, TravelType, bIsSeamlessTravel); }
     static void ClientSetSpectatorCamera_Implementation() { NativeCall<void>(nullptr, "ABasePlayerController.ClientSetSpectatorCamera_Implementation()"); }
     static __int64 SetPause() { return NativeCall<__int64>(nullptr, "ABasePlayerController.SetPause()"); }
     bool HasValidAdminIP() { return NativeCall<bool>(this, "ABasePlayerController.HasValidAdminIP()"); }
@@ -2597,7 +2911,7 @@ struct AShooterPlayerController : ABasePlayerController
     FItemNetID& LastUnequippedItemNetIDField() { return *GetNativePointerField<FItemNetID*>(this, "AShooterPlayerController.LastUnequippedItemNetID"); }
     FTimerHandle& CloseSteamStatusSceneHandleField() { return *GetNativePointerField<FTimerHandle*>(this, "AShooterPlayerController.CloseSteamStatusSceneHandle"); }
     __int64& LinkedPlayerIDField() { return *GetNativePointerField<__int64*>(this, "AShooterPlayerController.LinkedPlayerID"); }
-   //TSubclassOf<UUI_SteamInventoryStatusPopup>& SteamInventoryStatusUITemplateField() { return *GetNativePointerField<TSubclassOf<UUI_SteamInventoryStatusPopup>*>(this, "AShooterPlayerController.SteamInventoryStatusUITemplate"); }
+    //TSubclassOf<UUI_SteamInventoryStatusPopup>& SteamInventoryStatusUITemplateField() { return *GetNativePointerField<TSubclassOf<UUI_SteamInventoryStatusPopup>*>(this, "AShooterPlayerController.SteamInventoryStatusUITemplate"); }
     int& PlayerControllerNumField() { return *GetNativePointerField<int*>(this, "AShooterPlayerController.PlayerControllerNum"); }
     UE::Math::TVector<double>& LastTurnSpeedField() { return *GetNativePointerField<UE::Math::TVector<double>*>(this, "AShooterPlayerController.LastTurnSpeed"); }
     long double& LastMultiUseInteractionTimeField() { return *GetNativePointerField<long double*>(this, "AShooterPlayerController.LastMultiUseInteractionTime"); }
@@ -2997,7 +3311,7 @@ struct AShooterPlayerController : ABasePlayerController
     void ServerRequestRemoveWeaponAccessoryOnly(UPrimalInventoryComponent* inventoryComp, FItemNetID itemID) { NativeCall<void, UPrimalInventoryComponent*, FItemNetID>(this, "AShooterPlayerController.ServerRequestRemoveWeaponAccessoryOnly(UPrimalInventoryComponent*,FItemNetID)", inventoryComp, itemID); }
     void ServerRequestRemoveWeaponClipAmmo(UPrimalInventoryComponent* inventoryComp, FItemNetID itemID) { NativeCall<void, UPrimalInventoryComponent*, FItemNetID>(this, "AShooterPlayerController.ServerRequestRemoveWeaponClipAmmo(UPrimalInventoryComponent*,FItemNetID)", inventoryComp, itemID); }
     void ServerRequestSetPin(UObject* forTarget, int PinValue, bool bIsSetting, int TheCustomIndex) { NativeCall<void, UObject*, int, bool, int>(this, "AShooterPlayerController.ServerRequestSetPin(UObject*,int,bool,int)", forTarget, PinValue, bIsSetting, TheCustomIndex); }
-   // void ServerRequestShowLeaderboards(TSubclassOf<ULeaderboard> LeaderboardType, FName MissionTag) { NativeCall<void, TSubclassOf<ULeaderboard>, FName>(this, "AShooterPlayerController.ServerRequestShowLeaderboards(TSubclassOf<ULeaderboard>,FName)", LeaderboardType, MissionTag); }
+    // void ServerRequestShowLeaderboards(TSubclassOf<ULeaderboard> LeaderboardType, FName MissionTag) { NativeCall<void, TSubclassOf<ULeaderboard>, FName>(this, "AShooterPlayerController.ServerRequestShowLeaderboards(TSubclassOf<ULeaderboard>,FName)", LeaderboardType, MissionTag); }
     void ServerRequestTamingInfoList() { NativeCall<void>(this, "AShooterPlayerController.ServerRequestTamingInfoList()"); }
     void ServerRequestUpdateActiveMissionTags() { NativeCall<void>(this, "AShooterPlayerController.ServerRequestUpdateActiveMissionTags()"); }
     void ServerRequestUpdateTrackedWaypointsAndMapPlayers(bool ClientAutoTrackTamesSetting) { NativeCall<void, bool>(this, "AShooterPlayerController.ServerRequestUpdateTrackedWaypointsAndMapPlayers(bool)", ClientAutoTrackTamesSetting); }
@@ -3310,13 +3624,13 @@ struct AShooterPlayerController : ABasePlayerController
     //void ClientNotifyEditText_Implementation(TSubclassOf<UObject> ForObjectClass, int ExtraID1, int ExtraID2, UObject* ForObject) { NativeCall<void, TSubclassOf<UObject>, int, int, UObject*>(this, "AShooterPlayerController.ClientNotifyEditText_Implementation(TSubclassOf<UObject>,int,int,UObject*)", ForObjectClass, ExtraID1, ExtraID2, ForObject); }
     //void ServerNotifyEditText_Implementation(const FString* TextToUse, bool checkedBox, TSubclassOf<UObject> ForObjectClass, unsigned int ExtraID1, unsigned int ExtraID2, UObject* ForObject) { NativeCall<void, const FString*, bool, TSubclassOf<UObject>, unsigned int, unsigned int, UObject*>(this, "AShooterPlayerController.ServerNotifyEditText_Implementation(FString&,bool,TSubclassOf<UObject>,unsignedint,unsignedint,UObject*)", TextToUse, checkedBox, ForObjectClass, ExtraID1, ExtraID2, ForObject); }
     //void ServerSendChatMessage_Implementation(const FString* ChatMessage, EChatSendMode::Type SendMode) { NativeCall<void, const FString*, EChatSendMode::Type>(this, "AShooterPlayerController.ServerSendChatMessage_Implementation(FString&,EChatSendMode::Type)", ChatMessage, SendMode); }
-     void ServerSendChatMessage_Implementation(const FString* ChatMessage, int SendMode) { NativeCall<void, const FString*, int>(this, "AShooterPlayerController.ServerSendChatMessage_Implementation(FString&,EChatSendMode::Type)", ChatMessage, SendMode); }
+    void ServerSendChatMessage_Implementation(const FString* ChatMessage, int SendMode) { NativeCall<void, const FString*, int>(this, "AShooterPlayerController.ServerSendChatMessage_Implementation(FString&,EChatSendMode::Type)", ChatMessage, SendMode); }
     //void ServerSendChatMessage_Implementation(FString* ChatMessage, EChatSendMode::Type SendMode) { NativeCall<void, FString*, EChatSendMode::Type>(this, "AShooterPlayerController.ServerSendChatMessage_Implementation(FString&,EChatSendMode::Type)", ChatMessage, SendMode); }
     void LogChatMessage(const FPrimalChatMessage* Msg) { NativeCall<void, const FPrimalChatMessage*>(this, "AShooterPlayerController.LogChatMessage(FPrimalChatMessage*)", Msg); }
     static void ClientChatMessage_Implementation() { NativeCall<void>(nullptr, "AShooterPlayerController.ClientChatMessage_Implementation()"); }
     static void ClientServerChatMessage_Implementation() { NativeCall<void>(nullptr, "AShooterPlayerController.ClientServerChatMessage_Implementation()"); }
     static void ClientServerChatDirectMessage_Implementation() { NativeCall<void>(nullptr, "AShooterPlayerController.ClientServerChatDirectMessage_Implementation()"); }
-    
+
     void ClientServerNotification(FString* MessageText, FLinearColor MessageColor, float DisplayScale, float DisplayTime, UTexture2D* MessageIcon, USoundBase* SoundToPlay, int Priority) { NativeCall<void, FString*, FLinearColor, float, float, UTexture2D*, USoundBase*, int>(this, "AShooterPlayerController.ClientServerNotification(FString&,FLinearColor,float,float,UTexture2D*,USoundBase*,int)", MessageText, MessageColor, DisplayScale, DisplayTime, MessageIcon, SoundToPlay, Priority); }
     void ClientServerNotificationSingle(FString* MessageText, FLinearColor MessageColor, float DisplayScale, float DisplayTime, UTexture2D* MessageIcon, USoundBase* SoundToPlay, int MessageTypeID, int Priority) { NativeCall<void, FString*, FLinearColor, float, float, UTexture2D*, USoundBase*, int, int>(this, "AShooterPlayerController.ClientServerNotificationSingle(FString&,FLinearColor,float,float,UTexture2D*,USoundBase*,int,int)", MessageText, MessageColor, DisplayScale, DisplayTime, MessageIcon, SoundToPlay, MessageTypeID, Priority); }
     void ClientServerNotification_Implementation(FString* MessageText, FLinearColor MessageColor, float DisplayScale, float DisplayTime, UTexture2D* MessageIcon, USoundBase* SoundToPlay, int Priority) { NativeCall<void, FString*, FLinearColor, float, float, UTexture2D*, USoundBase*, int>(this, "AShooterPlayerController.ClientServerNotification_Implementation(FString&,FLinearColor,float,float,UTexture2D*,USoundBase*,int)", MessageText, MessageColor, DisplayScale, DisplayTime, MessageIcon, SoundToPlay, Priority); }
@@ -3424,7 +3738,7 @@ struct AShooterPlayerController : ABasePlayerController
     static void ServerSendArkDataPayloadEnd_Implementation() { NativeCall<void>(nullptr, "AShooterPlayerController.ServerSendArkDataPayloadEnd_Implementation()"); }
     static void ClientSendArkDataPayloadBegin_Implementation() { NativeCall<void>(nullptr, "AShooterPlayerController.ClientSendArkDataPayloadBegin_Implementation()"); }
     static void ClientSendArkDataPayloadEnd_Implementation() { NativeCall<void>(nullptr, "AShooterPlayerController.ClientSendArkDataPayloadEnd_Implementation()"); }
-   // void RequestCreateNewPlayerWithArkDataPossibleItems(const FArkTributePlayerData* PlayerData, unsigned __int64 TribeID) { NativeCall<void, const FArkTributePlayerData*, unsigned __int64>(this, "AShooterPlayerController.RequestCreateNewPlayerWithArkDataPossibleItems(FArkTributePlayerData*,unsigned__int64)", PlayerData, TribeID); }
+    // void RequestCreateNewPlayerWithArkDataPossibleItems(const FArkTributePlayerData* PlayerData, unsigned __int64 TribeID) { NativeCall<void, const FArkTributePlayerData*, unsigned __int64>(this, "AShooterPlayerController.RequestCreateNewPlayerWithArkDataPossibleItems(FArkTributePlayerData*,unsigned__int64)", PlayerData, TribeID); }
     static void ServerCharacterUploadWithItems_Start_Implementation() { NativeCall<void>(nullptr, "AShooterPlayerController.ServerCharacterUploadWithItems_Start_Implementation()"); }
     void ServerCharacterUploadWithItems_CharaterPayload_Implementation(unsigned __int64 PlayerDataId, const TArray<unsigned char, TSizedDefaultAllocator<32> >* PlayerDataChunk) { NativeCall<void, unsigned __int64, const TArray<unsigned char, TSizedDefaultAllocator<32> >*>(this, "AShooterPlayerController.ServerCharacterUploadWithItems_CharaterPayload_Implementation(unsigned__int64,TArray<unsignedchar,TSizedDefaultAllocator<32>>*)", PlayerDataId, PlayerDataChunk); }
     static void ServerCharacterUploadWithItems_UploadItem_Implementation() { NativeCall<void>(nullptr, "AShooterPlayerController.ServerCharacterUploadWithItems_UploadItem_Implementation()"); }
@@ -4883,7 +5197,7 @@ struct APrimalCharacter : ACharacter
     float GetRunningSpeedModifier(bool bIsForDefaultSpeed) { return NativeCall<float, bool>(this, "APrimalCharacter.GetRunningSpeedModifier(bool)", bIsForDefaultSpeed); }
     float GetMaxHealth() { return NativeCall<float>(this, "APrimalCharacter.GetMaxHealth()"); }
     bool AllowFirstPerson() { return NativeCall<bool>(this, "APrimalCharacter.AllowFirstPerson()"); }
-    //AActor* GetAimedActor(ECollisionChannel CollisionChannel, UActorComponent** HitComponent, float MaxDistanceOverride, float CheckRadius, int* hitBodyIndex, FHitResult* outHitResult, bool bForceUseCameraLocation, bool bForceUpdateAimedActors, bool bForceUseActorLocation, bool* bIsDirectHit) { return NativeCall<AActor*, ECollisionChannel, UActorComponent**, float, float, int*, FHitResult*, bool, bool, bool, bool*>(this, "APrimalCharacter.GetAimedActor(ECollisionChannel,UActorComponent**,float,float,int*,FHitResult*,bool,bool,bool,bool*)", CollisionChannel, HitComponent, MaxDistanceOverride, CheckRadius, hitBodyIndex, outHitResult, bForceUseCameraLocation, bForceUpdateAimedActors, bForceUseActorLocation, bIsDirectHit); }
+    AActor* GetAimedActor(ECollisionChannel CollisionChannel, UActorComponent** HitComponent, float MaxDistanceOverride, float CheckRadius, int* hitBodyIndex, FHitResult* outHitResult, bool bForceUseCameraLocation, bool bForceUpdateAimedActors, bool bForceUseActorLocation, bool* bIsDirectHit) { return NativeCall<AActor*, ECollisionChannel, UActorComponent**, float, float, int*, FHitResult*, bool, bool, bool, bool*>(this, "APrimalCharacter.GetAimedActor(ECollisionChannel,UActorComponent**,float,float,int*,FHitResult*,bool,bool,bool,bool*)", CollisionChannel, HitComponent, MaxDistanceOverride, CheckRadius, hitBodyIndex, outHitResult, bForceUseCameraLocation, bForceUpdateAimedActors, bForceUseActorLocation, bIsDirectHit); }
     void OnPrimalCharacterSleeped() { NativeCall<void>(this, "APrimalCharacter.OnPrimalCharacterSleeped()"); }
     //TSubclassOf<UToolTipWidget>* GetCustomTooltip_Implementation(TSubclassOf<UToolTipWidget>* result, UE::Math::TVector2<double>* tooltipPadding, UE::Math::TVector2<double>* tooltipScale, UE::Math::TVector<double>* tooltipLocationOffset) { return NativeCall<TSubclassOf<UToolTipWidget> *, TSubclassOf<UToolTipWidget>*, UE::Math::TVector2<double>*, UE::Math::TVector2<double>*, UE::Math::TVector<double>*>(this, "APrimalCharacter.GetCustomTooltip_Implementation(TSubclassOf<UToolTipWidget>*,UE::Math::TVector2<double>*,UE::Math::TVector2<double>*,UE::Math::TVector<double>*)", result, tooltipPadding, tooltipScale, tooltipLocationOffset); }
     void OnPrimalCharacterUnsleeped() { NativeCall<void>(this, "APrimalCharacter.OnPrimalCharacterUnsleeped()"); }
@@ -8227,30 +8541,30 @@ struct UCheatManager : AShooterPlayerController
 
      //TObjectPtr<ADebugCameraController>&DebugCameraControllerRefField() { return *GetNativePointerField<TObjectPtr<ADebugCameraController>*>(this, "UCheatManager.DebugCameraControllerRef"); }
      //TSubclassOf<ADebugCameraController>&DebugCameraControllerClassField() { return *GetNativePointerField<TSubclassOf<ADebugCameraController>*>(this, "UCheatManager.DebugCameraControllerClass"); }
-     float& DebugTraceDistanceField() { return *GetNativePointerField<float*>(this, "UCheatManager.DebugTraceDistance"); }
-     float& DebugCapsuleHalfHeightField() { return *GetNativePointerField<float*>(this, "UCheatManager.DebugCapsuleHalfHeight"); }
-     float& DebugCapsuleRadiusField() { return *GetNativePointerField<float*>(this, "UCheatManager.DebugCapsuleRadius"); }
-     float& DebugTraceDrawNormalLengthField() { return *GetNativePointerField<float*>(this, "UCheatManager.DebugTraceDrawNormalLength"); }
-     //TArray<FDebugTraceInfo,TSizedDefaultAllocator<32> >&DebugTraceInfoListField() { return *GetNativePointerField<TArray<FDebugTraceInfo,TSizedDefaultAllocator<32> >*>(this, "UCheatManager.DebugTraceInfoList"); }
-     //TArray<FDebugTraceInfo,TSizedDefaultAllocator<32> >&DebugTracePawnInfoListField() { return *GetNativePointerField<TArray<FDebugTraceInfo,TSizedDefaultAllocator<32> >*>(this, "UCheatManager.DebugTracePawnInfoList"); }
-     int& CurrentTraceIndexField() { return *GetNativePointerField<int*>(this, "UCheatManager.CurrentTraceIndex"); }
-     int& CurrentTracePawnIndexField() { return *GetNativePointerField<int*>(this, "UCheatManager.CurrentTracePawnIndex"); }
-     TArray<TObjectPtr<UCheatManagerExtension>,TSizedDefaultAllocator<32> >&CheatManagerExtensionsField() { return *GetNativePointerField<TArray<TObjectPtr<UCheatManagerExtension>,TSizedDefaultAllocator<32> >*>(this, "UCheatManager.CheatManagerExtensions"); }
+    float& DebugTraceDistanceField() { return *GetNativePointerField<float*>(this, "UCheatManager.DebugTraceDistance"); }
+    float& DebugCapsuleHalfHeightField() { return *GetNativePointerField<float*>(this, "UCheatManager.DebugCapsuleHalfHeight"); }
+    float& DebugCapsuleRadiusField() { return *GetNativePointerField<float*>(this, "UCheatManager.DebugCapsuleRadius"); }
+    float& DebugTraceDrawNormalLengthField() { return *GetNativePointerField<float*>(this, "UCheatManager.DebugTraceDrawNormalLength"); }
+    //TArray<FDebugTraceInfo,TSizedDefaultAllocator<32> >&DebugTraceInfoListField() { return *GetNativePointerField<TArray<FDebugTraceInfo,TSizedDefaultAllocator<32> >*>(this, "UCheatManager.DebugTraceInfoList"); }
+    //TArray<FDebugTraceInfo,TSizedDefaultAllocator<32> >&DebugTracePawnInfoListField() { return *GetNativePointerField<TArray<FDebugTraceInfo,TSizedDefaultAllocator<32> >*>(this, "UCheatManager.DebugTracePawnInfoList"); }
+    int& CurrentTraceIndexField() { return *GetNativePointerField<int*>(this, "UCheatManager.CurrentTraceIndex"); }
+    int& CurrentTracePawnIndexField() { return *GetNativePointerField<int*>(this, "UCheatManager.CurrentTracePawnIndex"); }
+    TArray<TObjectPtr<UCheatManagerExtension>, TSizedDefaultAllocator<32> >& CheatManagerExtensionsField() { return *GetNativePointerField<TArray<TObjectPtr<UCheatManagerExtension>, TSizedDefaultAllocator<32> >*>(this, "UCheatManager.CheatManagerExtensions"); }
 
-     // Bitfields
+    // Bitfields
 
-     BitFieldValue<bool, unsigned __int32> bDebugCapsuleSweep() { return { this, "UCheatManager.bDebugCapsuleSweep" }; }
-     BitFieldValue<bool, unsigned __int32> bDebugCapsuleTraceComplex() { return { this, "UCheatManager.bDebugCapsuleTraceComplex" }; }
-     BitFieldValue<bool, unsigned __int32> bToggleAILogging() { return { this, "UCheatManager.bToggleAILogging" }; }
+    BitFieldValue<bool, unsigned __int32> bDebugCapsuleSweep() { return { this, "UCheatManager.bDebugCapsuleSweep" }; }
+    BitFieldValue<bool, unsigned __int32> bDebugCapsuleTraceComplex() { return { this, "UCheatManager.bDebugCapsuleTraceComplex" }; }
+    BitFieldValue<bool, unsigned __int32> bToggleAILogging() { return { this, "UCheatManager.bToggleAILogging" }; }
 
-     // Functions
+    // Functions
 
-    static UClass * StaticClass() { return NativeCall<UClass*>(nullptr, "UCheatManager.StaticClass()"); }
+    static UClass* StaticClass() { return NativeCall<UClass*>(nullptr, "UCheatManager.StaticClass()"); }
     void ServerToggleAILogging() { NativeCall<void>(this, "UCheatManager.ServerToggleAILogging()"); }
     static void StaticRegisterNativesUCheatManager() { NativeCall<void>(nullptr, "UCheatManager.StaticRegisterNativesUCheatManager()"); }
     //void UCheatManager(const FObjectInitializer * ObjectInitializer) { NativeCall<void, const FObjectInitializer*>(this, "UCheatManager.UCheatManager(FObjectInitializer*)", ObjectInitializer); }
     //void OnPlayerEndPlayed(AActor * Player, EEndPlayReason::Type EndPlayReason) { NativeCall<void, AActor*, EEndPlayReason::Type>(this, "UCheatManager.OnPlayerEndPlayed(AActor*,EEndPlayReason::Type)", Player, EndPlayReason); }
-    bool ProcessConsoleExec(const wchar_t* Cmd, FOutputDevice * Ar, UObject * Executor) { return NativeCall<bool, const wchar_t*, FOutputDevice*, UObject*>(this, "UCheatManager.ProcessConsoleExec(wchar_t*,FOutputDevice*,UObject*)", Cmd, Ar, Executor); }
+    bool ProcessConsoleExec(const wchar_t* Cmd, FOutputDevice* Ar, UObject* Executor) { return NativeCall<bool, const wchar_t*, FOutputDevice*, UObject*>(this, "UCheatManager.ProcessConsoleExec(wchar_t*,FOutputDevice*,UObject*)", Cmd, Ar, Executor); }
     void FreezeFrame(float delay) { NativeCall<void, float>(this, "UCheatManager.FreezeFrame(float)", delay); }
     void Teleport() { NativeCall<void>(this, "UCheatManager.Teleport()"); }
     void ChangeSize(float F) { NativeCall<void, float>(this, "UCheatManager.ChangeSize(float)", F); }
@@ -8261,10 +8575,10 @@ struct UCheatManager : AShooterPlayerController
     void Slomo(float NewTimeDilation) { NativeCall<void, float>(this, "UCheatManager.Slomo(float)", NewTimeDilation); }
     void DamageTarget(float DamageAmount) { NativeCall<void, float>(this, "UCheatManager.DamageTarget(float)", DamageAmount); }
     //void DestroyAll(TSubclassOf<AActor> aClass, bool bExactMatch) { NativeCall<void, TSubclassOf<AActor>, bool>(this, "UCheatManager.DestroyAll(TSubclassOf<AActor>,bool)", aClass, bExactMatch); }
-    void Summon(const FString * ClassName) { NativeCall<void, const FString*>(this, "UCheatManager.Summon(FString&)", ClassName); }
+    void Summon(const FString* ClassName) { NativeCall<void, const FString*>(this, "UCheatManager.Summon(FString&)", ClassName); }
     void PlayersOnly() { NativeCall<void>(this, "UCheatManager.PlayersOnly()"); }
     void ViewSelf() { NativeCall<void>(this, "UCheatManager.ViewSelf()"); }
-    void ViewPlayer(const FString * S) { NativeCall<void, const FString*>(this, "UCheatManager.ViewPlayer(FString&)", S); }
+    void ViewPlayer(const FString* S) { NativeCall<void, const FString*>(this, "UCheatManager.ViewPlayer(FString&)", S); }
     void ViewActor(FName ActorName) { NativeCall<void, FName>(this, "UCheatManager.ViewActor(FName)", ActorName); }
     //void ViewClass(TSubclassOf<AActor> DesiredClass) { NativeCall<void, TSubclassOf<AActor>>(this, "UCheatManager.ViewClass(TSubclassOf<AActor>)", DesiredClass); }
     void SetLevelStreamingStatus(FName PackageName, bool bShouldBeLoaded, bool bShouldBeVisible) { NativeCall<void, FName, bool, bool>(this, "UCheatManager.SetLevelStreamingStatus(FName,bool,bool)", PackageName, bShouldBeLoaded, bShouldBeVisible); }
@@ -8286,21 +8600,21 @@ struct UCheatManager : AShooterPlayerController
     void DumpPartyState() { NativeCall<void>(this, "UCheatManager.DumpPartyState()"); }
     void DumpChatState() { NativeCall<void>(this, "UCheatManager.DumpChatState()"); }
     void DumpVoiceMutingState() { NativeCall<void>(this, "UCheatManager.DumpVoiceMutingState()"); }
-    UWorld * GetWorld() { return NativeCall<UWorld*>(this, "UCheatManager.GetWorld()"); }
+    UWorld* GetWorld() { return NativeCall<UWorld*>(this, "UCheatManager.GetWorld()"); }
     void BugItGo(float X, float Y, float Z, float Pitch, float Yaw, float Roll) { NativeCall<void, float, float, float, float, float, float>(this, "UCheatManager.BugItGo(float,float,float,float,float,float)", X, Y, Z, Pitch, Yaw, Roll); }
-    void BugItGoString(const FString * TheLocation, const FString * TheRotation) { NativeCall<void, const FString*, const FString*>(this, "UCheatManager.BugItGoString(FString&,FString&)", TheLocation, TheRotation); }
+    void BugItGoString(const FString* TheLocation, const FString* TheRotation) { NativeCall<void, const FString*, const FString*>(this, "UCheatManager.BugItGoString(FString&,FString&)", TheLocation, TheRotation); }
     static void BugItWorker() { NativeCall<void>(nullptr, "UCheatManager.BugItWorker()"); }
-    void BugIt(const FString * ScreenShotDescription) { NativeCall<void, const FString*>(this, "UCheatManager.BugIt(FString&)", ScreenShotDescription); }
+    void BugIt(const FString* ScreenShotDescription) { NativeCall<void, const FString*>(this, "UCheatManager.BugIt(FString&)", ScreenShotDescription); }
     static void BugItStringCreator() { NativeCall<void>(nullptr, "UCheatManager.BugItStringCreator()"); }
     void FlushLog() { NativeCall<void>(this, "UCheatManager.FlushLog()"); }
     void LogLoc() { NativeCall<void>(this, "UCheatManager.LogLoc()"); }
     void SetMouseSensitivityToDefault() { NativeCall<void>(this, "UCheatManager.SetMouseSensitivityToDefault()"); }
     void InvertMouse() { NativeCall<void>(this, "UCheatManager.InvertMouse()"); }
     static void CheatScript() { NativeCall<void>(nullptr, "UCheatManager.CheatScript()"); }
-    AActor * GetTarget(APlayerController * PlayerController, FHitResult * OutHit) { return NativeCall<AActor*, APlayerController*, FHitResult*>(this, "UCheatManager.GetTarget(APlayerController*,FHitResult*)", PlayerController, OutHit); }
+    AActor* GetTarget(APlayerController* PlayerController, FHitResult* OutHit) { return NativeCall<AActor*, APlayerController*, FHitResult*>(this, "UCheatManager.GetTarget(APlayerController*,FHitResult*)", PlayerController, OutHit); }
     void SpawnServerStatReplicator() { NativeCall<void>(this, "UCheatManager.SpawnServerStatReplicator()"); }
     void DestroyServerStatReplicator() { NativeCall<void>(this, "UCheatManager.DestroyServerStatReplicator()"); }
-    void AddCheatManagerExtension(UCheatManagerExtension * CheatObject) { NativeCall<void, UCheatManagerExtension*>(this, "UCheatManager.AddCheatManagerExtension(UCheatManagerExtension*)", CheatObject); }
+    void AddCheatManagerExtension(UCheatManagerExtension* CheatObject) { NativeCall<void, UCheatManagerExtension*>(this, "UCheatManager.AddCheatManagerExtension(UCheatManagerExtension*)", CheatObject); }
 };
 
 
