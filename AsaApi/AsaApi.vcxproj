@@ -291,6 +291,7 @@
       <AdditionalIncludeDirectories>$(SolutionDir)AsaApi\Core\Public\API\UE;$(SolutionDir)AsaApi\Core\Public;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -305,7 +306,10 @@
     <PostBuildEvent>
       <Command>xcopy /I  /Y "$(TargetDir)$(ProjectName).lib" "$(SolutionDir)out_lib\"
 copy  /Y "$(TargetDir)AsaApi.dll" "E:\ASA\TestingServer\ShooterGame\Binaries\Win64\ArkApi"
-copy  /Y "$(TargetDir)AsaApi.dll" "E:\ASA\Testing Server 2\ShooterGame\Binaries\Win64\ArkApi"</Command>
+copy  /Y "$(SolutionDir)AsaApi\Core\Private\PDBReader\pdbignores.txt" "E:\ASA\TestingServer\ShooterGame\Binaries\Win64\ArkApi"
+
+copy  /Y "$(TargetDir)AsaApi.dll" "E:\ASA\Testing Server 2\ShooterGame\Binaries\Win64\ArkApi"
+copy  /Y "$(SolutionDir)AsaApi\Core\Private\PDBReader\pdbignores.txt" "E:\ASA\Testing Server 2\ShooterGame\Binaries\Win64\ArkApi"</Command>
       <Message>Move lib</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
