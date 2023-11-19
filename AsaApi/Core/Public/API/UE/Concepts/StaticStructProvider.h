@@ -2,7 +2,7 @@
 
 #pragma once
 
-class UScriptStruct;
+struct UScriptStruct;
 
 /**
  * Describes a type with a StaticStruct (static) member.

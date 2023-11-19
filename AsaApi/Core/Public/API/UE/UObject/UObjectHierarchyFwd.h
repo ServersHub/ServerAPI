@@ -12,7 +12,7 @@ class				FObjectProperty;
 struct			UStruct;
 struct				UFunction;
 struct				UClass;
-class				UScriptStruct;
+struct				UScriptStruct;
 class		FLinker;
 class			FLinkerLoad;
 class			FLinkerSave;

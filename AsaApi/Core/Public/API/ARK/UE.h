@@ -779,6 +779,8 @@ struct FProperty : FField
 	}
 };
 
+struct UScriptStruct : UStruct {};
+
 struct UStreamableRenderAsset : UObject
 {
 	// Fields
