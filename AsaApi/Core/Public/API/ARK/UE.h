@@ -65,6 +65,17 @@ struct TWeakObjectPtr
 };
 
 template <typename T>
+TWeakObjectPtr<T> GetWeakReference(T* object)
+{
+	FWeakObjectPtr tempWeak;
+	tempWeak.operator=(object);
+	TWeakObjectPtr<T> tempTWeak(tempWeak.ObjectIndex, tempWeak.ObjectSerialNumber);
+	return tempTWeak;
+}
+template <typename T>
+using TAutoWeakObjectPtr = TWeakObjectPtr<T>;
+
+template <typename T>
 struct TSubclassOf
 {
 	TSubclassOf()
@@ -98,7 +109,7 @@ struct TObjectPtr
 {
 private:
 	FObjectHandlePrivate Handle;
-	FORCEINLINE UObject* RealGet() const { return reinterpret_cast<UObject*>(Handle.PointerOrRef); }	
+	FORCEINLINE UObject* RealGet() const { return reinterpret_cast<UObject*>(Handle.PointerOrRef); }
 public:
 
 	FORCEINLINE T* Get() const { return (T*)(RealGet()); }
@@ -113,7 +124,7 @@ struct TSoftClassPtr
 {
 private:
 	/*FORCEINLINE UClass* Retrieve() const
-	{ 
+	{
 		static UClass* resolvedClass =  NativeCall<UClass*>(this, "TSoftClassPtr<UObject>.LoadSynchronous()");
 		return resolvedClass;
 	}*/
