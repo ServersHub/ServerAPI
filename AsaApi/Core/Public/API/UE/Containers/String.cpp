@@ -1346,39 +1346,7 @@ void FString::ConvertTabsToSpacesInline(const int32 InSpacesPerTab)
 // This starting size catches 99.97% of printf calls - there are about 700k printf calls per level
 #define STARTING_BUFFER_SIZE		512
 
-FString FString::PrintfImpl(const TCHAR* Fmt, ...)
-{
-	int32		BufferSize	= STARTING_BUFFER_SIZE;
-	TCHAR	StartingBuffer[STARTING_BUFFER_SIZE];
-	TCHAR*	Buffer		= StartingBuffer;
-	int32		Result		= -1;
-
-	// First try to print to a stack allocated location 
-	GET_VARARGS_RESULT( Buffer, BufferSize, BufferSize-1, Fmt, Fmt, Result );
-
-	// If that fails, start allocating regular memory
-	if( Result == -1 )
-	{
-		Buffer = nullptr;
-		while(Result == -1)
-		{
-			BufferSize *= 2;
-			Buffer = (TCHAR*) FMemory::Realloc( Buffer, BufferSize * sizeof(TCHAR) );
-			GET_VARARGS_RESULT( Buffer, BufferSize, BufferSize-1, Fmt, Fmt, Result );
-		};
-	}
-
-	Buffer[Result] = TEXT('\0');
-
-	FString ResultString(Buffer);
-
-	if( BufferSize != STARTING_BUFFER_SIZE )
-	{
-		FMemory::Free( Buffer );
-	}
-
-	return ResultString;
-}
+//FString FString::PrintfImpl(const TCHAR* Fmt, ...);
 
 void FString::AppendfImpl(FString& AppendToMe, const TCHAR* Fmt, ...)
 {
