@@ -1046,7 +1046,7 @@ struct USceneComponent : UActorComponent
     static void SetWorldLocation() { NativeCall<void>(nullptr, "USceneComponent.SetWorldLocation()"); }
     //void SetWorldRotation(const UE::Math::TQuat<double>* NewRotation, bool bSweep, FHitResult* OutSweepHitResult, ETeleportType Teleport) { NativeCall<void, const UE::Math::TQuat<double>*, bool, FHitResult*, ETeleportType>(this, "USceneComponent.SetWorldRotation(UE::Math::TQuat<double>*,bool,FHitResult*,ETeleportType)", NewRotation, bSweep, OutSweepHitResult, Teleport); }
     static void SetWorldRotation() { NativeCall<void>(nullptr, "USceneComponent.SetWorldRotation()"); }
-    static void SetWorldScale3D() { NativeCall<void>(nullptr, "USceneComponent.SetWorldScale3D()"); }
+    void SetWorldScale3D(FVector NewScale) { NativeCall<void, FVector>(this, "USceneComponent.SetWorldScale3D(UE::Math::TVector<double>)", NewScale); }
     //void SetWorldTransform(const UE::Math::TTransform<double>* NewTransform, bool bSweep, FHitResult* OutSweepHitResult, ETeleportType Teleport) { NativeCall<void, const UE::Math::TTransform<double>*, bool, FHitResult*, ETeleportType>(this, "USceneComponent.SetWorldTransform(UE::Math::TTransform<double>*,bool,FHitResult*,ETeleportType)", NewTransform, bSweep, OutSweepHitResult, Teleport); }
     //static void SetWorldLocationAndRotation() { NativeCall<void>(nullptr, "USceneComponent.SetWorldLocationAndRotation()"); }
     //static void SetWorldLocationAndRotation() { NativeCall<void>(nullptr, "USceneComponent.SetWorldLocationAndRotation()"); }
