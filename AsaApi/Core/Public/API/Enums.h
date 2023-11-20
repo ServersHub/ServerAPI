@@ -41416,7 +41416,9 @@ enum class EObjectFlags :unsigned __int64
 	RF_PendingKill = 0x20000000,
 	RF_Garbage = 0x40000000,
 	RF_AllocatedInSharedPage = 0x80000000
-};enum class ELifetimeCondition :int
+};
+
+enum class ELifetimeCondition :int
 {
 	COND_None = 0x0,
 	COND_InitialOnly = 0x1,
