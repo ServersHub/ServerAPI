@@ -2411,7 +2411,7 @@ struct AShooterGameMode : APrimalGameMode
 	void LoadPlayerDataIds() { NativeCall<void>(this, "AShooterGameMode.LoadPlayerDataIds()"); }
 	static void AddPlayerID(int playerDataID, FString* netUniqueString) { NativeCall<void, int, FString*>(nullptr, "AShooterGameMode.AddPlayerID(int, FString*)", playerDataID, netUniqueString); }
 	unsigned __int64 GetSteamIDForPlayerID(int playerDataID) { return NativeCall<unsigned __int64, int>(this, "AShooterGameMode.GetSteamIDForPlayerID(int)", playerDataID); }
-	FString* GetSteamIDStringForPlayerID(FString* result, int playerDataID) { return NativeCall<FString*, FString*, int>(this, "AShooterGameMode.GetSteamIDStringForPlayerID(FString&,int)", result, playerDataID); }
+	FString* GetSteamIDStringForPlayerID(FString* result, int playerDataID) { return NativeCall<FString*, FString*, int>(this, "AShooterGameMode.GetSteamIDStringForPlayerID(int)", result, playerDataID); }
 	int GetPlayerIDForSteamID(unsigned __int64 steamID) { return NativeCall<int, unsigned __int64>(this, "AShooterGameMode.GetPlayerIDForSteamID(unsigned__int64)", steamID); }
 	unsigned int GenerateTribeId() { return NativeCall<unsigned int>(this, "AShooterGameMode.GenerateTribeId()"); }
 	static __int64 GeneratePlayerDataId() { return NativeCall<__int64>(nullptr, "AShooterGameMode.GeneratePlayerDataId()"); }
