@@ -49,35 +49,17 @@ namespace API
 
 	DWORD64 Offsets::GetAddress(const void* base, const std::string& name)
 	{
-		auto address = offsets_dump_[name];
-		if (address == 0)
-		{
-			Log::GetLog()->critical("Failed to get the address of {}.", name);
-			throw;
-		}
-		return reinterpret_cast<DWORD64>(base) + static_cast<DWORD64>(address);
+		return reinterpret_cast<DWORD64>(base) + static_cast<DWORD64>(offsets_dump_[name]);
 	}
 
 	LPVOID Offsets::GetAddress(const std::string& name)
 	{
-		auto address = offsets_dump_[name];
-		if (address == 0)
-		{
-			Log::GetLog()->critical("Failed to get the address of {}.", name);
-			throw;
-		}
-		return reinterpret_cast<LPVOID>(module_base_ + static_cast<DWORD64>(address));
+		return reinterpret_cast<LPVOID>(module_base_ + static_cast<DWORD64>(offsets_dump_[name]));
 	}
 
 	LPVOID Offsets::GetDataAddress(const std::string& name)
 	{
-		auto address = offsets_dump_[name];
-		if (address == 0)
-		{
-			Log::GetLog()->critical("Failed to get the address of {}.", name);
-			throw;
-		}
-		return reinterpret_cast<LPVOID>(data_base_ + static_cast<DWORD64>(address));
+		return reinterpret_cast<LPVOID>(data_base_ + static_cast<DWORD64>(offsets_dump_[name]));
 	}
 
 	BitField Offsets::GetBitField(const void* base, const std::string& name)
