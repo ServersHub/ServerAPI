@@ -49,35 +49,47 @@ namespace API
 
 	DWORD64 Offsets::GetAddress(const void* base, const std::string& name)
 	{
-		auto address = offsets_dump_[name];
-		if (address == 0)
+#ifdef API_DEBUG
+		if (!offsets_dump_.contains(name))
 		{
-			Log::GetLog()->critical("Failed to get the address of {}.", name);
+			Log::GetLog()->critical("Failed to get the offset of {}.", name);
+			Log::GetLog()->flush();
+			Sleep(10000);
 			throw;
 		}
-		return reinterpret_cast<DWORD64>(base) + static_cast<DWORD64>(address);
+#endif
+
+		return reinterpret_cast<DWORD64>(base) + static_cast<DWORD64>(offsets_dump_[name]);
 	}
 
 	LPVOID Offsets::GetAddress(const std::string& name)
 	{
-		auto address = offsets_dump_[name];
-		if (address == 0)
+#ifdef API_DEBUG
+		if (!offsets_dump_.contains(name))
 		{
-			Log::GetLog()->critical("Failed to get the address of {}.", name);
+			Log::GetLog()->critical("Failed to get the offset of {}.", name);
+			Log::GetLog()->flush();
+			Sleep(10000);
 			throw;
 		}
-		return reinterpret_cast<LPVOID>(module_base_ + static_cast<DWORD64>(address));
+#endif
+
+		return reinterpret_cast<LPVOID>(module_base_ + static_cast<DWORD64>(offsets_dump_[name]));
 	}
 
 	LPVOID Offsets::GetDataAddress(const std::string& name)
 	{
-		auto address = offsets_dump_[name];
-		if (address == 0)
+#ifdef API_DEBUG
+		if (!offsets_dump_.contains(name))
 		{
-			Log::GetLog()->critical("Failed to get the address of {}.", name);
+			Log::GetLog()->critical("Failed to get the offset of {}.", name);
+			Log::GetLog()->flush();
+			Sleep(10000);
 			throw;
 		}
-		return reinterpret_cast<LPVOID>(data_base_ + static_cast<DWORD64>(address));
+#endif
+
+		return reinterpret_cast<LPVOID>(data_base_ + static_cast<DWORD64>(offsets_dump_[name]));
 	}
 
 	BitField Offsets::GetBitField(const void* base, const std::string& name)
@@ -92,6 +104,16 @@ namespace API
 
 	BitField Offsets::GetBitFieldInternal(const void* base, const std::string& name)
 	{
+#ifdef API_DEBUG
+		if (!bitfields_dump_.contains(name))
+		{
+			Log::GetLog()->critical("Failed to get the bitfield address of {}.", name);
+			Log::GetLog()->flush();
+			Sleep(10000);
+			throw;
+		}
+#endif
+
 		const auto bf = bitfields_dump_[name];
 		auto cf = BitField();
 		cf.bit_position = bf.bit_position;
