@@ -1,5 +1,6 @@
 #pragma once
 #include "UE.h"
+#include "Math/Transform.h"
 
 struct FPrimalChatMessage {
     FString SenderName;
@@ -259,7 +260,303 @@ struct UPrimalActor : UObject
     void MulticastProperty(FName PropertyName, bool bUnreliable) { NativeCall<void, FName, bool>(this, "UPrimalActor.MulticastProperty(FName,bool)", PropertyName, bUnreliable); }
     void ForceReplicateNow(bool bForceCreateChannel, bool bForceCreateChannelIfRelevant, bool bOnlyIfNoChannel) { NativeCall<void, bool, bool, bool>(this, "UPrimalActor.ForceReplicateNow(bool,bool,bool)", bForceCreateChannel, bForceCreateChannelIfRelevant, bOnlyIfNoChannel); }
 };
+struct UActorComponent : UObject
+{
+    // Fields
 
+    FActorComponentTickFunction& PrimaryComponentTickField() { return *GetNativePointerField<FActorComponentTickFunction*>(this, "UActorComponent.PrimaryComponentTick"); }
+    TArray<FName, TSizedDefaultAllocator<32> >& ComponentTagsField() { return *GetNativePointerField<TArray<FName, TSizedDefaultAllocator<32> >*>(this, "UActorComponent.ComponentTags"); }
+    TArray<TObjectPtr<UAssetUserData>, TSizedDefaultAllocator<32> >& AssetUserDataField() { return *GetNativePointerField<TArray<TObjectPtr<UAssetUserData>, TSizedDefaultAllocator<32> >*>(this, "UActorComponent.AssetUserData"); }
+    int& MarkedForEndOfFrameUpdateArrayIndexField() { return *GetNativePointerField<int*>(this, "UActorComponent.MarkedForEndOfFrameUpdateArrayIndex"); }
+    int& UCSSerializationIndexField() { return *GetNativePointerField<int*>(this, "UActorComponent.UCSSerializationIndex"); }
+    EComponentCreationMethod& CreationMethodField() { return *GetNativePointerField<EComponentCreationMethod*>(this, "UActorComponent.CreationMethod"); }
+    FActorComponentDeactivateSignature& OnComponentDeactivatedField() { return *GetNativePointerField<FActorComponentDeactivateSignature*>(this, "UActorComponent.OnComponentDeactivated"); }
+    AActor* OwnerPrivateField() { return *GetNativePointerField<AActor**>(this, "UActorComponent.OwnerPrivate"); }
+    UWorld* WorldPrivateField() { return *GetNativePointerField<UWorld**>(this, "UActorComponent.WorldPrivate"); }
+    __int16& _padding_aaField() { return *GetNativePointerField<__int16*>(this, "UActorComponent._padding_aa"); }
+    FName& CustomTagField() { return *GetNativePointerField<FName*>(this, "UActorComponent.CustomTag"); }
+    int& CustomDataField() { return *GetNativePointerField<int*>(this, "UActorComponent.CustomData"); }
+
+    // Bitfields
+
+    BitFieldValue<bool, unsigned __int32> bRegistered() { return { this, "UActorComponent.bRegistered" }; }
+    BitFieldValue<bool, unsigned __int32> bRenderStateCreated() { return { this, "UActorComponent.bRenderStateCreated" }; }
+    BitFieldValue<bool, unsigned __int32> bPhysicsStateCreated() { return { this, "UActorComponent.bPhysicsStateCreated" }; }
+    BitFieldValue<bool, unsigned __int32> bNetAddressable() { return { this, "UActorComponent.bNetAddressable" }; }
+    BitFieldValue<bool, unsigned __int32> bReplicateUsingRegisteredSubObjectList() { return { this, "UActorComponent.bReplicateUsingRegisteredSubObjectList" }; }
+    BitFieldValue<bool, unsigned __int32> bReplicates() { return { this, "UActorComponent.bReplicates" }; }
+    BitFieldValue<bool, unsigned __int32> bRenderStateDirty() { return { this, "UActorComponent.bRenderStateDirty" }; }
+    BitFieldValue<bool, unsigned __int32> bRenderTransformDirty() { return { this, "UActorComponent.bRenderTransformDirty" }; }
+    BitFieldValue<bool, unsigned __int32> bRenderDynamicDataDirty() { return { this, "UActorComponent.bRenderDynamicDataDirty" }; }
+    BitFieldValue<bool, unsigned __int32> bRenderInstancesDirty() { return { this, "UActorComponent.bRenderInstancesDirty" }; }
+    BitFieldValue<bool, unsigned __int32> bRoutedPostRename() { return { this, "UActorComponent.bRoutedPostRename" }; }
+    BitFieldValue<bool, unsigned __int32> bAutoRegister() { return { this, "UActorComponent.bAutoRegister" }; }
+    BitFieldValue<bool, unsigned __int32> bAllowReregistration() { return { this, "UActorComponent.bAllowReregistration" }; }
+    BitFieldValue<bool, unsigned __int32> bTickInEditor() { return { this, "UActorComponent.bTickInEditor" }; }
+    BitFieldValue<bool, unsigned __int32> bNeverNeedsRenderUpdate() { return { this, "UActorComponent.bNeverNeedsRenderUpdate" }; }
+    BitFieldValue<bool, unsigned __int32> bAllowConcurrentTick() { return { this, "UActorComponent.bAllowConcurrentTick" }; }
+    BitFieldValue<bool, unsigned __int32> bAllowAnyoneToDestroyMe() { return { this, "UActorComponent.bAllowAnyoneToDestroyMe" }; }
+    BitFieldValue<bool, unsigned __int32> bAutoActivate() { return { this, "UActorComponent.bAutoActivate" }; }
+    BitFieldValue<bool, unsigned __int32> bIsActive() { return { this, "UActorComponent.bIsActive" }; }
+    BitFieldValue<bool, unsigned __int32> bEditableWhenInherited() { return { this, "UActorComponent.bEditableWhenInherited" }; }
+    BitFieldValue<bool, unsigned __int32> bOnlyRelevantToOwner() { return { this, "UActorComponent.bOnlyRelevantToOwner" }; }
+    BitFieldValue<bool, unsigned __int32> bNavigationRelevant() { return { this, "UActorComponent.bNavigationRelevant" }; }
+    BitFieldValue<bool, unsigned __int32> bCanEverAffectNavigation() { return { this, "UActorComponent.bCanEverAffectNavigation" }; }
+    BitFieldValue<bool, unsigned __int32> bWantsInitializeComponent() { return { this, "UActorComponent.bWantsInitializeComponent" }; }
+    BitFieldValue<bool, unsigned __int32> bIsEditorOnly() { return { this, "UActorComponent.bIsEditorOnly" }; }
+    BitFieldValue<bool, unsigned __int32> bHasBeenCreated() { return { this, "UActorComponent.bHasBeenCreated" }; }
+    BitFieldValue<bool, unsigned __int32> bHasBeenInitialized() { return { this, "UActorComponent.bHasBeenInitialized" }; }
+    BitFieldValue<bool, unsigned __int32> bIsReadyForReplication() { return { this, "UActorComponent.bIsReadyForReplication" }; }
+    BitFieldValue<bool, unsigned __int32> bHasBegunPlay() { return { this, "UActorComponent.bHasBegunPlay" }; }
+    BitFieldValue<bool, unsigned __int32> bIsBeingDestroyed() { return { this, "UActorComponent.bIsBeingDestroyed" }; }
+    BitFieldValue<bool, unsigned __int32> bTickFunctionsRegistered() { return { this, "UActorComponent.bTickFunctionsRegistered" }; }
+    BitFieldValue<bool, unsigned __int32> bIsNetStartupComponent() { return { this, "UActorComponent.bIsNetStartupComponent" }; }
+    BitFieldValue<bool, unsigned __int32> MarkedForEndOfFrameUpdateState() { return { this, "UActorComponent.MarkedForEndOfFrameUpdateState" }; }
+    BitFieldValue<bool, unsigned __int32> bMarkedForPreEndOfFrameSync() { return { this, "UActorComponent.bMarkedForPreEndOfFrameSync" }; }
+    BitFieldValue<bool, unsigned __int32> bAsyncPhysicsTickEnabled() { return { this, "UActorComponent.bAsyncPhysicsTickEnabled" }; }
+    BitFieldValue<bool, unsigned __int32> bStasisPreventUnregister() { return { this, "UActorComponent.bStasisPreventUnregister" }; }
+    BitFieldValue<bool, unsigned __int32> bOnlyInitialReplication() { return { this, "UActorComponent.bOnlyInitialReplication" }; }
+    BitFieldValue<bool, unsigned __int32> bPreventOnDedicatedServer() { return { this, "UActorComponent.bPreventOnDedicatedServer" }; }
+    BitFieldValue<bool, unsigned __int32> bPreventOnConsoles() { return { this, "UActorComponent.bPreventOnConsoles" }; }
+    BitFieldValue<bool, unsigned __int32> bPreventOnClient() { return { this, "UActorComponent.bPreventOnClient" }; }
+    BitFieldValue<bool, unsigned __int32> bPreventOnNonDedicatedHost() { return { this, "UActorComponent.bPreventOnNonDedicatedHost" }; }
+    BitFieldValue<bool, unsigned __int32> bDedicatedForceTickingEveryFrame() { return { this, "UActorComponent.bDedicatedForceTickingEveryFrame" }; }
+    BitFieldValue<bool, unsigned __int32> bAlwaysReplicatePropertyConditional() { return { this, "UActorComponent.bAlwaysReplicatePropertyConditional" }; }
+    BitFieldValue<bool, unsigned __int32> bUseBPOnComponentTick() { return { this, "UActorComponent.bUseBPOnComponentTick" }; }
+    BitFieldValue<bool, unsigned __int32> bUseBPOnComponentDestroyed() { return { this, "UActorComponent.bUseBPOnComponentDestroyed" }; }
+    BitFieldValue<bool, unsigned __int32> bUseBPOnComponentCreated() { return { this, "UActorComponent.bUseBPOnComponentCreated" }; }
+
+    // Functions
+
+    UWorld* GetWorld() { return NativeCall<UWorld*>(this, "UActorComponent.GetWorld()"); }
+    static UClass* GetPrivateStaticClass() { return NativeCall<UClass*>(nullptr, "UActorComponent.GetPrivateStaticClass()"); }
+    void AsyncPhysicsTickComponent(float DeltaTime, float SimTime) { NativeCall<void, float, float>(this, "UActorComponent.AsyncPhysicsTickComponent(float,float)", DeltaTime, SimTime); }
+    //ELifetimeCondition GetReplicationCondition() { return NativeCall<ELifetimeCondition>(this, "UActorComponent.GetReplicationCondition()"); }
+    void PostInitProperties() { NativeCall<void>(this, "UActorComponent.PostInitProperties()"); }
+    void OnCreatePhysicsState() { NativeCall<void>(this, "UActorComponent.OnCreatePhysicsState()"); }
+    static void StaticRegisterNativesUActorComponent() { NativeCall<void>(nullptr, "UActorComponent.StaticRegisterNativesUActorComponent()"); }
+    void ValidateGeneratedRepEnums(const TArray<FRepRecord, TSizedDefaultAllocator<32> >* ClassReps) { NativeCall<void, const TArray<FRepRecord, TSizedDefaultAllocator<32> >*>(this, "UActorComponent.ValidateGeneratedRepEnums(TArray<FRepRecord,TSizedDefaultAllocator<32>>*)", ClassReps); }
+    //void ~UActorComponent() { NativeCall<void>(this, "UActorComponent.~UActorComponent()"); }
+    //void UActorComponent(const FObjectInitializer* ObjectInitializer) { NativeCall<void, const FObjectInitializer*>(this, "UActorComponent.UActorComponent(FObjectInitializer*)", ObjectInitializer); }
+    bool Rename(const wchar_t* InName, UObject* NewOuter, unsigned int Flags) { return NativeCall<bool, const wchar_t*, UObject*, unsigned int>(this, "UActorComponent.Rename(wchar_t*,UObject*,unsignedint)", InName, NewOuter, Flags); }
+    void PostRename(UObject* OldOuter, const FName OldName) { NativeCall<void, UObject*, const FName>(this, "UActorComponent.PostRename(UObject*,FName)", OldOuter, OldName); }
+    bool AllowRegisterWithWorld(UWorld* InWorld) { return NativeCall<bool, UWorld*>(this, "UActorComponent.AllowRegisterWithWorld(UWorld*)", InWorld); }
+    void FailedToRegisterWithWorld(UWorld* InWorld) { NativeCall<void, UWorld*>(this, "UActorComponent.FailedToRegisterWithWorld(UWorld*)", InWorld); }
+    UWorld* GetWorld_Uncached() { return NativeCall<UWorld*>(this, "UActorComponent.GetWorld_Uncached()"); }
+    bool ComponentHasTag(FName Tag) { return NativeCall<bool, FName>(this, "UActorComponent.ComponentHasTag(FName)", Tag); }
+    ENetMode InternalGetNetMode() { return NativeCall<ENetMode>(this, "UActorComponent.InternalGetNetMode()"); }
+    FString* GetReadableName(FString* result) { return NativeCall<FString*, FString*>(this, "UActorComponent.GetReadableName(FString&)", result); }
+    void BeginDestroy() { NativeCall<void>(this, "UActorComponent.BeginDestroy()"); }
+    bool NeedsLoadForClient() { return NativeCall<bool>(this, "UActorComponent.NeedsLoadForClient()"); }
+    bool NeedsLoadForServer() { return NativeCall<bool>(this, "UActorComponent.NeedsLoadForServer()"); }
+    bool NeedsLoadForEditorGame() { return NativeCall<bool>(this, "UActorComponent.NeedsLoadForEditorGame()"); }
+    int GetFunctionCallspace(UFunction* Function, FFrame* Stack) { return NativeCall<int, UFunction*, FFrame*>(this, "UActorComponent.GetFunctionCallspace(UFunction*,FFrame*)", Function, Stack); }
+    bool CallRemoteFunction(UFunction* Function, void* Parameters, FOutParmRec* OutParms, FFrame* Stack) { return NativeCall<bool, UFunction*, void*, FOutParmRec*, FFrame*>(this, "UActorComponent.CallRemoteFunction(UFunction*,void*,FOutParmRec*,FFrame*)", Function, Parameters, OutParms, Stack); }
+    void OnRegister() { NativeCall<void>(this, "UActorComponent.OnRegister()"); }
+    void InitializeComponent() { NativeCall<void>(this, "UActorComponent.InitializeComponent()"); }
+    void UninitializeComponent() { NativeCall<void>(this, "UActorComponent.UninitializeComponent()"); }
+    void ReadyForReplication() { NativeCall<void>(this, "UActorComponent.ReadyForReplication()"); }
+    void BeginPlay() { NativeCall<void>(this, "UActorComponent.BeginPlay()"); }
+    //void EndPlay(const EEndPlayReason::Type EndPlayReason) { NativeCall<void, const EEndPlayReason::Type>(this, "UActorComponent.EndPlay(EEndPlayReason::Type)", EndPlayReason); }
+    //TStructOnScope<FActorComponentInstanceData, UScriptStruct*>* GetComponentInstanceData(TStructOnScope<FActorComponentInstanceData, UScriptStruct*>* result) { return NativeCall<TStructOnScope<FActorComponentInstanceData, UScriptStruct*>*, TStructOnScope<FActorComponentInstanceData, UScriptStruct*>*>(this, "UActorComponent.GetComponentInstanceData(TStructOnScope<FActorComponentInstanceData,UScriptStruct*>*)", result); }
+    bool SetupActorComponentTickFunction(FTickFunction* TickFunction) { return NativeCall<bool, FTickFunction*>(this, "UActorComponent.SetupActorComponentTickFunction(FTickFunction*)", TickFunction); }
+    void SetComponentTickEnabled(bool bEnabled) { NativeCall<void, bool>(this, "UActorComponent.SetComponentTickEnabled(bool)", bEnabled); }
+    void SetComponentTickEnabledAsync(bool bEnabled) { NativeCall<void, bool>(this, "UActorComponent.SetComponentTickEnabledAsync(bool)", bEnabled); }
+    bool IsComponentTickEnabled() { return NativeCall<bool>(this, "UActorComponent.IsComponentTickEnabled()"); }
+    void SetComponentTickIntervalAndCooldown(float TickInterval) { NativeCall<void, float>(this, "UActorComponent.SetComponentTickIntervalAndCooldown(float)", TickInterval); }
+    void RegisterComponentTickFunctions(bool bRegister, bool bSaveAndRestoreComponentTickState) { NativeCall<void, bool, bool>(this, "UActorComponent.RegisterComponentTickFunctions(bool,bool)", bRegister, bSaveAndRestoreComponentTickState); }
+    void RegisterAllComponentTickFunctions(bool bRegister, bool bSaveAndRestoreComponentTickState) { NativeCall<void, bool, bool>(this, "UActorComponent.RegisterAllComponentTickFunctions(bool,bool)", bRegister, bSaveAndRestoreComponentTickState); }
+    void RegisterAsyncPhysicsTickEnabled(bool bRegister) { NativeCall<void, bool>(this, "UActorComponent.RegisterAsyncPhysicsTickEnabled(bool)", bRegister); }
+    //void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) { NativeCall<void, float, ELevelTick, FActorComponentTickFunction*>(this, "UActorComponent.TickComponent(float,ELevelTick,FActorComponentTickFunction*)", DeltaTime, TickType, ThisTickFunction); }
+    void RegisterComponentWithWorld(UWorld* InWorld, FRegisterComponentContext* Context) { NativeCall<void, UWorld*, FRegisterComponentContext*>(this, "UActorComponent.RegisterComponentWithWorld(UWorld*,FRegisterComponentContext*)", InWorld, Context); }
+    void RegisterComponent() { NativeCall<void>(this, "UActorComponent.RegisterComponent()"); }
+    void UnregisterComponent() { NativeCall<void>(this, "UActorComponent.UnregisterComponent()"); }
+    void DestroyComponent(bool bPromoteChildren) { NativeCall<void, bool>(this, "UActorComponent.DestroyComponent(bool)", bPromoteChildren); }
+    void OnComponentDestroyed(bool bDestroyingHierarchy) { NativeCall<void, bool>(this, "UActorComponent.OnComponentDestroyed(bool)", bDestroyingHierarchy); }
+    void CreateRenderState_Concurrent(FRegisterComponentContext* Context) { NativeCall<void, FRegisterComponentContext*>(this, "UActorComponent.CreateRenderState_Concurrent(FRegisterComponentContext*)", Context); }
+    void SendRenderTransform_Concurrent() { NativeCall<void>(this, "UActorComponent.SendRenderTransform_Concurrent()"); }
+    void SendRenderInstanceData_Concurrent() { NativeCall<void>(this, "UActorComponent.SendRenderInstanceData_Concurrent()"); }
+    void DestroyRenderState_Concurrent() { NativeCall<void>(this, "UActorComponent.DestroyRenderState_Concurrent()"); }
+    void OnDestroyPhysicsState() { NativeCall<void>(this, "UActorComponent.OnDestroyPhysicsState()"); }
+    void CreatePhysicsState(bool bAllowDeferral) { NativeCall<void, bool>(this, "UActorComponent.CreatePhysicsState(bool)", bAllowDeferral); }
+    void DestroyPhysicsState() { NativeCall<void>(this, "UActorComponent.DestroyPhysicsState()"); }
+    void ExecuteUnregisterEvents() { NativeCall<void>(this, "UActorComponent.ExecuteUnregisterEvents()"); }
+    void ReregisterComponent() { NativeCall<void>(this, "UActorComponent.ReregisterComponent()"); }
+    void RecreateRenderState_Concurrent() { NativeCall<void>(this, "UActorComponent.RecreateRenderState_Concurrent()"); }
+    void RecreatePhysicsState() { NativeCall<void>(this, "UActorComponent.RecreatePhysicsState()"); }
+    void AddTickPrerequisiteActor(AActor* PrerequisiteActor) { NativeCall<void, AActor*>(this, "UActorComponent.AddTickPrerequisiteActor(AActor*)", PrerequisiteActor); }
+    void AddTickPrerequisiteComponent(UActorComponent* PrerequisiteComponent) { NativeCall<void, UActorComponent*>(this, "UActorComponent.AddTickPrerequisiteComponent(UActorComponent*)", PrerequisiteComponent); }
+    void RemoveTickPrerequisiteActor(AActor* PrerequisiteActor) { NativeCall<void, AActor*>(this, "UActorComponent.RemoveTickPrerequisiteActor(AActor*)", PrerequisiteActor); }
+    void RemoveTickPrerequisiteComponent(UActorComponent* PrerequisiteComponent) { NativeCall<void, UActorComponent*>(this, "UActorComponent.RemoveTickPrerequisiteComponent(UActorComponent*)", PrerequisiteComponent); }
+    void DoDeferredRenderUpdates_Concurrent() { NativeCall<void>(this, "UActorComponent.DoDeferredRenderUpdates_Concurrent()"); }
+    void MarkRenderStateDirty() { NativeCall<void>(this, "UActorComponent.MarkRenderStateDirty()"); }
+    void MarkForNeededEndOfFrameUpdate() { NativeCall<void>(this, "UActorComponent.MarkForNeededEndOfFrameUpdate()"); }
+    void ClearNeedEndOfFrameUpdate_Internal() { NativeCall<void>(this, "UActorComponent.ClearNeedEndOfFrameUpdate_Internal()"); }
+    void Activate(bool bReset) { NativeCall<void, bool>(this, "UActorComponent.Activate(bool)", bReset); }
+    void Deactivate() { NativeCall<void>(this, "UActorComponent.Deactivate()"); }
+    void SetActive(bool bNewActive, bool bReset) { NativeCall<void, bool, bool>(this, "UActorComponent.SetActive(bool,bool)", bNewActive, bReset); }
+    void SetAutoActivate(bool bNewAutoActivate) { NativeCall<void, bool>(this, "UActorComponent.SetAutoActivate(bool)", bNewAutoActivate); }
+    void ToggleActive() { NativeCall<void>(this, "UActorComponent.ToggleActive()"); }
+    void AddAssetUserData(UAssetUserData* InUserData) { NativeCall<void, UAssetUserData*>(this, "UActorComponent.AddAssetUserData(UAssetUserData*)", InUserData); }
+    //UAssetUserData* GetAssetUserDataOfClass(TSubclassOf<UAssetUserData> InUserDataClass) { return NativeCall<UAssetUserData*, TSubclassOf<UAssetUserData>>(this, "UActorComponent.GetAssetUserDataOfClass(TSubclassOf<UAssetUserData>)", InUserDataClass); }
+   // void RemoveUserDataOfClass(TSubclassOf<UAssetUserData> InUserDataClass) { NativeCall<void, TSubclassOf<UAssetUserData>>(this, "UActorComponent.RemoveUserDataOfClass(TSubclassOf<UAssetUserData>)", InUserDataClass); }
+    bool IsNameStableForNetworking() { return NativeCall<bool>(this, "UActorComponent.IsNameStableForNetworking()"); }
+    bool IsSupportedForNetworking() { return NativeCall<bool>(this, "UActorComponent.IsSupportedForNetworking()"); }
+    void SetIsReplicated(bool bShouldReplicate) { NativeCall<void, bool>(this, "UActorComponent.SetIsReplicated(bool)", bShouldReplicate); }
+    //void AddReplicatedSubObject(UObject* SubObject, ELifetimeCondition NetCondition) { NativeCall<void, UObject*, ELifetimeCondition>(this, "UActorComponent.AddReplicatedSubObject(UObject*,ELifetimeCondition)", SubObject, NetCondition); }
+    bool ReplicateSubobjects(UActorChannel* Channel, FOutBunch* Bunch, FReplicationFlags* RepFlags) { return NativeCall<bool, UActorChannel*, FOutBunch*, FReplicationFlags*>(this, "UActorComponent.ReplicateSubobjects(UActorChannel*,FOutBunch*,FReplicationFlags*)", Channel, Bunch, RepFlags); }
+    void PreReplication(IRepChangedPropertyTracker* ChangedPropertyTracker) { NativeCall<void, IRepChangedPropertyTracker*>(this, "UActorComponent.PreReplication(IRepChangedPropertyTracker*)", ChangedPropertyTracker); }
+    void GetLifetimeReplicatedProps(TArray<FLifetimeProperty, TSizedDefaultAllocator<32> >* OutLifetimeProps) { NativeCall<void, TArray<FLifetimeProperty, TSizedDefaultAllocator<32> >*>(this, "UActorComponent.GetLifetimeReplicatedProps(TArray<FLifetimeProperty,TSizedDefaultAllocator<32>>*)", OutLifetimeProps); }
+    void OnRep_IsActive() { NativeCall<void>(this, "UActorComponent.OnRep_IsActive()"); }
+    void DetermineUCSModifiedProperties() { NativeCall<void>(this, "UActorComponent.DetermineUCSModifiedProperties()"); }
+    void GetUCSModifiedProperties(TSet<FProperty const*, DefaultKeyFuncs<FProperty const*, 0>, FDefaultSetAllocator>* ModifiedProperties) { NativeCall<void, TSet<FProperty const*, DefaultKeyFuncs<FProperty const*, 0>, FDefaultSetAllocator>*>(this, "UActorComponent.GetUCSModifiedProperties(TSet<FProperty*,DefaultKeyFuncs<FProperty*,0>,FDefaultSetAllocator>*)", ModifiedProperties); }
+    void RemoveUCSModifiedProperties(const TArray<FProperty*, TSizedDefaultAllocator<32> >* Properties) { NativeCall<void, const TArray<FProperty*, TSizedDefaultAllocator<32> >*>(this, "UActorComponent.RemoveUCSModifiedProperties(TArray<FProperty*,TSizedDefaultAllocator<32>>*)", Properties); }
+    static void AddReferencedObjects(UObject* InThis, FReferenceCollector* Collector) { NativeCall<void, UObject*, FReferenceCollector*>(nullptr, "UActorComponent.AddReferencedObjects(UObject*,FReferenceCollector*)", InThis, Collector); }
+    void SetCanEverAffectNavigation(bool bRelevant) { NativeCall<void, bool>(this, "UActorComponent.SetCanEverAffectNavigation(bool)", bRelevant); }
+    void Serialize(FArchive* Ar) { NativeCall<void, FArchive*>(this, "UActorComponent.Serialize(FArchive*)", Ar); }
+    void SetIsReplicatedByDefault(const bool bNewReplicates) { NativeCall<void, const bool>(this, "UActorComponent.SetIsReplicatedByDefault(bool)", bNewReplicates); }
+};
+
+struct UStaticMeshComponent : UActorComponent
+{
+
+};
+
+struct USceneComponent : UActorComponent
+{
+    // Fields
+
+    TWeakObjectPtr<APhysicsVolume>& PhysicsVolumeField() { return *GetNativePointerField<TWeakObjectPtr<APhysicsVolume>*>(this, "USceneComponent.PhysicsVolume"); }
+    TObjectPtr<USceneComponent>& AttachParentField() { return *GetNativePointerField<TObjectPtr<USceneComponent>*>(this, "USceneComponent.AttachParent"); }
+    FName& AttachSocketNameField() { return *GetNativePointerField<FName*>(this, "USceneComponent.AttachSocketName"); }
+    TArray<TObjectPtr<USceneComponent>, TSizedDefaultAllocator<32> >& AttachChildrenField() { return *GetNativePointerField<TArray<TObjectPtr<USceneComponent>, TSizedDefaultAllocator<32> >*>(this, "USceneComponent.AttachChildren"); }
+    TArray<TObjectPtr<USceneComponent>, TSizedDefaultAllocator<32> >& ClientAttachedChildrenField() { return *GetNativePointerField<TArray<TObjectPtr<USceneComponent>, TSizedDefaultAllocator<32> >*>(this, "USceneComponent.ClientAttachedChildren"); }
+    FName& NetOldAttachSocketNameField() { return *GetNativePointerField<FName*>(this, "USceneComponent.NetOldAttachSocketName"); }
+    USceneComponent*& NetOldAttachParentField() { return *GetNativePointerField<USceneComponent**>(this, "USceneComponent.NetOldAttachParent"); }
+    UE::Math::TBoxSphereBounds<double, double>& BoundsField() { return *GetNativePointerField<UE::Math::TBoxSphereBounds<double, double>*>(this, "USceneComponent.Bounds"); }
+    UE::Math::TVector<double>& RelativeLocationField() { return *GetNativePointerField<UE::Math::TVector<double>*>(this, "USceneComponent.RelativeLocation"); }
+    UE::Math::TRotator<double>& RelativeRotationField() { return *GetNativePointerField<UE::Math::TRotator<double>*>(this, "USceneComponent.RelativeRotation"); }
+    UE::Math::TVector<double>& RelativeScale3DField() { return *GetNativePointerField<UE::Math::TVector<double>*>(this, "USceneComponent.RelativeScale3D"); }
+    UE::Math::TVector<double>& ComponentVelocityField() { return *GetNativePointerField<UE::Math::TVector<double>*>(this, "USceneComponent.ComponentVelocity"); }
+    TEnumAsByte<enum EDetailMode>& DetailModeField() { return *GetNativePointerField<TEnumAsByte<enum EDetailMode>*>(this, "USceneComponent.DetailMode"); }
+    FRotationConversionCache& WorldRotationCacheField() { return *GetNativePointerField<FRotationConversionCache*>(this, "USceneComponent.WorldRotationCache"); }
+    FRotationConversionCache& RelativeRotationCacheField() { return *GetNativePointerField<FRotationConversionCache*>(this, "USceneComponent.RelativeRotationCache"); }
+    UE::Math::TTransform<double>& ComponentToWorldField() { return *GetNativePointerField<UE::Math::TTransform<double>*>(this, "USceneComponent.ComponentToWorld"); }
+    int& AttachmentChangedIncrementerField() { return *GetNativePointerField<int*>(this, "USceneComponent.AttachmentChangedIncrementer"); }
+
+    // Bitfields
+
+    BitFieldValue<bool, unsigned __int32> bClientSyncAlwaysUpdatePhysicsCollision() { return { this, "USceneComponent.bClientSyncAlwaysUpdatePhysicsCollision" }; }
+    BitFieldValue<bool, unsigned __int32> bComponentToWorldUpdated() { return { this, "USceneComponent.bComponentToWorldUpdated" }; }
+    BitFieldValue<bool, unsigned __int32> bSkipUpdateOverlaps() { return { this, "USceneComponent.bSkipUpdateOverlaps" }; }
+    BitFieldValue<bool, unsigned __int32> bAbsoluteLocation() { return { this, "USceneComponent.bAbsoluteLocation" }; }
+    BitFieldValue<bool, unsigned __int32> bAbsoluteRotation() { return { this, "USceneComponent.bAbsoluteRotation" }; }
+    BitFieldValue<bool, unsigned __int32> bAbsoluteScale() { return { this, "USceneComponent.bAbsoluteScale" }; }
+    BitFieldValue<bool, unsigned __int32> bVisible() { return { this, "USceneComponent.bVisible" }; }
+    BitFieldValue<bool, unsigned __int32> bShouldBeAttached() { return { this, "USceneComponent.bShouldBeAttached" }; }
+    BitFieldValue<bool, unsigned __int32> bShouldSnapLocationWhenAttached() { return { this, "USceneComponent.bShouldSnapLocationWhenAttached" }; }
+    BitFieldValue<bool, unsigned __int32> bShouldSnapRotationWhenAttached() { return { this, "USceneComponent.bShouldSnapRotationWhenAttached" }; }
+    BitFieldValue<bool, unsigned __int32> bShouldSnapScaleWhenAttached() { return { this, "USceneComponent.bShouldSnapScaleWhenAttached" }; }
+    BitFieldValue<bool, unsigned __int32> bShouldUpdatePhysicsVolume() { return { this, "USceneComponent.bShouldUpdatePhysicsVolume" }; }
+    BitFieldValue<bool, unsigned __int32> bHiddenInGame() { return { this, "USceneComponent.bHiddenInGame" }; }
+    BitFieldValue<bool, unsigned __int32> bAttachedSoundsForceHighPriority() { return { this, "USceneComponent.bAttachedSoundsForceHighPriority" }; }
+    BitFieldValue<bool, unsigned __int32> bBoundsChangeTriggersStreamingDataRebuild() { return { this, "USceneComponent.bBoundsChangeTriggersStreamingDataRebuild" }; }
+    BitFieldValue<bool, unsigned __int32> bUseAttachParentBound() { return { this, "USceneComponent.bUseAttachParentBound" }; }
+    BitFieldValue<bool, unsigned __int32> bComputeFastLocalBounds() { return { this, "USceneComponent.bComputeFastLocalBounds" }; }
+    BitFieldValue<bool, unsigned __int32> bComputeBoundsOnceForGame() { return { this, "USceneComponent.bComputeBoundsOnceForGame" }; }
+    BitFieldValue<bool, unsigned __int32> bComputedBoundsOnceForGame() { return { this, "USceneComponent.bComputedBoundsOnceForGame" }; }
+    BitFieldValue<bool, unsigned __int32> bIsNotRenderAttachmentRoot() { return { this, "USceneComponent.bIsNotRenderAttachmentRoot" }; }
+    BitFieldValue<bool, unsigned __int32> bDisableDetachmentUpdateOverlaps() { return { this, "USceneComponent.bDisableDetachmentUpdateOverlaps" }; }
+    BitFieldValue<bool, unsigned __int32> bWantsOnUpdateTransform() { return { this, "USceneComponent.bWantsOnUpdateTransform" }; }
+    BitFieldValue<bool, unsigned __int32> bNetUpdateTransform() { return { this, "USceneComponent.bNetUpdateTransform" }; }
+    BitFieldValue<bool, unsigned __int32> bNetUpdateAttachment() { return { this, "USceneComponent.bNetUpdateAttachment" }; }
+    BitFieldValue<bool, unsigned __int32> bIgnoreParentTransformUpdate() { return { this, "USceneComponent.bIgnoreParentTransformUpdate" }; }
+    BitFieldValue<bool, unsigned __int32> bUpdateChildOverlaps() { return { this, "USceneComponent.bUpdateChildOverlaps" }; }
+
+    // Functions
+
+    static UClass* GetPrivateStaticClass() { return NativeCall<UClass*>(nullptr, "USceneComponent.GetPrivateStaticClass()"); }
+    void OnChildAttached(USceneComponent* ChildComponent) { NativeCall<void, USceneComponent*>(this, "USceneComponent.OnChildAttached(USceneComponent*)", ChildComponent); }
+    //void UpdateComponentToWorld(EUpdateTransformFlags UpdateTransformFlags, ETeleportType Teleport) { NativeCall<void, EUpdateTransformFlags, ETeleportType>(this, "USceneComponent.UpdateComponentToWorld(EUpdateTransformFlags,ETeleportType)", UpdateTransformFlags, Teleport); }
+    void SetHiddenInGame(bool NewHidden, bool bPropagateToChildren, bool bSetChildrenRenderState) { NativeCall<void, bool, bool, bool>(this, "USceneComponent.SetHiddenInGame(bool,bool,bool)", NewHidden, bPropagateToChildren, bSetChildrenRenderState); }
+    void OnUnregister() { NativeCall<void>(this, "USceneComponent.OnUnregister()"); }
+    static void StaticRegisterNativesUSceneComponent() { NativeCall<void>(nullptr, "USceneComponent.StaticRegisterNativesUSceneComponent()"); }
+    void ValidateGeneratedRepEnums(const TArray<FRepRecord, TSizedDefaultAllocator<32> >* ClassReps) { NativeCall<void, const TArray<FRepRecord, TSizedDefaultAllocator<32> >*>(this, "USceneComponent.ValidateGeneratedRepEnums(TArray<FRepRecord,TSizedDefaultAllocator<32>>*)", ClassReps); }
+    void NotifyIsRootComponentChanged(bool bIsRootComponent) { NativeCall<void, bool>(this, "USceneComponent.NotifyIsRootComponentChanged(bool)", bIsRootComponent); }
+    static const FName* GetRelativeScale3DPropertyName(const FName* result) { return NativeCall<const FName*, const FName*>(nullptr, "USceneComponent.GetRelativeScale3DPropertyName(FName*)", result); }
+    //void UpdateComponentToWorldWithParent(USceneComponent* Parent, FName SocketName, EUpdateTransformFlags UpdateTransformFlags, const UE::Math::TQuat<double>* RelativeRotationQuat, ETeleportType Teleport) { NativeCall<void, USceneComponent*, FName, EUpdateTransformFlags, const UE::Math::TQuat<double>*, ETeleportType>(this, "USceneComponent.UpdateComponentToWorldWithParent(USceneComponent*,FName,EUpdateTransformFlags,UE::Math::TQuat<double>*,ETeleportType)", Parent, SocketName, UpdateTransformFlags, RelativeRotationQuat, Teleport); }
+    void OnRegister() { NativeCall<void>(this, "USceneComponent.OnRegister()"); }
+    void EndPlay(EEndPlayReason::Type Reason) { NativeCall<void, EEndPlayReason::Type>(this, "USceneComponent.EndPlay(EEndPlayReason::Type)", Reason); }
+    //void PropagateTransformUpdate(bool bTransformChanged, EUpdateTransformFlags UpdateTransformFlags, ETeleportType Teleport) { NativeCall<void, bool, EUpdateTransformFlags, ETeleportType>(this, "USceneComponent.PropagateTransformUpdate(bool,EUpdateTransformFlags,ETeleportType)", bTransformChanged, UpdateTransformFlags, Teleport); }
+    //bool UpdateOverlaps(const TArrayView<FOverlapInfo const, int>* PendingOverlaps, bool bDoNotifies, const TArrayView<FOverlapInfo const, int>* OverlapsAtEndLocation) { return NativeCall<bool, const TArrayView<FOverlapInfo const, int>*, bool, const TArrayView<FOverlapInfo const, int>*>(this, "USceneComponent.UpdateOverlaps(TArrayView<FOverlapInfo,int>*,bool,TArrayView<FOverlapInfo,int>*)", PendingOverlaps, bDoNotifies, OverlapsAtEndLocation); }
+    //void ProcessScopedMovementUpdate(FScopedMovementUpdate* CurrentScopedUpdate) { NativeCall<void, FScopedMovementUpdate*>(this, "USceneComponent.ProcessScopedMovementUpdate(FScopedMovementUpdate*)", CurrentScopedUpdate); }
+    void DestroyComponent(bool bPromoteChildren) { NativeCall<void, bool>(this, "USceneComponent.DestroyComponent(bool)", bPromoteChildren); }
+    void OnComponentDestroyed(bool bDestroyingHierarchy) { NativeCall<void, bool>(this, "USceneComponent.OnComponentDestroyed(bool)", bDestroyingHierarchy); }
+    void CalcBoundingCylinder(float* CylinderRadius, float* CylinderHalfHeight) { NativeCall<void, float*, float*>(this, "USceneComponent.CalcBoundingCylinder(float*,float*)", CylinderRadius, CylinderHalfHeight); }
+    void UpdateBounds() { NativeCall<void>(this, "USceneComponent.UpdateBounds()"); }
+    //static void SetRelativeLocationAndRotation() { NativeCall<void>(nullptr, "USceneComponent.SetRelativeLocationAndRotation()"); }
+    //static void SetRelativeLocationAndRotation() { NativeCall<void>(nullptr, "USceneComponent.SetRelativeLocationAndRotation()"); }
+    //static void SetRelativeRotationExact() { NativeCall<void>(nullptr, "USceneComponent.SetRelativeRotationExact()"); }
+    //static void SetRelativeRotation() { NativeCall<void>(nullptr, "USceneComponent.SetRelativeRotation()"); }
+    //static void AddLocalOffset() { NativeCall<void>(nullptr, "USceneComponent.AddLocalOffset()"); }
+    //static void AddLocalRotation() { NativeCall<void>(nullptr, "USceneComponent.AddLocalRotation()"); }
+    //void AddLocalRotation(const UE::Math::TQuat<double>* DeltaRotation, bool bSweep, FHitResult* OutSweepHitResult, ETeleportType Teleport) { NativeCall<void, const UE::Math::TQuat<double>*, bool, FHitResult*, ETeleportType>(this, "USceneComponent.AddLocalRotation(UE::Math::TQuat<double>*,bool,FHitResult*,ETeleportType)", DeltaRotation, bSweep, OutSweepHitResult, Teleport); }
+    //void AddLocalTransform(const UE::Math::TTransform<double>* DeltaTransform, bool bSweep, FHitResult* OutSweepHitResult, ETeleportType Teleport) { NativeCall<void, const UE::Math::TTransform<double>*, bool, FHitResult*, ETeleportType>(this, "USceneComponent.AddLocalTransform(UE::Math::TTransform<double>*,bool,FHitResult*,ETeleportType)", DeltaTransform, bSweep, OutSweepHitResult, Teleport); }
+    //static void AddWorldRotation() { NativeCall<void>(nullptr, "USceneComponent.AddWorldRotation()"); }
+    //void AddWorldTransform(const UE::Math::TTransform<double>* DeltaTransform, bool bSweep, FHitResult* OutSweepHitResult, ETeleportType Teleport) { NativeCall<void, const UE::Math::TTransform<double>*, bool, FHitResult*, ETeleportType>(this, "USceneComponent.AddWorldTransform(UE::Math::TTransform<double>*,bool,FHitResult*,ETeleportType)", DeltaTransform, bSweep, OutSweepHitResult, Teleport); }
+    //void AddWorldTransformKeepScale(const UE::Math::TTransform<double>* DeltaTransform, bool bSweep, FHitResult* OutSweepHitResult, ETeleportType Teleport) { NativeCall<void, const UE::Math::TTransform<double>*, bool, FHitResult*, ETeleportType>(this, "USceneComponent.AddWorldTransformKeepScale(UE::Math::TTransform<double>*,bool,FHitResult*,ETeleportType)", DeltaTransform, bSweep, OutSweepHitResult, Teleport); }
+    //static void SetRelativeScale3D() { NativeCall<void>(nullptr, "USceneComponent.SetRelativeScale3D()"); }
+    void ResetRelativeTransform() { NativeCall<void>(this, "USceneComponent.ResetRelativeTransform()"); }
+    //void SetRelativeTransform(const UE::Math::TTransform<double>* NewTransform, bool bSweep, FHitResult* OutSweepHitResult, ETeleportType Teleport) { NativeCall<void, const UE::Math::TTransform<double>*, bool, FHitResult*, ETeleportType>(this, "USceneComponent.SetRelativeTransform(UE::Math::TTransform<double>*,bool,FHitResult*,ETeleportType)", NewTransform, bSweep, OutSweepHitResult, Teleport); }
+    static void SetWorldLocation() { NativeCall<void>(nullptr, "USceneComponent.SetWorldLocation()"); }
+    //void SetWorldRotation(const UE::Math::TQuat<double>* NewRotation, bool bSweep, FHitResult* OutSweepHitResult, ETeleportType Teleport) { NativeCall<void, const UE::Math::TQuat<double>*, bool, FHitResult*, ETeleportType>(this, "USceneComponent.SetWorldRotation(UE::Math::TQuat<double>*,bool,FHitResult*,ETeleportType)", NewRotation, bSweep, OutSweepHitResult, Teleport); }
+    static void SetWorldRotation() { NativeCall<void>(nullptr, "USceneComponent.SetWorldRotation()"); }
+    void SetWorldScale3D(FVector NewScale) { NativeCall<void, FVector>(this, "USceneComponent.SetWorldScale3D(UE::Math::TVector<double>)", NewScale); }
+    //void SetWorldTransform(const UE::Math::TTransform<double>* NewTransform, bool bSweep, FHitResult* OutSweepHitResult, ETeleportType Teleport) { NativeCall<void, const UE::Math::TTransform<double>*, bool, FHitResult*, ETeleportType>(this, "USceneComponent.SetWorldTransform(UE::Math::TTransform<double>*,bool,FHitResult*,ETeleportType)", NewTransform, bSweep, OutSweepHitResult, Teleport); }
+    //static void SetWorldLocationAndRotation() { NativeCall<void>(nullptr, "USceneComponent.SetWorldLocationAndRotation()"); }
+    //static void SetWorldLocationAndRotation() { NativeCall<void>(nullptr, "USceneComponent.SetWorldLocationAndRotation()"); }
+    void SetWorldLocationAndRotationNoPhysics(const UE::Math::TVector<double>* NewLocation, const UE::Math::TRotator<double>* NewRotation) { NativeCall<void, const UE::Math::TVector<double>*, const UE::Math::TRotator<double>*>(this, "USceneComponent.SetWorldLocationAndRotationNoPhysics(UE::Math::TVector<double>*,UE::Math::TRotator<double>*)", NewLocation, NewRotation); }
+    void GetChildrenComponents(bool bIncludeAllDescendants, TArray<USceneComponent*, TSizedDefaultAllocator<32> >* Children) { NativeCall<void, bool, TArray<USceneComponent*, TSizedDefaultAllocator<32> >*>(this, "USceneComponent.GetChildrenComponents(bool,TArray<USceneComponent*,TSizedDefaultAllocator<32>>*)", bIncludeAllDescendants, Children); }
+    void AppendDescendants(TArray<USceneComponent*, TSizedDefaultAllocator<32> >* Children) { NativeCall<void, TArray<USceneComponent*, TSizedDefaultAllocator<32> >*>(this, "USceneComponent.AppendDescendants(TArray<USceneComponent*,TSizedDefaultAllocator<32>>*)", Children); }
+    void SetupAttachment(USceneComponent* InParent, FName InSocketName) { NativeCall<void, USceneComponent*, FName>(this, "USceneComponent.SetupAttachment(USceneComponent*,FName)", InParent, InSocketName); }
+    bool AttachTo(USceneComponent* Parent, FName InSocketName, EAttachLocation::Type AttachType, bool bWeldSimulatedBodies) { return NativeCall<bool, USceneComponent*, FName, EAttachLocation::Type, bool>(this, "USceneComponent.AttachTo(USceneComponent*,FName,EAttachLocation::Type,bool)", Parent, InSocketName, AttachType, bWeldSimulatedBodies); }
+    bool AttachToComponent(USceneComponent* Parent, const FAttachmentTransformRules* AttachmentRules, FName SocketName) { return NativeCall<bool, USceneComponent*, const FAttachmentTransformRules*, FName>(this, "USceneComponent.AttachToComponent(USceneComponent*,FAttachmentTransformRules*,FName)", Parent, AttachmentRules, SocketName); }
+    void DetachFromParent(bool bMaintainWorldPosition, bool bCallModify) { NativeCall<void, bool, bool>(this, "USceneComponent.DetachFromParent(bool,bool)", bMaintainWorldPosition, bCallModify); }
+    //void DetachFromComponent(const FDetachmentTransformRules* DetachmentRules) { NativeCall<void, const FDetachmentTransformRules*>(this, "USceneComponent.DetachFromComponent(FDetachmentTransformRules*)", DetachmentRules); }
+    //TStructOnScope<FActorComponentInstanceData, UScriptStruct*>* GetComponentInstanceData(TStructOnScope<FActorComponentInstanceData, UScriptStruct*>* result) { return NativeCall<TStructOnScope<FActorComponentInstanceData, UScriptStruct*>*, TStructOnScope<FActorComponentInstanceData, UScriptStruct*>*>(this, "USceneComponent.GetComponentInstanceData(TStructOnScope<FActorComponentInstanceData,UScriptStruct*>*)", result); }
+    //void UpdateChildTransforms(EUpdateTransformFlags UpdateTransformFlags, ETeleportType Teleport) { NativeCall<void, EUpdateTransformFlags, ETeleportType>(this, "USceneComponent.UpdateChildTransforms(EUpdateTransformFlags,ETeleportType)", UpdateTransformFlags, Teleport); }
+    void GetSocketWorldLocationAndRotation(FName InSocketName, UE::Math::TVector<double>* OutLocation, UE::Math::TRotator<double>* OutRotation) { NativeCall<void, FName, UE::Math::TVector<double>*, UE::Math::TRotator<double>*>(this, "USceneComponent.GetSocketWorldLocationAndRotation(FName,UE::Math::TVector<double>*,UE::Math::TRotator<double>*)", InSocketName, OutLocation, OutRotation); }
+    //const FCollisionResponseContainer* GetCollisionResponseToChannels() { return NativeCall<const FCollisionResponseContainer*>(this, "USceneComponent.GetCollisionResponseToChannels()"); }
+    ECollisionResponse GetCollisionResponseToComponent(USceneComponent* OtherComponent) { return NativeCall<ECollisionResponse, USceneComponent*>(this, "USceneComponent.GetCollisionResponseToComponent(USceneComponent*)", OtherComponent); }
+    void SetMobility(EComponentMobility::Type NewMobility) { NativeCall<void, EComponentMobility::Type>(this, "USceneComponent.SetMobility(EComponentMobility::Type)", NewMobility); }
+    bool IsAnySimulatingPhysics() { return NativeCall<bool>(this, "USceneComponent.IsAnySimulatingPhysics()"); }
+    APhysicsVolume* GetPhysicsVolume() { return NativeCall<APhysicsVolume*>(this, "USceneComponent.GetPhysicsVolume()"); }
+    void UpdatePhysicsVolume(bool bTriggerNotifiers) { NativeCall<void, bool>(this, "USceneComponent.UpdatePhysicsVolume(bool)", bTriggerNotifiers); }
+    void SetPhysicsVolume(APhysicsVolume* NewVolume, bool bTriggerNotifiers) { NativeCall<void, APhysicsVolume*, bool>(this, "USceneComponent.SetPhysicsVolume(APhysicsVolume*,bool)", NewVolume, bTriggerNotifiers); }
+    bool IsPostLoadThreadSafe() { return NativeCall<bool>(this, "USceneComponent.IsPostLoadThreadSafe()"); }
+    static char InternalSetWorldLocationAndRotation() { return NativeCall<char>(nullptr, "USceneComponent.InternalSetWorldLocationAndRotation()"); }
+    //bool UpdateOverlapsImpl(const TArrayView<FOverlapInfo const, int>* PendingOverlaps, bool bDoNotifies, const TArrayView<FOverlapInfo const, int>* OverlapsAtEndLocation) { return NativeCall<bool, const TArrayView<FOverlapInfo const, int>*, bool, const TArrayView<FOverlapInfo const, int>*>(this, "USceneComponent.UpdateOverlapsImpl(TArrayView<FOverlapInfo,int>*,bool,TArrayView<FOverlapInfo,int>*)", PendingOverlaps, bDoNotifies, OverlapsAtEndLocation); }
+    //bool MoveComponent(const UE::Math::TVector<double>* Delta, const UE::Math::TRotator<double>* NewRotation, bool bSweep, FHitResult* Hit, EMoveComponentFlags MoveFlags, ETeleportType Teleport) { return NativeCall<bool, const UE::Math::TVector<double>*, const UE::Math::TRotator<double>*, bool, FHitResult*, EMoveComponentFlags, ETeleportType>(this, "USceneComponent.MoveComponent(UE::Math::TVector<double>*,UE::Math::TRotator<double>*,bool,FHitResult*,EMoveComponentFlags,ETeleportType)", Delta, NewRotation, bSweep, Hit, MoveFlags, Teleport); }
+    //bool MoveComponentImpl(const UE::Math::TVector<double>* Delta, const UE::Math::TQuat<double>* NewRotation, bool bSweep, FHitResult* OutHit, EMoveComponentFlags MoveFlags, ETeleportType Teleport) { return NativeCall<bool, const UE::Math::TVector<double>*, const UE::Math::TQuat<double>*, bool, FHitResult*, EMoveComponentFlags, ETeleportType>(this, "USceneComponent.MoveComponentImpl(UE::Math::TVector<double>*,UE::Math::TQuat<double>*,bool,FHitResult*,EMoveComponentFlags,ETeleportType)", Delta, NewRotation, bSweep, OutHit, MoveFlags, Teleport); }
+    bool IsVisibleInEditor() { return NativeCall<bool>(this, "USceneComponent.IsVisibleInEditor()"); }
+    bool ShouldRender() { return NativeCall<bool>(this, "USceneComponent.ShouldRender()"); }
+    bool CanEverRender() { return NativeCall<bool>(this, "USceneComponent.CanEverRender()"); }
+    bool IsVisible() { return NativeCall<bool>(this, "USceneComponent.IsVisible()"); }
+    void OnHiddenInGameChanged() { NativeCall<void>(this, "USceneComponent.OnHiddenInGameChanged()"); }
+    //void InternalSetVisibility(bool bNewVisibility, USceneComponent::EVisibilityPropagation PropagateToChildren, bool bSetChildrenRenderState) { NativeCall<void, bool, USceneComponent::EVisibilityPropagation, bool>(this, "USceneComponent.InternalSetVisibility(bool,USceneComponent::EVisibilityPropagation,bool)", bNewVisibility, PropagateToChildren, bSetChildrenRenderState); }
+    //void SetHiddenInGame(bool bNewHiddenGame, USceneComponent::EVisibilityPropagation PropagateToChildren, bool bSetChildrenRenderState) { NativeCall<void, bool, USceneComponent::EVisibilityPropagation, bool>(this, "USceneComponent.SetHiddenInGame(bool,USceneComponent::EVisibilityPropagation,bool)", bNewHiddenGame, PropagateToChildren, bSetChildrenRenderState); }
+    void ApplyWorldOffset(const UE::Math::TVector<double>* InOffset, bool bWorldShift) { NativeCall<void, const UE::Math::TVector<double>*, bool>(this, "USceneComponent.ApplyWorldOffset(UE::Math::TVector<double>*,bool)", InOffset, bWorldShift); }
+    void OnRep_AttachChildren() { NativeCall<void>(this, "USceneComponent.OnRep_AttachChildren()"); }
+    void PreNetReceive() { NativeCall<void>(this, "USceneComponent.PreNetReceive()"); }
+    void PostNetReceive() { NativeCall<void>(this, "USceneComponent.PostNetReceive()"); }
+    void PostRepNotifies() { NativeCall<void>(this, "USceneComponent.PostRepNotifies()"); }
+    void Serialize(FArchive* Ar) { NativeCall<void, FArchive*>(this, "USceneComponent.Serialize(FArchive*)", Ar); }
+    void GetLifetimeReplicatedProps(TArray<FLifetimeProperty, TSizedDefaultAllocator<32> >* OutLifetimeProps) { NativeCall<void, TArray<FLifetimeProperty, TSizedDefaultAllocator<32> >*>(this, "USceneComponent.GetLifetimeReplicatedProps(TArray<FLifetimeProperty,TSizedDefaultAllocator<32>>*)", OutLifetimeProps); }
+    void ClearSkipUpdateOverlaps() { NativeCall<void>(this, "USceneComponent.ClearSkipUpdateOverlaps()"); }
+    void SetShouldUpdatePhysicsVolume(bool bInShouldUpdatePhysicsVolume) { NativeCall<void, bool>(this, "USceneComponent.SetShouldUpdatePhysicsVolume(bool)", bInShouldUpdatePhysicsVolume); }
+    void UpdateNavigationData() { NativeCall<void>(this, "USceneComponent.UpdateNavigationData()"); }
+    void StopSound(USoundBase* SoundToStop, float FadeOutTime) { NativeCall<void, USoundBase*, float>(this, "USceneComponent.StopSound(USoundBase*,float)", SoundToStop, FadeOutTime); }
+};
 struct AActor : UPrimalActor
 {
     // Fields
@@ -625,8 +922,19 @@ struct AActor : UPrimalActor
     static void MulticastDrawDebugLine_Implementation() { NativeCall<void>(nullptr, "AActor.MulticastDrawDebugLine_Implementation()"); }
     static void MulticastDrawDebugLineTraceHitResult_Implementation() { NativeCall<void>(nullptr, "AActor.MulticastDrawDebugLineTraceHitResult_Implementation()"); }
     //UPathFollowingComponent* FindComponentByClass<class UPathFollowingComponent>() { return NativeCall<UPathFollowingComponent*>(this, "AActor.FindComponentByClass<class UPathFollowingComponent>()"); }
-
+    
+    //Custom functions
     bool IsA(UClass* someClass) { return this->ClassPrivateField()->IsChildOf(someClass); }
+    FVector GetLocation()
+    {
+        auto* root = this->RootComponentField().Get();
+        if (root)
+        {
+            UE::Math::TTransform<double> transform = root->ComponentToWorldField();
+            return transform.GetLocation();
+        }
+        return FVector();
+    }
 };
 
 struct APrimalTargetableActor : AActor

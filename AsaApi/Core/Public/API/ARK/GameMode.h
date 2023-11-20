@@ -753,7 +753,7 @@ struct UWorld : UPrimalWorld
 	APhysicsVolume* InternalGetDefaultPhysicsVolume() { return NativeCall<APhysicsVolume*>(this, "UWorld.InternalGetDefaultPhysicsVolume()"); }
 	AWorldSettings* GetWorldSettings(bool bCheckStreamingPersistent, bool bChecked) { return NativeCall<AWorldSettings*, bool, bool>(this, "UWorld.GetWorldSettings(bool,bool)", bCheckStreamingPersistent, bChecked); }
 	float GetDefaultGravityZ() { return NativeCall<float>(this, "UWorld.GetDefaultGravityZ()"); }
-	const FString* GetMapName(const FString* result) { return NativeCall<const FString*, const FString*>(this, "UWorld.GetMapName(FString&)", result); }
+	FString* GetMapName(FString* result) {  return NativeCall<FString*, FString*>(this, "UWorld.GetMapName()", result);	}
 	void WelcomePlayer(UNetConnection* Connection) { NativeCall<void, UNetConnection*>(this, "UWorld.WelcomePlayer(UNetConnection*)", Connection); }
 	bool DestroySwappedPC(UNetConnection* Connection) { return NativeCall<bool, UNetConnection*>(this, "UWorld.DestroySwappedPC(UNetConnection*)", Connection); }
 	void NotifyControlMessage(UNetConnection* Connection, unsigned __int8 MessageType, struct FInBunch* Bunch) { NativeCall<void, UNetConnection*, unsigned __int8, FInBunch*>(this, "UWorld.NotifyControlMessage(UNetConnection*,unsigned__int8,FInBunch*)", Connection, MessageType, Bunch); }
