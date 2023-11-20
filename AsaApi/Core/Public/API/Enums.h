@@ -41418,7 +41418,7 @@ enum class EObjectFlags :unsigned __int64
 	RF_AllocatedInSharedPage = 0x80000000
 };
 
-enum class ELifetimeCondition:int
+enum class ELifetimeCondition :int
 {
 	COND_None = 0x0,
 	COND_InitialOnly = 0x1,
@@ -41437,4 +41437,12 @@ enum class ELifetimeCondition:int
 	COND_Never = 0x0F,
 	COND_NetGroup = 0x10,
 	COND_Max = 0x11
+};
+
+enum class ELevelTick :int
+{
+	LEVELTICK_TimeOnly = 0x0,
+	LEVELTICK_ViewportsOnly = 0x1,
+	LEVELTICK_All = 0x2,
+	LEVELTICK_PauseTick = 0x3,
 };
