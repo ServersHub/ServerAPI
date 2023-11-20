@@ -346,9 +346,8 @@ namespace API
 				// Save the world in case the unload/load procedure causes crash
 				if (save_world)
 				{
-					Log::GetLog()->info("Saving world before reloading plugins ... THIS NEEDS FIXING...");
-					//commented out for initial build
-					//AsaApi::GetApiUtils().GetShooterGameMode()->SaveWorld(true);
+					Log::GetLog()->info("Saving world before reloading plugins");
+					AsaApi::GetApiUtils().GetShooterGameMode()->SaveWorld(true);
 					Log::GetLog()->info("World saved.");
 
 					save_world = false; // do not save again if multiple plugins are reloaded in this loop
