@@ -1200,10 +1200,13 @@ struct UPrimalInventoryComponent : UActorComponent
 
 struct UPrimalCharacterStatusComponent : UActorComponent
 {
+    // Fields
+
     FieldArray<float, 12> MaxStatusValuesField() { return { this, "UPrimalCharacterStatusComponent.MaxStatusValues" }; }
     FieldArray<float, 12> BaseLevelMaxStatusValuesField() { return { this, "UPrimalCharacterStatusComponent.BaseLevelMaxStatusValues" }; }
-    FieldArray<char, 12> NumberOfLevelUpPointsAppliedField() { return { this, "UPrimalCharacterStatusComponent.NumberOfLevelUpPointsApplied" }; }
-    FieldArray<char, 12> NumberOfLevelUpPointsAppliedTamedField() { return { this, "UPrimalCharacterStatusComponent.NumberOfLevelUpPointsAppliedTamed" }; }
+    FieldArray<unsigned __int8, 12> NumberOfLevelUpPointsAppliedField() { return { this, "UPrimalCharacterStatusComponent.NumberOfLevelUpPointsApplied" }; }
+    FieldArray<unsigned __int8, 12> NumberOfLevelUpPointsAppliedTamedField() { return { this, "UPrimalCharacterStatusComponent.NumberOfLevelUpPointsAppliedTamed" }; }
+    FieldArray<unsigned __int8, 12> NumberOfMutationsAppliedTamedField() { return { this, "UPrimalCharacterStatusComponent.NumberOfMutationsAppliedTamed" }; }
     float& TamedIneffectivenessModifierField() { return *GetNativePointerField<float*>(this, "UPrimalCharacterStatusComponent.TamedIneffectivenessModifier"); }
     float& MovingStaminaRecoveryRateMultiplierField() { return *GetNativePointerField<float*>(this, "UPrimalCharacterStatusComponent.MovingStaminaRecoveryRateMultiplier"); }
     FieldArray<float, 12> RecoveryRateStatusValueField() { return { this, "UPrimalCharacterStatusComponent.RecoveryRateStatusValue" }; }
@@ -1211,16 +1214,18 @@ struct UPrimalCharacterStatusComponent : UActorComponent
     FieldArray<float, 12> TimeToRecoverAfterDecreaseStatusValueField() { return { this, "UPrimalCharacterStatusComponent.TimeToRecoverAfterDecreaseStatusValue" }; }
     FieldArray<float, 12> AmountMaxGainedPerLevelUpValueField() { return { this, "UPrimalCharacterStatusComponent.AmountMaxGainedPerLevelUpValue" }; }
     FieldArray<float, 12> AmountMaxGainedPerLevelUpValueTamedField() { return { this, "UPrimalCharacterStatusComponent.AmountMaxGainedPerLevelUpValueTamed" }; }
-    FieldArray<char, 12> MaxGainedPerLevelUpValueIsPercentField() { return { this, "UPrimalCharacterStatusComponent.MaxGainedPerLevelUpValueIsPercent" }; }
-    FieldArray<char, 12> RecoveryRateIsPercentField() { return { this, "UPrimalCharacterStatusComponent.RecoveryRateIsPercent" }; }
+    FieldArray<unsigned __int8, 12> MaxGainedPerLevelUpValueIsPercentField() { return { this, "UPrimalCharacterStatusComponent.MaxGainedPerLevelUpValueIsPercent" }; }
+    FieldArray<unsigned __int8, 12> RecoveryRateIsPercentField() { return { this, "UPrimalCharacterStatusComponent.RecoveryRateIsPercent" }; }
     FieldArray<float, 12> TamingMaxStatMultipliersField() { return { this, "UPrimalCharacterStatusComponent.TamingMaxStatMultipliers" }; }
     FieldArray<float, 12> TamingMaxStatAdditionsField() { return { this, "UPrimalCharacterStatusComponent.TamingMaxStatAdditions" }; }
     FieldArray<float, 12> MaxLevelUpMultiplierField() { return { this, "UPrimalCharacterStatusComponent.MaxLevelUpMultiplier" }; }
+    FieldArray<float, 12> MutationMultiplierField() { return { this, "UPrimalCharacterStatusComponent.MutationMultiplier" }; }
     float& TamedLandDinoSwimSpeedLevelUpEffectivenessField() { return *GetNativePointerField<float*>(this, "UPrimalCharacterStatusComponent.TamedLandDinoSwimSpeedLevelUpEffectiveness"); }
     float& TamingIneffectivenessMultiplierField() { return *GetNativePointerField<float*>(this, "UPrimalCharacterStatusComponent.TamingIneffectivenessMultiplier"); }
     float& DinoRiderWeightMultiplierField() { return *GetNativePointerField<float*>(this, "UPrimalCharacterStatusComponent.DinoRiderWeightMultiplier"); }
-    FieldArray<char, 12> CanLevelUpValueField() { return { this, "UPrimalCharacterStatusComponent.CanLevelUpValue" }; }
-    FieldArray<char, 12> DontUseValueField() { return { this, "UPrimalCharacterStatusComponent.DontUseValue" }; }
+    FieldArray<unsigned __int8, 12> CanLevelUpValueField() { return { this, "UPrimalCharacterStatusComponent.CanLevelUpValue" }; }
+    FieldArray<unsigned __int8, 12> DontUseValueField() { return { this, "UPrimalCharacterStatusComponent.DontUseValue" }; }
+    FieldArray<unsigned __int8, 12> SkipWildLevelUpValueField() { return { this, "UPrimalCharacterStatusComponent.SkipWildLevelUpValue" }; }
     FieldArray<FPrimalCharacterStatusStateThresholds, 12> StatusStateThresholdsField() { return { this, "UPrimalCharacterStatusComponent.StatusStateThresholds" }; }
     float& ExperienceAutomaticConsciousIncreaseSpeedField() { return *GetNativePointerField<float*>(this, "UPrimalCharacterStatusComponent.ExperienceAutomaticConsciousIncreaseSpeed"); }
     float& CheatMaxWeightField() { return *GetNativePointerField<float*>(this, "UPrimalCharacterStatusComponent.CheatMaxWeight"); }
@@ -1246,7 +1251,6 @@ struct UPrimalCharacterStatusComponent : UActorComponent
     unsigned __int16& ExtraCharacterLevelField() { return *GetNativePointerField<unsigned __int16*>(this, "UPrimalCharacterStatusComponent.ExtraCharacterLevel"); }
     float& ExperiencePointsField() { return *GetNativePointerField<float*>(this, "UPrimalCharacterStatusComponent.ExperiencePoints"); }
     float& ReplicatedExperiencePointsField() { return *GetNativePointerField<float*>(this, "UPrimalCharacterStatusComponent.ReplicatedExperiencePoints"); }
-    TEnumAsByte<enum ELevelExperienceRampType::Type>& LevelExperienceRampTypeField() { return *GetNativePointerField<TEnumAsByte<enum ELevelExperienceRampType::Type>*>(this, "UPrimalCharacterStatusComponent.LevelExperienceRampType"); }
     float& MaxExperiencePointsField() { return *GetNativePointerField<float*>(this, "UPrimalCharacterStatusComponent.MaxExperiencePoints"); }
     float& BaseFoodConsumptionRateField() { return *GetNativePointerField<float*>(this, "UPrimalCharacterStatusComponent.BaseFoodConsumptionRate"); }
     float& BaseWaterConsumptionRateField() { return *GetNativePointerField<float*>(this, "UPrimalCharacterStatusComponent.BaseWaterConsumptionRate"); }
@@ -1297,22 +1301,22 @@ struct UPrimalCharacterStatusComponent : UActorComponent
     float& PoopItemFoodConsumptionCacheField() { return *GetNativePointerField<float*>(this, "UPrimalCharacterStatusComponent.PoopItemFoodConsumptionCache"); }
     float& LastHypothermalCharacterInsulationValueField() { return *GetNativePointerField<float*>(this, "UPrimalCharacterStatusComponent.LastHypothermalCharacterInsulationValue"); }
     float& LastHyperthermalCharacterInsulationValueField() { return *GetNativePointerField<float*>(this, "UPrimalCharacterStatusComponent.LastHyperthermalCharacterInsulationValue"); }
-    TEnumAsByte<enum EPrimalCharacterStatusValue::Type>& MaxStatusValueToAutoUpdateField() { return *GetNativePointerField<TEnumAsByte<enum EPrimalCharacterStatusValue::Type>*>(this, "UPrimalCharacterStatusComponent.MaxStatusValueToAutoUpdate"); }
     float& GenericXPMultiplierField() { return *GetNativePointerField<float*>(this, "UPrimalCharacterStatusComponent.GenericXPMultiplier"); }
     float& CraftEarnXPMultiplierField() { return *GetNativePointerField<float*>(this, "UPrimalCharacterStatusComponent.CraftEarnXPMultiplier"); }
     float& MinInventoryWeightField() { return *GetNativePointerField<float*>(this, "UPrimalCharacterStatusComponent.MinInventoryWeight"); }
     float& KillEarnXPMultiplierField() { return *GetNativePointerField<float*>(this, "UPrimalCharacterStatusComponent.KillEarnXPMultiplier"); }
     float& GenericEarnXPMultiplierField() { return *GetNativePointerField<float*>(this, "UPrimalCharacterStatusComponent.GenericEarnXPMultiplier"); }
     float& SpecialEarnXPMultiplierField() { return *GetNativePointerField<float*>(this, "UPrimalCharacterStatusComponent.SpecialEarnXPMultiplier"); }
+    float& ExplorerNoteEarnXPMultiplierField() { return *GetNativePointerField<float*>(this, "UPrimalCharacterStatusComponent.ExplorerNoteEarnXPMultiplier"); }
     float& HarvestEarnXPMultiplierField() { return *GetNativePointerField<float*>(this, "UPrimalCharacterStatusComponent.HarvestEarnXPMultiplier"); }
     float& DefaultHyperthermicInsulationField() { return *GetNativePointerField<float*>(this, "UPrimalCharacterStatusComponent.DefaultHyperthermicInsulation"); }
     float& DefaultHypothermicInsulationField() { return *GetNativePointerField<float*>(this, "UPrimalCharacterStatusComponent.DefaultHypothermicInsulation"); }
     float& MaxTamingEffectivenessBaseLevelMultiplierField() { return *GetNativePointerField<float*>(this, "UPrimalCharacterStatusComponent.MaxTamingEffectivenessBaseLevelMultiplier"); }
     FString& FoodStatusNameOverrideField() { return *GetNativePointerField<FString*>(this, "UPrimalCharacterStatusComponent.FoodStatusNameOverride"); }
-    UTexture2D* FoodStatusIconBackgroundOverrideField() { return *GetNativePointerField<UTexture2D**>(this, "UPrimalCharacterStatusComponent.FoodStatusIconBackgroundOverride"); }
-    UTexture2D* FoodStatusIconForegroundOverrideField() { return *GetNativePointerField<UTexture2D**>(this, "UPrimalCharacterStatusComponent.FoodStatusIconForegroundOverride"); }
-    TArray<FPrimalCharacterStatusValueModifier>& StatusValueModifiersField() { return *GetNativePointerField<TArray<FPrimalCharacterStatusValueModifier>*>(this, "UPrimalCharacterStatusComponent.StatusValueModifiers"); }
-    TArray<unsigned char>& StatusValueModifierDescriptionIndicesField() { return *GetNativePointerField<TArray<unsigned char>*>(this, "UPrimalCharacterStatusComponent.StatusValueModifierDescriptionIndices"); }
+    UTexture2D*& FoodStatusIconBackgroundOverrideField() { return *GetNativePointerField<UTexture2D**>(this, "UPrimalCharacterStatusComponent.FoodStatusIconBackgroundOverride"); }
+    UTexture2D*& FoodStatusIconForegroundOverrideField() { return *GetNativePointerField<UTexture2D**>(this, "UPrimalCharacterStatusComponent.FoodStatusIconForegroundOverride"); }
+    TArray<FPrimalCharacterStatusValueModifier, TSizedDefaultAllocator<32> >& StatusValueModifiersField() { return *GetNativePointerField<TArray<FPrimalCharacterStatusValueModifier, TSizedDefaultAllocator<32> >*>(this, "UPrimalCharacterStatusComponent.StatusValueModifiers"); }
+    TArray<unsigned char, TSizedDefaultAllocator<32> >& StatusValueModifierDescriptionIndicesField() { return *GetNativePointerField<TArray<unsigned char, TSizedDefaultAllocator<32> >*>(this, "UPrimalCharacterStatusComponent.StatusValueModifierDescriptionIndices"); }
     FieldArray<float, 12> CurrentStatusValuesField() { return { this, "UPrimalCharacterStatusComponent.CurrentStatusValues" }; }
     FieldArray<float, 12> AdditionalStatusValuesField() { return { this, "UPrimalCharacterStatusComponent.AdditionalStatusValues" }; }
     FieldArray<float, 12> ReplicatedCurrentStatusValuesField() { return { this, "UPrimalCharacterStatusComponent.ReplicatedCurrentStatusValues" }; }
@@ -1328,8 +1332,8 @@ struct UPrimalCharacterStatusComponent : UActorComponent
     float& DehydrationStaminaRecoveryRateField() { return *GetNativePointerField<float*>(this, "UPrimalCharacterStatusComponent.DehydrationStaminaRecoveryRate"); }
     float& WaterConsumptionMultiplierField() { return *GetNativePointerField<float*>(this, "UPrimalCharacterStatusComponent.WaterConsumptionMultiplier"); }
     float& FoodConsumptionMultiplierField() { return *GetNativePointerField<float*>(this, "UPrimalCharacterStatusComponent.FoodConsumptionMultiplier"); }
-    TArray<USoundBase*> EnteredStatusStateSoundsField() { return *GetNativePointerField<TArray<USoundBase*>*>(this, "UPrimalCharacterStatusComponent.EnteredStatusStateSounds"); }
-    TArray<USoundBase*> ExitStatusStateSoundsField() { return *GetNativePointerField<TArray<USoundBase*>*>(this, "UPrimalCharacterStatusComponent.ExitStatusStateSounds"); }
+    TArray<USoundBase*, TSizedDefaultAllocator<32> >& EnteredStatusStateSoundsField() { return *GetNativePointerField<TArray<USoundBase*, TSizedDefaultAllocator<32> >*>(this, "UPrimalCharacterStatusComponent.EnteredStatusStateSounds"); }
+    TArray<USoundBase*, TSizedDefaultAllocator<32> >& ExitStatusStateSoundsField() { return *GetNativePointerField<TArray<USoundBase*, TSizedDefaultAllocator<32> >*>(this, "UPrimalCharacterStatusComponent.ExitStatusStateSounds"); }
     float& ExtraOxygenSpeedStatMultiplierField() { return *GetNativePointerField<float*>(this, "UPrimalCharacterStatusComponent.ExtraOxygenSpeedStatMultiplier"); }
     float& ExtraTamedHealthMultiplierField() { return *GetNativePointerField<float*>(this, "UPrimalCharacterStatusComponent.ExtraTamedHealthMultiplier"); }
     float& WakingTameFoodConsumptionRateMultiplierField() { return *GetNativePointerField<float*>(this, "UPrimalCharacterStatusComponent.WakingTameFoodConsumptionRateMultiplier"); }
@@ -1349,14 +1353,17 @@ struct UPrimalCharacterStatusComponent : UActorComponent
     float& DinoImprintingQualityField() { return *GetNativePointerField<float*>(this, "UPrimalCharacterStatusComponent.DinoImprintingQuality"); }
     float& TamedBaseHealthMultiplierField() { return *GetNativePointerField<float*>(this, "UPrimalCharacterStatusComponent.TamedBaseHealthMultiplier"); }
     float& ExtraBabyDinoConsumingFoodRateMultiplierField() { return *GetNativePointerField<float*>(this, "UPrimalCharacterStatusComponent.ExtraBabyDinoConsumingFoodRateMultiplier"); }
-    TArray<FString>& StatusValueNameOverridesField() { return *GetNativePointerField<TArray<FString>*>(this, "UPrimalCharacterStatusComponent.StatusValueNameOverrides"); }
+    TArray<FString, TSizedDefaultAllocator<32> >& StatusValueNameOverridesField() { return *GetNativePointerField<TArray<FString, TSizedDefaultAllocator<32> >*>(this, "UPrimalCharacterStatusComponent.StatusValueNameOverrides"); }
     TSubclassOf<UDamageType>& RegainOxygenDamageTypeField() { return *GetNativePointerField<TSubclassOf<UDamageType>*>(this, "UPrimalCharacterStatusComponent.RegainOxygenDamageType"); }
     bool& bInWeightLockField() { return *GetNativePointerField<bool*>(this, "UPrimalCharacterStatusComponent.bInWeightLock"); }
     long double& LastReplicatedXPTimeField() { return *GetNativePointerField<long double*>(this, "UPrimalCharacterStatusComponent.LastReplicatedXPTime"); }
-    bool& bHasUnlockedMaxPlayerLevelAchievementThisSessionField() { return *GetNativePointerField<bool*>(this, "UPrimalCharacterStatusComponent.bHasUnlockedMaxPlayerLevelAchievementThisSession"); }
     bool& bHasUnlockedMaxDinoLevelAchievementThisSessionField() { return *GetNativePointerField<bool*>(this, "UPrimalCharacterStatusComponent.bHasUnlockedMaxDinoLevelAchievementThisSession"); }
+    long double& DeferredLevelUpSaveTimeSecondsField() { return *GetNativePointerField<long double*>(this, "UPrimalCharacterStatusComponent.DeferredLevelUpSaveTimeSeconds"); }
+    //TArray<FHUDStatusEntry, TSizedDefaultAllocator<32> >& HUDStatusValueModifierDescriptionsField() { return *GetNativePointerField<TArray<FHUDStatusEntry, TSizedDefaultAllocator<32> >*>(this, "UPrimalCharacterStatusComponent.HUDStatusValueModifierDescriptions"); }
+    //FieldArray<FHUDStatusEntry, 14> HUDStatusStatesField() { return { this, "UPrimalCharacterStatusComponent.HUDStatusStates" }; }
+    TArray<float, TSizedDefaultAllocator<32> >& LevelUpStatWeightOverridesField() { return *GetNativePointerField<TArray<float, TSizedDefaultAllocator<32> >*>(this, "UPrimalCharacterStatusComponent.LevelUpStatWeightOverrides"); }
 
-    // Bit fields
+    // Bitfields
 
     BitFieldValue<bool, unsigned __int32> bCanSuffocate() { return { this, "UPrimalCharacterStatusComponent.bCanSuffocate" }; }
     BitFieldValue<bool, unsigned __int32> bCanSuffocateIfTamed() { return { this, "UPrimalCharacterStatusComponent.bCanSuffocateIfTamed" }; }
@@ -1385,8 +1392,12 @@ struct UPrimalCharacterStatusComponent : UActorComponent
     BitFieldValue<bool, unsigned __int32> bPreventTamedStatReplication() { return { this, "UPrimalCharacterStatusComponent.bPreventTamedStatReplication" }; }
     BitFieldValue<bool, unsigned __int32> bUseBPAdjustStatusValueModification() { return { this, "UPrimalCharacterStatusComponent.bUseBPAdjustStatusValueModification" }; }
     BitFieldValue<bool, unsigned __int32> bForceDefaultSpeed() { return { this, "UPrimalCharacterStatusComponent.bForceDefaultSpeed" }; }
+    BitFieldValue<bool, unsigned __int32> bCheatStatus() { return { this, "UPrimalCharacterStatusComponent.bCheatStatus" }; }
     BitFieldValue<bool, unsigned __int32> bForceRefreshWeight() { return { this, "UPrimalCharacterStatusComponent.bForceRefreshWeight" }; }
     BitFieldValue<bool, unsigned __int32> bHideFoodStatusFromHUD() { return { this, "UPrimalCharacterStatusComponent.bHideFoodStatusFromHUD" }; }
+    BitFieldValue<bool, unsigned __int32> bUseBPGetStatusNameString() { return { this, "UPrimalCharacterStatusComponent.bUseBPGetStatusNameString" }; }
+    BitFieldValue<bool, unsigned __int32> bHideStaminaStatusFromHUD() { return { this, "UPrimalCharacterStatusComponent.bHideStaminaStatusFromHUD" }; }
+    BitFieldValue<bool, unsigned __int32> bDontUseSpeedMultipleAsSpeed() { return { this, "UPrimalCharacterStatusComponent.bDontUseSpeedMultipleAsSpeed" }; }
     BitFieldValue<bool, unsigned __int32> bForceGainOxygen() { return { this, "UPrimalCharacterStatusComponent.bForceGainOxygen" }; }
     BitFieldValue<bool, unsigned __int32> bFreezeStatusValues() { return { this, "UPrimalCharacterStatusComponent.bFreezeStatusValues" }; }
     BitFieldValue<bool, unsigned __int32> bTicked() { return { this, "UPrimalCharacterStatusComponent.bTicked" }; }
@@ -1395,13 +1406,21 @@ struct UPrimalCharacterStatusComponent : UActorComponent
     BitFieldValue<bool, unsigned __int32> bApplyingStatusValueModifiers() { return { this, "UPrimalCharacterStatusComponent.bApplyingStatusValueModifiers" }; }
     BitFieldValue<bool, unsigned __int32> bDontScaleMeleeDamage() { return { this, "UPrimalCharacterStatusComponent.bDontScaleMeleeDamage" }; }
     BitFieldValue<bool, unsigned __int32> bInfiniteWeight() { return { this, "UPrimalCharacterStatusComponent.bInfiniteWeight" }; }
+    BitFieldValue<bool, unsigned __int32> bUseLevelUpStatWeightOverrides() { return { this, "UPrimalCharacterStatusComponent.bUseLevelUpStatWeightOverrides" }; }
 
     // Functions
 
-    static UClass* StaticClass() { return NativeCall<UClass*>(nullptr, "UPrimalCharacterStatusComponent.StaticClass()"); }
-    void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>* OutLifetimeProps) { NativeCall<void, TArray<FLifetimeProperty>*>(this, "UPrimalCharacterStatusComponent.GetLifetimeReplicatedProps(TArray<FLifetimeProperty,TSizedDefaultAllocator<32>>&)", OutLifetimeProps); }
+    float BPModifyMaxExperiencePoints(float InMaxExperiencePoints) { return NativeCall<float, float>(this, "UPrimalCharacterStatusComponent.BPModifyMaxExperiencePoints(float)", InMaxExperiencePoints); }
+    int BPModifyMaxLevel(int InMaxLevel) { return NativeCall<int, int>(this, "UPrimalCharacterStatusComponent.BPModifyMaxLevel(int)", InMaxLevel); }
+    void ClientSyncMaxStatusValues(const TArray<float, TSizedDefaultAllocator<32> >* NetMaxStatusValues, const TArray<float, TSizedDefaultAllocator<32> >* NetBaseMaxStatusValues) { NativeCall<void, const TArray<float, TSizedDefaultAllocator<32> >*, const TArray<float, TSizedDefaultAllocator<32> >*>(this, "UPrimalCharacterStatusComponent.ClientSyncMaxStatusValues(TArray<float,TSizedDefaultAllocator<32>>&,TArray<float,TSizedDefaultAllocator<32>>&)", NetMaxStatusValues, NetBaseMaxStatusValues); }
+    void NetSyncMaxStatusValues(const TArray<float, TSizedDefaultAllocator<32> >* NetMaxStatusValues, const TArray<float, TSizedDefaultAllocator<32> >* NetBaseMaxStatusValues) { NativeCall<void, const TArray<float, TSizedDefaultAllocator<32> >*, const TArray<float, TSizedDefaultAllocator<32> >*>(this, "UPrimalCharacterStatusComponent.NetSyncMaxStatusValues(TArray<float,TSizedDefaultAllocator<32>>&,TArray<float,TSizedDefaultAllocator<32>>&)", NetMaxStatusValues, NetBaseMaxStatusValues); }
+    static void StaticRegisterNativesUPrimalCharacterStatusComponent() { NativeCall<void>(nullptr, "UPrimalCharacterStatusComponent.StaticRegisterNativesUPrimalCharacterStatusComponent()"); }
+    static UClass* GetPrivateStaticClass() { return NativeCall<UClass*>(nullptr, "UPrimalCharacterStatusComponent.GetPrivateStaticClass()"); }
+    void ValidateGeneratedRepEnums(const TArray<FRepRecord, TSizedDefaultAllocator<32> >* ClassReps) { NativeCall<void, const TArray<FRepRecord, TSizedDefaultAllocator<32> >*>(this, "UPrimalCharacterStatusComponent.ValidateGeneratedRepEnums(TArray<FRepRecord,TSizedDefaultAllocator<32>>&)", ClassReps); }
+    void Serialize(FStructuredArchiveRecord Record) { NativeCall<void, FStructuredArchiveRecord>(this, "UPrimalCharacterStatusComponent.Serialize(FStructuredArchiveRecord)", Record); }
+    void GetLifetimeReplicatedProps(TArray<FLifetimeProperty, TSizedDefaultAllocator<32> >* OutLifetimeProps) { NativeCall<void, TArray<FLifetimeProperty, TSizedDefaultAllocator<32> >*>(this, "UPrimalCharacterStatusComponent.GetLifetimeReplicatedProps(TArray<FLifetimeProperty,TSizedDefaultAllocator<32>>&)", OutLifetimeProps); }
     void InitializeComponent() { NativeCall<void>(this, "UPrimalCharacterStatusComponent.InitializeComponent()"); }
-    //float GetTotalStatusModifierDescriptionIndex(int StatusValueModifierDescriptionIndex) { return NativeCall<float, int>(this, "UPrimalCharacterStatusComponent.GetTotalStatusModifierDescriptionIndex", StatusValueModifierDescriptionIndex); }
+    void RemoveStatusValueModifierByIndex(int Index) { NativeCall<void, int>(this, "UPrimalCharacterStatusComponent.RemoveStatusValueModifierByIndex(int)", Index); }
     void AddStatusValueModifier(EPrimalCharacterStatusValue::Type ValueType, float Amount, float Speed, bool bContinueOnUnchangedValue, bool bSetValue, int StatusValueModifierDescriptionIndex, bool bResetExistingModifierDescriptionIndex, float LimitExistingModifierDescriptionToMaxAmount, bool bSetAdditionalValue, EPrimalCharacterStatusValue::Type StopAtValueNearMax, bool bMakeUntameable, TSubclassOf<UDamageType> ScaleValueByCharacterDamageType, AActor* Instigator) { NativeCall<void, EPrimalCharacterStatusValue::Type, float, float, bool, bool, int, bool, float, bool, EPrimalCharacterStatusValue::Type, bool, TSubclassOf<UDamageType>, AActor*>(this, "UPrimalCharacterStatusComponent.AddStatusValueModifier(EPrimalCharacterStatusValue::Type,float,float,bool,bool,int,bool,float,bool,EPrimalCharacterStatusValue::Type,bool,TSubclassOf<UDamageType>,AActor*)", ValueType, Amount, Speed, bContinueOnUnchangedValue, bSetValue, StatusValueModifierDescriptionIndex, bResetExistingModifierDescriptionIndex, LimitExistingModifierDescriptionToMaxAmount, bSetAdditionalValue, StopAtValueNearMax, bMakeUntameable, ScaleValueByCharacterDamageType, Instigator); }
     void ApplyStatusValueModifiers(float DeltaTime) { NativeCall<void, float>(this, "UPrimalCharacterStatusComponent.ApplyStatusValueModifiers(float)", DeltaTime); }
     void SetAllStatsToMaximum() { NativeCall<void>(this, "UPrimalCharacterStatusComponent.SetAllStatsToMaximum()"); }
@@ -1412,9 +1431,6 @@ struct UPrimalCharacterStatusComponent : UActorComponent
     void AdjustStatusValueModification(EPrimalCharacterStatusValue::Type valueType, float* Amount, TSubclassOf<UDamageType> DamageTypeClass, bool bManualModification) { NativeCall<void, EPrimalCharacterStatusValue::Type, float*, TSubclassOf<UDamageType>, bool>(this, "UPrimalCharacterStatusComponent.AdjustStatusValueModification(EPrimalCharacterStatusValue::Type,float&,TSubclassOf<UDamageType>,bool)", valueType, Amount, DamageTypeClass, bManualModification); }
     void GetDinoFoodConsumptionRateMultiplier(float* Amount) { NativeCall<void, float*>(this, "UPrimalCharacterStatusComponent.GetDinoFoodConsumptionRateMultiplier(float&)", Amount); }
     void UninitializeComponent() { NativeCall<void>(this, "UPrimalCharacterStatusComponent.UninitializeComponent()"); }
-    //int GetExtraCharacterLevel() { return NativeCall<int>(this, "UPrimalCharacterStatusComponent.GetExtraCharacterLevel"); }
-    //void SetExtraCharacterLevel(int NewExtraCharacterLevel) { NativeCall<void, int>(this, "UPrimalCharacterStatusComponent.SetExtraCharacterLevel", NewExtraCharacterLevel); }
-    //static EPrimalCharacterStatusValue::Type ConvertIntToCharacterStatusEnum(int InInteger) { return NativeCall<EPrimalCharacterStatusValue::Type, int>(nullptr, "UPrimalCharacterStatusComponent.ConvertIntToCharacterStatusEnum", InInteger); }
     float ModifyCurrentStatusValue(EPrimalCharacterStatusValue::Type valueType, float Amount, bool bPercentOfMax, bool bPercentOfCurrent, bool bManualModification, bool bSetValue, TSubclassOf<UDamageType> DamageTypeClass, bool bDamageDontKill, bool bForceSetValue) { return NativeCall<float, EPrimalCharacterStatusValue::Type, float, bool, bool, bool, bool, TSubclassOf<UDamageType>, bool, bool>(this, "UPrimalCharacterStatusComponent.ModifyCurrentStatusValue(EPrimalCharacterStatusValue::Type,float,bool,bool,bool,bool,TSubclassOf<UDamageType>,bool,bool)", valueType, Amount, bPercentOfMax, bPercentOfCurrent, bManualModification, bSetValue, DamageTypeClass, bDamageDontKill, bForceSetValue); }
     void ChangedStatusState(EPrimalCharacterStatusState::Type valueType, bool bEnteredState) { NativeCall<void, EPrimalCharacterStatusState::Type, bool>(this, "UPrimalCharacterStatusComponent.ChangedStatusState(EPrimalCharacterStatusState::Type,bool)", valueType, bEnteredState); }
     void CharacterUpdatedInventory(bool bEquippedOrUneqippedItem) { NativeCall<void, bool>(this, "UPrimalCharacterStatusComponent.CharacterUpdatedInventory(bool)", bEquippedOrUneqippedItem); }
@@ -1424,67 +1440,44 @@ struct UPrimalCharacterStatusComponent : UActorComponent
     void RefreshTemperature() { NativeCall<void>(this, "UPrimalCharacterStatusComponent.RefreshTemperature()"); }
     void UpdatedCurrentStatusValue(EPrimalCharacterStatusValue::Type valueType, float Amount, bool bManualModification, TSubclassOf<UDamageType> DamageTypeClass, bool bDamageDontKill, bool bDontAdjustOtherStats) { NativeCall<void, EPrimalCharacterStatusValue::Type, float, bool, TSubclassOf<UDamageType>, bool, bool>(this, "UPrimalCharacterStatusComponent.UpdatedCurrentStatusValue(EPrimalCharacterStatusValue::Type,float,bool,TSubclassOf<UDamageType>,bool,bool)", valueType, Amount, bManualModification, DamageTypeClass, bDamageDontKill, bDontAdjustOtherStats); }
     float GetStatusValueRecoveryRate(EPrimalCharacterStatusValue::Type valueType) { return NativeCall<float, EPrimalCharacterStatusValue::Type>(this, "UPrimalCharacterStatusComponent.GetStatusValueRecoveryRate(EPrimalCharacterStatusValue::Type)", valueType); }
-    //float GetRawStatusValueRecoveryRate(EPrimalCharacterStatusValue::Type valueType) { return NativeCall<float, EPrimalCharacterStatusValue::Type>(this, "UPrimalCharacterStatusComponent.GetRawStatusValueRecoveryRate", valueType); }
-    //void DrawLocalPlayerHUD(AShooterHUD* HUD, float ScaleMult, bool bFromBottomRight) { NativeCall<void, AShooterHUD*, float, bool>(this, "UPrimalCharacterStatusComponent.DrawLocalPlayerHUD", HUD, ScaleMult, bFromBottomRight); }
-    //void DrawLocalPlayerHUDDescriptions(AShooterHUD* HUD, long double TheTimeSeconds, float ScaleMult, bool bDrawBottomRight) { NativeCall<void, AShooterHUD*, long double, float, bool>(this, "UPrimalCharacterStatusComponent.DrawLocalPlayerHUDDescriptions", HUD, TheTimeSeconds, ScaleMult, bDrawBottomRight); }
+    void DrawLocalPlayerHUD(AShooterHUD* HUD, float ScaleMult, bool bFromBottomRight) { NativeCall<void, AShooterHUD*, float, bool>(this, "UPrimalCharacterStatusComponent.DrawLocalPlayerHUD(AShooterHUD*,float,bool)", HUD, ScaleMult, bFromBottomRight); }
+    void DrawLocalPlayerHUDDescriptions(AShooterHUD* HUD, long double TheTimeSeconds, float ScaleMult, bool bDrawBottomRight) { NativeCall<void, AShooterHUD*, long double, float, bool>(this, "UPrimalCharacterStatusComponent.DrawLocalPlayerHUDDescriptions(AShooterHUD*,double,float,bool)", HUD, TheTimeSeconds, ScaleMult, bDrawBottomRight); }
     bool IsInStatusState(EPrimalCharacterStatusState::Type StateType) { return NativeCall<bool, EPrimalCharacterStatusState::Type>(this, "UPrimalCharacterStatusComponent.IsInStatusState(EPrimalCharacterStatusState::Type)", StateType); }
-    //AActor* GetPrimalCharacter() { return NativeCall<AActor*>(this, "UPrimalCharacterStatusComponent.GetPrimalCharacter"); }
     void OnJumped() { NativeCall<void>(this, "UPrimalCharacterStatusComponent.OnJumped()"); }
-    float GetMeleeDamageModifier() { return NativeCall<float>(this, "UPrimalCharacterStatusComponent.GetMeleeDamageModifier()"); }
-    //float GetCraftingSpeedModifier() { return NativeCall<float>(this, "UPrimalCharacterStatusComponent.GetCraftingSpeedModifier"); }
+    float GetMeleeDamageModifier(FScriptContainerElement* a2) { return NativeCall<float, FScriptContainerElement*>(this, "UPrimalCharacterStatusComponent.GetMeleeDamageModifier()", a2); }
     float GetMovementSpeedModifier() { return NativeCall<float>(this, "UPrimalCharacterStatusComponent.GetMovementSpeedModifier()"); }
     float GetJumpZModifier() { return NativeCall<float>(this, "UPrimalCharacterStatusComponent.GetJumpZModifier()"); }
-    //void OnRep_CurrentStatusValues() { NativeCall<void>(this, "UPrimalCharacterStatusComponent.OnRep_CurrentStatusValues"); }
     void ServerSyncReplicatedValues() { NativeCall<void>(this, "UPrimalCharacterStatusComponent.ServerSyncReplicatedValues()"); }
-    //void OnRep_GlobalCurrentStatusValues() { NativeCall<void>(this, "UPrimalCharacterStatusComponent.OnRep_GlobalCurrentStatusValues"); }
-    //void OnRep_GlobalMaxStatusValues() { NativeCall<void>(this, "UPrimalCharacterStatusComponent.OnRep_GlobalMaxStatusValues"); }
-    //void OnRep_GlobalBaseLevelMaxStatusValues() { NativeCall<void>(this, "UPrimalCharacterStatusComponent.OnRep_GlobalBaseLevelMaxStatusValues"); }
-    //void OnRep_ReplicatedExperiencePoints() { NativeCall<void>(this, "UPrimalCharacterStatusComponent.OnRep_ReplicatedExperiencePoints"); }
     bool CanLevelUp(EPrimalCharacterStatusValue::Type LevelUpValueType, bool bCheckExperience) { return NativeCall<bool, EPrimalCharacterStatusValue::Type, bool>(this, "UPrimalCharacterStatusComponent.CanLevelUp(EPrimalCharacterStatusValue::Type,bool)", LevelUpValueType, bCheckExperience); }
-    void ServerApplyLevelUp(EPrimalCharacterStatusValue::Type LevelUpValueType, AShooterPlayerController* ByPC) { NativeCall<void, EPrimalCharacterStatusValue::Type, AShooterPlayerController*>(this, "UPrimalCharacterStatusComponent.ServerApplyLevelUp(EPrimalCharacterStatusValue::Type,AShooterPlayerController*,bool)", LevelUpValueType, ByPC); }
+    void ServerApplyLevelUp(EPrimalCharacterStatusValue::Type LevelUpValueType, AShooterPlayerController* ByPC, bool AllowSave) { NativeCall<void, EPrimalCharacterStatusValue::Type, AShooterPlayerController*, bool>(this, "UPrimalCharacterStatusComponent.ServerApplyLevelUp(EPrimalCharacterStatusValue::Type,AShooterPlayerController*,bool)", LevelUpValueType, ByPC, AllowSave); }
     void SetBaseLevel(int Level, bool bDontCurrentSetToMax) { NativeCall<void, int, bool>(this, "UPrimalCharacterStatusComponent.SetBaseLevel(int,bool)", Level, bDontCurrentSetToMax); }
     void SetBaseLevelNoStatChange(int Level) { NativeCall<void, int>(this, "UPrimalCharacterStatusComponent.SetBaseLevelNoStatChange(int)", Level); }
-    void SetBaseLevelCustomized(int Level, TArray<FStatValuePair>* CustomBaseStats, TArray<TEnumAsByte<enum EPrimalCharacterStatusValue::Type>>* PrioritizeStats, bool bDontCurrentSetToMax) { NativeCall<void, int, TArray<FStatValuePair>*, TArray<TEnumAsByte<enum EPrimalCharacterStatusValue::Type>>*, bool>(this, "UPrimalCharacterStatusComponent.SetBaseLevelCustomized(int,TArray<FStatValuePair,TSizedDefaultAllocator<32>>&,TArray<TEnumAsByte<EPrimalCharacterStatusValue::Type>,TSizedDefaultAllocator<32>>&,bool)", Level, CustomBaseStats, PrioritizeStats, bDontCurrentSetToMax); }
+    void SetBaseLevelCustomized(int Level, const TArray<FStatValuePair, TSizedDefaultAllocator<32> >* CustomBaseStats, const TArray<TEnumAsByte<EPrimalCharacterStatusValue::Type>, TSizedDefaultAllocator<32> >* PrioritizeStats, bool bDontCurrentSetToMax) { NativeCall<void, int, const TArray<FStatValuePair, TSizedDefaultAllocator<32> >*, const TArray<TEnumAsByte<EPrimalCharacterStatusValue::Type>, TSizedDefaultAllocator<32> >*, bool>(this, "UPrimalCharacterStatusComponent.SetBaseLevelCustomized(int,TArray<FStatValuePair,TSizedDefaultAllocator<32>>&,TArray<TEnumAsByte<EPrimalCharacterStatusValue::Type>,TSizedDefaultAllocator<32>>&,bool)", Level, CustomBaseStats, PrioritizeStats, bDontCurrentSetToMax); }
     void SetTameable(bool bTameable) { NativeCall<void, bool>(this, "UPrimalCharacterStatusComponent.SetTameable(bool)", bTameable); }
     void SetTamed(float TameIneffectivenessModifier, bool bSkipAddingTamedLevels) { NativeCall<void, float, bool>(this, "UPrimalCharacterStatusComponent.SetTamed(float,bool)", TameIneffectivenessModifier, bSkipAddingTamedLevels); }
     void ApplyTamingStatModifiers(float TameIneffectivenessModifier) { NativeCall<void, float>(this, "UPrimalCharacterStatusComponent.ApplyTamingStatModifiers(float)", TameIneffectivenessModifier); }
-    //bool IsAlignedWithTeam(int TargetingTeam) { return NativeCall<bool, int>(this, "UPrimalCharacterStatusComponent.IsAlignedWithTeam", TargetingTeam); }
-    FString* GetStatusValueString(FString* result, EPrimalCharacterStatusValue::Type ValueType, bool bValueOnly) { return NativeCall<FString*, FString*, EPrimalCharacterStatusValue::Type, bool>(this, "UPrimalCharacterStatusComponent.GetStatusValueString(EPrimalCharacterStatusValue::Type,bool)", result, ValueType, bValueOnly); }
-    FString* GetStatusNameString(FString* result, EPrimalCharacterStatusValue::Type ValueType) { return NativeCall<FString*, FString*, EPrimalCharacterStatusValue::Type>(this, "UPrimalCharacterStatusComponent.GetStatusNameString(EPrimalCharacterStatusValue::Type)", result, ValueType); }
-    FString* GetStatusMaxValueString(FString* result, EPrimalCharacterStatusValue::Type ValueType, bool bValueOnly) { return NativeCall<FString*, FString*, EPrimalCharacterStatusValue::Type, bool>(this, "UPrimalCharacterStatusComponent.GetStatusMaxValueString(EPrimalCharacterStatusValue::Type,bool)", result, ValueType, bValueOnly); }
+    FString* GetStatusValueString(FString* result, int ValueType, bool bValueOnly) { return NativeCall<FString*, FString*, int, bool>(this, "UPrimalCharacterStatusComponent.GetStatusValueString(EPrimalCharacterStatusValue::Type,bool)", result, ValueType, bValueOnly); }
+    FString* GetStatusNameString(FString* result, int ValueType) { return NativeCall<FString*, FString*, int>(this, "UPrimalCharacterStatusComponent.GetStatusNameString(EPrimalCharacterStatusValue::Type)", result, ValueType); }
+    FString* GetStatusMaxValueString(FString* result, int ValueType, bool bValueOnly) { return NativeCall<FString*, FString*, int, bool>(this, "UPrimalCharacterStatusComponent.GetStatusMaxValueString(EPrimalCharacterStatusValue::Type,bool)", result, ValueType, bValueOnly); }
     int GetCharacterLevel() { return NativeCall<int>(this, "UPrimalCharacterStatusComponent.GetCharacterLevel()"); }
     int GetBaseLevelFromLevelUpPoints(bool bIncludePlayerAddedLevels) { return NativeCall<int, bool>(this, "UPrimalCharacterStatusComponent.GetBaseLevelFromLevelUpPoints(bool)", bIncludePlayerAddedLevels); }
     void AddExperience(float HowMuch, bool bShareWithTribe, EXPType::Type XPType) { NativeCall<void, float, bool, EXPType::Type>(this, "UPrimalCharacterStatusComponent.AddExperience(float,bool,EXPType::Type)", HowMuch, bShareWithTribe, XPType); }
-    //int GetNumLevelUpsAvailable() { return NativeCall<int>(this, "UPrimalCharacterStatusComponent.GetNumLevelUpsAvailable"); }
     float GetExperienceRequiredForNextLevelUp() { return NativeCall<float>(this, "UPrimalCharacterStatusComponent.GetExperienceRequiredForNextLevelUp()"); }
     float GetExperienceRequiredForPreviousLevelUp() { return NativeCall<float>(this, "UPrimalCharacterStatusComponent.GetExperienceRequiredForPreviousLevelUp()"); }
+    int GetMaxLevel() { return NativeCall<int>(this, "UPrimalCharacterStatusComponent.GetMaxLevel()"); }
     bool IsAtMaxExperience() { return NativeCall<bool>(this, "UPrimalCharacterStatusComponent.IsAtMaxExperience()"); }
+    bool CanGainLevel() { return NativeCall<bool>(this, "UPrimalCharacterStatusComponent.CanGainLevel()"); }
     bool HasExperienceForLevelUp() { return NativeCall<bool>(this, "UPrimalCharacterStatusComponent.HasExperienceForLevelUp()"); }
     float GetExperiencePercent() { return NativeCall<float>(this, "UPrimalCharacterStatusComponent.GetExperiencePercent()"); }
-    void NetSyncMaxStatusValues_Implementation(TArray<float>* NetMaxStatusValues, TArray<float>* NetBaseMaxStatusValues) { NativeCall<void, TArray<float>*, TArray<float>*>(this, "UPrimalCharacterStatusComponent.NetSyncMaxStatusValues_Implementation(TArray<float,TSizedDefaultAllocator<32>>&,TArray<float,TSizedDefaultAllocator<32>>&)", NetMaxStatusValues, NetBaseMaxStatusValues); }
-    void ClientSyncMaxStatusValues_Implementation(TArray<float>* NetMaxStatusValues, TArray<float>* NetBaseMaxStatusValues) { NativeCall<void, TArray<float>*, TArray<float>*>(this, "UPrimalCharacterStatusComponent.ClientSyncMaxStatusValues_Implementation(TArray<float,TSizedDefaultAllocator<32>>&,TArray<float,TSizedDefaultAllocator<32>>&)", NetMaxStatusValues, NetBaseMaxStatusValues); }
+    void NetSyncMaxStatusValues_Implementation(const TArray<float, TSizedDefaultAllocator<32> >* NetMaxStatusValues, const TArray<float, TSizedDefaultAllocator<32> >* NetBaseMaxStatusValues) { NativeCall<void, const TArray<float, TSizedDefaultAllocator<32> >*, const TArray<float, TSizedDefaultAllocator<32> >*>(this, "UPrimalCharacterStatusComponent.NetSyncMaxStatusValues_Implementation(TArray<float,TSizedDefaultAllocator<32>>&,TArray<float,TSizedDefaultAllocator<32>>&)", NetMaxStatusValues, NetBaseMaxStatusValues); }
+    void ClientSyncMaxStatusValues_Implementation(const TArray<float, TSizedDefaultAllocator<32> >* NetMaxStatusValues, const TArray<float, TSizedDefaultAllocator<32> >* NetBaseMaxStatusValues) { NativeCall<void, const TArray<float, TSizedDefaultAllocator<32> >*, const TArray<float, TSizedDefaultAllocator<32> >*>(this, "UPrimalCharacterStatusComponent.ClientSyncMaxStatusValues_Implementation(TArray<float,TSizedDefaultAllocator<32>>&,TArray<float,TSizedDefaultAllocator<32>>&)", NetMaxStatusValues, NetBaseMaxStatusValues); }
     void Serialize(FArchive* Ar) { NativeCall<void, FArchive*>(this, "UPrimalCharacterStatusComponent.Serialize(FArchive&)", Ar); }
-    void Serialize(FStructuredArchiveRecord* Arr) { NativeCall<void, FStructuredArchiveRecord*>(this, "UPrimalCharacterStatusComponent.Serialize(FStructuredArchiveRecord)", Arr); }
-    //bool AllowTaming() { return NativeCall<bool>(this, "UPrimalCharacterStatusComponent.AllowTaming"); }
     void BPDirectSetCurrentStatusValue(EPrimalCharacterStatusValue::Type valueType, float newValue) { NativeCall<void, EPrimalCharacterStatusValue::Type, float>(this, "UPrimalCharacterStatusComponent.BPDirectSetCurrentStatusValue(EPrimalCharacterStatusValue::Type,float)", valueType, newValue); }
-    //void BPDirectSetMaxStatusValue(EPrimalCharacterStatusValue::Type valueType, float newValue) { NativeCall<void, EPrimalCharacterStatusValue::Type, float>(this, "UPrimalCharacterStatusComponent.BPDirectSetMaxStatusValue", valueType, newValue); }
-    //float BPGetCurrentStatusValue(EPrimalCharacterStatusValue::Type valueType) { return NativeCall<float, EPrimalCharacterStatusValue::Type>(this, "UPrimalCharacterStatusComponent.BPGetCurrentStatusValue", valueType); }
-    //float BPGetMaxStatusValue(EPrimalCharacterStatusValue::Type valueType) { return NativeCall<float, EPrimalCharacterStatusValue::Type>(this, "UPrimalCharacterStatusComponent.BPGetMaxStatusValue", valueType); }
-    //float BPGetPercentStatusValue(EPrimalCharacterStatusValue::Type valueType) { return NativeCall<float, EPrimalCharacterStatusValue::Type>(this, "UPrimalCharacterStatusComponent.BPGetPercentStatusValue", valueType); }
     void SetMaxStatusValue(EPrimalCharacterStatusValue::Type StatType, float newValue) { NativeCall<void, EPrimalCharacterStatusValue::Type, float>(this, "UPrimalCharacterStatusComponent.SetMaxStatusValue(EPrimalCharacterStatusValue::Type,float)", StatType, newValue); }
     void RescaleAllStats() { NativeCall<void>(this, "UPrimalCharacterStatusComponent.RescaleAllStats()"); }
     UPrimalCharacterStatusComponent* GetDefaultCharacterStatusComponent() { return NativeCall<UPrimalCharacterStatusComponent*>(this, "UPrimalCharacterStatusComponent.GetDefaultCharacterStatusComponent()"); }
-    //void BPSetRecoveryRateStatusValue(EPrimalCharacterStatusValue::Type valueType, float newValue) { NativeCall<void, EPrimalCharacterStatusValue::Type, float>(this, "UPrimalCharacterStatusComponent.BPSetRecoveryRateStatusValue", valueType, newValue); }
-    //int GetLevelUpPoints(EPrimalCharacterStatusValue::Type valueType, bool bTamedPoints) { return NativeCall<int, EPrimalCharacterStatusValue::Type, bool>(this, "UPrimalCharacterStatusComponent.GetLevelUpPoints", valueType, bTamedPoints); }
-    //void SetLevelUpPoints(EPrimalCharacterStatusValue::Type valueType, bool bTamedPoints, int newPoints) { NativeCall<void, EPrimalCharacterStatusValue::Type, bool, int>(this, "UPrimalCharacterStatusComponent.SetLevelUpPoints", valueType, bTamedPoints, newPoints); }
-    //void ClearAllLevelUpPoints(bool bTamedPoints) { NativeCall<void, bool>(this, "UPrimalCharacterStatusComponent.ClearAllLevelUpPoints", bTamedPoints); }
-    //void CopyPrimalStatusComponentValues(UPrimalCharacterStatusComponent* src) { NativeCall<void, UPrimalCharacterStatusComponent*>(this, "UPrimalCharacterStatusComponent.CopyPrimalStatusComponentValues", src); }
     FString* GetDebugString(FString* result) { return NativeCall<FString*, FString*>(this, "UPrimalCharacterStatusComponent.GetDebugString()", result); }
-    static void StaticRegisterNativesUPrimalCharacterStatusComponent() { NativeCall<void>(nullptr, "UPrimalCharacterStatusComponent.StaticRegisterNativesUPrimalCharacterStatusComponent()"); }
-    static UClass* GetPrivateStaticClass(const wchar_t* Package) { return NativeCall<UClass*, const wchar_t*>(nullptr, "UPrimalCharacterStatusComponent.GetPrivateStaticClass()", Package); }
-    //float BPAdjustStatusValueModification(EPrimalCharacterStatusValue::Type valueType, float Amount, TSubclassOf<UDamageType> DamageTypeClass, bool bManualModification) { return NativeCall<float, EPrimalCharacterStatusValue::Type, float, TSubclassOf<UDamageType>, bool>(this, "UPrimalCharacterStatusComponent.BPAdjustStatusValueModification", valueType, Amount, DamageTypeClass, bManualModification); }
-    float BPModifyMaxExperiencePoints(float InMaxExperiencePoints) { return NativeCall<float, float>(this, "UPrimalCharacterStatusComponent.BPModifyMaxExperiencePoints(float)", InMaxExperiencePoints); }
-    int BPModifyMaxLevel(int InMaxLevel) { return NativeCall<int, int>(this, "UPrimalCharacterStatusComponent.BPModifyMaxLevel(int)", InMaxLevel); }
-    void ClientSyncMaxStatusValues(TArray<float>* NetMaxStatusValues, TArray<float>* NetBaseMaxStatusValues) { NativeCall<void, TArray<float>*, TArray<float>*>(this, "UPrimalCharacterStatusComponent.ClientSyncMaxStatusValues(TArray<float,TSizedDefaultAllocator<32>>&,TArray<float,TSizedDefaultAllocator<32>>&)", NetMaxStatusValues, NetBaseMaxStatusValues); }
-    void NetSyncMaxStatusValues(TArray<float>* NetMaxStatusValues, TArray<float>* NetBaseMaxStatusValues) { NativeCall<void, TArray<float>*, TArray<float>*>(this, "UPrimalCharacterStatusComponent.NetSyncMaxStatusValues(TArray<float,TSizedDefaultAllocator<32>>&,TArray<float,TSizedDefaultAllocator<32>>&)", NetMaxStatusValues, NetBaseMaxStatusValues); }
+    void ServerApplyMutagen(bool bHasAncestors) { NativeCall<void, bool>(this, "UPrimalCharacterStatusComponent.ServerApplyMutagen(bool)", bHasAncestors); }
+    void ServerForceUpdateMaxStatValues() { NativeCall<void>(this, "UPrimalCharacterStatusComponent.ServerForceUpdateMaxStatValues()"); }
+    float GetDinoStatDistributionAgainstMax(EPrimalCharacterStatusValue::Type valueType, bool bTamedPoints, bool bCheckLevel, bool bIncludeMaxTamingEffLevels) { return NativeCall<float, EPrimalCharacterStatusValue::Type, bool, bool, bool>(this, "UPrimalCharacterStatusComponent.GetDinoStatDistributionAgainstMax(EPrimalCharacterStatusValue::Type,bool,bool,bool)", valueType, bTamedPoints, bCheckLevel, bIncludeMaxTamingEffLevels); }
 };
