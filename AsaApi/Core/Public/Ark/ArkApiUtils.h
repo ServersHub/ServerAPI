@@ -637,7 +637,10 @@ namespace AsaApi
 				FString path;
 				auto the_object = UVictoryCore::GetClassDefaultObject(the_class);
 				the_object->GetPathName(nullptr, &path);
-				return "Blueprint'" + path.LeftChop(2) + "'";
+				if (path.EndsWith("_C"))
+					return "Blueprint'" + path.LeftChop(2) + "'";
+				else
+					return "Blueprint'" + path + "'";
 			}
 
 			return FString("");

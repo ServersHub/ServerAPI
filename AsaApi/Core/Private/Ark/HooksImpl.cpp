@@ -86,6 +86,23 @@ namespace AsaApi
 		dynamic_cast<ApiUtils&>(*API::game_api->GetApiUtils()).SetWorld(a_shooter_game_mode->GetWorld());
 
 		AShooterGameMode_InitGame_original(a_shooter_game_mode, map_name, options, error_message);
+
+		const auto& actors = AsaApi::GetApiUtils().GetWorld()->PersistentLevelField().Get()->ActorsField();
+		for (auto actor : actors)
+		{
+			FString bp = AsaApi::GetApiUtils().GetBlueprint(actor);
+			if (bp.Equals("Blueprint'/Script/ShooterGame.Default__PrimalPersistentWorldData'"))
+			{
+				if (actor->TargetingTeamField() == 0)
+					actor->TargetingTeamField() = a_shooter_game_mode->ServerIDField();
+				
+				a_shooter_game_mode->MyServerIdField() = FString(std::to_string(actor->TargetingTeamField()));
+				a_shooter_game_mode->ServerIDField() = actor->TargetingTeamField();
+				Log::GetLog()->info("SERVER ID: {}", a_shooter_game_mode->ServerIDField());
+
+				break;
+			}
+		}
 	}
 
 	void Hook_AShooterPlayerController_ServerSendChatMessage_Impl(AShooterPlayerController* player_controller, FString* message, int mode, int senderPlatform)

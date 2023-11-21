@@ -47,10 +47,10 @@ namespace AsaApi
 	}
 
 	void ApiUtils::SetPlayerController(AShooterPlayerController* player_controller)
-	{
+	{		
 		if (!player_controller)
 			return;
-
+		
 		const FString eos_id = AsaApi::IApiUtils::GetEOSIDFromController(player_controller);
 
 		if (!eos_id.IsEmpty())
@@ -75,18 +75,16 @@ namespace AsaApi
 	AShooterPlayerController* ApiUtils::FindPlayerFromEOSID_Internal(const FString& eos_id) const
 	{
 		AShooterPlayerController* found_player = nullptr;
-
-		if (!eos_id.IsEmpty())
+		if (eos_id.IsEmpty())
+		{
 			return found_player;
-
+		}
 		auto iter = eos_id_map_.find(eos_id);
-
 		if (iter != eos_id_map_.end()
 			&& iter->first == eos_id)
 		{
 			found_player = iter->second;
 		}
-
 		return found_player;
 	}
 
