@@ -29,7 +29,7 @@ namespace AsaApi
 	DECLARE_HOOK(UEngine_Init, void, DWORD64, DWORD64);
 	DECLARE_HOOK(UWorld_Tick, void, DWORD64, DWORD64, float);
 	DECLARE_HOOK(AShooterGameMode_InitGame, void, AShooterGameMode*, FString*, FString*, FString*);
-	DECLARE_HOOK(AShooterPlayerController_ServerSendChatMessage_Impl, void, AShooterPlayerController*, FString*, int);
+	DECLARE_HOOK(AShooterPlayerController_ServerSendChatMessage_Impl, void, AShooterPlayerController*, FString*, int, int);
 	DECLARE_HOOK(AShooterPlayerController_ConsoleCommand, FString*, AShooterPlayerController*, FString*, FString*, bool);
 	DECLARE_HOOK(RCONClientConnection_ProcessRCONPacket, void, RCONClientConnection*, RCONPacket*, UWorld*);
 	DECLARE_HOOK(AGameState_DefaultTimer, void, AGameState*);
@@ -44,7 +44,7 @@ namespace AsaApi
 		hooks->SetHook("UEngine.Init(IEngineLoop*)", &Hook_UEngine_Init, &UEngine_Init_original);
 		hooks->SetHook("UWorld.Tick(ELevelTick,float)", &Hook_UWorld_Tick, &UWorld_Tick_original);
 		hooks->SetHook("AShooterGameMode.InitGame(FString&,FString&,FString&)", &Hook_AShooterGameMode_InitGame, &AShooterGameMode_InitGame_original);
-		hooks->SetHook("AShooterPlayerController.ServerSendChatMessage_Implementation(FString&,EChatSendMode::Type)", &Hook_AShooterPlayerController_ServerSendChatMessage_Impl, &AShooterPlayerController_ServerSendChatMessage_Impl_original);
+		hooks->SetHook("AShooterPlayerController.ServerSendChatMessage_Implementation(FString&,EChatSendMode::Type,int)", &Hook_AShooterPlayerController_ServerSendChatMessage_Impl, &AShooterPlayerController_ServerSendChatMessage_Impl_original);
 		hooks->SetHook("AShooterPlayerController.ConsoleCommand(FString&,bool)", &Hook_AShooterPlayerController_ConsoleCommand, &AShooterPlayerController_ConsoleCommand_original);
 		hooks->SetHook("RCONClientConnection.ProcessRCONPacket(RCONPacket&,UWorld*)", &Hook_RCONClientConnection_ProcessRCONPacket, &RCONClientConnection_ProcessRCONPacket_original);
 		hooks->SetHook("AGameState.DefaultTimer()", &Hook_AGameState_DefaultTimer, &AGameState_DefaultTimer_original);
@@ -88,7 +88,7 @@ namespace AsaApi
 		AShooterGameMode_InitGame_original(a_shooter_game_mode, map_name, options, error_message);
 	}
 
-	void Hook_AShooterPlayerController_ServerSendChatMessage_Impl(AShooterPlayerController* player_controller, FString* message, int mode)
+	void Hook_AShooterPlayerController_ServerSendChatMessage_Impl(AShooterPlayerController* player_controller, FString* message, int mode, int senderPlatform)
 	{
 		const long double last_chat_time = player_controller->LastChatMessageTimeField();
 		const long double now_time = AsaApi::GetApiUtils().GetWorld()->TimeSecondsField();
@@ -106,7 +106,7 @@ namespace AsaApi
 		if (command_executed || prevent_default)
 			return;
 		
-		AShooterPlayerController_ServerSendChatMessage_Impl_original(player_controller, message, mode);
+		AShooterPlayerController_ServerSendChatMessage_Impl_original(player_controller, message, mode, senderPlatform);
 	}
 
 	FString* Hook_AShooterPlayerController_ConsoleCommand(AShooterPlayerController* _this, FString* result, FString* Command, bool bWriteToLog)
