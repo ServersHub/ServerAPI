@@ -116,9 +116,9 @@ namespace AsaApi
 
 		player_controller->LastChatMessageTimeField() = now_time;
 
-		const auto command_executed = dynamic_cast<AsaApi::Commands&>(*API::game_api->GetCommands()).CheckChatCommands(player_controller, message, mode);
+		const auto command_executed = dynamic_cast<AsaApi::Commands&>(*API::game_api->GetCommands()).CheckChatCommands(player_controller, message, mode, platform);
 
-		const auto prevent_default = dynamic_cast<AsaApi::Commands&>(*API::game_api->GetCommands()).CheckOnChatMessageCallbacks(player_controller, message, mode, spam_check, command_executed);
+		const auto prevent_default = dynamic_cast<AsaApi::Commands&>(*API::game_api->GetCommands()).CheckOnChatMessageCallbacks(player_controller, message, mode, platform, spam_check, command_executed);
 
 		if (command_executed || prevent_default)
 			return;
