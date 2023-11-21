@@ -10,6 +10,12 @@
 #define ARK_API __declspec(dllimport)
 #endif
 
+struct FCollisionResponseParams;
+struct ASceneCapture2D;
+struct FPredictProjectilePathResult;
+struct FPredictProjectilePathParams;
+struct USoundConcurrency;
+struct USaveGame;
 struct FTexture2DResourceMem;
 struct FTexturePlatformData;
 struct FVirtualTextureBuildSettings;
