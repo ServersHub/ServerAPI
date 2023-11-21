@@ -350,7 +350,7 @@ struct AShooterGameState : AGameState
 	void WorldCompositionRescan() { NativeCall<void>(this, "AShooterGameState.WorldCompositionRescan()"); }
 	static void HTTPGetRequest() { NativeCall<void>(nullptr, "AShooterGameState.HTTPGetRequest()"); }
 	static void HTTPGetRequestCompleted() { NativeCall<void>(nullptr, "AShooterGameState.HTTPGetRequestCompleted()"); }
-	void HTTPPostRequest(FString InURL, FString Content) { NativeCall<void, FString, FString>(this, "AShooterGameState.HTTPPostRequest", InURL, Content); }
+	void HTTPPostRequest(FString InURL, FString Content) { NativeCall<void, FString, FString>(this, "AShooterGameState.HTTPPostRequest(FString,FString)", InURL, Content); }
 	static void HTTPPostRequestCompleted() { NativeCall<void>(nullptr, "AShooterGameState.HTTPPostRequestCompleted()"); }
 	static TArray<FGameIniData, TSizedDefaultAllocator<32> >* GetIniArray() { return NativeCall<TArray<FGameIniData, TSizedDefaultAllocator<32> >*>(nullptr, "AShooterGameState.GetIniArray()"); }
 	//bool IsUniqueDinoAlreadySpawned(const //TSoftClassPtr<APrimalDinoCharacter>* UniqueDino) { return NativeCall<bool, const //TSoftClassPtr<APrimalDinoCharacter>*>(this, "AShooterGameState.IsUniqueDinoAlreadySpawned(//TSoftClassPtr<APrimalDinoCharacter>*)", UniqueDino); }
