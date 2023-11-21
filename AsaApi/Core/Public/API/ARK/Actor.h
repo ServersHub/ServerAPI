@@ -55,7 +55,6 @@ struct  FPrimalPlayerCharacterConfigStructReplicated
     unsigned __int8 bUsingCustomPlayerVoiceCollection : 1;
 };
 
-
 struct UPrimalActor : UObject
 {
     // Fields
@@ -9604,4 +9603,68 @@ struct APrimalBuff : AActor
     void SetBuffCauser(AActor* CausedBy) { NativeCall<void, AActor*>(this, "APrimalBuff.SetBuffCauser(AActor*)", CausedBy); }
     void Multi_SyncBuffLifetime_Implementation(float NewDeactivateAfterTime) { return NativeCall<void, float>(this, "APrimalBuff.Multi_SyncBuffLifetime_Implementation(float)", NewDeactivateAfterTime); }
     //void UpdateBuffLifetime(float NewLifetime, const bool bRestartBuffLifetime) { return NativeCall<void, float, const bool>(this, "APrimalBuff.UpdateBuffLifetime", NewLifetime, bRestartBuffLifetime); }
+};
+
+struct FActorSpawnParameters
+{
+    enum ESpawnActorNameMode
+    {
+        Required_Fatal = 0x0,
+        Required_ErrorAndReturnNull = 0x1,
+        Required_ReturnNull = 0x2,
+        Requested = 0x3,
+    };
+
+    FName Name;
+    AActor* Template;
+    AActor* Owner;
+    APawn* Instigator;
+    ULevel* OverrideLevel;
+    UChildActorComponent* OverrideParentComponent;
+    unsigned char SpawnCollisionHandlingOverride[1];
+    ESpawnActorScaleMethod TransformScaleMethod;
+    unsigned __int8 bRemoteOwned : 1;
+    unsigned __int8 bNoFail : 1;
+    unsigned __int8 bDeferConstruction : 1;
+    unsigned __int8 bWillStasisAfterSpawn : 1;
+    unsigned __int8 bDeferBeginPlay : 1;
+    unsigned __int8 bAllowDuringConstructionScript : 1;
+    FActorSpawnParameters::ESpawnActorNameMode NameMode;
+    EObjectFlags ObjectFlags;
+    TFunction<void __cdecl(AActor*)> CustomPreSpawnInitalization;
+    USceneComponent* AttachToComponent;
+    FName AttachToBoneName;
+    bool bPrimalDeferConstruction;
+    unsigned int ExtraSpawnData;
+
+    FActorSpawnParameters()
+        : Name()
+        , Template(nullptr)
+        , Owner(nullptr)
+        , Instigator(nullptr)
+        , OverrideLevel(nullptr)
+        , OverrideParentComponent(nullptr)
+        , NameMode(ESpawnActorNameMode::Required_Fatal)
+        , CustomPreSpawnInitalization(nullptr)
+        , AttachToComponent(nullptr)
+        , AttachToBoneName(FName(""))
+        , bPrimalDeferConstruction(false)
+        , SpawnCollisionHandlingOverride{0}
+        , ObjectFlags(EObjectFlags::RF_Transactional)
+    {
+    }
+};
+
+
+struct ASaveGameActor : AActor
+{
+    // Fields
+
+
+      // Bitfields
+
+
+      // Functions
+
+    static UClass* StaticClass() { return NativeCall<UClass*>(nullptr, "ASaveGameActor.StaticClass()"); }
 };
