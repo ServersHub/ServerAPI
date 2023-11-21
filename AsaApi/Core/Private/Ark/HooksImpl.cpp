@@ -99,6 +99,8 @@ namespace AsaApi
 				a_shooter_game_mode->MyServerIdField() = FString(std::to_string(actor->TargetingTeamField()));
 				a_shooter_game_mode->ServerIDField() = actor->TargetingTeamField();
 				Log::GetLog()->info("SERVER ID: {}", a_shooter_game_mode->ServerIDField());
+
+				break;
 			}
 		}
 	}
