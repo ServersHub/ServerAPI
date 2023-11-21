@@ -15,8 +15,9 @@ struct FPrimalChatMessage {
     unsigned int RadioFrequency;
     TEnumAsByte<enum EChatType::Type> ChatType;
     UTexture2D* SenderIcon;
+    unsigned __int8 senderPlatform;
     FString UserId;
-    __int8 SenderIsAdmin : 1;
+    unsigned __int8 SenderIsAdmin : 1;
     FPrimalChatMessage()
         : SenderName(""),
         SenderSteamName(""),
