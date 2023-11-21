@@ -595,7 +595,7 @@ namespace AsaApi
 		{
 			FString eos_id;
 			GetShooterGameMode()->GetSteamIDStringForPlayerID(&eos_id, player_id);
-			if (!eos_id.IsEmpty())
+			if (eos_id.IsEmpty())
 			{
 				const auto& player_controllers = GetWorld()->PlayerControllerListField();
 				for (TWeakObjectPtr<APlayerController> player_controller : player_controllers)
@@ -608,7 +608,7 @@ namespace AsaApi
 					}
 				}
 
-				GetShooterGameMode()->AddPlayerID(player_id, &eos_id);
+				GetShooterGameMode()->AddPlayerID(player_id, &eos_id, false);
 			}
 
 			return eos_id;
