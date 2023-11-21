@@ -48,13 +48,13 @@ namespace AsaApi
 		* \param args Optional arguments
 		*/
 		template <typename T, typename... Args>
-		FORCEINLINE void SendServerMessage(AShooterPlayerController* player_controller, FLinearColor msg_color, const T* msg,
-			Args&&... args)
+		FORCEINLINE void SendServerMessage(AShooterPlayerController* player_controller, FLinearColor msg_color, const T* msg, Args&&... args)
 		{
 			if (player_controller)
 			{
+				FString senderid = "Server";
 				FString text(FString::Format(msg, std::forward<Args>(args)...));
-				player_controller->ClientServerChatDirectMessage(&text, msg_color, false);
+				player_controller->ClientServerChatDirectMessage(&text, msg_color, false, &senderid);
 			}
 		}
 
