@@ -16,25 +16,20 @@ namespace AsaApi
 		 * \param command Command name
 		 * \param callback Callback function
 		 */
-		virtual void AddChatCommand(const FString& command,
-			const std::function<void(AShooterPlayerController*, FString*, int)>&
-			callback) = 0;
+		virtual void AddChatCommand(const FString& command, const std::function<void(AShooterPlayerController*, FString*, int, int)>&callback) = 0;
 		/**
 		* \brief Adds a console command
 		* \param command Command name
 		* \param callback Callback function
 		*/
-		virtual void AddConsoleCommand(const FString& command,
-			const std::function<void(APlayerController*, FString*, bool)>& callback) = 0;
+		virtual void AddConsoleCommand(const FString& command, const std::function<void(APlayerController*, FString*, bool)>& callback) = 0;
 
 		/**
 		* \brief Adds a rcon command
 		* \param command Command name
 		* \param callback Callback function
 		*/
-		virtual void AddRconCommand(const FString& command,
-			const std::function<void(RCONClientConnection*, RCONPacket*, UWorld*)>& callback) =
-			0;
+		virtual void AddRconCommand(const FString& command, const std::function<void(RCONClientConnection*, RCONPacket*, UWorld*)>& callback) = 0;
 
 		/**
 		 * \brief Added function will be called every frame
@@ -55,9 +50,7 @@ namespace AsaApi
 		* \param id Unique ID
 		* \param callback Callback function
 		*/
-		virtual void AddOnChatMessageCallback(const FString& id,
-			const std::function<bool(AShooterPlayerController*, FString*,
-				int, bool, bool)>& callback) = 0;
+		virtual void AddOnChatMessageCallback(const FString& id, const std::function<bool(AShooterPlayerController*, FString*, int, int, bool, bool)>& callback) = 0;
 
 		/**
 		 * \brief Removes a chat command
