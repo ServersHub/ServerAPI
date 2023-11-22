@@ -2833,7 +2833,7 @@ struct APlayerController : APrimalController
     //void ServerUpdateLevelVisibility_Implementation(const FUpdateLevelVisibilityLevelInfo* LevelVisibility) { NativeCall<void, const FUpdateLevelVisibilityLevelInfo*>(this, "APlayerController.ServerUpdateLevelVisibility_Implementation(FUpdateLevelVisibilityLevelInfo*)", LevelVisibility); }
    // bool ServerUpdateLevelVisibility_Validate(const FUpdateLevelVisibilityLevelInfo* LevelVisibility) { return NativeCall<bool, const FUpdateLevelVisibilityLevelInfo*>(this, "APlayerController.ServerUpdateLevelVisibility_Validate(FUpdateLevelVisibilityLevelInfo*)", LevelVisibility); }
     void SetNetSpeed(int NewSpeed) { NativeCall<void, int>(this, "APlayerController.SetNetSpeed(int)", NewSpeed); }
-    FString* ConsoleCommand(FString* result, const FString* Cmd, bool bWriteToLog) { return NativeCall<FString*, FString*, const FString*, bool>(this, "APlayerController.ConsoleCommand(FString&,FString&,bool)", result, Cmd, bWriteToLog); }
+    FString* ConsoleCommand(FString* result, const FString* Cmd, bool bWriteToLog) { return NativeCall<FString*, FString*, const FString*, bool>(this, "APlayerController.ConsoleCommand(FString&,bool)", result, Cmd, bWriteToLog); }
     void CleanUpAudioComponents() { NativeCall<void>(this, "APlayerController.CleanUpAudioComponents()"); }
     AActor* GetViewTarget() { return NativeCall<AActor*>(this, "APlayerController.GetViewTarget()"); }
     static void SetViewTarget() { NativeCall<void>(nullptr, "APlayerController.SetViewTarget()"); }
