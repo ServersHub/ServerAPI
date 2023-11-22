@@ -2475,4 +2475,7 @@
       <Filter>Source Files\Core\Public\API\UE\Delegates</Filter>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="Core\Private\PDBReader\pdbignores.txt" />
+  </ItemGroup>
 </Project>
