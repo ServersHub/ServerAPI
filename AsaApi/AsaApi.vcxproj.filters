@@ -2456,6 +2456,12 @@
     <ClInclude Include="Core\Public\API\Helpers\Helpers.h">
       <Filter>Source Files\Core\Public\API</Filter>
     </ClInclude>
+    <ClInclude Include="Core\Public\API\ARK\Buff.h">
+      <Filter>Source Files\Core\Public\API\ARK</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Public\API\ARK\PrimalStructure.h">
+      <Filter>Source Files\Core\Public\API\ARK</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="AsaApi.def">
@@ -2474,5 +2480,8 @@
     <None Include="Core\Public\API\UE\Delegates\DelegateSignatureImpl.inl">
       <Filter>Source Files\Core\Public\API\UE\Delegates</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Core\Private\PDBReader\pdbignores.txt" />
   </ItemGroup>
 </Project>

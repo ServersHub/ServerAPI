@@ -41446,3 +41446,13 @@ enum class ELevelTick :int
 	LEVELTICK_All = 0x2,
 	LEVELTICK_PauseTick = 0x3,
 };
+
+enum class ETeleportType :int
+{
+
+};
+
+enum class EMovementMode :int
+{
+
+};

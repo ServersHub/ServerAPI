@@ -71,6 +71,7 @@ public:
 	FieldArray(void* parent, const std::string& field_name)
 		: value_(GetNativePointerField<T*>(parent, field_name))
 	{
+
 	}
 
 	T* operator()()
