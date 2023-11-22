@@ -10,6 +10,8 @@
 #define ARK_API __declspec(dllimport)
 #endif
 
+#define API_DEBUG
+
 struct FCollisionResponseParams;
 struct ASceneCapture2D;
 struct FPredictProjectilePathResult;
