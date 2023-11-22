@@ -174,6 +174,7 @@ struct UObjectBase
 	EObjectFlags& ObjectFlagsField() { return *GetNativePointerField<EObjectFlags*>(this, "UObjectBase.ObjectFlags"); }
 	int& InternalIndexField() { return *GetNativePointerField<int*>(this, "UObjectBase.InternalIndex"); }
 	UClass*& ClassPrivateField() { return *GetNativePointerField<UClass**>(this, "UObjectBase.ClassPrivate"); }
+	UClass*& ClassField() { return ClassPrivateField(); }
 	FName& NamePrivateField() { return *GetNativePointerField<FName*>(this, "UObjectBase.NamePrivate"); }
 	FName& NameField() { return NamePrivateField(); }
 	UObject*& OuterPrivateField() { return *GetNativePointerField<UObject**>(this, "UObjectBase.OuterPrivate"); }

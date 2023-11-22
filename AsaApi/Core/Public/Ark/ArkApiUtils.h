@@ -54,7 +54,7 @@ namespace AsaApi
 			{
 				FString senderid = "Server";
 				FString text(FString::Format(msg, std::forward<Args>(args)...));
-				player_controller->ClientServerChatDirectMessage(&text, msg_color, false, &senderid);
+				player_controller->ClientServerChatDirectMessage(&text, msg_color, false, &senderid); 
 			}
 		}
 
@@ -325,8 +325,7 @@ namespace AsaApi
 			if (!item)
 				return false;
 
-			FItemNetInfo* info = static_cast<FItemNetInfo*>(FMemory::Malloc(0x400));
-			RtlSecureZeroMemory(info, 0x400);
+			FItemNetInfo* info = AllocateStruct<FItemNetInfo>();
 
 			item->GetItemNetInfo(info, false);
 
@@ -338,7 +337,7 @@ namespace AsaApi
 
 			UPrimalInventoryComponent::StaticDropItem(player, info, archetype_dropped, &rot, true, &pos, &rot, true, false, false, true, nullptr, &zero_vector, nullptr, life_span);
 
-			FMemory::Free(info);
+			FreeStruct(info);
 			return true;
 		}
 
@@ -769,6 +768,29 @@ namespace AsaApi
 			}
 			
 			return eos_id;
+		}
+
+		/**
+		* \brief Create a new object of T, with the correct size
+		* \tparam T struct type. Must have ScriptStruct defined
+		* \return Pointer to T
+		*/
+		template<class T>
+		static FORCEINLINE T* AllocateStruct()
+		{
+			static int size = GetStructSize<T>();
+			T* obj = static_cast<T*>(FMemory::Malloc(size));
+			RtlSecureZeroMemory(obj, size);
+			return obj;
+		}
+
+		/**
+		* \brief Free a struct allocated
+		* \param obj Pointer to struct
+		*/
+		static FORCEINLINE void FreeStruct(void* obj)
+		{
+			FMemory::Free(obj);
 		}
 
 		void RunHiddenCommand(AShooterPlayerController* _this, FString* Command)
