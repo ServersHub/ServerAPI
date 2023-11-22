@@ -41446,3 +41446,34 @@ enum class ELevelTick :int
 	LEVELTICK_All = 0x2,
 	LEVELTICK_PauseTick = 0x3,
 };
+
+enum class EMovementMode :int
+{
+	MOVE_None = 0x0,
+	MOVE_Walking = 0x1,
+	MOVE_NavWalking = 0x2,
+	MOVE_Falling = 0x3,
+	MOVE_Swimming = 0x4,
+	MOVE_Flying = 0x5,
+	MOVE_Custom = 0x6,
+	MOVE_MAX = 0x7
+};
+
+typedef EWorldType::Type ETeleportType;
+
+
+//Shares Enums with EWorldType
+//namespace ETeleportType
+//{
+//	enum Type : int
+//	{
+//		None = EWorldType::None,
+//		Game = EWorldType::Game,
+//		Editor = EWorldType::Editor,
+//		PIE = EWorldType::PIE,
+//		EditorPreview = EWorldType::EditorPreview,
+//		GamePreview = EWorldType::GamePreview,
+//		GameRPC = EWorldType::GameRPC,
+//		Inactive = EWorldType::Inactive
+//	};
+//}
