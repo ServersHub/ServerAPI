@@ -31,7 +31,8 @@
 #include "Inventory.h"
 #include "GameMode.h"
 //#include "GameState.h"
-//#include "PrimalStructure.h"
+#include "PrimalStructure.h"
+#include "Buff.h"
 
 #include "../../IApiUtils.h"
 #include "../../ICommands.h"

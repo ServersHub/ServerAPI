@@ -1,4 +1,6 @@
 #pragma once
+#include "..\Base.h"
+
 enum class ESocketType
 {
 	SOCKTYPE_Unknown = 0x0,
@@ -539,4 +541,1742 @@ struct FStringEqual
 	{
 		return lhs.Equals(rhs);
 	}
+};
+
+struct BattleyePlayerInfo
+{
+	// Fields
+
+	unsigned __int64& iPIDField() { return *GetNativePointerField<unsigned __int64*>(this, "BattleyePlayerInfo.iPID"); }
+	TSharedPtr<FUniqueNetId const>& UniqueIdField() { return *GetNativePointerField<TSharedPtr<FUniqueNetId const>*>(this, "BattleyePlayerInfo.UniqueId"); }
+	BattleyePlayerStatus& StatusField() { return *GetNativePointerField<BattleyePlayerStatus*>(this, "BattleyePlayerInfo.Status"); }
+	TWeakObjectPtr<UNetConnection>& ClientConnectionField() { return *GetNativePointerField<TWeakObjectPtr<UNetConnection>*>(this, "BattleyePlayerInfo.ClientConnection"); }
+
+	// Bitfields
+
+
+	// Functions
+
+};
+
+struct FARKDinoData
+{
+	// Fields
+
+	UClass*& DinoClassField() { return *GetNativePointerField<UClass**>(this, "FARKDinoData.DinoClass"); }
+	TArray<unsigned char, TSizedDefaultAllocator<32> >& DinoDataField() { return *GetNativePointerField<TArray<unsigned char, TSizedDefaultAllocator<32> >*>(this, "FARKDinoData.DinoData"); }
+	FString& DinoNameInMapField() { return *GetNativePointerField<FString*>(this, "FARKDinoData.DinoNameInMap"); }
+	FString& DinoNameField() { return *GetNativePointerField<FString*>(this, "FARKDinoData.DinoName"); }
+
+	// Bitfields
+
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FARKDinoData.StaticStruct()"); }
+};
+
+struct FARKTributeData
+{
+	// Fields
+
+	FGuid& IDField() { return *GetNativePointerField<FGuid*>(this, "FARKTributeData.ID"); }
+	TArray<unsigned char, TSizedDefaultAllocator<32> >& DataBytesField() { return *GetNativePointerField<TArray<unsigned char, TSizedDefaultAllocator<32> >*>(this, "FARKTributeData.DataBytes"); }
+	FString& DataClassNameField() { return *GetNativePointerField<FString*>(this, "FARKTributeData.DataClassName"); }
+	FString& DataTagNameField() { return *GetNativePointerField<FString*>(this, "FARKTributeData.DataTagName"); }
+	FString& NameField() { return *GetNativePointerField<FString*>(this, "FARKTributeData.Name"); }
+	TArray<FString, TSizedDefaultAllocator<32> >& DataStatsField() { return *GetNativePointerField<TArray<FString, TSizedDefaultAllocator<32> >*>(this, "FARKTributeData.DataStats"); }
+	long double& LastReceiveDataTimeField() { return *GetNativePointerField<long double*>(this, "FARKTributeData.LastReceiveDataTime"); }
+	unsigned int& DataID1Field() { return *GetNativePointerField<unsigned int*>(this, "FARKTributeData.DataID1"); }
+	unsigned int& DataID2Field() { return *GetNativePointerField<unsigned int*>(this, "FARKTributeData.DataID2"); }
+
+	// Bitfields
+
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FARKTributeData.StaticStruct()"); }
+};
+
+struct FARKTributeDino
+{
+	// Fields
+
+	TSoftClassPtr<APrimalDinoCharacter>& DinoClassPtrField() { return *GetNativePointerField<TSoftClassPtr<APrimalDinoCharacter>*>(this, "FARKTributeDino.DinoClassPtr"); }
+	TArray<unsigned char, TSizedDefaultAllocator<32> >& DinoDataField() { return *GetNativePointerField<TArray<unsigned char, TSizedDefaultAllocator<32> >*>(this, "FARKTributeDino.DinoData"); }
+	FString& DinoNameField() { return *GetNativePointerField<FString*>(this, "FARKTributeDino.DinoName"); }
+	FString& DinoNameInMapField() { return *GetNativePointerField<FString*>(this, "FARKTributeDino.DinoNameInMap"); }
+	FieldArray<FString, 12> DinoStatsField() { return { this, "FARKTributeDino.DinoStats" }; }
+	float& DinoExperiencePointsField() { return *GetNativePointerField<float*>(this, "FARKTributeDino.DinoExperiencePoints"); }
+	float& VersionField() { return *GetNativePointerField<float*>(this, "FARKTributeDino.Version"); }
+	unsigned int& DinoID1Field() { return *GetNativePointerField<unsigned int*>(this, "FARKTributeDino.DinoID1"); }
+	unsigned int& DinoID2Field() { return *GetNativePointerField<unsigned int*>(this, "FARKTributeDino.DinoID2"); }
+
+	// Bitfields
+
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FARKTributeDino.StaticStruct()"); }
+	FARKTributeDino* operator=(const FARKTributeDino* __that) { return NativeCall<FARKTributeDino*, const FARKTributeDino*>(this, "FARKTributeDino.operator=(FARKTributeDino&)", __that); }
+	FARKTributeDino* operator=(FARKTributeDino* __that) { return NativeCall<FARKTributeDino*, FARKTributeDino*>(this, "FARKTributeDino.operator=(FARKTributeDino&)", __that); }
+};
+
+struct FARKTributeDinoListing
+{
+	// Fields
+
+	FString& DinoNameField() { return *GetNativePointerField<FString*>(this, "FARKTributeDinoListing.DinoName"); }
+	FieldArray<FString, 12> DinoStatsField() { return { this, "FARKTributeDinoListing.DinoStats" }; }
+	float& DinoExperiencePointsField() { return *GetNativePointerField<float*>(this, "FARKTributeDinoListing.DinoExperiencePoints"); }
+	UClass*& DinoClassField() { return *GetNativePointerField<UClass**>(this, "FARKTributeDinoListing.DinoClass"); }
+	unsigned int& DinoID1Field() { return *GetNativePointerField<unsigned int*>(this, "FARKTributeDinoListing.DinoID1"); }
+	unsigned int& DinoID2Field() { return *GetNativePointerField<unsigned int*>(this, "FARKTributeDinoListing.DinoID2"); }
+	unsigned int& ExpirationTimeUTCField() { return *GetNativePointerField<unsigned int*>(this, "FARKTributeDinoListing.ExpirationTimeUTC"); }
+
+	// Bitfields
+
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FARKTributeDinoListing.StaticStruct()"); }
+};
+
+struct FAddressInfoResult
+{
+	// Fields
+
+	FString& QueryHostNameField() { return *GetNativePointerField<FString*>(this, "FAddressInfoResult.QueryHostName"); }
+	FString& QueryServiceNameField() { return *GetNativePointerField<FString*>(this, "FAddressInfoResult.QueryServiceName"); }
+	FString& CanonicalNameResultField() { return *GetNativePointerField<FString*>(this, "FAddressInfoResult.CanonicalNameResult"); }
+	ESocketErrors& ReturnCodeField() { return *GetNativePointerField<ESocketErrors*>(this, "FAddressInfoResult.ReturnCode"); }
+	TArray<FAddressInfoResultData, TSizedDefaultAllocator<32> >& ResultsField() { return *GetNativePointerField<TArray<FAddressInfoResultData, TSizedDefaultAllocator<32> >*>(this, "FAddressInfoResult.Results"); }
+
+	// Bitfields
+
+
+	// Functions
+
+};
+
+struct FAddressInfoResultData
+{
+	// Fields
+
+	FieldArray<char, 1> AddressProtocolField() { return { this, "FAddressInfoResultData.AddressProtocol" }; }
+	FName& AddressProtocolNameField() { return *GetNativePointerField<FName*>(this, "FAddressInfoResultData.AddressProtocolName"); }
+	ESocketType& SocketConfigurationField() { return *GetNativePointerField<ESocketType*>(this, "FAddressInfoResultData.SocketConfiguration"); }
+	unsigned __int64& AddressLenField() { return *GetNativePointerField<unsigned __int64*>(this, "FAddressInfoResultData.AddressLen"); }
+	//TSharedRef<FInternetAddr, 1>& AddressField() { return *GetNativePointerField<TSharedRef<FInternetAddr, 1>*>(this, "FAddressInfoResultData.Address"); }
+
+	// Bitfields
+
+
+	// Functions
+
+};
+
+struct FAdminPlayerDataInfo
+{
+	// Fields
+
+	FString& PlayerNameField() { return *GetNativePointerField<FString*>(this, "FAdminPlayerDataInfo.PlayerName"); }
+	FString& PlayerSteamNameField() { return *GetNativePointerField<FString*>(this, "FAdminPlayerDataInfo.PlayerSteamName"); }
+	FString& SteamIDField() { return *GetNativePointerField<FString*>(this, "FAdminPlayerDataInfo.SteamID"); }
+	__int64& LinkedPlayerIDField() { return *GetNativePointerField<__int64*>(this, "FAdminPlayerDataInfo.LinkedPlayerID"); }
+
+	// Bitfields
+
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FAdminPlayerDataInfo.StaticStruct()"); }
+};
+
+struct FAggroEntry
+{
+	// Fields
+
+	TWeakObjectPtr<AActor const >& AttackerField() { return *GetNativePointerField<TWeakObjectPtr<AActor const >*>(this, "FAggroEntry.Attacker"); }
+	float& AggroFactorField() { return *GetNativePointerField<float*>(this, "FAggroEntry.AggroFactor"); }
+	long double& LastAggroHitTimeField() { return *GetNativePointerField<long double*>(this, "FAggroEntry.LastAggroHitTime"); }
+
+	// Bitfields
+
+
+	// Functions
+
+};
+
+struct FAliveNameAndLocation
+{
+	// Fields
+
+	FString& PlayerNameField() { return *GetNativePointerField<FString*>(this, "FAliveNameAndLocation.PlayerName"); }
+	FString& TribeNameField() { return *GetNativePointerField<FString*>(this, "FAliveNameAndLocation.TribeName"); }
+	unsigned int& TargetingTeamField() { return *GetNativePointerField<unsigned int*>(this, "FAliveNameAndLocation.TargetingTeam"); }
+	unsigned __int64& PlayerIDField() { return *GetNativePointerField<unsigned __int64*>(this, "FAliveNameAndLocation.PlayerID"); }
+	UE::Math::TVector<double>& LocationField() { return *GetNativePointerField<UE::Math::TVector<double>*>(this, "FAliveNameAndLocation.Location"); }
+
+	// Bitfields
+
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FAliveNameAndLocation.StaticStruct()"); }
+};
+
+struct FAlivePlayerDataInfo
+{
+	// Fields
+
+	FString& PlayerNameField() { return *GetNativePointerField<FString*>(this, "FAlivePlayerDataInfo.PlayerName"); }
+	FString& PlayerSteamNameField() { return *GetNativePointerField<FString*>(this, "FAlivePlayerDataInfo.PlayerSteamName"); }
+	unsigned __int64& PlayerIDField() { return *GetNativePointerField<unsigned __int64*>(this, "FAlivePlayerDataInfo.PlayerID"); }
+	FString& TribeNameField() { return *GetNativePointerField<FString*>(this, "FAlivePlayerDataInfo.TribeName"); }
+	unsigned __int64& TargetingTeamIDField() { return *GetNativePointerField<unsigned __int64*>(this, "FAlivePlayerDataInfo.TargetingTeamID"); }
+
+	// Bitfields
+
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FAlivePlayerDataInfo.StaticStruct()"); }
+};
+
+struct FBPNetExecParams
+{
+	// Fields
+
+	int& IntParam1Field() { return *GetNativePointerField<int*>(this, "FBPNetExecParams.IntParam1"); }
+	int& IntParam2Field() { return *GetNativePointerField<int*>(this, "FBPNetExecParams.IntParam2"); }
+	int& IntParam3Field() { return *GetNativePointerField<int*>(this, "FBPNetExecParams.IntParam3"); }
+	TArray<int, TSizedDefaultAllocator<32> >& IntArrayParam1Field() { return *GetNativePointerField<TArray<int, TSizedDefaultAllocator<32> >*>(this, "FBPNetExecParams.IntArrayParam1"); }
+	float& FloatParam1Field() { return *GetNativePointerField<float*>(this, "FBPNetExecParams.FloatParam1"); }
+	float& FloatParam2Field() { return *GetNativePointerField<float*>(this, "FBPNetExecParams.FloatParam2"); }
+	float& FloatParam3Field() { return *GetNativePointerField<float*>(this, "FBPNetExecParams.FloatParam3"); }
+	TArray<float, TSizedDefaultAllocator<32> >& FloatArrayParam1Field() { return *GetNativePointerField<TArray<float, TSizedDefaultAllocator<32> >*>(this, "FBPNetExecParams.FloatArrayParam1"); }
+	TObjectPtr<UObject>& ObjParam1Field() { return *GetNativePointerField<TObjectPtr<UObject>*>(this, "FBPNetExecParams.ObjParam1"); }
+	TObjectPtr<UObject>& ObjParam2Field() { return *GetNativePointerField<TObjectPtr<UObject>*>(this, "FBPNetExecParams.ObjParam2"); }
+	TObjectPtr<UObject>& ObjParam3Field() { return *GetNativePointerField<TObjectPtr<UObject>*>(this, "FBPNetExecParams.ObjParam3"); }
+	FString& StringParam1Field() { return *GetNativePointerField<FString*>(this, "FBPNetExecParams.StringParam1"); }
+
+	// Bitfields
+
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FBPNetExecParams.StaticStruct()"); }
+};
+
+struct FDamageEvent
+{
+	// Fields
+
+	//FDamageEvent_vtbl*& __vftableField() { return *GetNativePointerField<FDamageEvent_vtbl**>(this, "FDamageEvent.__vftable"); }
+	float& ImpulseField() { return *GetNativePointerField<float*>(this, "FDamageEvent.Impulse"); }
+	float& OriginalDamageField() { return *GetNativePointerField<float*>(this, "FDamageEvent.OriginalDamage"); }
+	int& InstanceBodyIndexField() { return *GetNativePointerField<int*>(this, "FDamageEvent.InstanceBodyIndex"); }
+	int& TypeIndexField() { return *GetNativePointerField<int*>(this, "FDamageEvent.TypeIndex"); }
+	TSubclassOf<UDamageType>& DamageTypeClassField() { return *GetNativePointerField<TSubclassOf<UDamageType>*>(this, "FDamageEvent.DamageTypeClass"); }
+
+	// Bitfields
+
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FDamageEvent.StaticStruct()"); }
+	void GetBestHitInfo(const AActor* HitActor, const AActor* HitInstigator, FHitResult* OutHitInfo, UE::Math::TVector<double>* OutImpulseDir) { NativeCall<void, const AActor*, const AActor*, FHitResult*, UE::Math::TVector<double>*>(this, "FDamageEvent.GetBestHitInfo(AActor*,AActor*,FHitResult&,UE::Math::TVector<double>&)", HitActor, HitInstigator, OutHitInfo, OutImpulseDir); }
+};
+
+struct FDamageHarvestingEntry
+{
+	// Fields
+
+	float& DamageMultiplierField() { return *GetNativePointerField<float*>(this, "FDamageHarvestingEntry.DamageMultiplier"); }
+	float& HarvestQuantityMultiplierField() { return *GetNativePointerField<float*>(this, "FDamageHarvestingEntry.HarvestQuantityMultiplier"); }
+	float& DamageHarvestAdditionalEffectivenessField() { return *GetNativePointerField<float*>(this, "FDamageHarvestingEntry.DamageHarvestAdditionalEffectiveness"); }
+	float& DamageDurabilityConsumptionMultiplierField() { return *GetNativePointerField<float*>(this, "FDamageHarvestingEntry.DamageDurabilityConsumptionMultiplier"); }
+	TSubclassOf<UDamageType>& DamageTypeParentField() { return *GetNativePointerField<TSubclassOf<UDamageType>*>(this, "FDamageHarvestingEntry.DamageTypeParent"); }
+	TSubclassOf<AActor>& HarvestDamageFXOverrideField() { return *GetNativePointerField<TSubclassOf<AActor>*>(this, "FDamageHarvestingEntry.HarvestDamageFXOverride"); }
+
+	// Bitfields
+
+	BitFieldValue<bool, unsigned __int32> bAllowUnderwaterHarvesting() { return { this, "FDamageHarvestingEntry.bAllowUnderwaterHarvesting" }; }
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FDamageHarvestingEntry.StaticStruct()"); }
+};
+
+struct FDamagePrimalCharacterStatusValueModifier
+{
+	// Fields
+
+	TEnumAsByte<enum EPrimalCharacterStatusValue::Type>& ValueTypeField() { return *GetNativePointerField<TEnumAsByte<enum EPrimalCharacterStatusValue::Type>*>(this, "FDamagePrimalCharacterStatusValueModifier.ValueType"); }
+	float& LimitExistingModifierDescriptionToMaxAmountField() { return *GetNativePointerField<float*>(this, "FDamagePrimalCharacterStatusValueModifier.LimitExistingModifierDescriptionToMaxAmount"); }
+	int& UseAbsoluteDamageAmountField() { return *GetNativePointerField<int*>(this, "FDamagePrimalCharacterStatusValueModifier.UseAbsoluteDamageAmount"); }
+	float& DamageMultiplierAmountToAddField() { return *GetNativePointerField<float*>(this, "FDamagePrimalCharacterStatusValueModifier.DamageMultiplierAmountToAdd"); }
+	float& SpeedToAddField() { return *GetNativePointerField<float*>(this, "FDamagePrimalCharacterStatusValueModifier.SpeedToAdd"); }
+	int& StatusValueModifierDescriptionIndexField() { return *GetNativePointerField<int*>(this, "FDamagePrimalCharacterStatusValueModifier.StatusValueModifierDescriptionIndex"); }
+	float& PercentualDamageField() { return *GetNativePointerField<float*>(this, "FDamagePrimalCharacterStatusValueModifier.PercentualDamage"); }
+	TSubclassOf<UDamageType>& ScaleValueByCharacterDamageTypeField() { return *GetNativePointerField<TSubclassOf<UDamageType>*>(this, "FDamagePrimalCharacterStatusValueModifier.ScaleValueByCharacterDamageType"); }
+
+	// Bitfields
+
+	BitFieldValue<bool, unsigned __int32> bSpeedToAddInSeconds() { return { this, "FDamagePrimalCharacterStatusValueModifier.bSpeedToAddInSeconds" }; }
+	BitFieldValue<bool, unsigned __int32> bContinueOnUnchangedValue() { return { this, "FDamagePrimalCharacterStatusValueModifier.bContinueOnUnchangedValue" }; }
+	BitFieldValue<bool, unsigned __int32> bIgnorePawnDamageAdjusters() { return { this, "FDamagePrimalCharacterStatusValueModifier.bIgnorePawnDamageAdjusters" }; }
+	BitFieldValue<bool, unsigned __int32> bResetExistingModifierDescriptionIndex() { return { this, "FDamagePrimalCharacterStatusValueModifier.bResetExistingModifierDescriptionIndex" }; }
+	BitFieldValue<bool, unsigned __int32> bSetValue() { return { this, "FDamagePrimalCharacterStatusValueModifier.bSetValue" }; }
+	BitFieldValue<bool, unsigned __int32> bSetAdditionalValue() { return { this, "FDamagePrimalCharacterStatusValueModifier.bSetAdditionalValue" }; }
+	BitFieldValue<bool, unsigned __int32> bUsePercentualDamage() { return { this, "FDamagePrimalCharacterStatusValueModifier.bUsePercentualDamage" }; }
+	BitFieldValue<bool, unsigned __int32> bMakeUntameable() { return { this, "FDamagePrimalCharacterStatusValueModifier.bMakeUntameable" }; }
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FDamagePrimalCharacterStatusValueModifier.StaticStruct()"); }
+};
+
+struct FDamageTypeAdjuster
+{
+	// Fields
+
+	TSoftClassPtr<UDamageType>& DamageTypeClassField() { return *GetNativePointerField<TSoftClassPtr<UDamageType>*>(this, "FDamageTypeAdjuster.DamageTypeClass"); }
+	float& DamageMultiplierField() { return *GetNativePointerField<float*>(this, "FDamageTypeAdjuster.DamageMultiplier"); }
+
+	// Bitfields
+
+	BitFieldValue<bool, unsigned __int32> bIgnoreMultiplierIfWildDinoAttacker() { return { this, "FDamageTypeAdjuster.bIgnoreMultiplierIfWildDinoAttacker" }; }
+	BitFieldValue<bool, unsigned __int32> bIgnoreMultiplierIfTamedDinoAttacker() { return { this, "FDamageTypeAdjuster.bIgnoreMultiplierIfTamedDinoAttacker" }; }
+	BitFieldValue<bool, unsigned __int32> bOnlyUseMultiplierIfWildDinoAttacker() { return { this, "FDamageTypeAdjuster.bOnlyUseMultiplierIfWildDinoAttacker" }; }
+	BitFieldValue<bool, unsigned __int32> bOnlyUseMultiplierIfTamedDinoAttacker() { return { this, "FDamageTypeAdjuster.bOnlyUseMultiplierIfTamedDinoAttacker" }; }
+	BitFieldValue<bool, unsigned __int32> bOnlyUseMultiplierIfTamed() { return { this, "FDamageTypeAdjuster.bOnlyUseMultiplierIfTamed" }; }
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FDamageTypeAdjuster.StaticStruct()"); }
+};
+
+struct FDinoAbilities
+{
+	// Fields
+
+	FName& DinoTagField() { return *GetNativePointerField<FName*>(this, "FDinoAbilities.DinoTag"); }
+	TArray<FDinoAbilityInfo, TSizedDefaultAllocator<32> >& AbilityInfosField() { return *GetNativePointerField<TArray<FDinoAbilityInfo, TSizedDefaultAllocator<32> >*>(this, "FDinoAbilities.AbilityInfos"); }
+
+	// Bitfields
+
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FDinoAbilities.StaticStruct()"); }
+};
+
+struct FDinoAbilityInfo
+{
+	// Fields
+
+	FName& InputActionField() { return *GetNativePointerField<FName*>(this, "FDinoAbilityInfo.InputAction"); }
+	FString& AbilityNameField() { return *GetNativePointerField<FString*>(this, "FDinoAbilityInfo.AbilityName"); }
+	FString& AbilityDescriptionField() { return *GetNativePointerField<FString*>(this, "FDinoAbilityInfo.AbilityDescription"); }
+
+	// Bitfields
+
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FDinoAbilityInfo.StaticStruct()"); }
+};
+
+struct FDinoAncestorsEntry
+{
+	// Fields
+
+	FString& MaleNameField() { return *GetNativePointerField<FString*>(this, "FDinoAncestorsEntry.MaleName"); }
+	unsigned int& MaleDinoID1Field() { return *GetNativePointerField<unsigned int*>(this, "FDinoAncestorsEntry.MaleDinoID1"); }
+	unsigned int& MaleDinoID2Field() { return *GetNativePointerField<unsigned int*>(this, "FDinoAncestorsEntry.MaleDinoID2"); }
+	FString& FemaleNameField() { return *GetNativePointerField<FString*>(this, "FDinoAncestorsEntry.FemaleName"); }
+	unsigned int& FemaleDinoID1Field() { return *GetNativePointerField<unsigned int*>(this, "FDinoAncestorsEntry.FemaleDinoID1"); }
+	unsigned int& FemaleDinoID2Field() { return *GetNativePointerField<unsigned int*>(this, "FDinoAncestorsEntry.FemaleDinoID2"); }
+
+	// Bitfields
+
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FDinoAncestorsEntry.StaticStruct()"); }
+};
+
+struct FDinoAncestorsEntryBlueprint
+{
+	// Fields
+
+	FString& MaleNameField() { return *GetNativePointerField<FString*>(this, "FDinoAncestorsEntryBlueprint.MaleName"); }
+	int& MaleDinoID1Field() { return *GetNativePointerField<int*>(this, "FDinoAncestorsEntryBlueprint.MaleDinoID1"); }
+	int& MaleDinoID2Field() { return *GetNativePointerField<int*>(this, "FDinoAncestorsEntryBlueprint.MaleDinoID2"); }
+	FString& FemaleNameField() { return *GetNativePointerField<FString*>(this, "FDinoAncestorsEntryBlueprint.FemaleName"); }
+	int& FemaleDinoID1Field() { return *GetNativePointerField<int*>(this, "FDinoAncestorsEntryBlueprint.FemaleDinoID1"); }
+	int& FemaleDinoID2Field() { return *GetNativePointerField<int*>(this, "FDinoAncestorsEntryBlueprint.FemaleDinoID2"); }
+
+	// Bitfields
+
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FDinoAncestorsEntryBlueprint.StaticStruct()"); }
+};
+
+struct FDinoAttackInfo
+{
+	// Fields
+
+	FName& AttackNameField() { return *GetNativePointerField<FName*>(this, "FDinoAttackInfo.AttackName"); }
+	float& AttackWeightField() { return *GetNativePointerField<float*>(this, "FDinoAttackInfo.AttackWeight"); }
+	float& AttackRangeField() { return *GetNativePointerField<float*>(this, "FDinoAttackInfo.AttackRange"); }
+	float& MinAttackRangeField() { return *GetNativePointerField<float*>(this, "FDinoAttackInfo.MinAttackRange"); }
+	float& ActivateAttackRangeField() { return *GetNativePointerField<float*>(this, "FDinoAttackInfo.ActivateAttackRange"); }
+	float& AttackIntervalField() { return *GetNativePointerField<float*>(this, "FDinoAttackInfo.AttackInterval"); }
+	TArray<int, TSizedDefaultAllocator<32> >& ChildStateIndexesField() { return *GetNativePointerField<TArray<int, TSizedDefaultAllocator<32> >*>(this, "FDinoAttackInfo.ChildStateIndexes"); }
+	float& AttackWithJumpChanceField() { return *GetNativePointerField<float*>(this, "FDinoAttackInfo.AttackWithJumpChance"); }
+	long double& LastAttackTimeField() { return *GetNativePointerField<long double*>(this, "FDinoAttackInfo.LastAttackTime"); }
+	long double& RiderLastAttackTimeField() { return *GetNativePointerField<long double*>(this, "FDinoAttackInfo.RiderLastAttackTime"); }
+	float& AttackSelectionExpirationTimeField() { return *GetNativePointerField<float*>(this, "FDinoAttackInfo.AttackSelectionExpirationTime"); }
+	long double& AttackSelectionTimeField() { return *GetNativePointerField<long double*>(this, "FDinoAttackInfo.AttackSelectionTime"); }
+	float& AttackRotationRangeDegreesField() { return *GetNativePointerField<float*>(this, "FDinoAttackInfo.AttackRotationRangeDegrees"); }
+	float& AttackRotationGroundSpeedMultiplierField() { return *GetNativePointerField<float*>(this, "FDinoAttackInfo.AttackRotationGroundSpeedMultiplier"); }
+	UE::Math::TRotator<double>& AttackRotationRateField() { return *GetNativePointerField<UE::Math::TRotator<double>*>(this, "FDinoAttackInfo.AttackRotationRate"); }
+	TArray<FName, TSizedDefaultAllocator<32> >& MeleeSwingSocketsField() { return *GetNativePointerField<TArray<FName, TSizedDefaultAllocator<32> >*>(this, "FDinoAttackInfo.MeleeSwingSockets"); }
+	FName& RangedSocketField() { return *GetNativePointerField<FName*>(this, "FDinoAttackInfo.RangedSocket"); }
+	int& MeleeDamageAmountField() { return *GetNativePointerField<int*>(this, "FDinoAttackInfo.MeleeDamageAmount"); }
+	float& MeleeDamageImpulseField() { return *GetNativePointerField<float*>(this, "FDinoAttackInfo.MeleeDamageImpulse"); }
+	float& MeleeSwingRadiusField() { return *GetNativePointerField<float*>(this, "FDinoAttackInfo.MeleeSwingRadius"); }
+	TSubclassOf<UDamageType>& MeleeDamageTypeField() { return *GetNativePointerField<TSubclassOf<UDamageType>*>(this, "FDinoAttackInfo.MeleeDamageType"); }
+	float& AttackOffsetField() { return *GetNativePointerField<float*>(this, "FDinoAttackInfo.AttackOffset"); }
+	float& StaminaCostField() { return *GetNativePointerField<float*>(this, "FDinoAttackInfo.StaminaCost"); }
+	float& RiderAttackIntervalField() { return *GetNativePointerField<float*>(this, "FDinoAttackInfo.RiderAttackInterval"); }
+	float& DotProductCheckMinField() { return *GetNativePointerField<float*>(this, "FDinoAttackInfo.DotProductCheckMin"); }
+	float& DotProductCheckMaxField() { return *GetNativePointerField<float*>(this, "FDinoAttackInfo.DotProductCheckMax"); }
+	TArray<UAnimMontage*, TSizedDefaultAllocator<32> >& AttackAnimationsField() { return *GetNativePointerField<TArray<UAnimMontage*, TSizedDefaultAllocator<32> >*>(this, "FDinoAttackInfo.AttackAnimations"); }
+	TArray<float, TSizedDefaultAllocator<32> >& AttackAnimationWeightsField() { return *GetNativePointerField<TArray<float, TSizedDefaultAllocator<32> >*>(this, "FDinoAttackInfo.AttackAnimationWeights"); }
+	TArray<float, TSizedDefaultAllocator<32> >& AttackAnimationsTimeFromEndToConsiderFinishedField() { return *GetNativePointerField<TArray<float, TSizedDefaultAllocator<32> >*>(this, "FDinoAttackInfo.AttackAnimationsTimeFromEndToConsiderFinished"); }
+	TSubclassOf<AShooterProjectile>& ProjectileClassField() { return *GetNativePointerField<TSubclassOf<AShooterProjectile>*>(this, "FDinoAttackInfo.ProjectileClass"); }
+	TSubclassOf<UPrimalAIState>& AttackStateTypeClassField() { return *GetNativePointerField<TSubclassOf<UPrimalAIState>*>(this, "FDinoAttackInfo.AttackStateTypeClass"); }
+	float& AttackRunningSpeedModifierField() { return *GetNativePointerField<float*>(this, "FDinoAttackInfo.AttackRunningSpeedModifier"); }
+	float& SwimmingAttackRunningSpeedModifierField() { return *GetNativePointerField<float*>(this, "FDinoAttackInfo.SwimmingAttackRunningSpeedModifier"); }
+	float& SetAttackTargetTimeField() { return *GetNativePointerField<float*>(this, "FDinoAttackInfo.SetAttackTargetTime"); }
+	UPrimalAIState*& AttackStateTypeField() { return *GetNativePointerField<UPrimalAIState**>(this, "FDinoAttackInfo.AttackStateType"); }
+	TArray<UE::Math::TVector<double>, TSizedDefaultAllocator<32> >& LastSocketPositionsField() { return *GetNativePointerField<TArray<UE::Math::TVector<double>, TSizedDefaultAllocator<32> >*>(this, "FDinoAttackInfo.LastSocketPositions"); }
+	long double& LastProjectileSpawnTimeField() { return *GetNativePointerField<long double*>(this, "FDinoAttackInfo.LastProjectileSpawnTime"); }
+	TArray<FName, TSizedDefaultAllocator<32> >& AttackAnimDamageImpactFXSocketNamesField() { return *GetNativePointerField<TArray<FName, TSizedDefaultAllocator<32> >*>(this, "FDinoAttackInfo.AttackAnimDamageImpactFXSocketNames"); }
+
+	// Bitfields
+
+	BitFieldValue<bool, unsigned __int32> bHighQualityAttack() { return { this, "FDinoAttackInfo.bHighQualityAttack" }; }
+	BitFieldValue<bool, unsigned __int32> bSkipUntamed() { return { this, "FDinoAttackInfo.bSkipUntamed" }; }
+	BitFieldValue<bool, unsigned __int32> bSkipTamed() { return { this, "FDinoAttackInfo.bSkipTamed" }; }
+	BitFieldValue<bool, unsigned __int32> bOnlyOnWildDinos() { return { this, "FDinoAttackInfo.bOnlyOnWildDinos" }; }
+	BitFieldValue<bool, unsigned __int32> bPreventWhenEncumbered() { return { this, "FDinoAttackInfo.bPreventWhenEncumbered" }; }
+	BitFieldValue<bool, unsigned __int32> bRidingOnlyAllowOnGround() { return { this, "FDinoAttackInfo.bRidingOnlyAllowOnGround" }; }
+	BitFieldValue<bool, unsigned __int32> bRidingOnlyAllowWhileFlying() { return { this, "FDinoAttackInfo.bRidingOnlyAllowWhileFlying" }; }
+	BitFieldValue<bool, unsigned __int32> bOnlyUseWithPlayersOrRiders() { return { this, "FDinoAttackInfo.bOnlyUseWithPlayersOrRiders" }; }
+	BitFieldValue<bool, unsigned __int32> bOnlyUseWithPlayers() { return { this, "FDinoAttackInfo.bOnlyUseWithPlayers" }; }
+	BitFieldValue<bool, unsigned __int32> bPreventWhenSwimming() { return { this, "FDinoAttackInfo.bPreventWhenSwimming" }; }
+	BitFieldValue<bool, unsigned __int32> bPreventWhenInsufficientStamina() { return { this, "FDinoAttackInfo.bPreventWhenInsufficientStamina" }; }
+	BitFieldValue<bool, unsigned __int32> bSkipOnFlyers() { return { this, "FDinoAttackInfo.bSkipOnFlyers" }; }
+	BitFieldValue<bool, unsigned __int32> bSkipAI() { return { this, "FDinoAttackInfo.bSkipAI" }; }
+	BitFieldValue<bool, unsigned __int32> bPreventOnFemale() { return { this, "FDinoAttackInfo.bPreventOnFemale" }; }
+	BitFieldValue<bool, unsigned __int32> bPreventOnMale() { return { this, "FDinoAttackInfo.bPreventOnMale" }; }
+	BitFieldValue<bool, unsigned __int32> bPreventWhenDinoCarrying() { return { this, "FDinoAttackInfo.bPreventWhenDinoCarrying" }; }
+	BitFieldValue<bool, unsigned __int32> bUseBlueprintCanRiderAttack() { return { this, "FDinoAttackInfo.bUseBlueprintCanRiderAttack" }; }
+	BitFieldValue<bool, unsigned __int32> bRequiresWalking() { return { this, "FDinoAttackInfo.bRequiresWalking" }; }
+	BitFieldValue<bool, unsigned __int32> bRequiresSwimming() { return { this, "FDinoAttackInfo.bRequiresSwimming" }; }
+	BitFieldValue<bool, unsigned __int32> AttackStatusStarted() { return { this, "FDinoAttackInfo.AttackStatusStarted" }; }
+	BitFieldValue<bool, unsigned __int32> bAttackStopsMovement() { return { this, "FDinoAttackInfo.bAttackStopsMovement" }; }
+	BitFieldValue<bool, unsigned __int32> bAttackStopsMovementAllowFalling() { return { this, "FDinoAttackInfo.bAttackStopsMovementAllowFalling" }; }
+	BitFieldValue<bool, unsigned __int32> bAttackWithJump() { return { this, "FDinoAttackInfo.bAttackWithJump" }; }
+	BitFieldValue<bool, unsigned __int32> bLocationBasedAttack() { return { this, "FDinoAttackInfo.bLocationBasedAttack" }; }
+	BitFieldValue<bool, unsigned __int32> bDropCarriedCharacter() { return { this, "FDinoAttackInfo.bDropCarriedCharacter" }; }
+	BitFieldValue<bool, unsigned __int32> bCancelAndDropIfCarriedCharacter() { return { this, "FDinoAttackInfo.bCancelAndDropIfCarriedCharacter" }; }
+	BitFieldValue<bool, unsigned __int32> bPreventAttackWhileRunning() { return { this, "FDinoAttackInfo.bPreventAttackWhileRunning" }; }
+	BitFieldValue<bool, unsigned __int32> ForceUpdateInRange() { return { this, "FDinoAttackInfo.ForceUpdateInRange" }; }
+	BitFieldValue<bool, unsigned __int32> ForceUpdateMeshSelf() { return { this, "FDinoAttackInfo.ForceUpdateMeshSelf" }; }
+	BitFieldValue<bool, unsigned __int32> bUseSecondaryAnimationInAir() { return { this, "FDinoAttackInfo.bUseSecondaryAnimationInAir" }; }
+	BitFieldValue<bool, unsigned __int32> bUseBlueprintCanAttack() { return { this, "FDinoAttackInfo.bUseBlueprintCanAttack" }; }
+	BitFieldValue<bool, unsigned __int32> bUseBlueprintAdjustOutputDamage() { return { this, "FDinoAttackInfo.bUseBlueprintAdjustOutputDamage" }; }
+	BitFieldValue<bool, unsigned __int32> bDisableRunningWhenAttacking() { return { this, "FDinoAttackInfo.bDisableRunningWhenAttacking" }; }
+	BitFieldValue<bool, unsigned __int32> bKeepExecutingWhenAcquiringTarget() { return { this, "FDinoAttackInfo.bKeepExecutingWhenAcquiringTarget" }; }
+	BitFieldValue<bool, unsigned __int32> bPreventWithRider() { return { this, "FDinoAttackInfo.bPreventWithRider" }; }
+	BitFieldValue<bool, unsigned __int32> bAIForceAttackDotProductCheck() { return { this, "FDinoAttackInfo.bAIForceAttackDotProductCheck" }; }
+	BitFieldValue<bool, unsigned __int32> bInstantlyHarvestCorpse() { return { this, "FDinoAttackInfo.bInstantlyHarvestCorpse" }; }
+	BitFieldValue<bool, unsigned __int32> bAddPawnVelocityToProjectile() { return { this, "FDinoAttackInfo.bAddPawnVelocityToProjectile" }; }
+	BitFieldValue<bool, unsigned __int32> bAttackStopsRotation() { return { this, "FDinoAttackInfo.bAttackStopsRotation" }; }
+	BitFieldValue<bool, unsigned __int32> bTamedAISpecialAttack() { return { this, "FDinoAttackInfo.bTamedAISpecialAttack" }; }
+	BitFieldValue<bool, unsigned __int32> bPreventWhenCarryingExplosive() { return { this, "FDinoAttackInfo.bPreventWhenCarryingExplosive" }; }
+	BitFieldValue<bool, unsigned __int32> bAllowWhenAnimationPreventsInput() { return { this, "FDinoAttackInfo.bAllowWhenAnimationPreventsInput" }; }
+	BitFieldValue<bool, unsigned __int32> bRequireLineOfSight() { return { this, "FDinoAttackInfo.bRequireLineOfSight" }; }
+	BitFieldValue<bool, unsigned __int32> bUseBPOverrideGetAttackAnimationIndex() { return { this, "FDinoAttackInfo.bUseBPOverrideGetAttackAnimationIndex" }; }
+	BitFieldValue<bool, unsigned __int32> bUseSecondaryAnimationWhenSwimming() { return { this, "FDinoAttackInfo.bUseSecondaryAnimationWhenSwimming" }; }
+	BitFieldValue<bool, unsigned __int32> bUseTertiaryAnimationWhenSwimming() { return { this, "FDinoAttackInfo.bUseTertiaryAnimationWhenSwimming" }; }
+	BitFieldValue<bool, unsigned __int32> bHighQualityAttackOnlyPlayerOrTamed() { return { this, "FDinoAttackInfo.bHighQualityAttackOnlyPlayerOrTamed" }; }
+	BitFieldValue<bool, unsigned __int32> bMeleeTraceForHitBlockers() { return { this, "FDinoAttackInfo.bMeleeTraceForHitBlockers" }; }
+	BitFieldValue<bool, unsigned __int32> bMeleeTraceForHitBlockersAddHeadsocket() { return { this, "FDinoAttackInfo.bMeleeTraceForHitBlockersAddHeadsocket" }; }
+	BitFieldValue<bool, unsigned __int32> bIgnoreCrouchAttack() { return { this, "FDinoAttackInfo.bIgnoreCrouchAttack" }; }
+	BitFieldValue<bool, unsigned __int32> bIgnoreResettingAttackIndexInTick() { return { this, "FDinoAttackInfo.bIgnoreResettingAttackIndexInTick" }; }
+	BitFieldValue<bool, unsigned __int32> bPreventSkippingAnimGraphDuringAttack() { return { this, "FDinoAttackInfo.bPreventSkippingAnimGraphDuringAttack" }; }
+	BitFieldValue<bool, unsigned __int32> bUseClosestSocketsForDamageImpactFX() { return { this, "FDinoAttackInfo.bUseClosestSocketsForDamageImpactFX" }; }
+	BitFieldValue<bool, unsigned __int32> bDisableAttackerDamageImpactFX() { return { this, "FDinoAttackInfo.bDisableAttackerDamageImpactFX" }; }
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FDinoAttackInfo.StaticStruct()"); }
+	FDinoAttackInfo* operator=(const FDinoAttackInfo* __that) { return NativeCall<FDinoAttackInfo*, const FDinoAttackInfo*>(this, "FDinoAttackInfo.operator=(FDinoAttackInfo&)", __that); }
+	FDinoAttackInfo* operator=(FDinoAttackInfo* __that) { return NativeCall<FDinoAttackInfo*, FDinoAttackInfo*>(this, "FDinoAttackInfo.operator=(FDinoAttackInfo&)", __that); }
+};
+
+struct FDinoBabySetup
+{
+	// Fields
+
+	FName& DinoNameTagField() { return *GetNativePointerField<FName*>(this, "FDinoBabySetup.DinoNameTag"); }
+	//TArray<FBoneModifierRangeArray, TSizedDefaultAllocator<32> >& BabyBoneModifierRangesField() { return *GetNativePointerField<TArray<FBoneModifierRangeArray, TSizedDefaultAllocator<32> >*>(this, "FDinoBabySetup.BabyBoneModifierRanges"); }
+	TArray<float, TSizedDefaultAllocator<32> >& WildRandomScaleRangeWeightsField() { return *GetNativePointerField<TArray<float, TSizedDefaultAllocator<32> >*>(this, "FDinoBabySetup.WildRandomScaleRangeWeights"); }
+	//TArray<FRandValueRange, TSizedDefaultAllocator<32> >& WildRandomScaleRangesField() { return *GetNativePointerField<TArray<FRandValueRange, TSizedDefaultAllocator<32> >*>(this, "FDinoBabySetup.WildRandomScaleRanges"); }
+
+	// Bitfields
+
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FDinoBabySetup.StaticStruct()"); }
+};
+
+struct FDinoBaseLevelWeightEntry
+{
+	// Fields
+
+	float& EntryWeightField() { return *GetNativePointerField<float*>(this, "FDinoBaseLevelWeightEntry.EntryWeight"); }
+	float& BaseLevelMinRangeField() { return *GetNativePointerField<float*>(this, "FDinoBaseLevelWeightEntry.BaseLevelMinRange"); }
+	float& BaseLevelMaxRangeField() { return *GetNativePointerField<float*>(this, "FDinoBaseLevelWeightEntry.BaseLevelMaxRange"); }
+
+	// Bitfields
+
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FDinoBaseLevelWeightEntry.StaticStruct()"); }
+};
+
+struct FDinoClassCount
+{
+	// Fields
+
+	int& NumberofTamedClassField() { return *GetNativePointerField<int*>(this, "FDinoClassCount.NumberofTamedClass"); }
+	int& NumberofTamedBabyClassField() { return *GetNativePointerField<int*>(this, "FDinoClassCount.NumberofTamedBabyClass"); }
+	int& NumberofTamedFemalesClassField() { return *GetNativePointerField<int*>(this, "FDinoClassCount.NumberofTamedFemalesClass"); }
+	int& NumberofWildClassField() { return *GetNativePointerField<int*>(this, "FDinoClassCount.NumberofWildClass"); }
+	int& NumberofWildBabyClassField() { return *GetNativePointerField<int*>(this, "FDinoClassCount.NumberofWildBabyClass"); }
+	int& NumberofWildFemalesClassField() { return *GetNativePointerField<int*>(this, "FDinoClassCount.NumberofWildFemalesClass"); }
+	int& NumberofWildLatentSpawnsField() { return *GetNativePointerField<int*>(this, "FDinoClassCount.NumberofWildLatentSpawns"); }
+
+	// Bitfields
+
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FDinoClassCount.StaticStruct()"); }
+};
+
+struct FDinoClassCountStruct
+{
+	// Fields
+
+	TSubclassOf<APrimalCharacter>& DinoClassField() { return *GetNativePointerField<TSubclassOf<APrimalCharacter>*>(this, "FDinoClassCountStruct.DinoClass"); }
+	int& NumberofTamedClassField() { return *GetNativePointerField<int*>(this, "FDinoClassCountStruct.NumberofTamedClass"); }
+	int& NumberofTamedBabyClassField() { return *GetNativePointerField<int*>(this, "FDinoClassCountStruct.NumberofTamedBabyClass"); }
+	int& NumberofTamedFemalesClassField() { return *GetNativePointerField<int*>(this, "FDinoClassCountStruct.NumberofTamedFemalesClass"); }
+	int& NumberofWildClassField() { return *GetNativePointerField<int*>(this, "FDinoClassCountStruct.NumberofWildClass"); }
+	int& NumberofWildBabyClassField() { return *GetNativePointerField<int*>(this, "FDinoClassCountStruct.NumberofWildBabyClass"); }
+	int& NumberofWildFemalesClassField() { return *GetNativePointerField<int*>(this, "FDinoClassCountStruct.NumberofWildFemalesClass"); }
+
+	// Bitfields
+
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FDinoClassCountStruct.StaticStruct()"); }
+};
+
+struct FDinoDownloadData
+{
+	// Fields
+
+	unsigned int& AllowDownloadTimeUTCField() { return *GetNativePointerField<unsigned int*>(this, "FDinoDownloadData.AllowDownloadTimeUTC"); }
+	TSubclassOf<APrimalDinoCharacter>& UniqueDinoField() { return *GetNativePointerField<TSubclassOf<APrimalDinoCharacter>*>(this, "FDinoDownloadData.UniqueDino"); }
+
+	// Bitfields
+
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FDinoDownloadData.StaticStruct()"); }
+};
+
+struct FDinoExtraDefaultItemList
+{
+	// Fields
+
+	int& MinimumDinoLevelField() { return *GetNativePointerField<int*>(this, "FDinoExtraDefaultItemList.MinimumDinoLevel"); }
+	float& ChanceToGiveField() { return *GetNativePointerField<float*>(this, "FDinoExtraDefaultItemList.ChanceToGive"); }
+	TArray<TSubclassOf<UPrimalItem>, TSizedDefaultAllocator<32> >& DefaultItemsToGiveField() { return *GetNativePointerField<TArray<TSubclassOf<UPrimalItem>, TSizedDefaultAllocator<32> >*>(this, "FDinoExtraDefaultItemList.DefaultItemsToGive"); }
+
+	// Bitfields
+
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FDinoExtraDefaultItemList.StaticStruct()"); }
+};
+
+struct FDinoFoodEffectivenessMultipliers
+{
+	// Fields
+
+	float& FoodEffectivenessMultiplierField() { return *GetNativePointerField<float*>(this, "FDinoFoodEffectivenessMultipliers.FoodEffectivenessMultiplier"); }
+	float& HealthEffectivenessMultiplierField() { return *GetNativePointerField<float*>(this, "FDinoFoodEffectivenessMultipliers.HealthEffectivenessMultiplier"); }
+	float& TorpidityEffectivenessMultiplierField() { return *GetNativePointerField<float*>(this, "FDinoFoodEffectivenessMultipliers.TorpidityEffectivenessMultiplier"); }
+	float& AffinityEffectivenessMultiplierField() { return *GetNativePointerField<float*>(this, "FDinoFoodEffectivenessMultipliers.AffinityEffectivenessMultiplier"); }
+	float& AffinityOverrideField() { return *GetNativePointerField<float*>(this, "FDinoFoodEffectivenessMultipliers.AffinityOverride"); }
+	float& StaminaEffectivenessMultiplierField() { return *GetNativePointerField<float*>(this, "FDinoFoodEffectivenessMultipliers.StaminaEffectivenessMultiplier"); }
+	int& FoodItemCategoryField() { return *GetNativePointerField<int*>(this, "FDinoFoodEffectivenessMultipliers.FoodItemCategory"); }
+	TSubclassOf<UPrimalItem>& FoodItemParentField() { return *GetNativePointerField<TSubclassOf<UPrimalItem>*>(this, "FDinoFoodEffectivenessMultipliers.FoodItemParent"); }
+	float& UntamedFoodConsumptionPriorityField() { return *GetNativePointerField<float*>(this, "FDinoFoodEffectivenessMultipliers.UntamedFoodConsumptionPriority"); }
+
+	// Bitfields
+
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FDinoFoodEffectivenessMultipliers.StaticStruct()"); }
+};
+
+struct FDinoKey
+{
+	// Fields
+
+	unsigned int& DinoID1Field() { return *GetNativePointerField<unsigned int*>(this, "FDinoKey.DinoID1"); }
+	unsigned int& DinoID2Field() { return *GetNativePointerField<unsigned int*>(this, "FDinoKey.DinoID2"); }
+
+	// Bitfields
+
+
+	// Functions
+
+};
+
+struct FDinoMapMarkerInfo
+{
+	// Fields
+
+	APrimalDinoCharacter*& DinoField() { return *GetNativePointerField<APrimalDinoCharacter**>(this, "FDinoMapMarkerInfo.Dino"); }
+	UStaticMeshComponent*& MarkerComponentField() { return *GetNativePointerField<UStaticMeshComponent**>(this, "FDinoMapMarkerInfo.MarkerComponent"); }
+	UE::Math::TVector<double>& DinoLocationField() { return *GetNativePointerField<UE::Math::TVector<double>*>(this, "FDinoMapMarkerInfo.DinoLocation"); }
+	int& PreviousLatitudeNumberField() { return *GetNativePointerField<int*>(this, "FDinoMapMarkerInfo.PreviousLatitudeNumber"); }
+	int& PreviousLongitudeNumberField() { return *GetNativePointerField<int*>(this, "FDinoMapMarkerInfo.PreviousLongitudeNumber"); }
+	FColor& MarkerColorField() { return *GetNativePointerField<FColor*>(this, "FDinoMapMarkerInfo.MarkerColor"); }
+
+	// Bitfields
+
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FDinoMapMarkerInfo.StaticStruct()"); }
+};
+
+struct FDinoOrderGroup
+{
+	// Fields
+
+	FString& DinoOrderGroupNameField() { return *GetNativePointerField<FString*>(this, "FDinoOrderGroup.DinoOrderGroupName"); }
+	TArray<TSubclassOf<APrimalDinoCharacter>, TSizedDefaultAllocator<32> >& DinoOrderClassesField() { return *GetNativePointerField<TArray<TSubclassOf<APrimalDinoCharacter>, TSizedDefaultAllocator<32> >*>(this, "FDinoOrderGroup.DinoOrderClasses"); }
+	//TArray<FDinoOrderID, TSizedDefaultAllocator<32> >& DinoOrderIDsField() { return *GetNativePointerField<TArray<FDinoOrderID, TSizedDefaultAllocator<32> >*>(this, "FDinoOrderGroup.DinoOrderIDs"); }
+
+	// Bitfields
+
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FDinoOrderGroup.StaticStruct()"); }
+	FDinoOrderGroup* operator=(const FDinoOrderGroup* __that) { return NativeCall<FDinoOrderGroup*, const FDinoOrderGroup*>(this, "FDinoOrderGroup.operator=(FDinoOrderGroup&)", __that); }
+};
+
+struct FDinoOrderID
+{
+	// Fields
+
+	int& DinoID1Field() { return *GetNativePointerField<int*>(this, "FDinoOrderID.DinoID1"); }
+	int& DinoID2Field() { return *GetNativePointerField<int*>(this, "FDinoOrderID.DinoID2"); }
+	FString& DinoNameField() { return *GetNativePointerField<FString*>(this, "FDinoOrderID.DinoName"); }
+
+	// Bitfields
+
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FDinoOrderID.StaticStruct()"); }
+};
+
+struct FDinoSaddleStruct
+{
+	// Fields
+
+	USkeletalMeshComponent*& SaddleField() { return *GetNativePointerField<USkeletalMeshComponent**>(this, "FDinoSaddleStruct.Saddle"); }
+	USkeletalMesh*& SkeletalMeshField() { return *GetNativePointerField<USkeletalMesh**>(this, "FDinoSaddleStruct.SkeletalMesh"); }
+	FItemNetID& itemIdField() { return *GetNativePointerField<FItemNetID*>(this, "FDinoSaddleStruct.itemId"); }
+
+	// Bitfields
+
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FDinoSaddleStruct.StaticStruct()"); }
+};
+
+struct FDinoSetup
+{
+	// Fields
+
+	TSubclassOf<APrimalDinoCharacter>& DinoTypeField() { return *GetNativePointerField<TSubclassOf<APrimalDinoCharacter>*>(this, "FDinoSetup.DinoType"); }
+	TSoftClassPtr<APrimalDinoCharacter>& DinoSoftReferenceField() { return *GetNativePointerField<TSoftClassPtr<APrimalDinoCharacter>*>(this, "FDinoSetup.DinoSoftReference"); }
+	FString& DinoBlueprintPathField() { return *GetNativePointerField<FString*>(this, "FDinoSetup.DinoBlueprintPath"); }
+	FString& DinoNameField() { return *GetNativePointerField<FString*>(this, "FDinoSetup.DinoName"); }
+	int& DinoLevelField() { return *GetNativePointerField<int*>(this, "FDinoSetup.DinoLevel"); }
+	FieldArray<unsigned __int8, 12> BasePointsPerStatField() { return { this, "FDinoSetup.BasePointsPerStat" }; }
+	FieldArray<unsigned __int8, 12> PlayerAddedPointsPerStatField() { return { this, "FDinoSetup.PlayerAddedPointsPerStat" }; }
+	UE::Math::TVector<double>& SpawnOffsetField() { return *GetNativePointerField<UE::Math::TVector<double>*>(this, "FDinoSetup.SpawnOffset"); }
+	TArray<TEnumAsByte<enum EPrimalCharacterStatusValue::Type>, TSizedDefaultAllocator<32> >& PrioritizeStatsField() { return *GetNativePointerField<TArray<TEnumAsByte<enum EPrimalCharacterStatusValue::Type>, TSizedDefaultAllocator<32> >*>(this, "FDinoSetup.PrioritizeStats"); }
+	TArray<FItemSetup, TSizedDefaultAllocator<32> >& TamedDinoInventoryField() { return *GetNativePointerField<TArray<FItemSetup, TSizedDefaultAllocator<32> >*>(this, "FDinoSetup.TamedDinoInventory"); }
+	TSubclassOf<UPrimalItem>& SaddleTypeField() { return *GetNativePointerField<TSubclassOf<UPrimalItem>*>(this, "FDinoSetup.SaddleType"); }
+	TSoftClassPtr<UPrimalItem>& SaddleSoftReferenceField() { return *GetNativePointerField<TSoftClassPtr<UPrimalItem>*>(this, "FDinoSetup.SaddleSoftReference"); }
+	FString& SaddleBlueprintPathField() { return *GetNativePointerField<FString*>(this, "FDinoSetup.SaddleBlueprintPath"); }
+	float& SaddleQualityField() { return *GetNativePointerField<float*>(this, "FDinoSetup.SaddleQuality"); }
+	float& SaddleMinRandomQualityField() { return *GetNativePointerField<float*>(this, "FDinoSetup.SaddleMinRandomQuality"); }
+	float& RandomWeightField() { return *GetNativePointerField<float*>(this, "FDinoSetup.RandomWeight"); }
+	float& WildRandomScaleOverrideField() { return *GetNativePointerField<float*>(this, "FDinoSetup.WildRandomScaleOverride"); }
+	float& DinoImprintingQualityField() { return *GetNativePointerField<float*>(this, "FDinoSetup.DinoImprintingQuality"); }
+
+	// Bitfields
+
+	BitFieldValue<bool, unsigned __int32> bIsTamed() { return { this, "FDinoSetup.bIsTamed" }; }
+	BitFieldValue<bool, unsigned __int32> bIgnoreMaxTameLimit() { return { this, "FDinoSetup.bIgnoreMaxTameLimit" }; }
+	BitFieldValue<bool, unsigned __int32> bPreventSpawningAtTameLimit() { return { this, "FDinoSetup.bPreventSpawningAtTameLimit" }; }
+	BitFieldValue<bool, unsigned __int32> bBlockTamedDialog() { return { this, "FDinoSetup.bBlockTamedDialog" }; }
+	BitFieldValue<bool, unsigned __int32> bAutoEquipSaddle() { return { this, "FDinoSetup.bAutoEquipSaddle" }; }
+	BitFieldValue<bool, unsigned __int32> bUseFixedSpawnLevel() { return { this, "FDinoSetup.bUseFixedSpawnLevel" }; }
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FDinoSetup.StaticStruct()"); }
+	FDinoSetup* operator=(const FDinoSetup* __that) { return NativeCall<FDinoSetup*, const FDinoSetup*>(this, "FDinoSetup.operator=(FDinoSetup&)", __that); }
+	FDinoSetup* operator=(FDinoSetup* __that) { return NativeCall<FDinoSetup*, FDinoSetup*>(this, "FDinoSetup.operator=(FDinoSetup&)", __that); }
+	void SetBaseLevels(EPrimalCharacterStatusValue::Type StatusType, int Value) { NativeCall<void, EPrimalCharacterStatusValue::Type, int>(this, "FDinoSetup.SetBaseLevels(EPrimalCharacterStatusValue::Type,int)", StatusType, Value); }
+	void SetConstantSaddleQuality(float Quality) { NativeCall<void, float>(this, "FDinoSetup.SetConstantSaddleQuality(float)", Quality); }
+	void SetPlayerAddedLevels(EPrimalCharacterStatusValue::Type StatusType, int Value) { NativeCall<void, EPrimalCharacterStatusValue::Type, int>(this, "FDinoSetup.SetPlayerAddedLevels(EPrimalCharacterStatusValue::Type,int)", StatusType, Value); }
+};
+
+struct FDinoSetupGroup
+{
+	// Fields
+
+	FName& GroupNameField() { return *GetNativePointerField<FName*>(this, "FDinoSetupGroup.GroupName"); }
+	float& RandomWeightField() { return *GetNativePointerField<float*>(this, "FDinoSetupGroup.RandomWeight"); }
+	TArray<FDinoSetup, TSizedDefaultAllocator<32> >& EntriesField() { return *GetNativePointerField<TArray<FDinoSetup, TSizedDefaultAllocator<32> >*>(this, "FDinoSetupGroup.Entries"); }
+	TArray<int, TSizedDefaultAllocator<32> >& EntriesSpawnNumberLimitsField() { return *GetNativePointerField<TArray<int, TSizedDefaultAllocator<32> >*>(this, "FDinoSetupGroup.EntriesSpawnNumberLimits"); }
+
+	// Bitfields
+
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FDinoSetupGroup.StaticStruct()"); }
+	FDinoSetupGroup* operator=(const FDinoSetupGroup* __that) { return NativeCall<FDinoSetupGroup*, const FDinoSetupGroup*>(this, "FDinoSetupGroup.operator=(FDinoSetupGroup&)", __that); }
+	FDinoSetupGroup* operator=(FDinoSetupGroup* __that) { return NativeCall<FDinoSetupGroup*, FDinoSetupGroup*>(this, "FDinoSetupGroup.operator=(FDinoSetupGroup&)", __that); }
+};
+
+struct FDinoSpawnWeightMultiplier
+{
+	// Fields
+
+	FName& DinoNameTagField() { return *GetNativePointerField<FName*>(this, "FDinoSpawnWeightMultiplier.DinoNameTag"); }
+	float& SpawnWeightMultiplierField() { return *GetNativePointerField<float*>(this, "FDinoSpawnWeightMultiplier.SpawnWeightMultiplier"); }
+	float& SpawnLimitPercentageField() { return *GetNativePointerField<float*>(this, "FDinoSpawnWeightMultiplier.SpawnLimitPercentage"); }
+
+	// Bitfields
+
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FDinoSpawnWeightMultiplier.StaticStruct()"); }
+};
+
+struct FEngramCustomFolder
+{
+	// Fields
+
+	FString& FolderNameField() { return *GetNativePointerField<FString*>(this, "FEngramCustomFolder.FolderName"); }
+	TArray<TSubclassOf<UPrimalItem>, TSizedDefaultAllocator<32> >& EngramCustomFolderItemClassesField() { return *GetNativePointerField<TArray<TSubclassOf<UPrimalItem>, TSizedDefaultAllocator<32> >*>(this, "FEngramCustomFolder.EngramCustomFolderItemClasses"); }
+
+	// Bitfields
+
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FEngramCustomFolder.StaticStruct()"); }
+};
+
+struct FEngramEntries
+{
+	// Fields
+
+	TArray<TSubclassOf<UPrimalEngramEntry>, TSizedDefaultAllocator<32> >& EngramEntriesField() { return *GetNativePointerField<TArray<TSubclassOf<UPrimalEngramEntry>, TSizedDefaultAllocator<32> >*>(this, "FEngramEntries.EngramEntries"); }
+
+	// Bitfields
+
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FEngramEntries.StaticStruct()"); }
+};
+
+struct FEngramEntryAutoUnlock
+{
+	// Fields
+
+	FString& EngramClassNameField() { return *GetNativePointerField<FString*>(this, "FEngramEntryAutoUnlock.EngramClassName"); }
+	int& LevelToAutoUnlockField() { return *GetNativePointerField<int*>(this, "FEngramEntryAutoUnlock.LevelToAutoUnlock"); }
+
+	// Bitfields
+
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FEngramEntryAutoUnlock.StaticStruct()"); }
+};
+
+struct FEngramEntryOverride
+{
+	// Fields
+
+	FString& EngramClassNameField() { return *GetNativePointerField<FString*>(this, "FEngramEntryOverride.EngramClassName"); }
+	int& EngramIndexField() { return *GetNativePointerField<int*>(this, "FEngramEntryOverride.EngramIndex"); }
+	int& EngramPointsCostField() { return *GetNativePointerField<int*>(this, "FEngramEntryOverride.EngramPointsCost"); }
+	int& EngramLevelRequirementField() { return *GetNativePointerField<int*>(this, "FEngramEntryOverride.EngramLevelRequirement"); }
+
+	// Bitfields
+
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FEngramEntryOverride.StaticStruct()"); }
+};
+
+struct FEngramsSetSoftReferenceMapping
+{
+	// Fields
+
+	TArray<FString, TSizedDefaultAllocator<32> >& EngramSetToUnlockField() { return *GetNativePointerField<TArray<FString, TSizedDefaultAllocator<32> >*>(this, "FEngramsSetSoftReferenceMapping.EngramSetToUnlock"); }
+
+	// Bitfields
+
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FEngramsSetSoftReferenceMapping.StaticStruct()"); }
+};
+
+struct FFrame : FOutputDevice
+{
+	// Fields
+
+	UFunction*& NodeField() { return *GetNativePointerField<UFunction**>(this, "FFrame.Node"); }
+	UObject*& ObjectField() { return *GetNativePointerField<UObject**>(this, "FFrame.Object"); }
+	unsigned __int8*& CodeField() { return *GetNativePointerField<unsigned __int8**>(this, "FFrame.Code"); }
+	unsigned __int8*& LocalsField() { return *GetNativePointerField<unsigned __int8**>(this, "FFrame.Locals"); }
+	FProperty*& MostRecentPropertyField() { return *GetNativePointerField<FProperty**>(this, "FFrame.MostRecentProperty"); }
+	unsigned __int8*& MostRecentPropertyAddressField() { return *GetNativePointerField<unsigned __int8**>(this, "FFrame.MostRecentPropertyAddress"); }
+	unsigned __int8*& MostRecentPropertyContainerField() { return *GetNativePointerField<unsigned __int8**>(this, "FFrame.MostRecentPropertyContainer"); }
+	TArray<unsigned int, TSizedInlineAllocator<8, 32, TSizedDefaultAllocator<32> > >& FlowStackField() { return *GetNativePointerField<TArray<unsigned int, TSizedInlineAllocator<8, 32, TSizedDefaultAllocator<32> > >*>(this, "FFrame.FlowStack"); }
+	FFrame*& PreviousFrameField() { return *GetNativePointerField<FFrame**>(this, "FFrame.PreviousFrame"); }
+	FOutParmRec*& OutParmsField() { return *GetNativePointerField<FOutParmRec**>(this, "FFrame.OutParms"); }
+	FField*& PropertyChainForCompiledInField() { return *GetNativePointerField<FField**>(this, "FFrame.PropertyChainForCompiledIn"); }
+	UFunction*& CurrentNativeFunctionField() { return *GetNativePointerField<UFunction**>(this, "FFrame.CurrentNativeFunction"); }
+	FFrame*& PreviousTrackingFrameField() { return *GetNativePointerField<FFrame**>(this, "FFrame.PreviousTrackingFrame"); }
+	bool& bAbortingExecutionField() { return *GetNativePointerField<bool*>(this, "FFrame.bAbortingExecution"); }
+
+	// Bitfields
+
+
+	// Functions
+
+	void StepExplicitProperty(void* const Result, FProperty* Property) { NativeCall<void, void* const, FProperty*>(this, "FFrame.StepExplicitProperty(void*const,FProperty*)", Result, Property); }
+	static void KismetExecutionMessage(const wchar_t* Message, ELogVerbosity::Type Verbosity, FName WarningId) { NativeCall<void, const wchar_t*, ELogVerbosity::Type, FName>(nullptr, "FFrame.KismetExecutionMessage(wchar_t*,ELogVerbosity::Type,FName)", Message, Verbosity, WarningId); }
+	void Serialize(const wchar_t* V, ELogVerbosity::Type Verbosity, const FName* Category) { NativeCall<void, const wchar_t*, ELogVerbosity::Type, const FName*>(this, "FFrame.Serialize(wchar_t*,ELogVerbosity::Type,FName&)", V, Verbosity, Category); }
+	// TODO: Might need manual analysis
+	FString* GetStackTrace(FString* result) { return NativeCall<FString*, FString*>(this, "FFrame.GetStackTrace(FString&)", result); }
+	void GetStackTrace(TStringBuilderBase<wchar_t>* Result) { NativeCall<void, TStringBuilderBase<wchar_t>*>(this, "FFrame.GetStackTrace(TStringBuilderBase<wchar_t>&)", Result); }
+};
+
+struct FFuncParms
+{
+	// Fields
+
+	UFunction*& FuncField() { return *GetNativePointerField<UFunction**>(this, "FFuncParms.Func"); }
+	unsigned __int8*& ParmsField() { return *GetNativePointerField<unsigned __int8**>(this, "FFuncParms.Parms"); }
+
+	// Bitfields
+
+
+	// Functions
+
+};
+
+struct FFunctionCaller
+{
+	// Fields
+
+	FName& FunctionNameField() { return *GetNativePointerField<FName*>(this, "FFunctionCaller.FunctionName"); }
+
+	// Bitfields
+
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FFunctionCaller.StaticStruct()"); }
+};
+
+struct FHitResult
+{
+	// Fields
+
+	int& FaceIndexField() { return *GetNativePointerField<int*>(this, "FHitResult.FaceIndex"); }
+	float& TimeField() { return *GetNativePointerField<float*>(this, "FHitResult.Time"); }
+	float& DistanceField() { return *GetNativePointerField<float*>(this, "FHitResult.Distance"); }
+	FVector_NetQuantize& LocationField() { return *GetNativePointerField<FVector_NetQuantize*>(this, "FHitResult.Location"); }
+	FVector_NetQuantize& ImpactPointField() { return *GetNativePointerField<FVector_NetQuantize*>(this, "FHitResult.ImpactPoint"); }
+	FVector_NetQuantizeNormal& NormalField() { return *GetNativePointerField<FVector_NetQuantizeNormal*>(this, "FHitResult.Normal"); }
+	FVector_NetQuantizeNormal& ImpactNormalField() { return *GetNativePointerField<FVector_NetQuantizeNormal*>(this, "FHitResult.ImpactNormal"); }
+	FVector_NetQuantize& TraceStartField() { return *GetNativePointerField<FVector_NetQuantize*>(this, "FHitResult.TraceStart"); }
+	FVector_NetQuantize& TraceEndField() { return *GetNativePointerField<FVector_NetQuantize*>(this, "FHitResult.TraceEnd"); }
+	float& PenetrationDepthField() { return *GetNativePointerField<float*>(this, "FHitResult.PenetrationDepth"); }
+	int& MyItemField() { return *GetNativePointerField<int*>(this, "FHitResult.MyItem"); }
+	int& ItemField() { return *GetNativePointerField<int*>(this, "FHitResult.Item"); }
+	TWeakObjectPtr<UPhysicalMaterial>& PhysMaterialField() { return *GetNativePointerField<TWeakObjectPtr<UPhysicalMaterial>*>(this, "FHitResult.PhysMaterial"); }
+	//FActorInstanceHandle& HitObjectHandleField() { return *GetNativePointerField<FActorInstanceHandle*>(this, "FHitResult.HitObjectHandle"); }
+	TWeakObjectPtr<UPrimitiveComponent>& ComponentField() { return *GetNativePointerField<TWeakObjectPtr<UPrimitiveComponent>*>(this, "FHitResult.Component"); }
+	FName& BoneNameField() { return *GetNativePointerField<FName*>(this, "FHitResult.BoneName"); }
+	FName& MyBoneNameField() { return *GetNativePointerField<FName*>(this, "FHitResult.MyBoneName"); }
+
+	// Bitfields
+
+	BitFieldValue<bool, unsigned __int32> bBlockingHit() { return { this, "FHitResult.bBlockingHit" }; }
+	BitFieldValue<bool, unsigned __int32> bStartPenetrating() { return { this, "FHitResult.bStartPenetrating" }; }
+	BitFieldValue<bool, unsigned __int32> bVolatileCollision() { return { this, "FHitResult.bVolatileCollision" }; }
+
+	// Functions
+
+	static FHitResult* GetReversedHit(FHitResult* result, const FHitResult* Hit) { return NativeCall<FHitResult*, FHitResult*, const FHitResult*>(nullptr, "FHitResult.GetReversedHit(FHitResult&)", result, Hit); }
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FHitResult.StaticStruct()"); }
+	bool NetSerialize(FArchive* Ar, UPackageMap* Map, bool* bOutSuccess) { return NativeCall<bool, FArchive*, UPackageMap*, bool*>(this, "FHitResult.NetSerialize(FArchive&,UPackageMap*,bool&)", Ar, Map, bOutSuccess); }
+};
+
+struct FHordeCrateDifficultyLevel
+{
+	// Fields
+
+	bool& bEnabledField() { return *GetNativePointerField<bool*>(this, "FHordeCrateDifficultyLevel.bEnabled"); }
+	int& MaxNumOfEventsForDifficultyField() { return *GetNativePointerField<int*>(this, "FHordeCrateDifficultyLevel.MaxNumOfEventsForDifficulty"); }
+	int& DifficultyLevelField() { return *GetNativePointerField<int*>(this, "FHordeCrateDifficultyLevel.DifficultyLevel"); }
+	int& MinNPCsToStartField() { return *GetNativePointerField<int*>(this, "FHordeCrateDifficultyLevel.MinNPCsToStart"); }
+	int& MaxNPCsToStartField() { return *GetNativePointerField<int*>(this, "FHordeCrateDifficultyLevel.MaxNPCsToStart"); }
+	//FHordeCrateNPCGroup& StartingNPCsField() { return *GetNativePointerField<FHordeCrateNPCGroup*>(this, "FHordeCrateDifficultyLevel.StartingNPCs"); }
+	//TArray<FHordeCrateWave, TSizedDefaultAllocator<32> >& NPCWavesToCompleteField() { return *GetNativePointerField<TArray<FHordeCrateWave, TSizedDefaultAllocator<32> >*>(this, "FHordeCrateDifficultyLevel.NPCWavesToComplete"); }
+	float& MinTimeBeforeSelfDestructField() { return *GetNativePointerField<float*>(this, "FHordeCrateDifficultyLevel.MinTimeBeforeSelfDestruct"); }
+	float& MaxTimeBeforeSelfDestructField() { return *GetNativePointerField<float*>(this, "FHordeCrateDifficultyLevel.MaxTimeBeforeSelfDestruct"); }
+	TSubclassOf<AActor>& ActorTemplateField() { return *GetNativePointerField<TSubclassOf<AActor>*>(this, "FHordeCrateDifficultyLevel.ActorTemplate"); }
+	float& MinQualityMultiplierField() { return *GetNativePointerField<float*>(this, "FHordeCrateDifficultyLevel.MinQualityMultiplier"); }
+	float& MaxQualityMultiplierField() { return *GetNativePointerField<float*>(this, "FHordeCrateDifficultyLevel.MaxQualityMultiplier"); }
+	int& MinAmtRewardItemsField() { return *GetNativePointerField<int*>(this, "FHordeCrateDifficultyLevel.MinAmtRewardItems"); }
+	int& MaxAmtRewardItemsField() { return *GetNativePointerField<int*>(this, "FHordeCrateDifficultyLevel.MaxAmtRewardItems"); }
+	FLinearColor& DifficultyColorField() { return *GetNativePointerField<FLinearColor*>(this, "FHordeCrateDifficultyLevel.DifficultyColor"); }
+	float& MainNodeElementPctField() { return *GetNativePointerField<float*>(this, "FHordeCrateDifficultyLevel.MainNodeElementPct"); }
+
+	// Bitfields
+
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FHordeCrateDifficultyLevel.StaticStruct()"); }
+};
+
+struct FHordeCrateEvent
+{
+	// Fields
+
+	long double& EventStartTimeField() { return *GetNativePointerField<long double*>(this, "FHordeCrateEvent.EventStartTime"); }
+	TWeakObjectPtr<AActor>& HordeSpawnNetworkField() { return *GetNativePointerField<TWeakObjectPtr<AActor>*>(this, "FHordeCrateEvent.HordeSpawnNetwork"); }
+	TWeakObjectPtr<AActor>& HordeModeCrateField() { return *GetNativePointerField<TWeakObjectPtr<AActor>*>(this, "FHordeCrateEvent.HordeModeCrate"); }
+	unsigned __int8& EventTypeField() { return *GetNativePointerField<unsigned __int8*>(this, "FHordeCrateEvent.EventType"); }
+
+	// Bitfields
+
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FHordeCrateEvent.StaticStruct()"); }
+};
+
+struct FHordeCrateNPCGroup
+{
+	// Fields
+
+	TArray<TSubclassOf<APrimalDinoCharacter>, TSizedDefaultAllocator<32> >& NPCClassesField() { return *GetNativePointerField<TArray<TSubclassOf<APrimalDinoCharacter>, TSizedDefaultAllocator<32> >*>(this, "FHordeCrateNPCGroup.NPCClasses"); }
+	TArray<TSoftClassPtr<APrimalDinoCharacter>, TSizedDefaultAllocator<32> >& NPCAssetsField() { return *GetNativePointerField<TArray<TSoftClassPtr<APrimalDinoCharacter>, TSizedDefaultAllocator<32> >*>(this, "FHordeCrateNPCGroup.NPCAssets"); }
+	TArray<float, TSizedDefaultAllocator<32> >& NPCWeightsField() { return *GetNativePointerField<TArray<float, TSizedDefaultAllocator<32> >*>(this, "FHordeCrateNPCGroup.NPCWeights"); }
+	TArray<int, TSizedDefaultAllocator<32> >& MinLevelsField() { return *GetNativePointerField<TArray<int, TSizedDefaultAllocator<32> >*>(this, "FHordeCrateNPCGroup.MinLevels"); }
+	TArray<int, TSizedDefaultAllocator<32> >& MaxLevelsField() { return *GetNativePointerField<TArray<int, TSizedDefaultAllocator<32> >*>(this, "FHordeCrateNPCGroup.MaxLevels"); }
+
+	// Bitfields
+
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FHordeCrateNPCGroup.StaticStruct()"); }
+};
+
+struct FHordeCrateWave
+{
+	// Fields
+
+	int& MinNumOfNPCsField() { return *GetNativePointerField<int*>(this, "FHordeCrateWave.MinNumOfNPCs"); }
+	int& MaxNumOfNPCsField() { return *GetNativePointerField<int*>(this, "FHordeCrateWave.MaxNumOfNPCs"); }
+	float& TimeToPrepareForWaveField() { return *GetNativePointerField<float*>(this, "FHordeCrateWave.TimeToPrepareForWave"); }
+	FHordeCrateNPCGroup& NPCsToSpawnField() { return *GetNativePointerField<FHordeCrateNPCGroup*>(this, "FHordeCrateWave.NPCsToSpawn"); }
+
+	// Bitfields
+
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FHordeCrateWave.StaticStruct()"); }
+};
+
+struct FItemAttachmentInfo
+{
+	// Fields
+
+	UActorComponent*& ComponentToAttachField() { return *GetNativePointerField<UActorComponent**>(this, "FItemAttachmentInfo.ComponentToAttach"); }
+	//TArray<FExtraItemAttachmentInfo, TSizedDefaultAllocator<32> >& ExtraItemAttachmentInfosField() { return *GetNativePointerField<TArray<FExtraItemAttachmentInfo, TSizedDefaultAllocator<32> >*>(this, "FItemAttachmentInfo.ExtraItemAttachmentInfos"); }
+	FName& SocketToAttachToField() { return *GetNativePointerField<FName*>(this, "FItemAttachmentInfo.SocketToAttachTo"); }
+	TSoftClassPtr<AActor>& OnlyUseAttachmentForActorClassField() { return *GetNativePointerField<TSoftClassPtr<AActor>*>(this, "FItemAttachmentInfo.OnlyUseAttachmentForActorClass"); }
+	FName& AttachedCompNameField() { return *GetNativePointerField<FName*>(this, "FItemAttachmentInfo.AttachedCompName"); }
+	TWeakObjectPtr<UActorComponent>& AttachedCompReferenceField() { return *GetNativePointerField<TWeakObjectPtr<UActorComponent>*>(this, "FItemAttachmentInfo.AttachedCompReference"); }
+
+	// Bitfields
+
+	BitFieldValue<bool, unsigned __int32> bCanBuildStructuresOn() { return { this, "FItemAttachmentInfo.bCanBuildStructuresOn" }; }
+	BitFieldValue<bool, unsigned __int32> bUseParentAnims() { return { this, "FItemAttachmentInfo.bUseParentAnims" }; }
+	BitFieldValue<bool, unsigned __int32> bAttachToFirstPersonHands() { return { this, "FItemAttachmentInfo.bAttachToFirstPersonHands" }; }
+	BitFieldValue<bool, unsigned __int32> bAttachToThirdPersonWeaponMesh() { return { this, "FItemAttachmentInfo.bAttachToThirdPersonWeaponMesh" }; }
+	BitFieldValue<bool, unsigned __int32> bDisabled() { return { this, "FItemAttachmentInfo.bDisabled" }; }
+	BitFieldValue<bool, unsigned __int32> bUseItemColors() { return { this, "FItemAttachmentInfo.bUseItemColors" }; }
+	BitFieldValue<bool, unsigned __int32> bUseIgnoreAttachmentWhenEquipmentOfType() { return { this, "FItemAttachmentInfo.bUseIgnoreAttachmentWhenEquipmentOfType" }; }
+	BitFieldValue<bool, unsigned __int32> bHideCharacterMesh() { return { this, "FItemAttachmentInfo.bHideCharacterMesh" }; }
+	BitFieldValue<bool, unsigned __int32> bAttachmentRequireWeaponSupportShield() { return { this, "FItemAttachmentInfo.bAttachmentRequireWeaponSupportShield" }; }
+	BitFieldValue<bool, unsigned __int32> bForceDediAttachment() { return { this, "FItemAttachmentInfo.bForceDediAttachment" }; }
+	BitFieldValue<bool, unsigned __int32> bForceVisibleInFirstPerson() { return { this, "FItemAttachmentInfo.bForceVisibleInFirstPerson" }; }
+	BitFieldValue<bool, unsigned __int32> bIgnoreEquipmentForceHideFirstPerson() { return { this, "FItemAttachmentInfo.bIgnoreEquipmentForceHideFirstPerson" }; }
+	BitFieldValue<bool, unsigned __int32> bAttachToFirstPersonCamera() { return { this, "FItemAttachmentInfo.bAttachToFirstPersonCamera" }; }
+	BitFieldValue<bool, unsigned __int32> bAttachToFirstPersonCameraCapsule() { return { this, "FItemAttachmentInfo.bAttachToFirstPersonCameraCapsule" }; }
+	BitFieldValue<bool, unsigned __int32> bPersistShieldRefreshOnWeaponEquip() { return { this, "FItemAttachmentInfo.bPersistShieldRefreshOnWeaponEquip" }; }
+	BitFieldValue<bool, unsigned __int32> bDisableForTaxidermy() { return { this, "FItemAttachmentInfo.bDisableForTaxidermy" }; }
+	BitFieldValue<bool, unsigned __int32> bDontAddAttachedParentBounds() { return { this, "FItemAttachmentInfo.bDontAddAttachedParentBounds" }; }
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FItemAttachmentInfo.StaticStruct()"); }
+};
+
+struct FItemCount
+{
+	// Fields
+
+	FString& StringRefField() { return *GetNativePointerField<FString*>(this, "FItemCount.StringRef"); }
+	int& StackSizeField() { return *GetNativePointerField<int*>(this, "FItemCount.StackSize"); }
+	int& NumStacksField() { return *GetNativePointerField<int*>(this, "FItemCount.NumStacks"); }
+	float& QualityField() { return *GetNativePointerField<float*>(this, "FItemCount.Quality"); }
+	bool& bAutoSlotField() { return *GetNativePointerField<bool*>(this, "FItemCount.bAutoSlot"); }
+	int& SlotField() { return *GetNativePointerField<int*>(this, "FItemCount.Slot"); }
+
+	// Bitfields
+
+
+	// Functions
+
+	static FItemCount* InSlot(FItemCount* result, int Slot, const FString* StringRef, int StackSize, int NumStacks, float Quality) { return NativeCall<FItemCount*, FItemCount*, int, const FString*, int, int, float>(nullptr, "FItemCount.InSlot(int,FString&,int,int,float)", result, Slot, StringRef, StackSize, NumStacks, Quality); }
+};
+
+struct FItemCraftQueueEntry
+{
+	// Fields
+
+	FItemNetID& ItemIDField() { return *GetNativePointerField<FItemNetID*>(this, "FItemCraftQueueEntry.ItemID"); }
+	int& QuantityField() { return *GetNativePointerField<int*>(this, "FItemCraftQueueEntry.Quantity"); }
+	bool& bIgnoreInventoryRequirementField() { return *GetNativePointerField<bool*>(this, "FItemCraftQueueEntry.bIgnoreInventoryRequirement"); }
+	float& RepairPercentageField() { return *GetNativePointerField<float*>(this, "FItemCraftQueueEntry.RepairPercentage"); }
+	float& RepairSpeedMultiplierField() { return *GetNativePointerField<float*>(this, "FItemCraftQueueEntry.RepairSpeedMultiplier"); }
+
+	// Bitfields
+
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FItemCraftQueueEntry.StaticStruct()"); }
+};
+
+struct FItemCraftingConsumptionReplenishment
+{
+	// Fields
+
+	TArray<TSubclassOf<UPrimalItem>, TSizedDefaultAllocator<32> >& ItemResourceClassesField() { return *GetNativePointerField<TArray<TSubclassOf<UPrimalItem>, TSizedDefaultAllocator<32> >*>(this, "FItemCraftingConsumptionReplenishment.ItemResourceClasses"); }
+	TSubclassOf<UPrimalItem>& ToReplaceWithClassField() { return *GetNativePointerField<TSubclassOf<UPrimalItem>*>(this, "FItemCraftingConsumptionReplenishment.ToReplaceWithClass"); }
+
+	// Bitfields
+
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FItemCraftingConsumptionReplenishment.StaticStruct()"); }
+};
+
+struct FItemCraftingCostOverride
+{
+	// Fields
+
+	TSubclassOf<UPrimalItem>& ItemClassField() { return *GetNativePointerField<TSubclassOf<UPrimalItem>*>(this, "FItemCraftingCostOverride.ItemClass"); }
+	TArray<FCraftingResourceRequirement, TSizedDefaultAllocator<32> >& BaseCraftingResourceRequirementsField() { return *GetNativePointerField<TArray<FCraftingResourceRequirement, TSizedDefaultAllocator<32> >*>(this, "FItemCraftingCostOverride.BaseCraftingResourceRequirements"); }
+
+	// Bitfields
+
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FItemCraftingCostOverride.StaticStruct()"); }
+};
+
+struct FItemInfo
+{
+	// Fields
+
+	TBitArray<FDefaultBitArrayAllocator>& NeedsVerticalWireField() { return *GetNativePointerField<TBitArray<FDefaultBitArrayAllocator>*>(this, "FItemInfo.NeedsVerticalWire"); }
+	int& ParentIndexField() { return *GetNativePointerField<int*>(this, "FItemInfo.ParentIndex"); }
+
+	// Bitfields
+
+	BitFieldValue<bool, unsigned __int32> bHasChildren() { return { this, "FItemInfo.bHasChildren" }; }
+	BitFieldValue<bool, unsigned __int32> bIsLastChild() { return { this, "FItemInfo.bIsLastChild" }; }
+
+	// Functions
+
+};
+
+struct FItemMaxItemQuantityOverride
+{
+	// Fields
+
+	TSubclassOf<UPrimalItem>& ItemClassField() { return *GetNativePointerField<TSubclassOf<UPrimalItem>*>(this, "FItemMaxItemQuantityOverride.ItemClass"); }
+	FMaxItemQuantityOverride& QuantityField() { return *GetNativePointerField<FMaxItemQuantityOverride*>(this, "FItemMaxItemQuantityOverride.Quantity"); }
+
+	// Bitfields
+
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FItemMaxItemQuantityOverride.StaticStruct()"); }
+};
+
+struct FItemMultiplier
+{
+	// Fields
+
+	TSubclassOf<UPrimalItem>& ItemClassField() { return *GetNativePointerField<TSubclassOf<UPrimalItem>*>(this, "FItemMultiplier.ItemClass"); }
+	float& ItemMultiplierField() { return *GetNativePointerField<float*>(this, "FItemMultiplier.ItemMultiplier"); }
+
+	// Bitfields
+
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FItemMultiplier.StaticStruct()"); }
+};
+
+struct FItemNetInfo
+{
+	// Fields
+
+	TSubclassOf<UPrimalItem>& ItemArchetypeField() { return *GetNativePointerField<TSubclassOf<UPrimalItem>*>(this, "FItemNetInfo.ItemArchetype"); }
+	FItemNetID& ItemIDField() { return *GetNativePointerField<FItemNetID*>(this, "FItemNetInfo.ItemID"); }
+	unsigned int& ItemQuantityField() { return *GetNativePointerField<unsigned int*>(this, "FItemNetInfo.ItemQuantity"); }
+	int& CustomItemIDField() { return *GetNativePointerField<int*>(this, "FItemNetInfo.CustomItemID"); }
+	int& SlotIndexField() { return *GetNativePointerField<int*>(this, "FItemNetInfo.SlotIndex"); }
+	long double& CreationTimeField() { return *GetNativePointerField<long double*>(this, "FItemNetInfo.CreationTime"); }
+	FString& CustomItemNameField() { return *GetNativePointerField<FString*>(this, "FItemNetInfo.CustomItemName"); }
+	FString& CustomItemDescriptionField() { return *GetNativePointerField<FString*>(this, "FItemNetInfo.CustomItemDescription"); }
+	long double& UploadEarliestValidTimeField() { return *GetNativePointerField<long double*>(this, "FItemNetInfo.UploadEarliestValidTime"); }
+	TArray<unsigned __int64, TSizedDefaultAllocator<32> >& SteamUserItemIDField() { return *GetNativePointerField<TArray<unsigned __int64, TSizedDefaultAllocator<32> >*>(this, "FItemNetInfo.SteamUserItemID"); }
+	unsigned __int16& CraftQueueField() { return *GetNativePointerField<unsigned __int16*>(this, "FItemNetInfo.CraftQueue"); }
+	long double& NextCraftCompletionTimeField() { return *GetNativePointerField<long double*>(this, "FItemNetInfo.NextCraftCompletionTime"); }
+	float& CraftingSkillField() { return *GetNativePointerField<float*>(this, "FItemNetInfo.CraftingSkill"); }
+	float& CraftedSkillBonusField() { return *GetNativePointerField<float*>(this, "FItemNetInfo.CraftedSkillBonus"); }
+	FString& CrafterCharacterNameField() { return *GetNativePointerField<FString*>(this, "FItemNetInfo.CrafterCharacterName"); }
+	FString& CrafterTribeNameField() { return *GetNativePointerField<FString*>(this, "FItemNetInfo.CrafterTribeName"); }
+	unsigned int& WeaponClipAmmoField() { return *GetNativePointerField<unsigned int*>(this, "FItemNetInfo.WeaponClipAmmo"); }
+	float& ItemDurabilityField() { return *GetNativePointerField<float*>(this, "FItemNetInfo.ItemDurability"); }
+	float& ItemRatingField() { return *GetNativePointerField<float*>(this, "FItemNetInfo.ItemRating"); }
+	unsigned int& ExpirationTimeUTCField() { return *GetNativePointerField<unsigned int*>(this, "FItemNetInfo.ExpirationTimeUTC"); }
+	TSubclassOf<UPrimalItem>& ItemCustomClassField() { return *GetNativePointerField<TSubclassOf<UPrimalItem>*>(this, "FItemNetInfo.ItemCustomClass"); }
+	FieldArray<unsigned __int16, 8> ItemStatValuesField() { return { this, "FItemNetInfo.ItemStatValues" }; }
+	FieldArray<__int16, 6> ItemColorIDField() { return { this, "FItemNetInfo.ItemColorID" }; }
+	TSubclassOf<UPrimalItem>& ItemSkinTemplateField() { return *GetNativePointerField<TSubclassOf<UPrimalItem>*>(this, "FItemNetInfo.ItemSkinTemplate"); }
+	TArray<FCustomItemData, TSizedDefaultAllocator<32> >& CustomItemDatasField() { return *GetNativePointerField<TArray<FCustomItemData, TSizedDefaultAllocator<32> >*>(this, "FItemNetInfo.CustomItemDatas"); }
+	TArray<FColor, TSizedDefaultAllocator<32> >& CustomItemColorsField() { return *GetNativePointerField<TArray<FColor, TSizedDefaultAllocator<32> >*>(this, "FItemNetInfo.CustomItemColors"); }
+	TArray<FCraftingResourceRequirement, TSizedDefaultAllocator<32> >& CustomResourceRequirementsField() { return *GetNativePointerField<TArray<FCraftingResourceRequirement, TSizedDefaultAllocator<32> >*>(this, "FItemNetInfo.CustomResourceRequirements"); }
+	long double& NextSpoilingTimeField() { return *GetNativePointerField<long double*>(this, "FItemNetInfo.NextSpoilingTime"); }
+	long double& LastSpoilingTimeField() { return *GetNativePointerField<long double*>(this, "FItemNetInfo.LastSpoilingTime"); }
+	unsigned __int64& OwnerPlayerDataIdField() { return *GetNativePointerField<unsigned __int64*>(this, "FItemNetInfo.OwnerPlayerDataId"); }
+	TWeakObjectPtr<AShooterCharacter>& LastOwnerPlayerField() { return *GetNativePointerField<TWeakObjectPtr<AShooterCharacter>*>(this, "FItemNetInfo.LastOwnerPlayer"); }
+	long double& LastAutoDurabilityDecreaseTimeField() { return *GetNativePointerField<long double*>(this, "FItemNetInfo.LastAutoDurabilityDecreaseTime"); }
+	float& ItemStatClampsMultiplierField() { return *GetNativePointerField<float*>(this, "FItemNetInfo.ItemStatClampsMultiplier"); }
+	UE::Math::TVector<double>& OriginalItemDropLocationField() { return *GetNativePointerField<UE::Math::TVector<double>*>(this, "FItemNetInfo.OriginalItemDropLocation"); }
+	FieldArray<__int16, 6> PreSkinItemColorIDField() { return { this, "FItemNetInfo.PreSkinItemColorID" }; }
+	FieldArray<unsigned __int8, 12> EggNumberOfLevelUpPointsAppliedField() { return { this, "FItemNetInfo.EggNumberOfLevelUpPointsApplied" }; }
+	FieldArray<unsigned __int8, 12> EggNumberMutationsAppliedField() { return { this, "FItemNetInfo.EggNumberMutationsApplied" }; }
+	float& EggTamedIneffectivenessModifierField() { return *GetNativePointerField<float*>(this, "FItemNetInfo.EggTamedIneffectivenessModifier"); }
+	FieldArray<unsigned __int8, 6> EggColorSetIndicesField() { return { this, "FItemNetInfo.EggColorSetIndices" }; }
+	int& EggGenderOverrideField() { return *GetNativePointerField<int*>(this, "FItemNetInfo.EggGenderOverride"); }
+	long double& ClusterSpoilingTimeUTCField() { return *GetNativePointerField<long double*>(this, "FItemNetInfo.ClusterSpoilingTimeUTC"); }
+	TArray<FDinoAncestorsEntry, TSizedDefaultAllocator<32> >& EggDinoAncestorsField() { return *GetNativePointerField<TArray<FDinoAncestorsEntry, TSizedDefaultAllocator<32> >*>(this, "FItemNetInfo.EggDinoAncestors"); }
+	TArray<FDinoAncestorsEntry, TSizedDefaultAllocator<32> >& EggDinoAncestorsMaleField() { return *GetNativePointerField<TArray<FDinoAncestorsEntry, TSizedDefaultAllocator<32> >*>(this, "FItemNetInfo.EggDinoAncestorsMale"); }
+	int& EggRandomMutationsFemaleField() { return *GetNativePointerField<int*>(this, "FItemNetInfo.EggRandomMutationsFemale"); }
+	int& EggRandomMutationsMaleField() { return *GetNativePointerField<int*>(this, "FItemNetInfo.EggRandomMutationsMale"); }
+	bool& bNetInfoFromClientField() { return *GetNativePointerField<bool*>(this, "FItemNetInfo.bNetInfoFromClient"); }
+
+	// Bitfields
+
+	BitFieldValue<bool, unsigned __int32> bIsBlueprint() { return { this, "FItemNetInfo.bIsBlueprint" }; }
+	BitFieldValue<bool, unsigned __int32> bIsEngram() { return { this, "FItemNetInfo.bIsEngram" }; }
+	BitFieldValue<bool, unsigned __int32> bIsCustomRecipe() { return { this, "FItemNetInfo.bIsCustomRecipe" }; }
+	BitFieldValue<bool, unsigned __int32> bIsFoodRecipe() { return { this, "FItemNetInfo.bIsFoodRecipe" }; }
+	BitFieldValue<bool, unsigned __int32> bIsRepairing() { return { this, "FItemNetInfo.bIsRepairing" }; }
+	BitFieldValue<bool, unsigned __int32> bAllowRemovalFromInventory() { return { this, "FItemNetInfo.bAllowRemovalFromInventory" }; }
+	BitFieldValue<bool, unsigned __int32> bHideFromInventoryDisplay() { return { this, "FItemNetInfo.bHideFromInventoryDisplay" }; }
+	BitFieldValue<bool, unsigned __int32> bAllowRemovalFromSteamInventory() { return { this, "FItemNetInfo.bAllowRemovalFromSteamInventory" }; }
+	BitFieldValue<bool, unsigned __int32> bFromSteamInventory() { return { this, "FItemNetInfo.bFromSteamInventory" }; }
+	BitFieldValue<bool, unsigned __int32> bIsFromAllClustersInventory() { return { this, "FItemNetInfo.bIsFromAllClustersInventory" }; }
+	BitFieldValue<bool, unsigned __int32> bForcePreventGrinding() { return { this, "FItemNetInfo.bForcePreventGrinding" }; }
+	BitFieldValue<bool, unsigned __int32> bIsEquipped() { return { this, "FItemNetInfo.bIsEquipped" }; }
+	BitFieldValue<bool, unsigned __int32> bIsSlot() { return { this, "FItemNetInfo.bIsSlot" }; }
+	BitFieldValue<bool, unsigned __int32> bIsInitialItem() { return { this, "FItemNetInfo.bIsInitialItem" }; }
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FItemNetInfo.StaticStruct()"); }
+	FItemNetInfo* operator=(FItemNetInfo* __that) { return NativeCall<FItemNetInfo*, FItemNetInfo*>(this, "FItemNetInfo.operator=(FItemNetInfo&)", __that); }
+	FItemNetInfo* operator=(const FItemNetInfo* __that) { return NativeCall<FItemNetInfo*, const FItemNetInfo*>(this, "FItemNetInfo.operator=(FItemNetInfo&)", __that); }
+	bool NetSerialize(FArchive* Ar, UPackageMap* Map, bool* bOutSuccess) { return NativeCall<bool, FArchive*, UPackageMap*, bool*>(this, "FItemNetInfo.NetSerialize(FArchive&,UPackageMap*,bool&)", Ar, Map, bOutSuccess); }
+};
+
+struct FItemSetup
+{
+	// Fields
+
+	TSubclassOf<UPrimalItem>& ItemTypeField() { return *GetNativePointerField<TSubclassOf<UPrimalItem>*>(this, "FItemSetup.ItemType"); }
+	FString& ItemBlueprintPathField() { return *GetNativePointerField<FString*>(this, "FItemSetup.ItemBlueprintPath"); }
+	float& MinQualityField() { return *GetNativePointerField<float*>(this, "FItemSetup.MinQuality"); }
+	float& MaxQualityField() { return *GetNativePointerField<float*>(this, "FItemSetup.MaxQuality"); }
+	int& QuantityField() { return *GetNativePointerField<int*>(this, "FItemSetup.Quantity"); }
+
+	// Bitfields
+
+	BitFieldValue<bool, unsigned __int32> bAutoEquip() { return { this, "FItemSetup.bAutoEquip" }; }
+	BitFieldValue<bool, unsigned __int32> bDontStack() { return { this, "FItemSetup.bDontStack" }; }
+	BitFieldValue<bool, unsigned __int32> bForceBlueprint() { return { this, "FItemSetup.bForceBlueprint" }; }
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FItemSetup.StaticStruct()"); }
+};
+
+struct FItemStatInfo
+{
+	// Fields
+
+	int& DefaultModifierValueField() { return *GetNativePointerField<int*>(this, "FItemStatInfo.DefaultModifierValue"); }
+	int& RandomizerRangeOverrideField() { return *GetNativePointerField<int*>(this, "FItemStatInfo.RandomizerRangeOverride"); }
+	float& RandomizerRangeMultiplierField() { return *GetNativePointerField<float*>(this, "FItemStatInfo.RandomizerRangeMultiplier"); }
+	float& TheRandomizerPowerField() { return *GetNativePointerField<float*>(this, "FItemStatInfo.TheRandomizerPower"); }
+	float& StateModifierScaleField() { return *GetNativePointerField<float*>(this, "FItemStatInfo.StateModifierScale"); }
+	float& InitialValueConstantField() { return *GetNativePointerField<float*>(this, "FItemStatInfo.InitialValueConstant"); }
+	float& RatingValueMultiplierField() { return *GetNativePointerField<float*>(this, "FItemStatInfo.RatingValueMultiplier"); }
+	float& AbsoluteMaxValueField() { return *GetNativePointerField<float*>(this, "FItemStatInfo.AbsoluteMaxValue"); }
+
+	// Bitfields
+
+	BitFieldValue<bool, unsigned __int32> bUsed() { return { this, "FItemStatInfo.bUsed" }; }
+	BitFieldValue<bool, unsigned __int32> bCalculateAsPercent() { return { this, "FItemStatInfo.bCalculateAsPercent" }; }
+	BitFieldValue<bool, unsigned __int32> bDisplayAsPercent() { return { this, "FItemStatInfo.bDisplayAsPercent" }; }
+	BitFieldValue<bool, unsigned __int32> bRequiresSubmerged() { return { this, "FItemStatInfo.bRequiresSubmerged" }; }
+	BitFieldValue<bool, unsigned __int32> bPreventIfSubmerged() { return { this, "FItemStatInfo.bPreventIfSubmerged" }; }
+	BitFieldValue<bool, unsigned __int32> bHideStatFromTooltip() { return { this, "FItemStatInfo.bHideStatFromTooltip" }; }
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FItemStatInfo.StaticStruct()"); }
+	float GetItemStatModifier(unsigned __int16 ItemStatValue) { return NativeCall<float, unsigned __int16>(this, "FItemStatInfo.GetItemStatModifier(unsignedshort)", ItemStatValue); }
+	unsigned __int16 GetRandomValue(float QualityLevel, float MinRandomQuality, float* outRandonMultiplier) { return NativeCall<unsigned __int16, float, float, float*>(this, "FItemStatInfo.GetRandomValue(float,float,float*)", QualityLevel, MinRandomQuality, outRandonMultiplier); }
+};
+
+struct FItemToDinoStatParams
+{
+	// Fields
+
+	TEnumAsByte<enum EPrimalItemStat::Type>& ItemStatField() { return *GetNativePointerField<TEnumAsByte<enum EPrimalItemStat::Type>*>(this, "FItemToDinoStatParams.ItemStat"); }
+	int& MinItemStatValueField() { return *GetNativePointerField<int*>(this, "FItemToDinoStatParams.MinItemStatValue"); }
+	int& MaxItemStatValueField() { return *GetNativePointerField<int*>(this, "FItemToDinoStatParams.MaxItemStatValue"); }
+	int& MinDinoStatValueField() { return *GetNativePointerField<int*>(this, "FItemToDinoStatParams.MinDinoStatValue"); }
+	int& MaxDinoStatValueField() { return *GetNativePointerField<int*>(this, "FItemToDinoStatParams.MaxDinoStatValue"); }
+
+	// Bitfields
+
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FItemToDinoStatParams.StaticStruct()"); }
+};
+
+struct FMultiUseEntry
+{
+	// Fields
+
+	TObjectPtr<UActorComponent>& ForComponentField() { return *GetNativePointerField<TObjectPtr<UActorComponent>*>(this, "FMultiUseEntry.ForComponent"); }
+	FString& UseStringField() { return *GetNativePointerField<FString*>(this, "FMultiUseEntry.UseString"); }
+	int& UseIndexField() { return *GetNativePointerField<int*>(this, "FMultiUseEntry.UseIndex"); }
+	int& PriorityField() { return *GetNativePointerField<int*>(this, "FMultiUseEntry.Priority"); }
+	TObjectPtr<AActor>& BPDrawEntryTargetRefField() { return *GetNativePointerField<TObjectPtr<AActor>*>(this, "FMultiUseEntry.BPDrawEntryTargetRef"); }
+	int& WheelCategoryField() { return *GetNativePointerField<int*>(this, "FMultiUseEntry.WheelCategory"); }
+	FColor& DisableUseColorField() { return *GetNativePointerField<FColor*>(this, "FMultiUseEntry.DisableUseColor"); }
+	FColor& UseTextColorField() { return *GetNativePointerField<FColor*>(this, "FMultiUseEntry.UseTextColor"); }
+	float& EntryActivationTimerField() { return *GetNativePointerField<float*>(this, "FMultiUseEntry.EntryActivationTimer"); }
+	float& DefaultEntryActivationTimerField() { return *GetNativePointerField<float*>(this, "FMultiUseEntry.DefaultEntryActivationTimer"); }
+	TObjectPtr<USoundBase>& ActivationSoundField() { return *GetNativePointerField<TObjectPtr<USoundBase>*>(this, "FMultiUseEntry.ActivationSound"); }
+	int& UseInventoryButtonStyleOverrideIndexField() { return *GetNativePointerField<int*>(this, "FMultiUseEntry.UseInventoryButtonStyleOverrideIndex"); }
+	int& AdditionalButtonsIndexField() { return *GetNativePointerField<int*>(this, "FMultiUseEntry.AdditionalButtonsIndex"); }
+	TObjectPtr<UTexture2D>& IconField() { return *GetNativePointerField<TObjectPtr<UTexture2D>*>(this, "FMultiUseEntry.Icon"); }
+	FColor& UseIconColorField() { return *GetNativePointerField<FColor*>(this, "FMultiUseEntry.UseIconColor"); }
+	TObjectPtr<UObject>& SponsorIconObjectField() { return *GetNativePointerField<TObjectPtr<UObject>*>(this, "FMultiUseEntry.SponsorIconObject"); }
+	int& OpenWheelCategoryField() { return *GetNativePointerField<int*>(this, "FMultiUseEntry.OpenWheelCategory"); }
+
+	// Bitfields
+
+	BitFieldValue<bool, unsigned __int32> bHideFromUI() { return { this, "FMultiUseEntry.bHideFromUI" }; }
+	BitFieldValue<bool, unsigned __int32> bDisableUse() { return { this, "FMultiUseEntry.bDisableUse" }; }
+	BitFieldValue<bool, unsigned __int32> bHideActivationKey() { return { this, "FMultiUseEntry.bHideActivationKey" }; }
+	BitFieldValue<bool, unsigned __int32> bRepeatMultiUse() { return { this, "FMultiUseEntry.bRepeatMultiUse" }; }
+	BitFieldValue<bool, unsigned __int32> bDisplayOnInventoryUI() { return { this, "FMultiUseEntry.bDisplayOnInventoryUI" }; }
+	BitFieldValue<bool, unsigned __int32> bDisplayOnInventoryUISecondary() { return { this, "FMultiUseEntry.bDisplayOnInventoryUISecondary" }; }
+	BitFieldValue<bool, unsigned __int32> bHarvestable() { return { this, "FMultiUseEntry.bHarvestable" }; }
+	BitFieldValue<bool, unsigned __int32> bIsSecondaryUse() { return { this, "FMultiUseEntry.bIsSecondaryUse" }; }
+	BitFieldValue<bool, unsigned __int32> bPersistWheelOnActivation() { return { this, "FMultiUseEntry.bPersistWheelOnActivation" }; }
+	BitFieldValue<bool, unsigned __int32> bOverrideUseTextColor() { return { this, "FMultiUseEntry.bOverrideUseTextColor" }; }
+	BitFieldValue<bool, unsigned __int32> bDisplayOnInventoryUITertiary() { return { this, "FMultiUseEntry.bDisplayOnInventoryUITertiary" }; }
+	BitFieldValue<bool, unsigned __int32> bClientSideOnly() { return { this, "FMultiUseEntry.bClientSideOnly" }; }
+	BitFieldValue<bool, unsigned __int32> bPersistWheelRequiresDirectActivation() { return { this, "FMultiUseEntry.bPersistWheelRequiresDirectActivation" }; }
+	BitFieldValue<bool, unsigned __int32> bUseBPDrawEntry() { return { this, "FMultiUseEntry.bUseBPDrawEntry" }; }
+	BitFieldValue<bool, unsigned __int32> bDrawTooltip() { return { this, "FMultiUseEntry.bDrawTooltip" }; }
+	BitFieldValue<bool, unsigned __int32> bIsDynamicOption() { return { this, "FMultiUseEntry.bIsDynamicOption" }; }
+	BitFieldValue<bool, unsigned __int32> bUseOldMultiUseOptionWithText() { return { this, "FMultiUseEntry.bUseOldMultiUseOptionWithText" }; }
+
+	// Functions
+
+	void operator=(const FMultiUseEntry* InVal) { NativeCall<void, const FMultiUseEntry*>(this, "FMultiUseEntry.operator=(FMultiUseEntry&)", InVal); }
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FMultiUseEntry.StaticStruct()"); }
+};
+
+struct FMultiUseWheelOption
+{
+	// Fields
+
+	FString& ActionStringField() { return *GetNativePointerField<FString*>(this, "FMultiUseWheelOption.ActionString"); }
+	TObjectPtr<UTexture2D>& IconField() { return *GetNativePointerField<TObjectPtr<UTexture2D>*>(this, "FMultiUseWheelOption.Icon"); }
+
+	// Bitfields
+
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FMultiUseWheelOption.StaticStruct()"); }
+};
+
+struct FNetExecParams
+{
+	// Fields
+
+	int& IntParam1Field() { return *GetNativePointerField<int*>(this, "FNetExecParams.IntParam1"); }
+	int& IntParam2Field() { return *GetNativePointerField<int*>(this, "FNetExecParams.IntParam2"); }
+	float& FloatParam1Field() { return *GetNativePointerField<float*>(this, "FNetExecParams.FloatParam1"); }
+	TObjectPtr<UObject>& ObjParam1Field() { return *GetNativePointerField<TObjectPtr<UObject>*>(this, "FNetExecParams.ObjParam1"); }
+
+	// Bitfields
+
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FNetExecParams.StaticStruct()"); }
+};
+
+struct FPointOfInterestData
+{
+	// Fields
+
+	unsigned __int8& PointTypeField() { return *GetNativePointerField<unsigned __int8*>(this, "FPointOfInterestData.PointType"); }
+	FName& PointTagField() { return *GetNativePointerField<FName*>(this, "FPointOfInterestData.PointTag"); }
+	FString& PointTitleField() { return *GetNativePointerField<FString*>(this, "FPointOfInterestData.PointTitle"); }
+	FString& PointDescriptionField() { return *GetNativePointerField<FString*>(this, "FPointOfInterestData.PointDescription"); }
+	UE::Math::TVector<double>& PointLocationField() { return *GetNativePointerField<UE::Math::TVector<double>*>(this, "FPointOfInterestData.PointLocation"); }
+	UE::Math::TRotator<double>& PointRotationField() { return *GetNativePointerField<UE::Math::TRotator<double>*>(this, "FPointOfInterestData.PointRotation"); }
+	AActor*& PointActorField() { return *GetNativePointerField<AActor**>(this, "FPointOfInterestData.PointActor"); }
+	float& PointVisibleDistanceField() { return *GetNativePointerField<float*>(this, "FPointOfInterestData.PointVisibleDistance"); }
+	float& PointVisibleDotProductRangeField() { return *GetNativePointerField<float*>(this, "FPointOfInterestData.PointVisibleDotProductRange"); }
+	UTexture2D*& PointIconField() { return *GetNativePointerField<UTexture2D**>(this, "FPointOfInterestData.PointIcon"); }
+	UParticleSystem*& ViewedPointVFXField() { return *GetNativePointerField<UParticleSystem**>(this, "FPointOfInterestData.ViewedPointVFX"); }
+	USoundCue*& ViewedPointSFXField() { return *GetNativePointerField<USoundCue**>(this, "FPointOfInterestData.ViewedPointSFX"); }
+	//TSubclassOf<APointOfInterestCosmeticActor_Base>& PointCosmeticActorClassField() { return *GetNativePointerField<TSubclassOf<APointOfInterestCosmeticActor_Base>*>(this, "FPointOfInterestData.PointCosmeticActorClass"); }
+	UE::Math::TTransform<double>& PointCosmeticActorOffsetTransformField() { return *GetNativePointerField<UE::Math::TTransform<double>*>(this, "FPointOfInterestData.PointCosmeticActorOffsetTransform"); }
+	USoundBase*& LocationAddedSoundField() { return *GetNativePointerField<USoundBase**>(this, "FPointOfInterestData.LocationAddedSound"); }
+	USoundBase*& LocationReachedSoundField() { return *GetNativePointerField<USoundBase**>(this, "FPointOfInterestData.LocationReachedSound"); }
+	UE::Math::TVector<double>& WidgetLocationOffsetField() { return *GetNativePointerField<UE::Math::TVector<double>*>(this, "FPointOfInterestData.WidgetLocationOffset"); }
+	float& WidgetHiddenDistanceField() { return *GetNativePointerField<float*>(this, "FPointOfInterestData.WidgetHiddenDistance"); }
+	FLinearColor& IndicatorColorField() { return *GetNativePointerField<FLinearColor*>(this, "FPointOfInterestData.IndicatorColor"); }
+	FLinearColor& IconColorField() { return *GetNativePointerField<FLinearColor*>(this, "FPointOfInterestData.IconColor"); }
+	float& ProgressValueField() { return *GetNativePointerField<float*>(this, "FPointOfInterestData.ProgressValue"); }
+	FString& ProgressLabelTextField() { return *GetNativePointerField<FString*>(this, "FPointOfInterestData.ProgressLabelText"); }
+	FLinearColor& ProgressBarColorField() { return *GetNativePointerField<FLinearColor*>(this, "FPointOfInterestData.ProgressBarColor"); }
+	FLinearColor& ProgressLabelColorField() { return *GetNativePointerField<FLinearColor*>(this, "FPointOfInterestData.ProgressLabelColor"); }
+	int& CharacterIDField() { return *GetNativePointerField<int*>(this, "FPointOfInterestData.CharacterID"); }
+	float& AlphaMultiplierField() { return *GetNativePointerField<float*>(this, "FPointOfInterestData.AlphaMultiplier"); }
+	float& ScaleMultiplierField() { return *GetNativePointerField<float*>(this, "FPointOfInterestData.ScaleMultiplier"); }
+	float& SecondaryProgressValueField() { return *GetNativePointerField<float*>(this, "FPointOfInterestData.SecondaryProgressValue"); }
+	FLinearColor& SecondaryProgressBarColorField() { return *GetNativePointerField<FLinearColor*>(this, "FPointOfInterestData.SecondaryProgressBarColor"); }
+	int& UseDismissIndexField() { return *GetNativePointerField<int*>(this, "FPointOfInterestData.UseDismissIndex"); }
+	AActor*& DismissActorActionField() { return *GetNativePointerField<AActor**>(this, "FPointOfInterestData.DismissActorAction"); }
+	FString& DistanceStringField() { return *GetNativePointerField<FString*>(this, "FPointOfInterestData.DistanceString"); }
+
+	// Bitfields
+
+	BitFieldValue<bool, unsigned __int32> bHidePointOfInterestTitleBar() { return { this, "FPointOfInterestData.bHidePointOfInterestTitleBar" }; }
+	BitFieldValue<bool, unsigned __int32> bPointTagValidated() { return { this, "FPointOfInterestData.bPointTagValidated" }; }
+	BitFieldValue<bool, unsigned __int32> bPointTagRequiresValidation() { return { this, "FPointOfInterestData.bPointTagRequiresValidation" }; }
+	BitFieldValue<bool, unsigned __int32> bOnlyVisibleOffScreen() { return { this, "FPointOfInterestData.bOnlyVisibleOffScreen" }; }
+	BitFieldValue<bool, unsigned __int32> bOnlyVisibleOnScreen() { return { this, "FPointOfInterestData.bOnlyVisibleOnScreen" }; }
+	BitFieldValue<bool, unsigned __int32> bAlwaysVisible() { return { this, "FPointOfInterestData.bAlwaysVisible" }; }
+	BitFieldValue<bool, unsigned __int32> bUsePulseAnimation() { return { this, "FPointOfInterestData.bUsePulseAnimation" }; }
+	BitFieldValue<bool, unsigned __int32> bShowProgress() { return { this, "FPointOfInterestData.bShowProgress" }; }
+	BitFieldValue<bool, unsigned __int32> bShowProgressLabelWhenOffScreen() { return { this, "FPointOfInterestData.bShowProgressLabelWhenOffScreen" }; }
+	BitFieldValue<bool, unsigned __int32> bOnlyVisibleOnMap() { return { this, "FPointOfInterestData.bOnlyVisibleOnMap" }; }
+	BitFieldValue<bool, unsigned __int32> CharacterIsPlayer() { return { this, "FPointOfInterestData.CharacterIsPlayer" }; }
+	BitFieldValue<bool, unsigned __int32> bShowSecondaryProgress() { return { this, "FPointOfInterestData.bShowSecondaryProgress" }; }
+	BitFieldValue<bool, unsigned __int32> bCanDismissPOI() { return { this, "FPointOfInterestData.bCanDismissPOI" }; }
+	BitFieldValue<bool, unsigned __int32> bPreventTextClose() { return { this, "FPointOfInterestData.bPreventTextClose" }; }
+
+	// Functions
+
+	FPointOfInterestData* operator=(const FPointOfInterestData* __that) { return NativeCall<FPointOfInterestData*, const FPointOfInterestData*>(this, "FPointOfInterestData.operator=(FPointOfInterestData&)", __that); }
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FPointOfInterestData.StaticStruct()"); }
+	bool IsPointInitialized() { return NativeCall<bool>(this, "FPointOfInterestData.IsPointInitialized()"); }
+};
+
+struct FPointOfInterestData_ForCompanion
+{
+	// Fields
+
+	FPointOfInterestData& PointDataField() { return *GetNativePointerField<FPointOfInterestData*>(this, "FPointOfInterestData_ForCompanion.PointData"); }
+	FPointOfInterestCompanionBehavior& PointCompanionBehaviorField() { return *GetNativePointerField<FPointOfInterestCompanionBehavior*>(this, "FPointOfInterestData_ForCompanion.PointCompanionBehavior"); }
+
+	// Bitfields
+
+
+	// Functions
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FPointOfInterestData_ForCompanion.StaticStruct()"); }
+};
+
+struct FPrimalCharacterStatusStateDefinition
+{
+	// Fields
+
+	TEnumAsByte<enum EPrimalCharacterStatusValue::Type>& StatusValueTypeField() { return *GetNativePointerField<TEnumAsByte<enum EPrimalCharacterStatusValue::Type>*>(this, "FPrimalCharacterStatusStateDefinition.StatusValueType"); }
+	int& StatusValueThresholdIndexField() { return *GetNativePointerField<int*>(this, "FPrimalCharacterStatusStateDefinition.StatusValueThresholdIndex"); }
+	UTexture2D*& StatusStateIconField() { return *GetNativePointerField<UTexture2D**>(this, "FPrimalCharacterStatusStateDefinition.StatusStateIcon"); }
+	FString& StatusStateNameField() { return *GetNativePointerField<FString*>(this, "FPrimalCharacterStatusStateDefinition.StatusStateName"); }
+	FString& StatusStateDescriptionField() { return *GetNativePointerField<FString*>(this, "FPrimalCharacterStatusStateDefinition.StatusStateDescription"); }
+	FColor& StatusStateNameColorField() { return *GetNativePointerField<FColor*>(this, "FPrimalCharacterStatusStateDefinition.StatusStateNameColor"); }
+	bool& bDisplayHUDMessageField() { return *GetNativePointerField<bool*>(this, "FPrimalCharacterStatusStateDefinition.bDisplayHUDMessage"); }
+	FString& HUDMessageField() { return *GetNativePointerField<FString*>(this, "FPrimalCharacterStatusStateDefinition.HUDMessage"); }
+	FColor& HUDMessageColorField() { return *GetNativePointerField<FColor*>(this, "FPrimalCharacterStatusStateDefinition.HUDMessageColor"); }
+	int& BuffTypeField() { return *GetNativePointerField<int*>(this, "FPrimalCharacterStatusStateDefinition.BuffType"); }
+
+	// Bitfields
+
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FPrimalCharacterStatusStateDefinition.StaticStruct()"); }
+};
+
+struct FPrimalCharacterStatusStateThresholds
+{
+	// Fields
+
+	TArray<float, TSizedDefaultAllocator<32> >& HighThresholdStatusStateValuesField() { return *GetNativePointerField<TArray<float, TSizedDefaultAllocator<32> >*>(this, "FPrimalCharacterStatusStateThresholds.HighThresholdStatusStateValues"); }
+	TArray<TEnumAsByte<enum EPrimalCharacterStatusState::Type>, TSizedDefaultAllocator<32> >& HighThresholdStatusStateTypeField() { return *GetNativePointerField<TArray<TEnumAsByte<enum EPrimalCharacterStatusState::Type>, TSizedDefaultAllocator<32> >*>(this, "FPrimalCharacterStatusStateThresholds.HighThresholdStatusStateType"); }
+	TArray<float, TSizedDefaultAllocator<32> >& LowThresholdStatusStateValuesField() { return *GetNativePointerField<TArray<float, TSizedDefaultAllocator<32> >*>(this, "FPrimalCharacterStatusStateThresholds.LowThresholdStatusStateValues"); }
+	TArray<TEnumAsByte<enum EPrimalCharacterStatusState::Type>, TSizedDefaultAllocator<32> >& LowThresholdStatusStateTypeField() { return *GetNativePointerField<TArray<TEnumAsByte<enum EPrimalCharacterStatusState::Type>, TSizedDefaultAllocator<32> >*>(this, "FPrimalCharacterStatusStateThresholds.LowThresholdStatusStateType"); }
+
+	// Bitfields
+
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FPrimalCharacterStatusStateThresholds.StaticStruct()"); }
+};
+
+struct FPrimalCharacterStatusValueDefinition
+{
+	// Fields
+
+	UTexture2D*& StatusValueIconField() { return *GetNativePointerField<UTexture2D**>(this, "FPrimalCharacterStatusValueDefinition.StatusValueIcon"); }
+	FString& StatusValueNameField() { return *GetNativePointerField<FString*>(this, "FPrimalCharacterStatusValueDefinition.StatusValueName"); }
+	bool& bDisplayHideCurrentValueField() { return *GetNativePointerField<bool*>(this, "FPrimalCharacterStatusValueDefinition.bDisplayHideCurrentValue"); }
+
+	// Bitfields
+
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FPrimalCharacterStatusValueDefinition.StaticStruct()"); }
+};
+
+struct FPrimalCharacterStatusValueModifier
+{
+	// Fields
+
+	TWeakObjectPtr<AActor>& InstigatorField() { return *GetNativePointerField<TWeakObjectPtr<AActor>*>(this, "FPrimalCharacterStatusValueModifier.Instigator"); }
+	FieldArray<char, 4> ValueTypeField() { return { this, "FPrimalCharacterStatusValueModifier.ValueType" }; }
+	FieldArray<char, 4> StopOnValueNearMaxField() { return { this, "FPrimalCharacterStatusValueModifier.StopOnValueNearMax" }; }
+	float& AmountToAddField() { return *GetNativePointerField<float*>(this, "FPrimalCharacterStatusValueModifier.AmountToAdd"); }
+	float& BaseAmountToAddField() { return *GetNativePointerField<float*>(this, "FPrimalCharacterStatusValueModifier.BaseAmountToAdd"); }
+	float& SpeedToAddField() { return *GetNativePointerField<float*>(this, "FPrimalCharacterStatusValueModifier.SpeedToAdd"); }
+	bool& bSetValueField() { return *GetNativePointerField<bool*>(this, "FPrimalCharacterStatusValueModifier.bSetValue"); }
+	bool& bMakeUntameableField() { return *GetNativePointerField<bool*>(this, "FPrimalCharacterStatusValueModifier.bMakeUntameable"); }
+	int& StatusValueModifierDescriptionIndexField() { return *GetNativePointerField<int*>(this, "FPrimalCharacterStatusValueModifier.StatusValueModifierDescriptionIndex"); }
+
+	// Bitfields
+
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FPrimalCharacterStatusValueModifier.StaticStruct()"); }
+};
+
+struct FPrimalItemDefinition
+{
+	// Fields
+
+	UTexture2D*& ItemTypeIconField() { return *GetNativePointerField<UTexture2D**>(this, "FPrimalItemDefinition.ItemTypeIcon"); }
+	FString& ItemTypeNameField() { return *GetNativePointerField<FString*>(this, "FPrimalItemDefinition.ItemTypeName"); }
+	FColor& ItemTypeColorField() { return *GetNativePointerField<FColor*>(this, "FPrimalItemDefinition.ItemTypeColor"); }
+
+	// Bitfields
+
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FPrimalItemDefinition.StaticStruct()"); }
+};
+
+struct FPrimalItemQuality
+{
+	// Fields
+
+	FLinearColor& QualityColorField() { return *GetNativePointerField<FLinearColor*>(this, "FPrimalItemQuality.QualityColor"); }
+	FString& QualityNameField() { return *GetNativePointerField<FString*>(this, "FPrimalItemQuality.QualityName"); }
+	float& QualityRandomMultiplierThresholdField() { return *GetNativePointerField<float*>(this, "FPrimalItemQuality.QualityRandomMultiplierThreshold"); }
+	float& CraftingXPMultiplierField() { return *GetNativePointerField<float*>(this, "FPrimalItemQuality.CraftingXPMultiplier"); }
+	float& RepairingXPMultiplierField() { return *GetNativePointerField<float*>(this, "FPrimalItemQuality.RepairingXPMultiplier"); }
+	float& CraftingResourceRequirementsMultiplierField() { return *GetNativePointerField<float*>(this, "FPrimalItemQuality.CraftingResourceRequirementsMultiplier"); }
+
+	// Bitfields
+
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FPrimalItemQuality.StaticStruct()"); }
+};
+
+struct FPrimalItemStatDefinition
+{
+	// Fields
+
+	UTexture2D*& ItemStatIconField() { return *GetNativePointerField<UTexture2D**>(this, "FPrimalItemStatDefinition.ItemStatIcon"); }
+	FString& ItemStatNameField() { return *GetNativePointerField<FString*>(this, "FPrimalItemStatDefinition.ItemStatName"); }
+
+	// Bitfields
+
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FPrimalItemStatDefinition.StaticStruct()"); }
+};
+
+struct FPrimalMapMarkerEntryData
+{
+	// Fields
+
+	int& coord1Field() { return *GetNativePointerField<int*>(this, "FPrimalMapMarkerEntryData.coord1"); }
+	int& coord2Field() { return *GetNativePointerField<int*>(this, "FPrimalMapMarkerEntryData.coord2"); }
+	FString& nameField() { return *GetNativePointerField<FString*>(this, "FPrimalMapMarkerEntryData.name"); }
+	FColor& OverrideMarkerTextColorField() { return *GetNativePointerField<FColor*>(this, "FPrimalMapMarkerEntryData.OverrideMarkerTextColor"); }
+	float& coord1fField() { return *GetNativePointerField<float*>(this, "FPrimalMapMarkerEntryData.coord1f"); }
+	float& coord2fField() { return *GetNativePointerField<float*>(this, "FPrimalMapMarkerEntryData.coord2f"); }
+
+	// Bitfields
+
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FPrimalMapMarkerEntryData.StaticStruct()"); }
+};
+
+struct FPrimalPersistentCharacterStatsStruct
+{
+	// Fields
+
+	 unsigned __int16& CharacterStatusComponent_ExtraCharacterLevelField() { return *GetNativePointerField<unsigned __int16*>(this, "FPrimalPersistentCharacterStatsStruct.CharacterStatusComponent_ExtraCharacterLevel"); }
+	 float& CharacterStatusComponent_ExperiencePointsField() { return *GetNativePointerField<float*>(this, "FPrimalPersistentCharacterStatsStruct.CharacterStatusComponent_ExperiencePoints"); }
+	 int& PlayerState_TotalEngramPointsField() { return *GetNativePointerField<int*>(this, "FPrimalPersistentCharacterStatsStruct.PlayerState_TotalEngramPoints"); }
+	 int& PlayerState_PurchasedEngramPointsField() { return *GetNativePointerField<int*>(this, "FPrimalPersistentCharacterStatsStruct.PlayerState_PurchasedEngramPoints"); }
+	 int& CharacterStatusComponent_HighestExtraCharacterLevelField() { return *GetNativePointerField<int*>(this, "FPrimalPersistentCharacterStatsStruct.CharacterStatusComponent_HighestExtraCharacterLevel"); }
+	 int& CharacterStatusComponent_LastRespecAtExtraCharacterLevelField() { return *GetNativePointerField<int*>(this, "FPrimalPersistentCharacterStatsStruct.CharacterStatusComponent_LastRespecAtExtraCharacterLevel"); }
+	 long double& CharacterStatusComponent_LastRespecUtcTimeSecondsField() { return *GetNativePointerField<long double*>(this, "FPrimalPersistentCharacterStatsStruct.CharacterStatusComponent_LastRespecUtcTimeSeconds"); }
+	 TArray<unsigned int,TSizedDefaultAllocator<32> >&PerMapExplorerNoteUnlocksField() { return *GetNativePointerField<TArray<unsigned int,TSizedDefaultAllocator<32> >*>(this, "FPrimalPersistentCharacterStatsStruct.PerMapExplorerNoteUnlocks"); }
+	 TArray<FName,TSizedDefaultAllocator<32> >&EmoteUnlocksField() { return *GetNativePointerField<TArray<FName,TSizedDefaultAllocator<32> >*>(this, "FPrimalPersistentCharacterStatsStruct.EmoteUnlocks"); }
+	 TArray<TSubclassOf<UPrimalItem>,TSizedDefaultAllocator<32> >&PlayerState_EngramBlueprintsField() { return *GetNativePointerField<TArray<TSubclassOf<UPrimalItem>,TSizedDefaultAllocator<32> >*>(this, "FPrimalPersistentCharacterStatsStruct.PlayerState_EngramBlueprints"); }
+	 FieldArray<unsigned __int8, 12> CharacterStatusComponent_NumberOfLevelUpPointsAppliedField() { return { this, "FPrimalPersistentCharacterStatsStruct.CharacterStatusComponent_NumberOfLevelUpPointsApplied" }; }
+	 FieldArray<TSubclassOf<UPrimalItem>, 10> PlayerState_DefaultItemSlotClassesField() { return { this, "FPrimalPersistentCharacterStatsStruct.PlayerState_DefaultItemSlotClasses" }; }
+	 FieldArray<unsigned __int8, 10> PlayerState_DefaultItemSlotEngramsField() { return { this, "FPrimalPersistentCharacterStatsStruct.PlayerState_DefaultItemSlotEngrams" }; }
+	 FieldArray<FDinoOrderGroup, 10> DinoOrderGroupsField() { return { this, "FPrimalPersistentCharacterStatsStruct.DinoOrderGroups" }; }
+	 int& CurrentlySelectedDinoOrderGroupField() { return *GetNativePointerField<int*>(this, "FPrimalPersistentCharacterStatsStruct.CurrentlySelectedDinoOrderGroup"); }
+	 float& PercentageOfHeadHairGrowthField() { return *GetNativePointerField<float*>(this, "FPrimalPersistentCharacterStatsStruct.PercentageOfHeadHairGrowth"); }
+	 float& PercentageOfFacialHairGrowthField() { return *GetNativePointerField<float*>(this, "FPrimalPersistentCharacterStatsStruct.PercentageOfFacialHairGrowth"); }
+	 unsigned __int8& HeadHairIndexField() { return *GetNativePointerField<unsigned __int8*>(this, "FPrimalPersistentCharacterStatsStruct.HeadHairIndex"); }
+	 TArray<TSubclassOf<UPrimalItem>,TSizedDefaultAllocator<32> >&ForcedUnlockDefaultCosmeticsField() { return *GetNativePointerField<TArray<TSubclassOf<UPrimalItem>,TSizedDefaultAllocator<32> >*>(this, "FPrimalPersistentCharacterStatsStruct.ForcedUnlockDefaultCosmetics"); }
+
+	 // Bitfields
+
+
+	 // Functions
+
+	static UScriptStruct * StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FPrimalPersistentCharacterStatsStruct.StaticStruct()"); }
+	FPrimalPersistentCharacterStatsStruct * operator=(const FPrimalPersistentCharacterStatsStruct * __that) { return NativeCall<FPrimalPersistentCharacterStatsStruct*, const FPrimalPersistentCharacterStatsStruct*>(this, "FPrimalPersistentCharacterStatsStruct.operator=(FPrimalPersistentCharacterStatsStruct&)", __that); }
+	//void FPrimalPersistentCharacterStatsStruct() { NativeCall<void>(this, "FPrimalPersistentCharacterStatsStruct.FPrimalPersistentCharacterStatsStruct()"); }
+	//void ~FPrimalPersistentCharacterStatsStruct() { NativeCall<void>(this, "FPrimalPersistentCharacterStatsStruct.~FPrimalPersistentCharacterStatsStruct()"); }
+	//void FPrimalPersistentCharacterStatsStruct(const FPrimalPersistentCharacterStatsStruct * __that) { NativeCall<void, const FPrimalPersistentCharacterStatsStruct*>(this, "FPrimalPersistentCharacterStatsStruct.FPrimalPersistentCharacterStatsStruct(FPrimalPersistentCharacterStatsStruct&)", __that); }
+	bool IsPerMapExplorerNoteUnlocked(int ExplorerNoteIndex) { return NativeCall<bool, int>(this, "FPrimalPersistentCharacterStatsStruct.IsPerMapExplorerNoteUnlocked(int)", ExplorerNoteIndex); }
+	bool IsEmoteUnlocked(FName EmoteName) { return NativeCall<bool, FName>(this, "FPrimalPersistentCharacterStatsStruct.IsEmoteUnlocked(FName)", EmoteName); }
+	void UnlockEmote(FName EmoteName) { NativeCall<void, FName>(this, "FPrimalPersistentCharacterStatsStruct.UnlockEmote(FName)", EmoteName); }
+	void ApplyToPrimalCharacter(APrimalCharacter * aChar, AShooterPlayerController * forPC, bool bIgnoreStats) { NativeCall<void, APrimalCharacter*, AShooterPlayerController*, bool>(this, "FPrimalPersistentCharacterStatsStruct.ApplyToPrimalCharacter(APrimalCharacter*,AShooterPlayerController*,bool)", aChar, forPC, bIgnoreStats); }
+	void GiveEngramsToPlayerState(APrimalCharacter * aChar, AShooterPlayerController * forPC) { NativeCall<void, APrimalCharacter*, AShooterPlayerController*>(this, "FPrimalPersistentCharacterStatsStruct.GiveEngramsToPlayerState(APrimalCharacter*,AShooterPlayerController*)", aChar, forPC); }
+};
+
+struct FPrimalPlayerCharacterConfigStruct
+{
+	// Fields
+
+	FieldArray<FLinearColor, 4> BodyColorsField() { return { this, "FPrimalPlayerCharacterConfigStruct.BodyColors" }; }
+	FieldArray<unsigned __int8, 2> OverrideHeadHairColorField() { return { this, "FPrimalPlayerCharacterConfigStruct.OverrideHeadHairColor" }; }
+	FieldArray<unsigned __int8, 2> OverrideFacialHairColorField() { return { this, "FPrimalPlayerCharacterConfigStruct.OverrideFacialHairColor" }; }
+	unsigned __int8& HeadHairIndexField() { return *GetNativePointerField<unsigned __int8*>(this, "FPrimalPlayerCharacterConfigStruct.HeadHairIndex"); }
+	float& PercentOfFullHeadHairGrowthField() { return *GetNativePointerField<float*>(this, "FPrimalPlayerCharacterConfigStruct.PercentOfFullHeadHairGrowth"); }
+	float& PercentOfFullFacialHairGrowthField() { return *GetNativePointerField<float*>(this, "FPrimalPlayerCharacterConfigStruct.PercentOfFullFacialHairGrowth"); }
+	FString& PlayerCharacterNameField() { return *GetNativePointerField<FString*>(this, "FPrimalPlayerCharacterConfigStruct.PlayerCharacterName"); }
+	FieldArray<float, 26> RawBoneModifiersField() { return { this, "FPrimalPlayerCharacterConfigStruct.RawBoneModifiers" }; }
+	FieldArray<unsigned __int8, 50> DynamicMaterialBytesField() { return { this, "FPrimalPlayerCharacterConfigStruct.DynamicMaterialBytes" }; }
+	int& PlayerVoiceCollectionIndexField() { return *GetNativePointerField<int*>(this, "FPrimalPlayerCharacterConfigStruct.PlayerVoiceCollectionIndex"); }
+	int& PlayerSpawnRegionIndexField() { return *GetNativePointerField<int*>(this, "FPrimalPlayerCharacterConfigStruct.PlayerSpawnRegionIndex"); }
+
+	// Bitfields
+
+	BitFieldValue<bool, unsigned __int32> bIsFemale() { return { this, "FPrimalPlayerCharacterConfigStruct.bIsFemale" }; }
+	BitFieldValue<bool, unsigned __int32> bUsingCustomPlayerVoiceCollection() { return { this, "FPrimalPlayerCharacterConfigStruct.bUsingCustomPlayerVoiceCollection" }; }
+
+	// Functions
+
+	//void FPrimalPlayerCharacterConfigStruct(const FPrimalPlayerCharacterConfigStruct* __that) { NativeCall<void, const FPrimalPlayerCharacterConfigStruct*>(this, "FPrimalPlayerCharacterConfigStruct.FPrimalPlayerCharacterConfigStruct(FPrimalPlayerCharacterConfigStruct&)", __that); }
+	FPrimalPlayerCharacterConfigStruct* operator=(const FPrimalPlayerCharacterConfigStruct* __that) { return NativeCall<FPrimalPlayerCharacterConfigStruct*, const FPrimalPlayerCharacterConfigStruct*>(this, "FPrimalPlayerCharacterConfigStruct.operator=(FPrimalPlayerCharacterConfigStruct&)", __that); }
+	//void FPrimalPlayerCharacterConfigStruct() { NativeCall<void>(this, "FPrimalPlayerCharacterConfigStruct.FPrimalPlayerCharacterConfigStruct()"); }
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FPrimalPlayerCharacterConfigStruct.StaticStruct()"); }
+	//void FPrimalPlayerCharacterConfigStruct(FPrimalPlayerCharacterConfigStruct* __that) { NativeCall<void, FPrimalPlayerCharacterConfigStruct*>(this, "FPrimalPlayerCharacterConfigStruct.FPrimalPlayerCharacterConfigStruct(FPrimalPlayerCharacterConfigStruct&)", __that); }
+	FPrimalPlayerCharacterConfigStruct* operator=(FPrimalPlayerCharacterConfigStruct* __that) { return NativeCall<FPrimalPlayerCharacterConfigStruct*, FPrimalPlayerCharacterConfigStruct*>(this, "FPrimalPlayerCharacterConfigStruct.operator=(FPrimalPlayerCharacterConfigStruct&)", __that); }
+};
+
+struct FPrimalPlayerDataStruct
+{
+	// Fields
+
+	unsigned __int64& PlayerDataIDField() { return *GetNativePointerField<unsigned __int64*>(this, "FPrimalPlayerDataStruct.PlayerDataID"); }
+	FUniqueNetIdRepl& UniqueIDField() { return *GetNativePointerField<FUniqueNetIdRepl*>(this, "FPrimalPlayerDataStruct.UniqueID"); }
+	FString& SavedNetworkAddressField() { return *GetNativePointerField<FString*>(this, "FPrimalPlayerDataStruct.SavedNetworkAddress"); }
+	FString& PlayerNameField() { return *GetNativePointerField<FString*>(this, "FPrimalPlayerDataStruct.PlayerName"); }
+	unsigned int& LocalPlayerIndexField() { return *GetNativePointerField<unsigned int*>(this, "FPrimalPlayerDataStruct.LocalPlayerIndex"); }
+	FPrimalPlayerCharacterConfigStruct& MyPlayerCharacterConfigField() { return *GetNativePointerField<FPrimalPlayerCharacterConfigStruct*>(this, "FPrimalPlayerDataStruct.MyPlayerCharacterConfig"); }
+	int& LastPinCodeUsedField() { return *GetNativePointerField<int*>(this, "FPrimalPlayerDataStruct.LastPinCodeUsed"); }
+	FPrimalPersistentCharacterStatsStruct& MyPersistentCharacterStatsField() { return *GetNativePointerField<FPrimalPersistentCharacterStatsStruct*>(this, "FPrimalPlayerDataStruct.MyPersistentCharacterStats"); }
+	int& NumPersonalDinosField() { return *GetNativePointerField<int*>(this, "FPrimalPlayerDataStruct.NumPersonalDinos"); }
+	int& TribeIDField() { return *GetNativePointerField<int*>(this, "FPrimalPlayerDataStruct.TribeID"); }
+	TArray<int, TSizedDefaultAllocator<32> >& AppIDSetField() { return *GetNativePointerField<TArray<int, TSizedDefaultAllocator<32> >*>(this, "FPrimalPlayerDataStruct.AppIDSet"); }
+	int& PlayerDataVersionField() { return *GetNativePointerField<int*>(this, "FPrimalPlayerDataStruct.PlayerDataVersion"); }
+	long double& NextAllowedRespawnTimeField() { return *GetNativePointerField<long double*>(this, "FPrimalPlayerDataStruct.NextAllowedRespawnTime"); }
+	long double& LastTimeDiedToEnemyTeamField() { return *GetNativePointerField<long double*>(this, "FPrimalPlayerDataStruct.LastTimeDiedToEnemyTeam"); }
+	long double& LoginTimeField() { return *GetNativePointerField<long double*>(this, "FPrimalPlayerDataStruct.LoginTime"); }
+	long double& LastLoginTimeField() { return *GetNativePointerField<long double*>(this, "FPrimalPlayerDataStruct.LastLoginTime"); }
+	float& AllowedRespawnIntervalField() { return *GetNativePointerField<float*>(this, "FPrimalPlayerDataStruct.AllowedRespawnInterval"); }
+	float& NumOfDeathsField() { return *GetNativePointerField<float*>(this, "FPrimalPlayerDataStruct.NumOfDeaths"); }
+	int& SpawnDayNumberField() { return *GetNativePointerField<int*>(this, "FPrimalPlayerDataStruct.SpawnDayNumber"); }
+	float& SpawnDayTimeField() { return *GetNativePointerField<float*>(this, "FPrimalPlayerDataStruct.SpawnDayTime"); }
+	long double& LastInventoryRetrievalUTCTimeField() { return *GetNativePointerField<long double*>(this, "FPrimalPlayerDataStruct.LastInventoryRetrievalUTCTime"); }
+	long double& SuicideCooldownStartTimeField() { return *GetNativePointerField<long double*>(this, "FPrimalPlayerDataStruct.SuicideCooldownStartTime"); }
+	TArray<FLatestMissionScore, TSizedDefaultAllocator<32> >& LatestMissionScoresField() { return *GetNativePointerField<TArray<FLatestMissionScore, TSizedDefaultAllocator<32> >*>(this, "FPrimalPlayerDataStruct.LatestMissionScores"); }
+	TArray<FTrackedActorPlusInfoStruct, TSizedDefaultAllocator<32> >& PersonalCachedTeamActorList_UpdatedOnIntervalField() { return *GetNativePointerField<TArray<FTrackedActorPlusInfoStruct, TSizedDefaultAllocator<32> >*>(this, "FPrimalPlayerDataStruct.PersonalCachedTeamActorList_UpdatedOnInterval"); }
+	long double& LastNetworkTimeUpdatedPersonalCachedTeamActorListsField() { return *GetNativePointerField<long double*>(this, "FPrimalPlayerDataStruct.LastNetworkTimeUpdatedPersonalCachedTeamActorLists"); }
+	//TArray<FVectorBoolPair, TSizedDefaultAllocator<32> >& ServerSavedLastDeathLocationsField() { return *GetNativePointerField<TArray<FVectorBoolPair, TSizedDefaultAllocator<32> >*>(this, "FPrimalPlayerDataStruct.ServerSavedLastDeathLocations"); }
+	//TArray<FTrackedActorIDCategoryPair, TSizedDefaultAllocator<32> >& SavedFavoritedTrackedActorInfoField() { return *GetNativePointerField<TArray<FTrackedActorIDCategoryPair, TSizedDefaultAllocator<32> >*>(this, "FPrimalPlayerDataStruct.SavedFavoritedTrackedActorInfo"); }
+	//TArray<FTrackedActorIDCategoryPairWithBool, TSizedDefaultAllocator<32> >& SavedWaypointTrackedActorInfoField() { return *GetNativePointerField<TArray<FTrackedActorIDCategoryPairWithBool, TSizedDefaultAllocator<32> >*>(this, "FPrimalPlayerDataStruct.SavedWaypointTrackedActorInfo"); }
+
+	// Bitfields
+
+	BitFieldValue<bool, unsigned __int32> bFirstSpawned() { return { this, "FPrimalPlayerDataStruct.bFirstSpawned" }; }
+	BitFieldValue<bool, unsigned __int32> bUseSpectator() { return { this, "FPrimalPlayerDataStruct.bUseSpectator" }; }
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FPrimalPlayerDataStruct.StaticStruct()"); }
+	FPrimalPlayerDataStruct* operator=(const FPrimalPlayerDataStruct* __that) { return NativeCall<FPrimalPlayerDataStruct*, const FPrimalPlayerDataStruct*>(this, "FPrimalPlayerDataStruct.operator=(FPrimalPlayerDataStruct&)", __that); }
 };
