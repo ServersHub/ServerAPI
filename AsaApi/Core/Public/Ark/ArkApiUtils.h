@@ -113,8 +113,7 @@ namespace AsaApi
 		* \param args Optional arguments
 		*/
 		template <typename T, typename... Args>
-		FORCEINLINE void SendServerMessageToAll(FLinearColor msg_color, const T* msg,
-			Args&&... args)
+		FORCEINLINE void SendServerMessageToAll(FLinearColor msg_color, const T* msg, Args&&... args)
 		{
 			FString text(FString::Format(msg, std::forward<Args>(args)...));
 
@@ -124,7 +123,8 @@ namespace AsaApi
 				AShooterPlayerController* shooter_pc = static_cast<AShooterPlayerController*>(player_controller.Get());
 				if (shooter_pc)
 				{
-					shooter_pc->ClientServerChatDirectMessage(&text, msg_color, false);
+					FString senderid = "Server";
+					shooter_pc->ClientServerChatDirectMessage(&text, msg_color, false, &senderid);
 				}
 			}
 		}
@@ -151,9 +151,7 @@ namespace AsaApi
 			{
 				AShooterPlayerController* shooter_pc = static_cast<AShooterPlayerController*>(player_controller.Get());
 				if (shooter_pc)
-				{
-					shooter_pc->ClientServerSOTFNotificationCustom_Implementation(&text, color, display_scale, display_time, icon, nullptr);
-				}
+					shooter_pc->ClientServerNotification(&text, color, display_scale, display_time, nullptr, nullptr, 1);
 			}
 		}
 
@@ -179,9 +177,7 @@ namespace AsaApi
 			{
 				AShooterPlayerController* shooter_pc = static_cast<AShooterPlayerController*>(player_controller.Get());
 				if (shooter_pc)
-				{
 					shooter_pc->ClientChatMessage(chat_message);
-				}
 			}
 		}
 
@@ -194,9 +190,7 @@ namespace AsaApi
 			
 			AShooterPlayerController* playerController = static_cast<AShooterPlayerController*>(controller);
 			if (playerController != nullptr)
-			{
 				playerController->GetUniqueNetIdAsString(&eos_id);
-			}
 
 			return eos_id;
 		}
@@ -234,11 +228,8 @@ namespace AsaApi
 		{
 			AShooterPlayerController* result = nullptr;
 
-			if (character != nullptr
-				&& !character->IsDead())
-			{
+			if (character != nullptr && !character->IsDead())
 				result = (AShooterPlayerController*)(character->GetOwnerController());
-			}
 
 			return result;
 		}
@@ -320,25 +311,19 @@ namespace AsaApi
 		FORCEINLINE bool SpawnDrop(const wchar_t* blueprint, FVector pos, int amount, float item_quality = 0.0f,
 			bool force_blueprint = false, float life_span = 0.0f) const
 		{
-			return false;
 			APlayerController* player = GetWorld()->GetFirstPlayerController();
 			if (!player)
-			{
 				return false;
-			}
 
 			FString bpFstr(blueprint);
 
-			TSubclassOf<UPrimalItem> archetype;
-			archetype.uClass = UVictoryCore::BPLoadClass(&bpFstr);
+			TSubclassOf<UObject> archetype;
+			UVictoryCore::StringReferenceToClass(&archetype, &bpFstr);
 
-			UPrimalItem* item = UPrimalItem::AddNewItem(archetype, nullptr, false, false, item_quality, false, amount,
-				force_blueprint, 0, false, nullptr, 0, 0, 0, true);
+			UPrimalItem* item = UPrimalItem::AddNewItem(archetype.uClass, nullptr, false, false, item_quality, false, amount, force_blueprint, 0, false, nullptr, 0, 0, 0, true);
 
 			if (!item)
-			{
 				return false;
-			}
 
 			FItemNetInfo* info = static_cast<FItemNetInfo*>(FMemory::Malloc(0x400));
 			RtlSecureZeroMemory(info, 0x400);
@@ -351,8 +336,7 @@ namespace AsaApi
 			FVector zero_vector{ 0, 0, 0 };
 			FRotator rot{ 0, 0, 0 };
 
-			UPrimalInventoryComponent::StaticDropItem(player, info, archetype_dropped, &rot, true, &pos, &rot, true,
-				false, false, true, nullptr, &zero_vector, nullptr, life_span);
+			UPrimalInventoryComponent::StaticDropItem(player, info, archetype_dropped, &rot, true, &pos, &rot, true, false, false, true, nullptr, &zero_vector, nullptr, life_span);
 
 			FMemory::Free(info);
 			return true;
