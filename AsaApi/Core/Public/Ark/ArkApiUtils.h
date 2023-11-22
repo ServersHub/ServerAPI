@@ -48,13 +48,13 @@ namespace AsaApi
 		* \param args Optional arguments
 		*/
 		template <typename T, typename... Args>
-		FORCEINLINE void SendServerMessage(AShooterPlayerController* player_controller, FLinearColor msg_color, const T* msg,
-			Args&&... args)
+		FORCEINLINE void SendServerMessage(AShooterPlayerController* player_controller, FLinearColor msg_color, const T* msg, Args&&... args)
 		{
 			if (player_controller)
 			{
+				FString senderid = "Server";
 				FString text(FString::Format(msg, std::forward<Args>(args)...));
-				player_controller->ClientServerChatDirectMessage(&text, msg_color, false);
+				player_controller->ClientServerChatDirectMessage(&text, msg_color, false, &senderid);
 			}
 		}
 
@@ -595,7 +595,7 @@ namespace AsaApi
 		{
 			FString eos_id;
 			GetShooterGameMode()->GetSteamIDStringForPlayerID(&eos_id, player_id);
-			if (!eos_id.IsEmpty())
+			if (eos_id.IsEmpty())
 			{
 				const auto& player_controllers = GetWorld()->PlayerControllerListField();
 				for (TWeakObjectPtr<APlayerController> player_controller : player_controllers)
@@ -608,7 +608,7 @@ namespace AsaApi
 					}
 				}
 
-				GetShooterGameMode()->AddPlayerID(player_id, &eos_id);
+				GetShooterGameMode()->AddPlayerID(player_id, &eos_id, false);
 			}
 
 			return eos_id;

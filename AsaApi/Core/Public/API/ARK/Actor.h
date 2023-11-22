@@ -37,23 +37,37 @@ struct FPrimalChatMessage {
     FPrimalChatMessage* operator=(FPrimalChatMessage* __that) { return NativeCall<FPrimalChatMessage*, FPrimalChatMessage*>(this, "FPrimalChatMessage.operator=(FPrimalChatMessage&)", __that); }
 };
 
-struct  FPrimalPlayerCharacterConfigStructReplicated
+struct FPrimalPlayerCharacterConfigStructReplicated
 {
-    unsigned __int8 bIsFemale : 1;
-    FLinearColor BodyColors[4];
-    FString PlayerCharacterName;
-    unsigned __int8 FacialHairIndex;
-    unsigned __int8 HeadHairIndex;
-    unsigned __int8 EyebrowIndex;
-    float PercentOfFullHeadHairGrowth;
-    float PercentOfFullFacialHairGrowth;
-    float RawBoneModifiers[26];
-    int PlayerSpawnRegionIndex;
-    unsigned __int8 OverrideHeadHairColor[2];
-    unsigned __int8 OverrideFacialHairColor[2];
-    unsigned __int8 DynamicMaterialBytes[50];
-    int PlayerVoiceCollectionIndex;
-    unsigned __int8 bUsingCustomPlayerVoiceCollection : 1;
+    // Fields
+
+    FieldArray<FLinearColor, 4> BodyColorsField() { return { this, "FPrimalPlayerCharacterConfigStructReplicated.BodyColors" }; }
+    FString& PlayerCharacterNameField() { return *GetNativePointerField<FString*>(this, "FPrimalPlayerCharacterConfigStructReplicated.PlayerCharacterName"); }
+    unsigned __int8& HeadHairIndexField() { return *GetNativePointerField<unsigned __int8*>(this, "FPrimalPlayerCharacterConfigStructReplicated.HeadHairIndex"); }
+    float& PercentOfFullHeadHairGrowthField() { return *GetNativePointerField<float*>(this, "FPrimalPlayerCharacterConfigStructReplicated.PercentOfFullHeadHairGrowth"); }
+    float& PercentOfFullFacialHairGrowthField() { return *GetNativePointerField<float*>(this, "FPrimalPlayerCharacterConfigStructReplicated.PercentOfFullFacialHairGrowth"); }
+    FieldArray<float, 26> RawBoneModifiersField() { return { this, "FPrimalPlayerCharacterConfigStructReplicated.RawBoneModifiers" }; }
+    int& PlayerSpawnRegionIndexField() { return *GetNativePointerField<int*>(this, "FPrimalPlayerCharacterConfigStructReplicated.PlayerSpawnRegionIndex"); }
+    FieldArray<unsigned __int8, 2> OverrideHeadHairColorField() { return { this, "FPrimalPlayerCharacterConfigStructReplicated.OverrideHeadHairColor" }; }
+    FieldArray<unsigned __int8, 2> OverrideFacialHairColorField() { return { this, "FPrimalPlayerCharacterConfigStructReplicated.OverrideFacialHairColor" }; }
+    FieldArray<unsigned __int8, 50> DynamicMaterialBytesField() { return { this, "FPrimalPlayerCharacterConfigStructReplicated.DynamicMaterialBytes" }; }
+    int& PlayerVoiceCollectionIndexField() { return *GetNativePointerField<int*>(this, "FPrimalPlayerCharacterConfigStructReplicated.PlayerVoiceCollectionIndex"); }
+
+    // Bitfields
+
+    BitFieldValue<bool, unsigned __int32> bIsFemale() { return { this, "FPrimalPlayerCharacterConfigStructReplicated.bIsFemale" }; }
+    BitFieldValue<bool, unsigned __int32> bUsingCustomPlayerVoiceCollection() { return { this, "FPrimalPlayerCharacterConfigStructReplicated.bUsingCustomPlayerVoiceCollection" }; }
+
+    // Functions
+
+    //void FPrimalPlayerCharacterConfigStructReplicated(const FPrimalPlayerCharacterConfigStructReplicated* __that) { NativeCall<void, const FPrimalPlayerCharacterConfigStructReplicated*>(this, "FPrimalPlayerCharacterConfigStructReplicated.FPrimalPlayerCharacterConfigStructReplicated(FPrimalPlayerCharacterConfigStructReplicated&)", __that); }
+    static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FPrimalPlayerCharacterConfigStructReplicated.StaticStruct()"); }
+    FPrimalPlayerCharacterConfigStructReplicated* operator=(const FPrimalPlayerCharacterConfigStructReplicated* __that) { return NativeCall<FPrimalPlayerCharacterConfigStructReplicated*, const FPrimalPlayerCharacterConfigStructReplicated*>(this, "FPrimalPlayerCharacterConfigStructReplicated.operator=(FPrimalPlayerCharacterConfigStructReplicated&)", __that); }
+    //void FPrimalPlayerCharacterConfigStructReplicated() { NativeCall<void>(this, "FPrimalPlayerCharacterConfigStructReplicated.FPrimalPlayerCharacterConfigStructReplicated()"); }
+    FPrimalPlayerCharacterConfigStructReplicated* operator=(FPrimalPlayerCharacterConfigStructReplicated* __that) { return NativeCall<FPrimalPlayerCharacterConfigStructReplicated*, FPrimalPlayerCharacterConfigStructReplicated*>(this, "FPrimalPlayerCharacterConfigStructReplicated.operator=(FPrimalPlayerCharacterConfigStructReplicated&)", __that); }
+    //void FPrimalPlayerCharacterConfigStructReplicated(FPrimalPlayerCharacterConfigStructReplicated* __that) { NativeCall<void, FPrimalPlayerCharacterConfigStructReplicated*>(this, "FPrimalPlayerCharacterConfigStructReplicated.FPrimalPlayerCharacterConfigStructReplicated(FPrimalPlayerCharacterConfigStructReplicated&)", __that); }
+    FPrimalPlayerCharacterConfigStruct* GetPlayerCharacterConfig(FPrimalPlayerCharacterConfigStruct* result) { return NativeCall<FPrimalPlayerCharacterConfigStruct*, FPrimalPlayerCharacterConfigStruct*>(this, "FPrimalPlayerCharacterConfigStructReplicated.GetPlayerCharacterConfig()", result); }
+    //void FPrimalPlayerCharacterConfigStructReplicated(const FPrimalPlayerCharacterConfigStruct* fromConfig) { NativeCall<void, const FPrimalPlayerCharacterConfigStruct*>(this, "FPrimalPlayerCharacterConfigStructReplicated.FPrimalPlayerCharacterConfigStructReplicated(FPrimalPlayerCharacterConfigStruct&)", fromConfig); }
 };
 
 struct UPrimalActor : UObject
@@ -3577,7 +3591,7 @@ struct AShooterPlayerController : ABasePlayerController
     static void ClientProcessItemNetExecCommandUnreliableBP() { NativeCall<void>(nullptr, "AShooterPlayerController.ClientProcessItemNetExecCommandUnreliableBP()"); }
     void ClientProgressAchievement(const FString* AchievementID, float Progress, bool savePlayerData) { NativeCall<void, const FString*, float, bool>(this, "AShooterPlayerController.ClientProgressAchievement(FString&,float,bool)", AchievementID, Progress, savePlayerData); }
     static void ClientSendArkDataPayloadBegin() { NativeCall<void>(nullptr, "AShooterPlayerController.ClientSendArkDataPayloadBegin()"); }
-    void ClientServerChatDirectMessage(FString* MessageText, FLinearColor MessageColor, bool bIsBold) { NativeCall<void, FString*, FLinearColor, bool>(this, "AShooterPlayerController.ClientServerChatDirectMessage(FString&,FLinearColor,bool)", MessageText, MessageColor, bIsBold); }
+    void ClientServerChatDirectMessage(FString* MessageText, FLinearColor MessageColor, bool bIsBold, FString* SenderId) { NativeCall<void, FString*, FLinearColor, bool, FString*>(this, "AShooterPlayerController.ClientServerChatDirectMessage(FString&,FLinearColor,bool,FString&)", MessageText, MessageColor, bIsBold, SenderId); }
     void ClientSetArkTributeLimits(bool LimitItems, bool LimitDinos, bool LimitCharacters, int MaxItems, int MaxDinos, int MaxCharacters) { NativeCall<void, bool, bool, bool, int, int, int>(this, "AShooterPlayerController.ClientSetArkTributeLimits(bool,bool,bool,int,int,int)", LimitItems, LimitDinos, LimitCharacters, MaxItems, MaxDinos, MaxCharacters); }
     //void ClientSetHUDAndInitUIScenes(TSubclassOf<AHUD> NewHUDClass) { NativeCall<void, TSubclassOf<AHUD>>(this, "AShooterPlayerController.ClientSetHUDAndInitUIScenes(TSubclassOf<AHUD>)", NewHUDClass); }
     void ClientShowCharacterCreationUI(bool bShowDownloadCharacter) { NativeCall<void, bool>(this, "AShooterPlayerController.ClientShowCharacterCreationUI(bool)", bShowDownloadCharacter); }
