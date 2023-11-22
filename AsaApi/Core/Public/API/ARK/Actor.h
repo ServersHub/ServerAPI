@@ -3736,9 +3736,9 @@ struct AShooterPlayerController : ABasePlayerController
     void EndArkGamepadDpadDown() { NativeCall<void>(this, "AShooterPlayerController.EndArkGamepadDpadDown()"); }
     void ServerAddAchievementID_Implementation(const FString* AchievementID, bool bIsOnSpawn) { NativeCall<void, const FString*, bool>(this, "AShooterPlayerController.ServerAddAchievementID_Implementation(FString&,bool)", AchievementID, bIsOnSpawn); }
     int GetLinkedPlayerID() { return NativeCall<int>(this, "AShooterPlayerController.GetLinkedPlayerID()"); }
-    FString* GetPlayerCharacterName(FString* result) { return NativeCall<FString*, FString*>(this, "AShooterPlayerController.GetPlayerCharacterName()", result); }
-    void ClientCollectedAchievementItem_Implementation(TSubclassOf<UPrimalItem> ItemClass) { NativeCall<void, TSubclassOf<UPrimalItem>>(this, "AShooterPlayerController.ClientCollectedAchievementItem_Implementation(TSubclassOf<UPrimalItem>)", ItemClass); }
-    bool AllowTribeGroupPermission(ETribeGroupPermission::Type TribeGroupPermission, UObject* OnObject) { return NativeCall<bool, ETribeGroupPermission::Type, UObject*>(this, "AShooterPlayerController.AllowTribeGroupPermission(ETribeGroupPermission::Type,UObject*)", TribeGroupPermission, OnObject); }
+    FString* GetPlayerCharacterName(FString* result) { return NativeCall<FString*, FString*>(this, "AShooterPlayerController.GetPlayerCharacterName(FString&)", result); }
+    //void ClientCollectedAchievementItem_Implementation(TSubclassOf<UPrimalItem> ItemClass) { NativeCall<void, TSubclassOf<UPrimalItem>>(this, "AShooterPlayerController.ClientCollectedAchievementItem_Implementation(TSubclassOf<UPrimalItem>)", ItemClass); }
+    //bool AllowTribeGroupPermission(ETribeGroupPermission::Type TribeGroupPermission, UObject* OnObject) { return NativeCall<bool, ETribeGroupPermission::Type, UObject*>(this, "AShooterPlayerController.AllowTribeGroupPermission(ETribeGroupPermission::Type,UObject*)", TribeGroupPermission, OnObject); }
     bool UseTribeGroupRanks() { return NativeCall<bool>(this, "AShooterPlayerController.UseTribeGroupRanks()"); }
     bool IsTribeAdmin() { return NativeCall<bool>(this, "AShooterPlayerController.IsTribeAdmin()"); }
     bool IsInTribe() { return NativeCall<bool>(this, "AShooterPlayerController.IsInTribe()"); }
@@ -7606,9 +7606,9 @@ struct APrimalDinoCharacter : APrimalCharacter
     bool IsNearFeed(AShooterPlayerState* ForPlayer) { return NativeCall<bool, AShooterPlayerState*>(this, "APrimalDinoCharacter.IsNearFeed(AShooterPlayerState*)", ForPlayer); }
     void DeathHarvestingFadeOut_Implementation() { NativeCall<void>(this, "APrimalDinoCharacter.DeathHarvestingFadeOut_Implementation()"); }
     void NotifyItemAdded(UPrimalItem* anItem, bool bEquipItem) { NativeCall<void, UPrimalItem*, bool>(this, "APrimalDinoCharacter.NotifyItemAdded(UPrimalItem*,bool)", anItem, bEquipItem); }
-    FString* GetDinoDescriptiveName(FString* result, bool IgnoreArticle, bool IncludeDetails) { return NativeCall<FString*, FString*, bool, bool>(this, "APrimalDinoCharacter.GetDinoDescriptiveName(bool,bool)", result, IgnoreArticle, IncludeDetails); }
-    TArray<FString, TSizedDefaultAllocator<32> >* GetDetailedDescription(TArray<FString, TSizedDefaultAllocator<32> >* result, const FString* IndentPrefix) { return NativeCall<TArray<FString, TSizedDefaultAllocator<32> >*, TArray<FString, TSizedDefaultAllocator<32> >*, const FString*>(this, "APrimalDinoCharacter.GetDetailedDescription(FString&)", result, IndentPrefix); }
-    void ServerGiveDefaultWeapon_Implementation(__int16 a2) { NativeCall<void, __int16>(this, "APrimalDinoCharacter.ServerGiveDefaultWeapon_Implementation()", a2); }
+    FString* GetDinoDescriptiveName(FString* result, bool IgnoreArticle, bool IncludeDetails) { return NativeCall<FString*, FString*, bool, bool>(this, "APrimalDinoCharacter.GetDinoDescriptiveName(FString&,bool,bool)", result, IgnoreArticle, IncludeDetails); }
+    TArray<FString, TSizedDefaultAllocator<32> >* GetDetailedDescription(TArray<FString, TSizedDefaultAllocator<32> >* result, const FString* IndentPrefix) { return NativeCall<TArray<FString, TSizedDefaultAllocator<32> >*, TArray<FString, TSizedDefaultAllocator<32> >*, const FString*>(this, "APrimalDinoCharacter.GetDetailedDescription(TArray<FString,TSizedDefaultAllocator<32>>*,FString&)", result, IndentPrefix); }
+    void ServerGiveDefaultWeapon_Implementation() { NativeCall<void>(this, "APrimalDinoCharacter.ServerGiveDefaultWeapon_Implementation()"); }
     bool CanWhistle() { return NativeCall<bool>(this, "APrimalDinoCharacter.CanWhistle()"); }
     void ServerCallFollow_Implementation(__int16 a2) { NativeCall<void, __int16>(this, "APrimalDinoCharacter.ServerCallFollow_Implementation()", a2); }
     void ServerCallFollowOne_Implementation(APrimalDinoCharacter* ForDinoChar) { NativeCall<void, APrimalDinoCharacter*>(this, "APrimalDinoCharacter.ServerCallFollowOne_Implementation(APrimalDinoCharacter*)", ForDinoChar); }
