@@ -1422,6 +1422,16 @@ struct AActor : UPrimalActor
     void MulticastDrawDebugLineTraceHitResult_Implementation(const FHitResult* Hit, UE::Math::TVector<double>* TraceStart, UE::Math::TVector<double>* TraceEnd) { NativeCall<void, const FHitResult*, UE::Math::TVector<double>*, UE::Math::TVector<double>*>(this, "AActor.MulticastDrawDebugLineTraceHitResult_Implementation(FHitResult,UE::Math::TVector<double>,UE::Math::TVector<double>,FLinearColor,FLinearColor,float,float,bool,FLinearColor,float,float,bool)", Hit, TraceStart, TraceEnd); }
     //UPathFollowingComponent* FindComponentByClass<class UPathFollowingComponent>() { return NativeCall<UPathFollowingComponent*>(this, "AActor.FindComponentByClass<class UPathFollowingComponent>()"); }
     bool IsA(UClass* SomeBase) { return ClassPrivateField()->IsChildOf(SomeBase); }
+    inline FVector GetLocation()
+    {
+        auto* root = this->RootComponentField().Get();
+        if (root)
+        {
+            UE::Math::TTransform<double> transform = root->ComponentToWorldField();
+            return transform.GetLocation();
+        }
+        return FVector();
+    }
 };
 
 struct AVolume : AActor // : ABrush
@@ -3150,7 +3160,7 @@ struct AShooterPlayerController : ABasePlayerController
     void ClientProgressAchievement(const FString* AchievementID, float Progress, bool savePlayerData) { NativeCall<void, const FString*, float, bool>(this, "AShooterPlayerController.ClientProgressAchievement(FString&,float,bool)", AchievementID, Progress, savePlayerData); }
     void ClientSendArkDataPayloadBegin(FGuid* ID, EPrimalARKTributeDataType::Type ArkDataType, const FString* DataClass, const FString* TagName, const FString* Name, const TArray<FString, TSizedDefaultAllocator<32> >* DataStats, unsigned int ID1, unsigned int ID2) { NativeCall<void, FGuid*, EPrimalARKTributeDataType::Type, const FString*, const FString*, const FString*, const TArray<FString, TSizedDefaultAllocator<32> >*, unsigned int, unsigned int>(this, "AShooterPlayerController.ClientSendArkDataPayloadBegin(FGuid,EPrimalARKTributeDataType::Type,FString&,FString&,FString&,TArray<FString,TSizedDefaultAllocator<32>>&,unsignedint,unsignedint)", ID, ArkDataType, DataClass, TagName, Name, DataStats, ID1, ID2); }
     void ClientServerChatDirectMessage(const FString* MessageText, FLinearColor MessageColor, bool bIsBold, const FString* SenderId) { NativeCall<void, const FString*, FLinearColor, bool, const FString*>(this, "AShooterPlayerController.ClientServerChatDirectMessage(FString&,FLinearColor,bool,FString&)", MessageText, MessageColor, bIsBold, SenderId); }
-    void ClientServerNotification(const FString* MessageText, FLinearColor* MessageColor, float DisplayScale, float DisplayTime, UTexture2D* MessageIcon, USoundBase* SoundToPlay, int Priority) { NativeCall<void, const FString*, FLinearColor*, float, float, UTexture2D*, USoundBase*, int>(this, "AShooterPlayerController.ClientServerNotification(FString&,FLinearColor,float,float,UTexture2D*,USoundBase*,int)", MessageText, MessageColor, DisplayScale, DisplayTime, MessageIcon, SoundToPlay, Priority); }
+    void ClientServerNotification(const FString* MessageText, FLinearColor MessageColor, float DisplayScale, float DisplayTime, UTexture2D* MessageIcon, USoundBase* SoundToPlay, int Priority) { NativeCall<void, const FString*, FLinearColor, float, float, UTexture2D*, USoundBase*, int>(this, "AShooterPlayerController.ClientServerNotification(FString&,FLinearColor,float,float,UTexture2D*,USoundBase*,int)", MessageText, MessageColor, DisplayScale, DisplayTime, MessageIcon, SoundToPlay, Priority); }
     void ClientServerNotificationSingle(const FString* MessageText, FLinearColor* MessageColor, float DisplayScale, float DisplayTime, UTexture2D* MessageIcon, USoundBase* SoundToPlay, int MessageTypeID) { NativeCall<void, const FString*, FLinearColor*, float, float, UTexture2D*, USoundBase*, int>(this, "AShooterPlayerController.ClientServerNotificationSingle(FString&,FLinearColor,float,float,UTexture2D*,USoundBase*,int,int)", MessageText, MessageColor, DisplayScale, DisplayTime, MessageIcon, SoundToPlay, MessageTypeID); }
     void ClientSetArkTributeLimits(bool LimitItems, bool LimitDinos, bool LimitCharacters, int MaxItems, int MaxDinos, int MaxCharacters) { NativeCall<void, bool, bool, bool, int, int, int>(this, "AShooterPlayerController.ClientSetArkTributeLimits(bool,bool,bool,int,int,int)", LimitItems, LimitDinos, LimitCharacters, MaxItems, MaxDinos, MaxCharacters); }
     void ClientSetHUDAndInitUIScenes(TSubclassOf<AHUD> NewHUDClass) { NativeCall<void, TSubclassOf<AHUD>>(this, "AShooterPlayerController.ClientSetHUDAndInitUIScenes(TSubclassOf<AHUD>)", NewHUDClass); }
