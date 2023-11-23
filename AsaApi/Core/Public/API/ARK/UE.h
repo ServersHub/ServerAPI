@@ -945,6 +945,8 @@ struct Globals
 	}
 
 	static DataValue<struct UEngine*> GEngine() { return { "Global.GEngine" }; }
+	static DataValue<class FString*> GGameUserSettingsIni() { return { "Global.GGameUserSettingsIni" }; }
+	static DataValue<struct FConfigCacheIni*> GConfig() { return { "Global.GConfig" }; }
 };
 
 struct UEngine : UObject

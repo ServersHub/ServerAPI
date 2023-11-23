@@ -2169,41 +2169,41 @@ struct FPrimalPersistentCharacterStatsStruct
 {
 	// Fields
 
-	 unsigned __int16& CharacterStatusComponent_ExtraCharacterLevelField() { return *GetNativePointerField<unsigned __int16*>(this, "FPrimalPersistentCharacterStatsStruct.CharacterStatusComponent_ExtraCharacterLevel"); }
-	 float& CharacterStatusComponent_ExperiencePointsField() { return *GetNativePointerField<float*>(this, "FPrimalPersistentCharacterStatsStruct.CharacterStatusComponent_ExperiencePoints"); }
-	 int& PlayerState_TotalEngramPointsField() { return *GetNativePointerField<int*>(this, "FPrimalPersistentCharacterStatsStruct.PlayerState_TotalEngramPoints"); }
-	 int& PlayerState_PurchasedEngramPointsField() { return *GetNativePointerField<int*>(this, "FPrimalPersistentCharacterStatsStruct.PlayerState_PurchasedEngramPoints"); }
-	 int& CharacterStatusComponent_HighestExtraCharacterLevelField() { return *GetNativePointerField<int*>(this, "FPrimalPersistentCharacterStatsStruct.CharacterStatusComponent_HighestExtraCharacterLevel"); }
-	 int& CharacterStatusComponent_LastRespecAtExtraCharacterLevelField() { return *GetNativePointerField<int*>(this, "FPrimalPersistentCharacterStatsStruct.CharacterStatusComponent_LastRespecAtExtraCharacterLevel"); }
-	 long double& CharacterStatusComponent_LastRespecUtcTimeSecondsField() { return *GetNativePointerField<long double*>(this, "FPrimalPersistentCharacterStatsStruct.CharacterStatusComponent_LastRespecUtcTimeSeconds"); }
-	 TArray<unsigned int,TSizedDefaultAllocator<32> >&PerMapExplorerNoteUnlocksField() { return *GetNativePointerField<TArray<unsigned int,TSizedDefaultAllocator<32> >*>(this, "FPrimalPersistentCharacterStatsStruct.PerMapExplorerNoteUnlocks"); }
-	 TArray<FName,TSizedDefaultAllocator<32> >&EmoteUnlocksField() { return *GetNativePointerField<TArray<FName,TSizedDefaultAllocator<32> >*>(this, "FPrimalPersistentCharacterStatsStruct.EmoteUnlocks"); }
-	 TArray<TSubclassOf<UPrimalItem>,TSizedDefaultAllocator<32> >&PlayerState_EngramBlueprintsField() { return *GetNativePointerField<TArray<TSubclassOf<UPrimalItem>,TSizedDefaultAllocator<32> >*>(this, "FPrimalPersistentCharacterStatsStruct.PlayerState_EngramBlueprints"); }
-	 FieldArray<unsigned __int8, 12> CharacterStatusComponent_NumberOfLevelUpPointsAppliedField() { return { this, "FPrimalPersistentCharacterStatsStruct.CharacterStatusComponent_NumberOfLevelUpPointsApplied" }; }
-	 FieldArray<TSubclassOf<UPrimalItem>, 10> PlayerState_DefaultItemSlotClassesField() { return { this, "FPrimalPersistentCharacterStatsStruct.PlayerState_DefaultItemSlotClasses" }; }
-	 FieldArray<unsigned __int8, 10> PlayerState_DefaultItemSlotEngramsField() { return { this, "FPrimalPersistentCharacterStatsStruct.PlayerState_DefaultItemSlotEngrams" }; }
-	 FieldArray<FDinoOrderGroup, 10> DinoOrderGroupsField() { return { this, "FPrimalPersistentCharacterStatsStruct.DinoOrderGroups" }; }
-	 int& CurrentlySelectedDinoOrderGroupField() { return *GetNativePointerField<int*>(this, "FPrimalPersistentCharacterStatsStruct.CurrentlySelectedDinoOrderGroup"); }
-	 float& PercentageOfHeadHairGrowthField() { return *GetNativePointerField<float*>(this, "FPrimalPersistentCharacterStatsStruct.PercentageOfHeadHairGrowth"); }
-	 float& PercentageOfFacialHairGrowthField() { return *GetNativePointerField<float*>(this, "FPrimalPersistentCharacterStatsStruct.PercentageOfFacialHairGrowth"); }
-	 unsigned __int8& HeadHairIndexField() { return *GetNativePointerField<unsigned __int8*>(this, "FPrimalPersistentCharacterStatsStruct.HeadHairIndex"); }
-	 TArray<TSubclassOf<UPrimalItem>,TSizedDefaultAllocator<32> >&ForcedUnlockDefaultCosmeticsField() { return *GetNativePointerField<TArray<TSubclassOf<UPrimalItem>,TSizedDefaultAllocator<32> >*>(this, "FPrimalPersistentCharacterStatsStruct.ForcedUnlockDefaultCosmetics"); }
+	unsigned __int16& CharacterStatusComponent_ExtraCharacterLevelField() { return *GetNativePointerField<unsigned __int16*>(this, "FPrimalPersistentCharacterStatsStruct.CharacterStatusComponent_ExtraCharacterLevel"); }
+	float& CharacterStatusComponent_ExperiencePointsField() { return *GetNativePointerField<float*>(this, "FPrimalPersistentCharacterStatsStruct.CharacterStatusComponent_ExperiencePoints"); }
+	int& PlayerState_TotalEngramPointsField() { return *GetNativePointerField<int*>(this, "FPrimalPersistentCharacterStatsStruct.PlayerState_TotalEngramPoints"); }
+	int& PlayerState_PurchasedEngramPointsField() { return *GetNativePointerField<int*>(this, "FPrimalPersistentCharacterStatsStruct.PlayerState_PurchasedEngramPoints"); }
+	int& CharacterStatusComponent_HighestExtraCharacterLevelField() { return *GetNativePointerField<int*>(this, "FPrimalPersistentCharacterStatsStruct.CharacterStatusComponent_HighestExtraCharacterLevel"); }
+	int& CharacterStatusComponent_LastRespecAtExtraCharacterLevelField() { return *GetNativePointerField<int*>(this, "FPrimalPersistentCharacterStatsStruct.CharacterStatusComponent_LastRespecAtExtraCharacterLevel"); }
+	long double& CharacterStatusComponent_LastRespecUtcTimeSecondsField() { return *GetNativePointerField<long double*>(this, "FPrimalPersistentCharacterStatsStruct.CharacterStatusComponent_LastRespecUtcTimeSeconds"); }
+	TArray<unsigned int, TSizedDefaultAllocator<32> >& PerMapExplorerNoteUnlocksField() { return *GetNativePointerField<TArray<unsigned int, TSizedDefaultAllocator<32> >*>(this, "FPrimalPersistentCharacterStatsStruct.PerMapExplorerNoteUnlocks"); }
+	TArray<FName, TSizedDefaultAllocator<32> >& EmoteUnlocksField() { return *GetNativePointerField<TArray<FName, TSizedDefaultAllocator<32> >*>(this, "FPrimalPersistentCharacterStatsStruct.EmoteUnlocks"); }
+	TArray<TSubclassOf<UPrimalItem>, TSizedDefaultAllocator<32> >& PlayerState_EngramBlueprintsField() { return *GetNativePointerField<TArray<TSubclassOf<UPrimalItem>, TSizedDefaultAllocator<32> >*>(this, "FPrimalPersistentCharacterStatsStruct.PlayerState_EngramBlueprints"); }
+	FieldArray<unsigned __int8, 12> CharacterStatusComponent_NumberOfLevelUpPointsAppliedField() { return { this, "FPrimalPersistentCharacterStatsStruct.CharacterStatusComponent_NumberOfLevelUpPointsApplied" }; }
+	FieldArray<TSubclassOf<UPrimalItem>, 10> PlayerState_DefaultItemSlotClassesField() { return { this, "FPrimalPersistentCharacterStatsStruct.PlayerState_DefaultItemSlotClasses" }; }
+	FieldArray<unsigned __int8, 10> PlayerState_DefaultItemSlotEngramsField() { return { this, "FPrimalPersistentCharacterStatsStruct.PlayerState_DefaultItemSlotEngrams" }; }
+	FieldArray<FDinoOrderGroup, 10> DinoOrderGroupsField() { return { this, "FPrimalPersistentCharacterStatsStruct.DinoOrderGroups" }; }
+	int& CurrentlySelectedDinoOrderGroupField() { return *GetNativePointerField<int*>(this, "FPrimalPersistentCharacterStatsStruct.CurrentlySelectedDinoOrderGroup"); }
+	float& PercentageOfHeadHairGrowthField() { return *GetNativePointerField<float*>(this, "FPrimalPersistentCharacterStatsStruct.PercentageOfHeadHairGrowth"); }
+	float& PercentageOfFacialHairGrowthField() { return *GetNativePointerField<float*>(this, "FPrimalPersistentCharacterStatsStruct.PercentageOfFacialHairGrowth"); }
+	unsigned __int8& HeadHairIndexField() { return *GetNativePointerField<unsigned __int8*>(this, "FPrimalPersistentCharacterStatsStruct.HeadHairIndex"); }
+	TArray<TSubclassOf<UPrimalItem>, TSizedDefaultAllocator<32> >& ForcedUnlockDefaultCosmeticsField() { return *GetNativePointerField<TArray<TSubclassOf<UPrimalItem>, TSizedDefaultAllocator<32> >*>(this, "FPrimalPersistentCharacterStatsStruct.ForcedUnlockDefaultCosmetics"); }
 
-	 // Bitfields
+	// Bitfields
 
 
-	 // Functions
+	// Functions
 
-	static UScriptStruct * StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FPrimalPersistentCharacterStatsStruct.StaticStruct()"); }
-	FPrimalPersistentCharacterStatsStruct * operator=(const FPrimalPersistentCharacterStatsStruct * __that) { return NativeCall<FPrimalPersistentCharacterStatsStruct*, const FPrimalPersistentCharacterStatsStruct*>(this, "FPrimalPersistentCharacterStatsStruct.operator=(FPrimalPersistentCharacterStatsStruct&)", __that); }
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FPrimalPersistentCharacterStatsStruct.StaticStruct()"); }
+	FPrimalPersistentCharacterStatsStruct* operator=(const FPrimalPersistentCharacterStatsStruct* __that) { return NativeCall<FPrimalPersistentCharacterStatsStruct*, const FPrimalPersistentCharacterStatsStruct*>(this, "FPrimalPersistentCharacterStatsStruct.operator=(FPrimalPersistentCharacterStatsStruct&)", __that); }
 	//void FPrimalPersistentCharacterStatsStruct() { NativeCall<void>(this, "FPrimalPersistentCharacterStatsStruct.FPrimalPersistentCharacterStatsStruct()"); }
 	//void ~FPrimalPersistentCharacterStatsStruct() { NativeCall<void>(this, "FPrimalPersistentCharacterStatsStruct.~FPrimalPersistentCharacterStatsStruct()"); }
 	//void FPrimalPersistentCharacterStatsStruct(const FPrimalPersistentCharacterStatsStruct * __that) { NativeCall<void, const FPrimalPersistentCharacterStatsStruct*>(this, "FPrimalPersistentCharacterStatsStruct.FPrimalPersistentCharacterStatsStruct(FPrimalPersistentCharacterStatsStruct&)", __that); }
 	bool IsPerMapExplorerNoteUnlocked(int ExplorerNoteIndex) { return NativeCall<bool, int>(this, "FPrimalPersistentCharacterStatsStruct.IsPerMapExplorerNoteUnlocked(int)", ExplorerNoteIndex); }
 	bool IsEmoteUnlocked(FName EmoteName) { return NativeCall<bool, FName>(this, "FPrimalPersistentCharacterStatsStruct.IsEmoteUnlocked(FName)", EmoteName); }
 	void UnlockEmote(FName EmoteName) { NativeCall<void, FName>(this, "FPrimalPersistentCharacterStatsStruct.UnlockEmote(FName)", EmoteName); }
-	void ApplyToPrimalCharacter(APrimalCharacter * aChar, AShooterPlayerController * forPC, bool bIgnoreStats) { NativeCall<void, APrimalCharacter*, AShooterPlayerController*, bool>(this, "FPrimalPersistentCharacterStatsStruct.ApplyToPrimalCharacter(APrimalCharacter*,AShooterPlayerController*,bool)", aChar, forPC, bIgnoreStats); }
-	void GiveEngramsToPlayerState(APrimalCharacter * aChar, AShooterPlayerController * forPC) { NativeCall<void, APrimalCharacter*, AShooterPlayerController*>(this, "FPrimalPersistentCharacterStatsStruct.GiveEngramsToPlayerState(APrimalCharacter*,AShooterPlayerController*)", aChar, forPC); }
+	void ApplyToPrimalCharacter(APrimalCharacter* aChar, AShooterPlayerController* forPC, bool bIgnoreStats) { NativeCall<void, APrimalCharacter*, AShooterPlayerController*, bool>(this, "FPrimalPersistentCharacterStatsStruct.ApplyToPrimalCharacter(APrimalCharacter*,AShooterPlayerController*,bool)", aChar, forPC, bIgnoreStats); }
+	void GiveEngramsToPlayerState(APrimalCharacter* aChar, AShooterPlayerController* forPC) { NativeCall<void, APrimalCharacter*, AShooterPlayerController*>(this, "FPrimalPersistentCharacterStatsStruct.GiveEngramsToPlayerState(APrimalCharacter*,AShooterPlayerController*)", aChar, forPC); }
 };
 
 struct FPrimalPlayerCharacterConfigStruct
@@ -2279,4 +2279,70 @@ struct FPrimalPlayerDataStruct
 
 	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FPrimalPlayerDataStruct.StaticStruct()"); }
 	FPrimalPlayerDataStruct* operator=(const FPrimalPlayerDataStruct* __that) { return NativeCall<FPrimalPlayerDataStruct*, const FPrimalPlayerDataStruct*>(this, "FPrimalPlayerDataStruct.operator=(FPrimalPlayerDataStruct&)", __that); }
+};
+
+struct FConfigCacheIni
+{
+	// Fields
+
+	//FConfigCacheIni_vtbl*& __vftableField() { return *GetNativePointerField<FConfigCacheIni_vtbl**>(this, "FConfigCacheIni.__vftable"); }
+	bool& bIsReadyForUseField() { return *GetNativePointerField<bool*>(this, "FConfigCacheIni.bIsReadyForUse"); }
+	//FConfigCacheIni::FKnownConfigFiles& KnownFilesField() { return *GetNativePointerField<FConfigCacheIni::FKnownConfigFiles*>(this, "FConfigCacheIni.KnownFiles"); }
+	TMap<FString, FConfigFile*, FDefaultSetAllocator, TDefaultMapHashableKeyFuncs<FString, FConfigFile*, 0> >& OtherFilesField() { return *GetNativePointerField<TMap<FString, FConfigFile*, FDefaultSetAllocator, TDefaultMapHashableKeyFuncs<FString, FConfigFile*, 0> >*>(this, "FConfigCacheIni.OtherFiles"); }
+
+	// Bitfields
+
+
+	// Functions
+
+	bool AreFileOperationsDisabled() { return NativeCall<bool>(this, "FConfigCacheIni.AreFileOperationsDisabled()"); }
+	int GetIntOrDefault(const wchar_t* Section, const wchar_t* Key, const int DefaultValue, const FString* Filename) { return NativeCall<int, const wchar_t*, const wchar_t*, const int, const FString*>(this, "FConfigCacheIni.GetIntOrDefault(wchar_t*,wchar_t*,int,FString&)", Section, Key, DefaultValue, Filename); }
+	FConfigFile* FindConfigFile(const FString* Filename) { return NativeCall<FConfigFile*, const FString*>(this, "FConfigCacheIni.FindConfigFile(FString&)", Filename); }
+	FConfigFile* Find(const FString* Filename) { return NativeCall<FConfigFile*, const FString*>(this, "FConfigCacheIni.Find(FString&)", Filename); }
+	FConfigFile* FindConfigFileWithBaseName(FName BaseName) { return NativeCall<FConfigFile*, FName>(this, "FConfigCacheIni.FindConfigFileWithBaseName(FName)", BaseName); }
+	TArray<FString, TSizedDefaultAllocator<32> >* GetFilenames(TArray<FString, TSizedDefaultAllocator<32> >* result) { return NativeCall<TArray<FString, TSizedDefaultAllocator<32> >*, TArray<FString, TSizedDefaultAllocator<32> >*>(this, "FConfigCacheIni.GetFilenames()", result); }
+	void Flush(bool bRemoveFromCache, const FString* Filename) { NativeCall<void, bool, const FString*>(this, "FConfigCacheIni.Flush(bool,FString&)", bRemoveFromCache, Filename); }
+	void Parse1ToNSectionOfNames(const wchar_t* Section, const wchar_t* KeyOne, const wchar_t* KeyN, TMap<FName, TArray<FName, TSizedDefaultAllocator<32> >, FDefaultSetAllocator, TDefaultMapHashableKeyFuncs<FName, TArray<FName, TSizedDefaultAllocator<32> >, 0> >* OutMap, const FString* Filename) { NativeCall<void, const wchar_t*, const wchar_t*, const wchar_t*, TMap<FName, TArray<FName, TSizedDefaultAllocator<32> >, FDefaultSetAllocator, TDefaultMapHashableKeyFuncs<FName, TArray<FName, TSizedDefaultAllocator<32> >, 0> >*, const FString*>(this, "FConfigCacheIni.Parse1ToNSectionOfNames(wchar_t*,wchar_t*,wchar_t*,TMap<FName,TArray<FName,TSizedDefaultAllocator<32>>,FDefaultSetAllocator,TDefaultMapHashableKeyFuncs<FName,TArray<FName,TSizedDefaultAllocator<32>>,0>>&,FString&)", Section, KeyOne, KeyN, OutMap, Filename); }
+	void Parse1ToNSectionOfStrings(const wchar_t* Section, const wchar_t* KeyOne, const wchar_t* KeyN, TMap<FString, TArray<FString, TSizedDefaultAllocator<32> >, FDefaultSetAllocator, TDefaultMapHashableKeyFuncs<FString, TArray<FString, TSizedDefaultAllocator<32> >, 0> >* OutMap, const FString* Filename) { NativeCall<void, const wchar_t*, const wchar_t*, const wchar_t*, TMap<FString, TArray<FString, TSizedDefaultAllocator<32> >, FDefaultSetAllocator, TDefaultMapHashableKeyFuncs<FString, TArray<FString, TSizedDefaultAllocator<32> >, 0> >*, const FString*>(this, "FConfigCacheIni.Parse1ToNSectionOfStrings(wchar_t*,wchar_t*,wchar_t*,TMap<FString,TArray<FString,TSizedDefaultAllocator<32>>,FDefaultSetAllocator,TDefaultMapHashableKeyFuncs<FString,TArray<FString,TSizedDefaultAllocator<32>>,0>>&,FString&)", Section, KeyOne, KeyN, OutMap, Filename); }
+	void LoadFile(const FString* Filename, const FConfigFile* Fallback, const wchar_t* PlatformString) { NativeCall<void, const FString*, const FConfigFile*, const wchar_t*>(this, "FConfigCacheIni.LoadFile(FString&,FConfigFile*,wchar_t*)", Filename, Fallback, PlatformString); }
+	void UnloadFile(const FString* Filename) { NativeCall<void, const FString*>(this, "FConfigCacheIni.UnloadFile(FString&)", Filename); }
+	bool GetString(const wchar_t* Section, const wchar_t* Key, FString* Value, const FString* Filename) { return NativeCall<bool, const wchar_t*, const wchar_t*, FString*, const FString*>(this, "FConfigCacheIni.GetString(wchar_t*,wchar_t*,FString&,FString&)", Section, Key, Value, Filename); }
+	bool GetSection(const wchar_t* Section, TArray<FString, TSizedDefaultAllocator<32> >* Result, const FString* Filename) { return NativeCall<bool, const wchar_t*, TArray<FString, TSizedDefaultAllocator<32> >*, const FString*>(this, "FConfigCacheIni.GetSection(wchar_t*,TArray<FString,TSizedDefaultAllocator<32>>&,FString&)", Section, Result, Filename); }
+	FConfigSection* GetSectionPrivate(const wchar_t* Section, const bool Force, const bool Const, const FString* Filename) { return NativeCall<FConfigSection*, const wchar_t*, const bool, const bool, const FString*>(this, "FConfigCacheIni.GetSectionPrivate(wchar_t*,bool,bool,FString&)", Section, Force, Const, Filename); }
+	bool DoesSectionExist(const wchar_t* Section, const FString* Filename) { return NativeCall<bool, const wchar_t*, const FString*>(this, "FConfigCacheIni.DoesSectionExist(wchar_t*,FString&)", Section, Filename); }
+	void SetString(const wchar_t* Section, const wchar_t* Key, const wchar_t* Value, const FString* Filename) { NativeCall<void, const wchar_t*, const wchar_t*, const wchar_t*, const FString*>(this, "FConfigCacheIni.SetString(wchar_t*,wchar_t*,wchar_t*,FString&)", Section, Key, Value, Filename); }
+	bool RemoveKey(const wchar_t* Section, const wchar_t* Key, const FString* Filename) { return NativeCall<bool, const wchar_t*, const wchar_t*, const FString*>(this, "FConfigCacheIni.RemoveKey(wchar_t*,wchar_t*,FString&)", Section, Key, Filename); }
+	bool EmptySection(const wchar_t* Section, const FString* Filename) { return NativeCall<bool, const wchar_t*, const FString*>(this, "FConfigCacheIni.EmptySection(wchar_t*,FString&)", Section, Filename); }
+	FString* GetConfigFilename(FString* result, const wchar_t* BaseIniName) { return NativeCall<FString*, FString*, const wchar_t*>(this, "FConfigCacheIni.GetConfigFilename(wchar_t*)", result, BaseIniName); }
+	bool GetSectionNames(const FString* Filename, TArray<FString, TSizedDefaultAllocator<32> >* out_SectionNames) { return NativeCall<bool, const FString*, TArray<FString, TSizedDefaultAllocator<32> >*>(this, "FConfigCacheIni.GetSectionNames(FString&,TArray<FString,TSizedDefaultAllocator<32>>&)", Filename, out_SectionNames); }
+	bool GetPerObjectConfigSections(const FString* Filename, const FString* SearchClass, TArray<FString, TSizedDefaultAllocator<32> >* out_SectionNames) { return NativeCall<bool, const FString*, const FString*, TArray<FString, TSizedDefaultAllocator<32> >*>(this, "FConfigCacheIni.GetPerObjectConfigSections(FString&,FString&,TArray<FString,TSizedDefaultAllocator<32>>&,int)", Filename, SearchClass, out_SectionNames); }
+	void Dump(FOutputDevice* Ar, const wchar_t* BaseIniName) { NativeCall<void, FOutputDevice*, const wchar_t*>(this, "FConfigCacheIni.Dump(FOutputDevice&,wchar_t*)", Ar, BaseIniName); }
+	FString* GetStr(FString* result, const wchar_t* Section, const wchar_t* Key, const FString* Filename) { return NativeCall<FString*, FString*, const wchar_t*, const wchar_t*, const FString*>(this, "FConfigCacheIni.GetStr(wchar_t*,wchar_t*,FString&)", result, Section, Key, Filename); }
+	bool GetInt(const wchar_t* Section, const wchar_t* Key, int* Value, const FString* Filename) { return NativeCall<bool, const wchar_t*, const wchar_t*, int*, const FString*>(this, "FConfigCacheIni.GetInt(wchar_t*,wchar_t*,int&,FString&)", Section, Key, Value, Filename); }
+	bool GetFloat(const wchar_t* Section, const wchar_t* Key, float* Value, const FString* Filename) { return NativeCall<bool, const wchar_t*, const wchar_t*, float*, const FString*>(this, "FConfigCacheIni.GetFloat(wchar_t*,wchar_t*,float&,FString&)", Section, Key, Value, Filename); }
+	bool GetBool(const wchar_t* Section, const wchar_t* Key, bool* Value, const FString* Filename) { return NativeCall<bool, const wchar_t*, const wchar_t*, bool*, const FString*>(this, "FConfigCacheIni.GetBool(wchar_t*,wchar_t*,bool&,FString&)", Section, Key, Value, Filename); }
+	int GetArray(const wchar_t* Section, const wchar_t* Key, TArray<FString, TSizedDefaultAllocator<32> >* out_Arr, const FString* Filename) { return NativeCall<int, const wchar_t*, const wchar_t*, TArray<FString, TSizedDefaultAllocator<32> >*, const FString*>(this, "FConfigCacheIni.GetArray(wchar_t*,wchar_t*,TArray<FString,TSizedDefaultAllocator<32>>&,FString&)", Section, Key, out_Arr, Filename); }
+	int GetSingleLineArray(const wchar_t* Section, const wchar_t* Key, TArray<FString, TSizedDefaultAllocator<32> >* out_Arr) { return NativeCall<int, const wchar_t*, const wchar_t*, TArray<FString, TSizedDefaultAllocator<32> >*>(this, "FConfigCacheIni.GetSingleLineArray(wchar_t*,wchar_t*,TArray<FString,TSizedDefaultAllocator<32>>&,FString&)", Section, Key, out_Arr); }
+	bool GetVector2D(const wchar_t* Section, const wchar_t* Key, UE::Math::TVector2<double>* Value, const FString* Filename) { return NativeCall<bool, const wchar_t*, const wchar_t*, UE::Math::TVector2<double>*, const FString*>(this, "FConfigCacheIni.GetVector2D(wchar_t*,wchar_t*,UE::Math::TVector2<double>&,FString&)", Section, Key, Value, Filename); }
+	void SetInt(const wchar_t* Section, const wchar_t* Key, int Value, const FString* Filename) { NativeCall<void, const wchar_t*, const wchar_t*, int, const FString*>(this, "FConfigCacheIni.SetInt(wchar_t*,wchar_t*,int,FString&)", Section, Key, Value, Filename); }
+	void SetFloat(const wchar_t* Section, const wchar_t* Key, float Value, const FString* Filename) { NativeCall<void, const wchar_t*, const wchar_t*, float, const FString*>(this, "FConfigCacheIni.SetFloat(wchar_t*,wchar_t*,float,FString&)", Section, Key, Value, Filename); }
+	void SetBool(const wchar_t* Section, const wchar_t* Key, bool Value, const FString* Filename) { NativeCall<void, const wchar_t*, const wchar_t*, bool, const FString*>(this, "FConfigCacheIni.SetBool(wchar_t*,wchar_t*,bool,FString&)", Section, Key, Value, Filename); }
+	void SetVector(const wchar_t* Section, const wchar_t* Key, UE::Math::TVector<double>* Value, const FString* Filename) { NativeCall<void, const wchar_t*, const wchar_t*, UE::Math::TVector<double>*, const FString*>(this, "FConfigCacheIni.SetVector(wchar_t*,wchar_t*,UE::Math::TVector<double>,FString&)", Section, Key, Value, Filename); }
+	void ShowMemoryUsage(FOutputDevice* Ar) { NativeCall<void, FOutputDevice*>(this, "FConfigCacheIni.ShowMemoryUsage(FOutputDevice&)", Ar); }
+	unsigned __int64 GetMaxMemoryUsage() { return NativeCall<unsigned __int64>(this, "FConfigCacheIni.GetMaxMemoryUsage()"); }
+	bool ForEachEntry(const TDelegate<void __cdecl(wchar_t const*, wchar_t const*), FDefaultDelegateUserPolicy>* Visitor, const wchar_t* Section, const FString* Filename) { return NativeCall<bool, const TDelegate<void __cdecl(wchar_t const*, wchar_t const*), FDefaultDelegateUserPolicy>*, const wchar_t*, const FString*>(this, "FConfigCacheIni.ForEachEntry(TDelegate<void__cdecl(wchar_t*,wchar_t*)", Visitor, Section, Filename); }
+	static FString* GetDestIniFilename(FString* result, const wchar_t* BaseIniName, const wchar_t* PlatformName, const wchar_t* GeneratedConfigDir) { return NativeCall<FString*, FString*, const wchar_t*, const wchar_t*, const wchar_t*>(nullptr, "FConfigCacheIni.GetDestIniFilename(wchar_t*,wchar_t*,wchar_t*)", result, BaseIniName, PlatformName, GeneratedConfigDir); }
+	void Serialize(FArchive* Ar) { NativeCall<void, FArchive*>(this, "FConfigCacheIni.Serialize(FArchive&)", Ar); }
+	void SerializeStateForBootstrap_Impl(FArchive* Ar) { NativeCall<void, FArchive*>(this, "FConfigCacheIni.SerializeStateForBootstrap_Impl(FArchive&)", Ar); }
+	void FKnownConfigFiles() { NativeCall<void>(this, "FConfigCacheIni.FKnownConfigFiles()"); }
+	static bool CreateGConfigFromSaved(const wchar_t* Filename) { return NativeCall<bool, const wchar_t*>(nullptr, "FConfigCacheIni.CreateGConfigFromSaved(wchar_t*)", Filename); }
+	static void InitializeConfigSystem(__int64 a1, __int64 a2, __int64 a3) { NativeCall<void, __int64, __int64, __int64>(nullptr, "FConfigCacheIni.InitializeConfigSystem()", a1, a2, a3); }
+	static const FString* GetCustomConfigString() { return NativeCall<const FString*>(nullptr, "FConfigCacheIni.GetCustomConfigString()"); }
+	static bool LoadGlobalIniFile(FString* OutFinalIniFilename, const wchar_t* BaseIniName, const wchar_t* Platform, bool bForceReload, bool bRequireDefaultIni, bool bAllowGeneratedIniWhenCooked, bool bAllowRemoteConfig, const wchar_t* GeneratedConfigDir, FConfigCacheIni* ConfigSystem) { return NativeCall<bool, FString*, const wchar_t*, const wchar_t*, bool, bool, bool, bool, const wchar_t*, FConfigCacheIni*>(nullptr, "FConfigCacheIni.LoadGlobalIniFile(FString&,wchar_t*,wchar_t*,bool,bool,bool,bool,wchar_t*,FConfigCacheIni*)", OutFinalIniFilename, BaseIniName, Platform, bForceReload, bRequireDefaultIni, bAllowGeneratedIniWhenCooked, bAllowRemoteConfig, GeneratedConfigDir, ConfigSystem); }
+	static bool LoadLocalIniFile(FConfigFile* ConfigFile, const wchar_t* IniName, bool bIsBaseIniName, const wchar_t* Platform, bool bForceReload) { return NativeCall<bool, FConfigFile*, const wchar_t*, bool, const wchar_t*, bool>(nullptr, "FConfigCacheIni.LoadLocalIniFile(FConfigFile&,wchar_t*,bool,wchar_t*,bool)", ConfigFile, IniName, bIsBaseIniName, Platform, bForceReload); }
+	static FConfigFile* FindPlatformConfig(const wchar_t* IniName, const wchar_t* Platform) { return NativeCall<FConfigFile*, const wchar_t*, const wchar_t*>(nullptr, "FConfigCacheIni.FindPlatformConfig(wchar_t*,wchar_t*)", IniName, Platform); }
+	static FConfigFile* FindOrLoadPlatformConfig(FConfigFile* LocalFile, const wchar_t* IniName, const wchar_t* Platform) { return NativeCall<FConfigFile*, FConfigFile*, const wchar_t*, const wchar_t*>(nullptr, "FConfigCacheIni.FindOrLoadPlatformConfig(FConfigFile&,wchar_t*,wchar_t*)", LocalFile, IniName, Platform); }
+	//static void LoadConsoleVariablesFromINI(void(__fastcall*)(void*) a1) { NativeCall<void, void(__fastcall*)(void*)>(nullptr, "FConfigCacheIni.LoadConsoleVariablesFromINI()", a1); }
+	int Remove(const FString* Filename) { return NativeCall<int, const FString*>(this, "FConfigCacheIni.Remove(FString&)", Filename); }
+	FConfigFile* Add(const FString* Filename, const FConfigFile* File) { return NativeCall<FConfigFile*, const FString*, const FConfigFile*>(this, "FConfigCacheIni.Add(FString&,FConfigFile&)", Filename, File); }
 };

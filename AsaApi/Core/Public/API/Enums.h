@@ -41460,20 +41460,3 @@ enum class EMovementMode :int
 };
 
 typedef EWorldType::Type ETeleportType;
-
-
-//Shares Enums with EWorldType
-//namespace ETeleportType
-//{
-//	enum Type : int
-//	{
-//		None = EWorldType::None,
-//		Game = EWorldType::Game,
-//		Editor = EWorldType::Editor,
-//		PIE = EWorldType::PIE,
-//		EditorPreview = EWorldType::EditorPreview,
-//		GamePreview = EWorldType::GamePreview,
-//		GameRPC = EWorldType::GameRPC,
-//		Inactive = EWorldType::Inactive
-//	};
-//}
