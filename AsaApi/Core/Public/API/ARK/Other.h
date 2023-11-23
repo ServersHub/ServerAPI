@@ -120,7 +120,7 @@ struct UVictoryCore : UVictoryCoreHighest
 	static TArray<APlayerCameraManager*, TSizedDefaultAllocator<32> >* GetAllLocalPlayerCameraManagers(TArray<APlayerCameraManager*, TSizedDefaultAllocator<32> >* result, UObject* WorldContextObject) { return NativeCall<TArray<APlayerCameraManager*, TSizedDefaultAllocator<32> >*, TArray<APlayerCameraManager*, TSizedDefaultAllocator<32> >*, UObject*>(nullptr, "UVictoryCore.GetAllLocalPlayerCameraManagers(TArray<APlayerCameraManager*,TSizedDefaultAllocator<32>>*,UObject*)", result, WorldContextObject); }
 	static AShooterCharacter* GetShooterCharacterFromPawn(APawn* Pawn) { return NativeCall<AShooterCharacter*, APawn*>(nullptr, "UVictoryCore.GetShooterCharacterFromPawn(APawn*)", Pawn); }
 	static AShooterCharacter* GetShooterCharacterFromController(AController* Controller) { return NativeCall<AShooterCharacter*, AController*>(nullptr, "UVictoryCore.GetShooterCharacterFromController(AController*)", Controller); }
-	//static bool VTraceSingleBP(UObject* WorldContextObject, FHitResult* OutHit, const UE::Math::TVector<double>* Start, const UE::Math::TVector<double>* End, ECollisionChannel TraceChannel, int CollisionGroups, FName TraceTag, bool bTraceComplex, AActor* ActorToIgnore, float DebugDrawDuration) { return NativeCall<bool, UObject*, FHitResult*, const UE::Math::TVector<double>*, const UE::Math::TVector<double>*, ECollisionChannel, int, FName, bool, AActor*, float>(nullptr, "UVictoryCore.VTraceSingleBP(UObject*,FHitResult*,UE::Math::TVector<double>*,UE::Math::TVector<double>*,ECollisionChannel,int,FName,bool,AActor*,float)", WorldContextObject, OutHit, Start, End, TraceChannel, CollisionGroups, TraceTag, bTraceComplex, ActorToIgnore, DebugDrawDuration); }
+	static bool VTraceSingleBP(UObject* WorldContextObject, FHitResult* OutHit, const UE::Math::TVector<double>* Start, const UE::Math::TVector<double>* End, ECollisionChannel TraceChannel, int CollisionGroups, FName TraceTag, bool bTraceComplex, AActor* ActorToIgnore, float DebugDrawDuration) { return NativeCall<bool, UObject*, FHitResult*, const UE::Math::TVector<double>*, const UE::Math::TVector<double>*, ECollisionChannel, int, FName, bool, AActor*, float>(nullptr, "UVictoryCore.VTraceSingleBP(UObject*,FHitResult&,UE::Math::TVector<double>&,UE::Math::TVector<double>&,ECollisionChannel,int,FName,bool,AActor*,float)", WorldContextObject, OutHit, Start, End, TraceChannel, CollisionGroups, TraceTag, bTraceComplex, ActorToIgnore, DebugDrawDuration); }
 	//static bool VTraceSingleBP_IgnoreActorsArray(UObject* WorldContextObject, FHitResult* OutHit, const UE::Math::TVector<double>* Start, const UE::Math::TVector<double>* End, const TArray<AActor*, TSizedDefaultAllocator<32> >* ExtraIgnoreActors, const AActor* InIgnoreActor, ECollisionChannel TraceChannel, int CollisionGroups, FName TraceTag, bool bReturnPhysMaterial, bool bTraceComplex, float DebugDrawDuration) { return NativeCall<bool, UObject*, FHitResult*, const UE::Math::TVector<double>*, const UE::Math::TVector<double>*, const TArray<AActor*, TSizedDefaultAllocator<32> >*, const AActor*, ECollisionChannel, int, FName, bool, bool, float>(nullptr, "UVictoryCore.VTraceSingleBP_IgnoreActorsArray(UObject*,FHitResult*,UE::Math::TVector<double>*,UE::Math::TVector<double>*,TArray<AActor*,TSizedDefaultAllocator<32>>*,AActor*,ECollisionChannel,int,FName,bool,bool,float)", WorldContextObject, OutHit, Start, End, ExtraIgnoreActors, InIgnoreActor, TraceChannel, CollisionGroups, TraceTag, bReturnPhysMaterial, bTraceComplex, DebugDrawDuration); }
 	//static bool VTraceSphereBP(UObject* WorldContextObject, const UE::Math::TVector<double>* Start, const UE::Math::TVector<double>* End, FHitResult* HitOut, float Radius, const AActor* ActorToIgnore, ECollisionChannel Channel, int CollisionGroups, bool bReturnPhysMaterial, bool bTraceComplex, FName TraceTag, const AActor* OtherActorToIgnore, AActor* AnotherActorToIgnore, float DebugDrawDuration) { return NativeCall<bool, UObject*, const UE::Math::TVector<double>*, const UE::Math::TVector<double>*, FHitResult*, float, const AActor*, ECollisionChannel, int, bool, bool, FName, const AActor*, AActor*, float>(nullptr, "UVictoryCore.VTraceSphereBP(UObject*,UE::Math::TVector<double>*,UE::Math::TVector<double>*,FHitResult*,float,AActor*,ECollisionChannel,int,bool,bool,FName,AActor*,AActor*,float)", WorldContextObject, Start, End, HitOut, Radius, ActorToIgnore, Channel, CollisionGroups, bReturnPhysMaterial, bTraceComplex, TraceTag, OtherActorToIgnore, AnotherActorToIgnore, DebugDrawDuration); }
 	//static bool VTraceSphereBP_IgnoreActorsArray(UObject* WorldContextObject, const UE::Math::TVector<double>* Start, const UE::Math::TVector<double>* End, FHitResult* HitOut, float Radius, const TArray<AActor*, TSizedDefaultAllocator<32> >* ExtraIgnoreActors, const AActor* InIgnoreActor, ECollisionChannel Channel, int CollisionGroups, bool bReturnPhysMaterial, bool bTraceComplex, FName TraceTag, float DebugDrawDuration) { return NativeCall<bool, UObject*, const UE::Math::TVector<double>*, const UE::Math::TVector<double>*, FHitResult*, float, const TArray<AActor*, TSizedDefaultAllocator<32> >*, const AActor*, ECollisionChannel, int, bool, bool, FName, float>(nullptr, "UVictoryCore.VTraceSphereBP_IgnoreActorsArray(UObject*,UE::Math::TVector<double>*,UE::Math::TVector<double>*,FHitResult*,float,TArray<AActor*,TSizedDefaultAllocator<32>>*,AActor*,ECollisionChannel,int,bool,bool,FName,float)", WorldContextObject, Start, End, HitOut, Radius, ExtraIgnoreActors, InIgnoreActor, Channel, CollisionGroups, bReturnPhysMaterial, bTraceComplex, TraceTag, DebugDrawDuration); }
@@ -2345,4 +2345,134 @@ struct FConfigCacheIni
 	//static void LoadConsoleVariablesFromINI(void(__fastcall*)(void*) a1) { NativeCall<void, void(__fastcall*)(void*)>(nullptr, "FConfigCacheIni.LoadConsoleVariablesFromINI()", a1); }
 	int Remove(const FString* Filename) { return NativeCall<int, const FString*>(this, "FConfigCacheIni.Remove(FString&)", Filename); }
 	FConfigFile* Add(const FString* Filename, const FConfigFile* File) { return NativeCall<FConfigFile*, const FString*, const FConfigFile*>(this, "FConfigCacheIni.Add(FString&,FConfigFile&)", Filename, File); }
+};
+
+struct FCustomItemByteArray
+{
+	// Fields
+
+	TArray<unsigned char, TSizedDefaultAllocator<32> >& BytesField() { return *GetNativePointerField<TArray<unsigned char, TSizedDefaultAllocator<32> >*>(this, "FCustomItemByteArray.Bytes"); }
+
+	// Bitfields
+
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FCustomItemByteArray.StaticStruct()"); }
+};
+
+struct FCustomItemByteArrays
+{
+	// Fields
+
+	TArray<FCustomItemByteArray, TSizedDefaultAllocator<32> >& ByteArraysField() { return *GetNativePointerField<TArray<FCustomItemByteArray, TSizedDefaultAllocator<32> >*>(this, "FCustomItemByteArrays.ByteArrays"); }
+
+	// Bitfields
+
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FCustomItemByteArrays.StaticStruct()"); }
+	FCustomItemByteArrays* operator=(const FCustomItemByteArrays* __that) { return NativeCall<FCustomItemByteArrays*, const FCustomItemByteArrays*>(this, "FCustomItemByteArrays.operator=(FCustomItemByteArrays&)", __that); }
+};
+
+struct FCustomItemDoubles
+{
+	// Fields
+
+	TArray<double, TSizedDefaultAllocator<32> >& DoublesField() { return *GetNativePointerField<TArray<double, TSizedDefaultAllocator<32> >*>(this, "FCustomItemDoubles.Doubles"); }
+
+	// Bitfields
+
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FCustomItemDoubles.StaticStruct()"); }
+};
+
+
+
+struct FCustomItemData
+{
+	// Fields
+
+	FName& CustomDataNameField() { return *GetNativePointerField<FName*>(this, "FCustomItemData.CustomDataName"); }
+	TArray<FString, TSizedDefaultAllocator<32> >& CustomDataStringsField() { return *GetNativePointerField<TArray<FString, TSizedDefaultAllocator<32> >*>(this, "FCustomItemData.CustomDataStrings"); }
+	TArray<float, TSizedDefaultAllocator<32> >& CustomDataFloatsField() { return *GetNativePointerField<TArray<float, TSizedDefaultAllocator<32> >*>(this, "FCustomItemData.CustomDataFloats"); }
+	TArray<UObject*, TSizedDefaultAllocator<32> >& CustomDataObjectsField() { return *GetNativePointerField<TArray<UObject*, TSizedDefaultAllocator<32> >*>(this, "FCustomItemData.CustomDataObjects"); }
+	TArray<UClass*, TSizedDefaultAllocator<32> >& CustomDataClassesField() { return *GetNativePointerField<TArray<UClass*, TSizedDefaultAllocator<32> >*>(this, "FCustomItemData.CustomDataClasses"); }
+	TArray<FName, TSizedDefaultAllocator<32> >& CustomDataNamesField() { return *GetNativePointerField<TArray<FName, TSizedDefaultAllocator<32> >*>(this, "FCustomItemData.CustomDataNames"); }
+	FCustomItemByteArrays& CustomDataBytesField() { return *GetNativePointerField<FCustomItemByteArrays*>(this, "FCustomItemData.CustomDataBytes"); }
+	FCustomItemDoubles& CustomDataDoublesField() { return *GetNativePointerField<FCustomItemDoubles*>(this, "FCustomItemData.CustomDataDoubles"); }
+
+	// Bitfields
+
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FCustomItemData.StaticStruct()"); }
+	FCustomItemData* operator=(const FCustomItemData* __that) { return NativeCall<FCustomItemData*, const FCustomItemData*>(this, "FCustomItemData.operator=(FCustomItemData&)", __that); }
+};
+
+struct FWeightedObjectList
+{
+	// Fields
+
+	TArray<float, TSizedDefaultAllocator<32> >& WeightsField() { return *GetNativePointerField<TArray<float, TSizedDefaultAllocator<32> >*>(this, "FWeightedObjectList.Weights"); }
+	TArray<UObject*, TSizedDefaultAllocator<32> >& AssociatedObjectsField() { return *GetNativePointerField<TArray<UObject*, TSizedDefaultAllocator<32> >*>(this, "FWeightedObjectList.AssociatedObjects"); }
+
+	// Bitfields
+
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FWeightedObjectList.StaticStruct()"); }
+	UObject* GetRandomObject() { return NativeCall<UObject*>(this, "FWeightedObjectList.GetRandomObject()"); }
+};
+
+struct FVector_NetQuantize : UE::Math::TVector<double>
+{
+	// Fields
+
+
+	  // Bitfields
+
+
+	  // Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FVector_NetQuantize.StaticStruct()"); }
+	bool NetSerialize(FArchive* Ar, UPackageMap* Map, bool* bOutSuccess) { return NativeCall<bool, FArchive*, UPackageMap*, bool*>(this, "FVector_NetQuantize.NetSerialize(FArchive&,UPackageMap*,bool&)", Ar, Map, bOutSuccess); }
+};
+
+struct FUseItemAddCharacterStatusValue
+{
+	// Fields
+
+	float& BaseAmountToAddField() { return *GetNativePointerField<float*>(this, "FUseItemAddCharacterStatusValue.BaseAmountToAdd"); }
+	float& LimitExistingModifierDescriptionToMaxAmountField() { return *GetNativePointerField<float*>(this, "FUseItemAddCharacterStatusValue.LimitExistingModifierDescriptionToMaxAmount"); }
+	float& AddOverTimeSpeedField() { return *GetNativePointerField<float*>(this, "FUseItemAddCharacterStatusValue.AddOverTimeSpeed"); }
+	float& PercentAbsoluteMaxValueField() { return *GetNativePointerField<float*>(this, "FUseItemAddCharacterStatusValue.PercentAbsoluteMaxValue"); }
+	float& PercentAbsoluteMinValueField() { return *GetNativePointerField<float*>(this, "FUseItemAddCharacterStatusValue.PercentAbsoluteMinValue"); }
+	int& StatusValueModifierDescriptionIndexField() { return *GetNativePointerField<int*>(this, "FUseItemAddCharacterStatusValue.StatusValueModifierDescriptionIndex"); }
+	float& ItemQualityAddValueMultiplierField() { return *GetNativePointerField<float*>(this, "FUseItemAddCharacterStatusValue.ItemQualityAddValueMultiplier"); }
+	TEnumAsByte<enum EPrimalCharacterStatusValue::Type>& StopAtValueNearMaxField() { return *GetNativePointerField<TEnumAsByte<enum EPrimalCharacterStatusValue::Type>*>(this, "FUseItemAddCharacterStatusValue.StopAtValueNearMax"); }
+	TSoftClassPtr<UDamageType>& ScaleValueByCharacterDamageTypeField() { return *GetNativePointerField<TSoftClassPtr<UDamageType>*>(this, "FUseItemAddCharacterStatusValue.ScaleValueByCharacterDamageType"); }
+
+	// Bitfields
+
+	BitFieldValue<bool, unsigned __int32> bPercentOfMaxStatusValue() { return { this, "FUseItemAddCharacterStatusValue.bPercentOfMaxStatusValue" }; }
+	BitFieldValue<bool, unsigned __int32> bPercentOfCurrentStatusValue() { return { this, "FUseItemAddCharacterStatusValue.bPercentOfCurrentStatusValue" }; }
+	BitFieldValue<bool, unsigned __int32> bUseItemQuality() { return { this, "FUseItemAddCharacterStatusValue.bUseItemQuality" }; }
+	BitFieldValue<bool, unsigned __int32> bDontRequireLessThanMaxToUse() { return { this, "FUseItemAddCharacterStatusValue.bDontRequireLessThanMaxToUse" }; }
+	BitFieldValue<bool, unsigned __int32> bAddOverTime() { return { this, "FUseItemAddCharacterStatusValue.bAddOverTime" }; }
+	BitFieldValue<bool, unsigned __int32> bAddOverTimeSpeedInSeconds() { return { this, "FUseItemAddCharacterStatusValue.bAddOverTimeSpeedInSeconds" }; }
+	BitFieldValue<bool, unsigned __int32> bContinueOnUnchangedValue() { return { this, "FUseItemAddCharacterStatusValue.bContinueOnUnchangedValue" }; }
+	BitFieldValue<bool, unsigned __int32> bSetValue() { return { this, "FUseItemAddCharacterStatusValue.bSetValue" }; }
+	BitFieldValue<bool, unsigned __int32> bSetAdditionalValue() { return { this, "FUseItemAddCharacterStatusValue.bSetAdditionalValue" }; }
+	BitFieldValue<bool, unsigned __int32> bResetExistingModifierDescriptionIndex() { return { this, "FUseItemAddCharacterStatusValue.bResetExistingModifierDescriptionIndex" }; }
+	BitFieldValue<bool, unsigned __int32> bForceUseStatOnDinos() { return { this, "FUseItemAddCharacterStatusValue.bForceUseStatOnDinos" }; }
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FUseItemAddCharacterStatusValue.StaticStruct()"); }
 };

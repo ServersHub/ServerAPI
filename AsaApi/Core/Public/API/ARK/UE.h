@@ -91,6 +91,21 @@ struct TSubclassOf
 	UClass* uClass;
 };
 
+struct FStaticConstructObjectParameters
+{
+	const UClass* Class;
+	UObject* Outer;
+	FName Name;
+	EObjectFlags SetFlags;
+	EInternalObjectFlags InternalSetFlags;
+	bool bCopyTransientsFromClassDefaults;
+	bool bAssumeTemplateIsArchetype;
+	UObject* Template;
+	FObjectInstancingGraph* InstanceGraph;
+	UPackage* ExternalPackage;
+	TFunction<void __cdecl(void)> PropertyInitCallback;
+	void* SubobjectOverrides;
+};
 
 struct FObjectHandlePrivate
 {
@@ -942,6 +957,20 @@ struct Globals
 		return NativeCall<UObject*, UClass*, UObject*, const wchar_t*, const wchar_t*, unsigned int, DWORD64, bool, void*>(
 			nullptr, "Global.StaticLoadObject(UClass*,UObject*,wchar_t*,wchar_t*,unsignedint,UPackageMap*,bool,FLinkerInstancingContext*)",
 			ObjectClass, InOuter, InName, Filename, LoadFlags, Sandbox, bAllowObjectReconciliation, nullptr);
+	}
+
+	static UObject* StaticConstructObject(UClass* InClass, UObject* InOuter, FName InName, EObjectFlags InFlags, UObject* InTemplate, bool bCopyTransientsFromClassDefaults, FObjectInstancingGraph* InInstanceGraph)
+	{
+		FStaticConstructObjectParameters Params;
+		Params.Class = InClass;
+		Params.Outer = InOuter;
+		Params.Name = InName;
+		Params.SetFlags = InFlags;
+		Params.Template = InTemplate;
+		Params.bCopyTransientsFromClassDefaults = bCopyTransientsFromClassDefaults;
+		Params.InstanceGraph = InInstanceGraph;
+
+		return NativeCall<UObject*, FStaticConstructObjectParameters*>(nullptr, "Global.StaticConstructObject_Internal(FStaticConstructObjectParameters&)", &Params);
 	}
 
 	static DataValue<struct UEngine*> GEngine() { return { "Global.GEngine" }; }

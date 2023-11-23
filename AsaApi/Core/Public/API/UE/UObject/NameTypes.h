@@ -106,7 +106,10 @@ struct FNameEntryId
 private:
 	uint32 Value;
 
-	static FNameEntryId FromValidEName(EName Ename);
+	static FNameEntryId FromValidEName(EName Ename)
+	{
+		return NativeCall<FNameEntryId, EName>(nullptr, "FNameEntryId.FromValidEName(EName)", Ename);
+	}
 	static FNameEntryId FromValidENamePostInit(EName Ename);
 
 public:

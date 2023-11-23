@@ -701,6 +701,17 @@ struct UPrimalItem : UObject
     const //TArray<//TSoftClassPtr<APrimalStructure>, TSizedDefaultAllocator<32> >* GetAllStructuresToBuild() { return NativeCall<const //TArray<//TSoftClassPtr<APrimalStructure>, TSizedDefaultAllocator<32> >*>(this, "UPrimalItem.GetAllStructuresToBuild()"); }
         void ConsumeCraftingResources(TArray<FCustomItemData, TSizedDefaultAllocator<32> >* ItemDataOutBuffer, float* ItemDurabilityUsed) { NativeCall<void, TArray<FCustomItemData, TSizedDefaultAllocator<32> >*, float*>(this, "UPrimalItem.ConsumeCraftingResources(TArray<FCustomItemData,TSizedDefaultAllocator<32>>*,float*)", ItemDataOutBuffer, ItemDurabilityUsed); }
     void ConsumeRepairingResources(float RepairPercent) { NativeCall<void, float>(this, "UPrimalItem.ConsumeRepairingResources(float)", RepairPercent); }
+
+    inline bool HasCustomItemData(FName& CustomDataName)
+    {
+        for (auto& customItemData : this->CustomItemDatasField())
+		{
+			if (customItemData.CustomDataNameField().IsEqual(CustomDataName))
+				return true;
+		}
+
+        return false;
+    }
 };
 
 struct ADroppedItem : AActor
