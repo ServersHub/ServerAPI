@@ -28,7 +28,7 @@
  * Currently this is enabled for the Editor and any Programs (such as UHT), but not the Runtime
  */
 #ifndef WITH_CASE_PRESERVING_NAME
-#define WITH_CASE_PRESERVING_NAME WITH_EDITORONLY_DATA
+#define WITH_CASE_PRESERVING_NAME 0
 #endif
 
  // Should the number part of the fname be stored in the name table or in the FName instance?
