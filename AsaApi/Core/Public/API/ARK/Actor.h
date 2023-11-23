@@ -3746,7 +3746,7 @@ struct AShooterPlayerController : ABasePlayerController
     void EndArkGamepadDpadDown() { NativeCall<void>(this, "AShooterPlayerController.EndArkGamepadDpadDown()"); }
     void ServerAddAchievementID_Implementation(const FString* AchievementID, bool bIsOnSpawn) { NativeCall<void, const FString*, bool>(this, "AShooterPlayerController.ServerAddAchievementID_Implementation(FString&,bool)", AchievementID, bIsOnSpawn); }
     int GetLinkedPlayerID() { return NativeCall<int>(this, "AShooterPlayerController.GetLinkedPlayerID()"); }
-    FString* GetPlayerCharacterName(FString* result) { return NativeCall<FString*, FString*>(this, "AShooterPlayerController.GetPlayerCharacterName(FString&)", result); }
+    FString* GetPlayerCharacterName(FString* result) { return NativeCall<FString*, FString*>(this, "AShooterPlayerController.GetPlayerCharacterName()", result); }
     //void ClientCollectedAchievementItem_Implementation(TSubclassOf<UPrimalItem> ItemClass) { NativeCall<void, TSubclassOf<UPrimalItem>>(this, "AShooterPlayerController.ClientCollectedAchievementItem_Implementation(TSubclassOf<UPrimalItem>)", ItemClass); }
     //bool AllowTribeGroupPermission(ETribeGroupPermission::Type TribeGroupPermission, UObject* OnObject) { return NativeCall<bool, ETribeGroupPermission::Type, UObject*>(this, "AShooterPlayerController.AllowTribeGroupPermission(ETribeGroupPermission::Type,UObject*)", TribeGroupPermission, OnObject); }
     bool UseTribeGroupRanks() { return NativeCall<bool>(this, "AShooterPlayerController.UseTribeGroupRanks()"); }
