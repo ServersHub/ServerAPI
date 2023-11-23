@@ -116,7 +116,6 @@ struct EActorLists {};
 struct EActorUpdateOverlapsMethod;
 struct EComponentCreationMethod;
 struct EDLCSelector {};
-struct EInternalObjectFlags;
 struct EObjectFullNameFlags;
 struct ETravelType;
 struct ExpensiveFunctionRegister;
@@ -182,6 +181,7 @@ struct FBPNetExecParams;
 struct FBroadphaseSettings;
 struct FBuffAddition;
 struct FBuffStatEntry;
+struct FStaticConstructObjectParameters;
 struct FCachedDBAccessor;
 struct FCachedTeamTameListStruct;
 struct FCanvas

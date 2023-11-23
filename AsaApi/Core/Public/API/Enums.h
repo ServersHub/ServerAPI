@@ -41460,3 +41460,4 @@ enum class EMovementMode :int
 };
 
 typedef EWorldType::Type ETeleportType;
+typedef EWorldType::Type EInternalObjectFlags;

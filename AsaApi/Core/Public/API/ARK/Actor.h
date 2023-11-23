@@ -7866,6 +7866,11 @@ struct APrimalDinoCharacter : APrimalCharacter
     bool ShouldUseArmorDurabilityVFX() { return NativeCall<bool>(this, "APrimalDinoCharacter.ShouldUseArmorDurabilityVFX()"); }
     bool ShouldUseDurabilityVar(int VarIndex) { return NativeCall<bool, int>(this, "APrimalDinoCharacter.ShouldUseDurabilityVar(int)", VarIndex); }
     bool ShouldUseDurabilityVarForItemType(TEnumAsByte<EPrimalEquipmentType::Type> TheItemType) { return NativeCall<bool, TEnumAsByte<EPrimalEquipmentType::Type>>(this, "APrimalDinoCharacter.ShouldUseDurabilityVarForItemType(TEnumAsByte<EPrimalEquipmentType::Type>)", TheItemType); }
+
+    inline void SetMyInventoryComponent(UPrimalInventoryComponent* inventory) 
+    { 
+        this->MyInventoryComponentField() = inventory;
+    }
 };
 
 struct AShooterWeapon : AActor
