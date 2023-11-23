@@ -79,7 +79,8 @@ struct APrimalBotCharacter : APrimalDinoCharacter
     void InitializeAnimOverrides() { NativeCall<void>(this, "APrimalBotCharacter.InitializeAnimOverrides()"); }
     UAnimSequence* GetBotAnimSequenceOverride(UAnimSequence* AnimSeq) { return NativeCall<UAnimSequence*, UAnimSequence*>(this, "APrimalBotCharacter.GetBotAnimSequenceOverride(UAnimSequence*)", AnimSeq); }
 };
-
+struct AEmitter : AActor { };
+struct APrimalEmitterSpawnable : AEmitter {};
 struct APrimalBuff : APrimalEmitterSpawnable
 {
     // Fields
