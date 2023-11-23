@@ -16,7 +16,7 @@
 
 class Error;
 class FChunkedFixedUObjectArray;
-class FConfigCacheIni;
+struct FConfigCacheIni;
 class FExec;
 class FFixedUObjectArray;
 class FOutputDeviceConsole;
