@@ -170,8 +170,8 @@ struct FItemNetID
 {
 	// Fields
 
-	unsigned int& ItemID1Field() { return *GetNativePointerField<unsigned int*>(this, "FItemNetID.ItemID1"); }
-	unsigned int& ItemID2Field() { return *GetNativePointerField<unsigned int*>(this, "FItemNetID.ItemID2"); }
+	unsigned int ItemID1;
+	unsigned int ItemID2;
 
 	// Bitfields
 
