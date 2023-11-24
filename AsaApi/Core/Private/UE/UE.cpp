@@ -5,7 +5,7 @@ ARK_API FProperty* UObject::FindProperty(FName name)
 {
 	for (FProperty* Property = this->ClassPrivateField()->PropertyLinkField(); ; Property = Property->PropertyLinkNextField())
 	{
-		Log::GetLog()->info(Property->NamePrivateField().ToString().ToString());
+		//Log::GetLog()->info(Property->NamePrivateField().ToString().ToString());
 		if (Property->NamePrivateField().ToString().Equals(name.ToString()))
 			return Property;
 	}
