@@ -561,6 +561,12 @@ struct BattleyePlayerInfo
 
 struct FARKDinoData
 {
+	UClass* DinoClass;
+	TArray<unsigned char, TSizedDefaultAllocator<32> > DinoData;
+	FString DinoNameInMap;
+	FString DinoName;
+	bool bNetInfoFromClient;
+
 	// Fields
 
 	UClass*& DinoClassField() { return *GetNativePointerField<UClass**>(this, "FARKDinoData.DinoClass"); }
@@ -2349,6 +2355,7 @@ struct FConfigCacheIni
 
 struct FCustomItemByteArray
 {
+	TArray<unsigned char> Bytes;
 	// Fields
 
 	TArray<unsigned char, TSizedDefaultAllocator<32> >& BytesField() { return *GetNativePointerField<TArray<unsigned char, TSizedDefaultAllocator<32> >*>(this, "FCustomItemByteArray.Bytes"); }
@@ -2363,6 +2370,7 @@ struct FCustomItemByteArray
 
 struct FCustomItemByteArrays
 {
+	TArray<FCustomItemByteArray> ByteArrays;
 	// Fields
 
 	TArray<FCustomItemByteArray, TSizedDefaultAllocator<32> >& ByteArraysField() { return *GetNativePointerField<TArray<FCustomItemByteArray, TSizedDefaultAllocator<32> >*>(this, "FCustomItemByteArrays.ByteArrays"); }
@@ -2378,6 +2386,7 @@ struct FCustomItemByteArrays
 
 struct FCustomItemDoubles
 {
+	TArray<double> Doubles;
 	// Fields
 
 	TArray<double, TSizedDefaultAllocator<32> >& DoublesField() { return *GetNativePointerField<TArray<double, TSizedDefaultAllocator<32> >*>(this, "FCustomItemDoubles.Doubles"); }
@@ -2394,6 +2403,15 @@ struct FCustomItemDoubles
 
 struct FCustomItemData
 {
+	FName CustomDataName;
+	TArray<FString, TSizedDefaultAllocator<32> > CustomDataStrings;
+	TArray<float, TSizedDefaultAllocator<32> > CustomDataFloats;
+	TArray<UObject*, TSizedDefaultAllocator<32> > CustomDataObjects;
+	TArray<UClass*, TSizedDefaultAllocator<32> > CustomDataClasses;
+	TArray<FName, TSizedDefaultAllocator<32> > CustomDataNames;
+	FCustomItemByteArrays CustomDataBytes;
+	FCustomItemDoubles CustomDataDoubles;
+
 	// Fields
 
 	FName& CustomDataNameField() { return *GetNativePointerField<FName*>(this, "FCustomItemData.CustomDataName"); }

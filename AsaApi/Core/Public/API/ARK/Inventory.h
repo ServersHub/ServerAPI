@@ -287,6 +287,7 @@ struct UPrimalItem : UObject
     bool& bUseBPOnLocalUseField() { return *GetNativePointerField<bool*>(this, "UPrimalItem.bUseBPOnLocalUse"); }
     unsigned int& AssociatedDinoID1Field() { return *GetNativePointerField<unsigned int*>(this, "UPrimalItem.AssociatedDinoID1"); }
     unsigned int& AssociatedDinoID2Field() { return *GetNativePointerField<unsigned int*>(this, "UPrimalItem.AssociatedDinoID2"); }
+    unsigned char& ItemQualityIndexField() { return *GetNativePointerField<unsigned char*>(this, "UPrimalItem.ItemQualityIndex"); }
 
     // Bitfields
 
