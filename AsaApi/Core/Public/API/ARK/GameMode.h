@@ -2385,7 +2385,7 @@ struct AShooterGameMode : APrimalGameMode
 	void LoadBanListFromString(FString* FileString, bool GlobalList) { NativeCall<void, FString*, bool>(this, "AShooterGameMode.LoadBanListFromString(FString&,bool)", FileString, GlobalList); }
 	//FString* GetSaveDirectoryName(FString* result, ESaveType::Type SaveType, bool RemoveSavedArksDir) { return NativeCall<FString*, FString*, ESaveType::Type, bool>(this, "AShooterGameMode.GetSaveDirectoryName(FString&,ESaveType::Type,bool)", result, SaveType, RemoveSavedArksDir); }
 	static FString* GeneratePGMapFolderName() { return NativeCall<FString*>(nullptr, "AShooterGameMode.GeneratePGMapFolderName()"); }
-	FString* GetMapName(FString* result) { return NativeCall<FString*, FString*>(this, "AShooterGameMode.GetMapName(FString&)", result); }
+	FString* GetMapName(FString* result) { return NativeCall<FString*, FString*>(this, "AShooterGameMode.GetMapName()", result); }
 	void UpdateSaveBackupFiles() { NativeCall<void>(this, "AShooterGameMode.UpdateSaveBackupFiles()"); }
 	void LoadTribeIds_Process(unsigned int theTribeID) { NativeCall<void, unsigned int>(this, "AShooterGameMode.LoadTribeIds_Process(unsignedint)", theTribeID); }
 	void LoadTribeIds() { NativeCall<void>(this, "AShooterGameMode.LoadTribeIds()"); }

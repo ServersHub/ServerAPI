@@ -311,7 +311,7 @@ public:
 	const FPointerTableBase* PrevPointerTable;
 	FPlatformTypeLayoutParameters HostLayoutParameters;
 	FPlatformTypeLayoutParameters TargetLayoutParameters;
-	const class UStruct* CurrentStruct;
+	const struct UStruct* CurrentStruct;
 };
 
 /**
