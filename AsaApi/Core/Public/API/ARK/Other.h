@@ -159,7 +159,6 @@ struct UVictoryCore : UVictoryCoreHighest
 	static TArray<AActor*, TSizedDefaultAllocator<32> >* SortActorsByDistance(TArray<AActor*, TSizedDefaultAllocator<32> >* result, const UE::Math::TVector<double>* fromLoc, const TArray<AActor*, TSizedDefaultAllocator<32> >* actors) { return NativeCall<TArray<AActor*, TSizedDefaultAllocator<32> >*, TArray<AActor*, TSizedDefaultAllocator<32> >*, const UE::Math::TVector<double>*, const TArray<AActor*, TSizedDefaultAllocator<32> >*>(nullptr, "UVictoryCore.SortActorsByDistance(TArray<AActor*,TSizedDefaultAllocator<32>>*,UE::Math::TVector<double>*,TArray<AActor*,TSizedDefaultAllocator<32>>*)", result, fromLoc, actors); }
 	static void PlayMusic() { NativeCall<void>(nullptr, "UVictoryCore.PlayMusic()"); }
 	static void StopMusic() { NativeCall<void>(nullptr, "UVictoryCore.StopMusic()"); }
-	static UClass* BPLoadClass(const FString* PathName) { return NativeCall<UClass*, const FString*>(nullptr, "UVictoryCore.BPLoadClass(FString&)", PathName); }
 	//static bool VTraceAgainstActorExpensive(UObject* WorldContextObject, const UE::Math::TVector<double>* Start, const UE::Math::TVector<double>* End, FHitResult* HitOut, AActor* ActorToTraceAgainst, ECollisionChannel Channel, __int64 CollisionGroups, float SphereRadius, bool bReturnPhysMaterial, bool bTraceComplex, const UE::Math::TVector<double>* BoxExtent, FName TraceTag, bool bSort) { return NativeCall<bool, UObject*, const UE::Math::TVector<double>*, const UE::Math::TVector<double>*, FHitResult*, AActor*, ECollisionChannel, __int64, float, bool, bool, const UE::Math::TVector<double>*, FName, bool>(nullptr, "UVictoryCore.VTraceAgainstActorExpensive(UObject*,UE::Math::TVector<double>*,UE::Math::TVector<double>*,FHitResult*,AActor*,ECollisionChannel,__int64,float,bool,bool,UE::Math::TVector<double>*,FName,bool)", WorldContextObject, Start, End, HitOut, ActorToTraceAgainst, Channel, CollisionGroups, SphereRadius, bReturnPhysMaterial, bTraceComplex, BoxExtent, TraceTag, bSort); }
 	static TSubclassOf<UObject>* StringReferenceToClass(TSubclassOf<UObject>* result, const FString* StringReference) { return NativeCall<TSubclassOf<UObject> *, TSubclassOf<UObject>*, const FString*>(nullptr, "UVictoryCore.StringReferenceToClass(FString&)", result, StringReference); }
 	static void RefreshApplySoundVolumes() { NativeCall<void>(nullptr, "UVictoryCore.RefreshApplySoundVolumes()"); }
@@ -271,6 +270,17 @@ struct UVictoryCore : UVictoryCoreHighest
 	//static int IsChildOfClassesT<class UPrimalItem>(TSubclassOf<UObject> childClass, const //TArray<TSubclassOf<UPrimalItem>, TSizedDefaultAllocator<32> >* ParentClassesArray) { return NativeCall<int, TSubclassOf<UObject>, const //TArray<TSubclassOf<UPrimalItem>, TSizedDefaultAllocator<32> >*>(nullptr, "UVictoryCore.IsChildOfClassesT<class UPrimalItem>(TSubclassOf<UObject>,//TArray<TSubclassOf<UPrimalItem>,TSizedDefaultAllocator<32>>*)", childClass, ParentClassesArray); }
 	//static int IsChildOfClassesSoftRefT<class APrimalStructure>(TSubclassOf<UObject> childClass, const //TArray<//TSoftClassPtr<APrimalStructure>, TSizedDefaultAllocator<32> >* ParentClassesArray) { return NativeCall<int, TSubclassOf<UObject>, const //TArray<//TSoftClassPtr<APrimalStructure>, TSizedDefaultAllocator<32> >*>(nullptr, "UVictoryCore.IsChildOfClassesSoftRefT<class APrimalStructure>(TSubclassOf<UObject>,//TArray<//TSoftClassPtr<APrimalStructure>,TSizedDefaultAllocator<32>>*)", childClass, ParentClassesArray); }
 	//static int IsChildOfClassesT<class APrimalStructure>(TSubclassOf<UObject> childClass, const //TArray<TSubclassOf<APrimalStructure>, TSizedDefaultAllocator<32> >* ParentClassesArray) { return NativeCall<int, TSubclassOf<UObject>, const //TArray<TSubclassOf<APrimalStructure>, TSizedDefaultAllocator<32> >*>(nullptr, "UVictoryCore.IsChildOfClassesT<class APrimalStructure>(TSubclassOf<UObject>,//TArray<TSubclassOf<APrimalStructure>,TSizedDefaultAllocator<32>>*)", childClass, ParentClassesArray); }
+
+	static UClass* BPLoadClass(const FString& path_name)
+	{
+		TSubclassOf<UObject> LoadedClass;
+		UVictoryCore::StringReferenceToClass(&LoadedClass, &path_name);
+
+		if (LoadedClass.uClass)
+			return LoadedClass.uClass;
+		else
+			return nullptr;
+	}
 };
 
 struct FTribeGovernment
