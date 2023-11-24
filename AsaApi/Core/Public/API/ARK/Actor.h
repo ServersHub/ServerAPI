@@ -7616,7 +7616,7 @@ struct APrimalDinoCharacter : APrimalCharacter
     bool IsNearFeed(AShooterPlayerState* ForPlayer) { return NativeCall<bool, AShooterPlayerState*>(this, "APrimalDinoCharacter.IsNearFeed(AShooterPlayerState*)", ForPlayer); }
     void DeathHarvestingFadeOut_Implementation() { NativeCall<void>(this, "APrimalDinoCharacter.DeathHarvestingFadeOut_Implementation()"); }
     void NotifyItemAdded(UPrimalItem* anItem, bool bEquipItem) { NativeCall<void, UPrimalItem*, bool>(this, "APrimalDinoCharacter.NotifyItemAdded(UPrimalItem*,bool)", anItem, bEquipItem); }
-    FString* GetDinoDescriptiveName(FString* result, bool IgnoreArticle, bool IncludeDetails) { return NativeCall<FString*, FString*, bool, bool>(this, "APrimalDinoCharacter.GetDinoDescriptiveName(FString&,bool,bool)", result, IgnoreArticle, IncludeDetails); }
+    FString* GetDinoDescriptiveName(FString* result, bool IgnoreArticle, bool IncludeDetails) { return NativeCall<FString*, FString*, bool, bool>(this, "APrimalDinoCharacter.GetDinoDescriptiveName(bool,bool)", result, IgnoreArticle, IncludeDetails); }
     TArray<FString, TSizedDefaultAllocator<32> >* GetDetailedDescription(TArray<FString, TSizedDefaultAllocator<32> >* result, const FString* IndentPrefix) { return NativeCall<TArray<FString, TSizedDefaultAllocator<32> >*, TArray<FString, TSizedDefaultAllocator<32> >*, const FString*>(this, "APrimalDinoCharacter.GetDetailedDescription(TArray<FString,TSizedDefaultAllocator<32>>*,FString&)", result, IndentPrefix); }
     void ServerGiveDefaultWeapon_Implementation() { NativeCall<void>(this, "APrimalDinoCharacter.ServerGiveDefaultWeapon_Implementation()"); }
     bool CanWhistle() { return NativeCall<bool>(this, "APrimalDinoCharacter.CanWhistle()"); }
