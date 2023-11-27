@@ -100,6 +100,7 @@ namespace AsaApi
 				FPrimalChatMessage chat_message;
 				chat_message.SenderName = sender_name;
 				chat_message.Message = text;
+				chat_message.UserId = GetEOSIDFromController(player_controller);
 				player_controller->ClientChatMessage(chat_message);
 			}
 		}
@@ -177,7 +178,10 @@ namespace AsaApi
 			{
 				AShooterPlayerController* shooter_pc = static_cast<AShooterPlayerController*>(player_controller.Get());
 				if (shooter_pc)
+				{
+					chat_message.UserId = GetEOSIDFromController(shooter_pc);
 					shooter_pc->ClientChatMessage(chat_message);
+				}
 			}
 		}
 

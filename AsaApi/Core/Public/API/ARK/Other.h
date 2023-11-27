@@ -1069,6 +1069,10 @@ struct FDinoBabySetup
 
 struct FDinoBaseLevelWeightEntry
 {
+	float EntryWeight;
+	float BaseLevelMinRange;
+	float BaseLevelMaxRange;
+
 	// Fields
 
 	float& EntryWeightField() { return *GetNativePointerField<float*>(this, "FDinoBaseLevelWeightEntry.EntryWeight"); }
@@ -1834,6 +1838,21 @@ struct FItemSetup
 
 struct FItemStatInfo
 {
+	unsigned __int32 bUsed : 1;
+	unsigned __int32 bCalculateAsPercent : 1;
+	unsigned __int32 bDisplayAsPercent : 1;
+	unsigned __int32 bRequiresSubmerged : 1;
+	unsigned __int32 bPreventIfSubmerged : 1;
+	unsigned __int32 bHideStatFromTooltip : 1;
+	int DefaultModifierValue;
+	int RandomizerRangeOverride;
+	float RandomizerRangeMultiplier;
+	float TheRandomizerPower;
+	float StateModifierScale;
+	float InitialValueConstant;
+	float RatingValueMultiplier;
+	float AbsoluteMaxValue;
+
 	// Fields
 
 	int& DefaultModifierValueField() { return *GetNativePointerField<int*>(this, "FItemStatInfo.DefaultModifierValue"); }
@@ -1847,12 +1866,12 @@ struct FItemStatInfo
 
 	// Bitfields
 
-	BitFieldValue<bool, unsigned __int32> bUsed() { return { this, "FItemStatInfo.bUsed" }; }
-	BitFieldValue<bool, unsigned __int32> bCalculateAsPercent() { return { this, "FItemStatInfo.bCalculateAsPercent" }; }
-	BitFieldValue<bool, unsigned __int32> bDisplayAsPercent() { return { this, "FItemStatInfo.bDisplayAsPercent" }; }
-	BitFieldValue<bool, unsigned __int32> bRequiresSubmerged() { return { this, "FItemStatInfo.bRequiresSubmerged" }; }
-	BitFieldValue<bool, unsigned __int32> bPreventIfSubmerged() { return { this, "FItemStatInfo.bPreventIfSubmerged" }; }
-	BitFieldValue<bool, unsigned __int32> bHideStatFromTooltip() { return { this, "FItemStatInfo.bHideStatFromTooltip" }; }
+	BitFieldValue<bool, unsigned __int32> bUsedField() { return { this, "FItemStatInfo.bUsed" }; }
+	BitFieldValue<bool, unsigned __int32> bCalculateAsPercentField() { return { this, "FItemStatInfo.bCalculateAsPercent" }; }
+	BitFieldValue<bool, unsigned __int32> bDisplayAsPercentField() { return { this, "FItemStatInfo.bDisplayAsPercent" }; }
+	BitFieldValue<bool, unsigned __int32> bRequiresSubmergedField() { return { this, "FItemStatInfo.bRequiresSubmerged" }; }
+	BitFieldValue<bool, unsigned __int32> bPreventIfSubmergedField() { return { this, "FItemStatInfo.bPreventIfSubmerged" }; }
+	BitFieldValue<bool, unsigned __int32> bHideStatFromTooltipField() { return { this, "FItemStatInfo.bHideStatFromTooltip" }; }
 
 	// Functions
 
