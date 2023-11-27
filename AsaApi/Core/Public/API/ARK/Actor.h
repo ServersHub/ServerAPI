@@ -26,12 +26,13 @@ struct FPrimalChatMessage {
         Message(""),
         Receiver(""),
         SenderTeamIndex(0),
-        ReceivedTime(-1),
+        ReceivedTime(0),
         SendMode(EChatSendMode::GlobalChat),
         RadioFrequency(0),
         ChatType(EChatType::GlobalChat),
         SenderIcon(nullptr),
-        UserId("")
+        UserId(""),
+        senderPlatform((unsigned char)1)
     {
     }
     FPrimalChatMessage* operator=(FPrimalChatMessage* __that) { return NativeCall<FPrimalChatMessage*, FPrimalChatMessage*>(this, "FPrimalChatMessage.operator=(FPrimalChatMessage&)", __that); }

@@ -1069,6 +1069,10 @@ struct FDinoBabySetup
 
 struct FDinoBaseLevelWeightEntry
 {
+	float EntryWeight;
+	float BaseLevelMinRange;
+	float BaseLevelMaxRange;
+
 	// Fields
 
 	float& EntryWeightField() { return *GetNativePointerField<float*>(this, "FDinoBaseLevelWeightEntry.EntryWeight"); }
