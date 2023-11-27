@@ -607,8 +607,8 @@ namespace AsaApi
 				FString path_name = GetClassBlueprint(object->ClassPrivateField());
 				return path_name.Replace(L"Default__", L"", ESearchCase::CaseSensitive);
 			}
-			else
-				return FString("");
+				
+			return FString("");
 		}
 
 		/**
