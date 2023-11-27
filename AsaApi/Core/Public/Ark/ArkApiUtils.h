@@ -604,10 +604,11 @@ namespace AsaApi
 		{
 			if (object != nullptr && object->ClassPrivateField() != nullptr)
 			{
-				return GetClassBlueprint(object->ClassPrivateField());
+				FString path_name = GetClassBlueprint(object->ClassPrivateField());
+				return path_name.Replace(L"Default__", L"", ESearchCase::CaseSensitive);
 			}
-
-			return FString("");
+			else
+				return FString("");
 		}
 
 		/**
