@@ -37,6 +37,7 @@ namespace AsaApi
 	DECLARE_HOOK(URCONServer_Init, bool, URCONServer*, FString*, unsigned int, UShooterCheatManager*);
 	DECLARE_HOOK(AShooterPlayerController_OnPossess, void, AShooterPlayerController*, APawn*);
 	DECLARE_HOOK(AShooterGameMode_Logout, void, AShooterGameMode*, AController*);
+	DECLARE_HOOK(UShooterCheatManager_Broadcast, void, UShooterCheatManager*, FString*);
 
 	void InitHooks()
 	{
@@ -52,6 +53,7 @@ namespace AsaApi
 		hooks->SetHook("URCONServer.Init(FString,int,UShooterCheatManager*)", &Hook_URCONServer_Init, &URCONServer_Init_original);
 		hooks->SetHook("AShooterPlayerController.OnPossess(APawn*)", &Hook_AShooterPlayerController_OnPossess, &AShooterPlayerController_OnPossess_original);
 		hooks->SetHook("AShooterGameMode.Logout(AController*)", &Hook_AShooterGameMode_Logout, &AShooterGameMode_Logout_original);
+		hooks->SetHook("UShooterCheatManager.Broadcast(FString&)", &Hook_UShooterCheatManager_Broadcast, &UShooterCheatManager_Broadcast_original);
 
 		Log::GetLog()->info("Initialized hooks\n");
 	}
@@ -186,4 +188,16 @@ namespace AsaApi
 
 		AShooterGameMode_Logout_original(_this, Exiting);
 	}
+
+	void Hook_UShooterCheatManager_Broadcast(UShooterCheatManager* _this, FString* msg)
+	{
+		if (!_this->MyPCField())
+		{
+			if (AsaApi::GetApiUtils().GetWorld()->GetFirstPlayerController())
+				AsaApi::GetApiUtils().GetShooterGameMode()->SendServerChatMessage(msg, FColorList::Yellow, false, -1, -1, AsaApi::IApiUtils::GetEOSIDFromController(AsaApi::GetApiUtils().GetWorld()->GetFirstPlayerController()));
+		}
+		else
+			return UShooterCheatManager_Broadcast_original(_this, msg);
+	}
+
 } // namespace AsaApi
