@@ -13,7 +13,7 @@
 
 namespace API
 {
-	constexpr float api_version = 1.00;
+	constexpr float api_version = 1.01;
 
 	ArkBaseApi::ArkBaseApi()
 		: commands_(std::make_unique<AsaApi::Commands>()),
@@ -37,22 +37,26 @@ namespace API
 
 		try
 		{
-			const fs::path filepath = fs::current_path().append("ArkAscendedServer.pdb");
+			TCHAR buffer[MAX_PATH];
+			GetModuleFileName(NULL, buffer, sizeof(buffer));
+			fs::path exe_path = std::filesystem::path(buffer).parent_path();
 
-			if (!fs::exists(fs::current_path().append(ArkBaseApi::GetApiName())))
-				fs::create_directory(fs::current_path().append(ArkBaseApi::GetApiName()));
+			const fs::path filepath = fs::path(exe_path).append("ArkAscendedServer.pdb");
 
-			if (!fs::exists(fs::current_path().append(ArkBaseApi::GetApiName() + "/Plugins")))
-				fs::create_directory(fs::current_path().append(ArkBaseApi::GetApiName() + "/Plugins"));
+			if (!fs::exists(fs::path(exe_path).append(ArkBaseApi::GetApiName())))
+				fs::create_directory(fs::path(exe_path).append(ArkBaseApi::GetApiName()));
 
-			if (!fs::exists(fs::current_path().append(ArkBaseApi::GetApiName()+"/Cache")))
-				fs::create_directory(fs::current_path().append(ArkBaseApi::GetApiName()+"/Cache"));
+			if (!fs::exists(fs::path(exe_path).append(ArkBaseApi::GetApiName() + "/Plugins")))
+				fs::create_directory(fs::path(exe_path).append(ArkBaseApi::GetApiName() + "/Plugins"));
 
-			const fs::path pdbIgnoreFile = fs::current_path().append(ArkBaseApi::GetApiName() + "/pdbignores.txt");
-			const fs::path keyCacheFile = fs::current_path().append(ArkBaseApi::GetApiName()+"/Cache/cached_key.cache");
-			const fs::path offsetsCacheFile = fs::current_path().append(ArkBaseApi::GetApiName()+"/Cache/cached_offsets.cache");
-			const fs::path bitfieldsCacheFile = fs::current_path().append(ArkBaseApi::GetApiName()+"/Cache/cached_bitfields.cache");
-			const fs::path offsetsCacheFilePlain = fs::current_path().append(ArkBaseApi::GetApiName() + "/Cache/cached_offsets.txt");
+			if (!fs::exists(fs::path(exe_path).append(ArkBaseApi::GetApiName()+"/Cache")))
+				fs::create_directory(fs::path(exe_path).append(ArkBaseApi::GetApiName()+"/Cache"));
+
+			const fs::path pdbIgnoreFile = fs::path(exe_path).append(ArkBaseApi::GetApiName() + "/pdbignores.txt");
+			const fs::path keyCacheFile = fs::path(exe_path).append(ArkBaseApi::GetApiName()+"/Cache/cached_key.cache");
+			const fs::path offsetsCacheFile = fs::path(exe_path).append(ArkBaseApi::GetApiName()+"/Cache/cached_offsets.cache");
+			const fs::path bitfieldsCacheFile = fs::path(exe_path).append(ArkBaseApi::GetApiName()+"/Cache/cached_bitfields.cache");
+			const fs::path offsetsCacheFilePlain = fs::path(exe_path).append(ArkBaseApi::GetApiName() + "/Cache/cached_offsets.txt");
 			const std::string fileHash = Cache::calculateSHA256(filepath);
 			const std::string storedHash = Cache::readFromFile(keyCacheFile);
 			std::unordered_set<std::string> pdbIgnoreSet = Cache::readFileIntoSet(pdbIgnoreFile);
