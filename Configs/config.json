@@ -1,0 +1,8 @@
+{  
+  "settings":{  
+    "AutomaticPluginReloading":true,
+    "AutomaticPluginReloadSeconds":5,
+    "SaveWorldBeforePluginReload":true,
+	"AttachToParent": true
+  }
+}
