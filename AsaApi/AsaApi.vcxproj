@@ -1138,6 +1138,7 @@ copy "$(SolutionDir)$(PlatformName)\$(ConfigurationName)\$(ProjectName).pdb" "F:
     <ClInclude Include="D:\Spill\UE_5.2\Engine\Source\Runtime\Core\Public\Delegates\IntegerSequence.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\Configs\config.json" />
     <None Include="AsaApi.def" />
     <None Include="Core\Public\API\UE\Algo\LevenshteinDistanceAlgorithm.tps" />
     <None Include="Core\Public\API\UE\Delegates\DelegateSignatureImpl.inl" />
