@@ -2480,6 +2480,9 @@
     <None Include="Core\Public\API\UE\Delegates\DelegateSignatureImpl.inl">
       <Filter>Source Files\Core\Public\API\UE\Delegates</Filter>
     </None>
+    <None Include="..\Configs\config.json">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Core\Private\PDBReader\pdbignores.txt" />
