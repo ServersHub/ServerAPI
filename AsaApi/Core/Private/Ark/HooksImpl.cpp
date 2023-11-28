@@ -38,6 +38,7 @@ namespace AsaApi
 	DECLARE_HOOK(AShooterPlayerController_OnPossess, void, AShooterPlayerController*, APawn*);
 	DECLARE_HOOK(AShooterGameMode_Logout, void, AShooterGameMode*, AController*);
 	DECLARE_HOOK(UShooterCheatManager_Broadcast, void, UShooterCheatManager*, FString*);
+	DECLARE_HOOK(AShooterGameMode_HandleNewPlayer_Implementation, bool, AShooterGameMode*, AShooterPlayerController*, UPrimalPlayerData*, AShooterCharacter*, bool);
 
 	void InitHooks()
 	{
@@ -54,6 +55,7 @@ namespace AsaApi
 		hooks->SetHook("AShooterPlayerController.OnPossess(APawn*)", &Hook_AShooterPlayerController_OnPossess, &AShooterPlayerController_OnPossess_original);
 		hooks->SetHook("AShooterGameMode.Logout(AController*)", &Hook_AShooterGameMode_Logout, &AShooterGameMode_Logout_original);
 		hooks->SetHook("UShooterCheatManager.Broadcast(FString&)", &Hook_UShooterCheatManager_Broadcast, &UShooterCheatManager_Broadcast_original);
+		hooks->SetHook("AShooterGameMode.HandleNewPlayer_Implementation(AShooterPlayerController*,UPrimalPlayerData*,AShooterCharacter*,bool)", &Hook_AShooterGameMode_HandleNewPlayer_Implementation, &AShooterGameMode_HandleNewPlayer_Implementation_original);
 
 		Log::GetLog()->info("Initialized hooks\n");
 	}
@@ -200,4 +202,10 @@ namespace AsaApi
 			return UShooterCheatManager_Broadcast_original(_this, msg);
 	}
 
+	bool Hook_AShooterGameMode_HandleNewPlayer_Implementation(AShooterGameMode* _this, AShooterPlayerController* NewPlayer, UPrimalPlayerData* PlayerData, AShooterCharacter* PlayerCharacter, bool bIsFromLogin)
+	{
+		dynamic_cast<ApiUtils&>(*API::game_api->GetApiUtils()).SetPlayerController(NewPlayer);
+
+		return AShooterGameMode_HandleNewPlayer_Implementation_original(_this, NewPlayer, PlayerData, PlayerCharacter, bIsFromLogin);
+	}
 } // namespace AsaApi
