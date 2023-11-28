@@ -85,6 +85,26 @@ namespace AsaApi
 		{
 			found_player = iter->second;
 		}
+
+		if (found_player == nullptr)
+		{
+			const auto& player_controllers = GetWorld()->PlayerControllerListField();
+			for (TWeakObjectPtr<APlayerController> player_controller : player_controllers)
+			{
+				AShooterPlayerController* shooter_pc = static_cast<AShooterPlayerController*>(player_controller.Get());
+
+				if (shooter_pc)
+				{
+					const FString& iter_eos_id = *API::game_api->GetApiUtils()->GetEOSIDFromController(shooter_pc);
+					if (iter_eos_id == eos_id)
+					{
+						found_player = shooter_pc;
+						break;
+					}
+				}
+			}
+		}
+
 		return found_player;
 	}
 

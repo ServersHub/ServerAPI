@@ -37,6 +37,7 @@ namespace AsaApi
 	DECLARE_HOOK(URCONServer_Init, bool, URCONServer*, FString*, unsigned int, UShooterCheatManager*);
 	DECLARE_HOOK(AShooterPlayerController_OnPossess, void, AShooterPlayerController*, APawn*);
 	DECLARE_HOOK(AShooterGameMode_Logout, void, AShooterGameMode*, AController*);
+	DECLARE_HOOK(AShooterGameMode_HandleNewPlayer_Implementation, bool, AShooterGameMode*, AShooterPlayerController*, UPrimalPlayerData*, AShooterCharacter*, bool);
 
 	void InitHooks()
 	{
@@ -52,6 +53,7 @@ namespace AsaApi
 		hooks->SetHook("URCONServer.Init(FString,int,UShooterCheatManager*)", &Hook_URCONServer_Init, &URCONServer_Init_original);
 		hooks->SetHook("AShooterPlayerController.OnPossess(APawn*)", &Hook_AShooterPlayerController_OnPossess, &AShooterPlayerController_OnPossess_original);
 		hooks->SetHook("AShooterGameMode.Logout(AController*)", &Hook_AShooterGameMode_Logout, &AShooterGameMode_Logout_original);
+		hooks->SetHook("AShooterGameMode.HandleNewPlayer_Implementation(AShooterPlayerController*,UPrimalPlayerData*,AShooterCharacter*,bool)", &Hook_AShooterGameMode_HandleNewPlayer_Implementation, &AShooterGameMode_HandleNewPlayer_Implementation_original);
 
 		Log::GetLog()->info("Initialized hooks\n");
 	}
@@ -185,5 +187,12 @@ namespace AsaApi
 		dynamic_cast<ApiUtils&>(*API::game_api->GetApiUtils()).RemovePlayerController(Exiting_SPC);
 
 		AShooterGameMode_Logout_original(_this, Exiting);
+	}
+
+	bool Hook_AShooterGameMode_HandleNewPlayer_Implementation(AShooterGameMode* _this, AShooterPlayerController* NewPlayer, UPrimalPlayerData* PlayerData, AShooterCharacter* PlayerCharacter, bool bIsFromLogin)
+	{
+		dynamic_cast<ApiUtils&>(*API::game_api->GetApiUtils()).SetPlayerController(NewPlayer);
+
+		return AShooterGameMode_HandleNewPlayer_Implementation_original(_this, NewPlayer, PlayerData, PlayerCharacter, bIsFromLogin);
 	}
 } // namespace AsaApi
