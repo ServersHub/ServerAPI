@@ -7,7 +7,6 @@
 #include <Logger/Logger.h>
 #include "Tools.h"
 
-#include "../Helpers.h"
 #include "../IBaseApi.h"
 #include <Timer.h>
 
@@ -17,57 +16,6 @@ namespace API
 	{
 		static PluginManager instance;
 		return instance;
-	}
-
-	nlohmann::json PluginManager::GetAllPDBConfigs()
-	{
-		namespace fs = std::filesystem;
-
-		const std::string dir_path = Tools::GetCurrentDir() + "/" + game_api->GetApiName() + "/Plugins";
-
-		auto result = nlohmann::json({});
-
-		for (const auto& dir_name : fs::directory_iterator(dir_path))
-		{
-			const auto& path = dir_name.path();
-			const auto filename = path.filename().stem().generic_string();
-
-			try
-			{
-				const auto plugin_pdb_config = ReadPluginPDBConfig(filename);
-				MergePdbConfig(result, plugin_pdb_config);
-			}
-			catch (const std::exception& error)
-			{
-				Log::GetLog()->warn("({}) {}", __FUNCTION__, error.what());
-			}
-		}
-
-		return result;
-	}
-
-	nlohmann::json PluginManager::ReadPluginPDBConfig(const std::string& plugin_name)
-	{
-		namespace fs = std::filesystem;
-
-		auto plugin_pdb_config = nlohmann::json({});
-
-		const std::string dir_path = Tools::GetCurrentDir() + "/" + game_api->GetApiName() + "/Plugins/" + plugin_name;
-		const std::string config_path = dir_path + "/PdbConfig.json";
-
-		if (!fs::exists(config_path))
-		{
-			return plugin_pdb_config;
-		}
-
-		std::ifstream file{ config_path };
-		if (file.is_open())
-		{
-			file >> plugin_pdb_config;
-			file.close();
-		}
-
-		return plugin_pdb_config;
 	}
 
 	nlohmann::json PluginManager::ReadSettingsConfig()
