@@ -46,11 +46,6 @@ namespace API
 		PluginManager& operator=(PluginManager&&) = delete;
 
 		/**
-		* \brief Get all plugin pdb configs
-		*/
-		static nlohmann::json GetAllPDBConfigs();
-
-		/**
 		 * \brief Find and load all plugins
 		 */
 		void LoadAllPlugins();
@@ -89,7 +84,6 @@ namespace API
 		~PluginManager() = default;
 
 		static nlohmann::json ReadPluginInfo(const std::string& plugin_name);
-		static nlohmann::json ReadPluginPDBConfig(const std::string& plugin_name);
 		static nlohmann::json ReadSettingsConfig();
 
 		void CheckPluginsDependencies();
