@@ -8,9 +8,6 @@ namespace AsaApi::Tools
 {
 	ARK_API std::string GetCurrentDir();
 
-	[[deprecated]] ARK_API std::wstring ConvertToWideStr(const std::string& text);
-	[[deprecated]] ARK_API std::string ConvertToAnsiStr(const std::wstring& text);
-
 	/**
 	 * \brief Converts a wide Unicode string to an UTF8 string
 	 */
