@@ -15,32 +15,6 @@ namespace AsaApi::Tools
 		return std::string(buffer).substr(0, pos);
 	}
 
-	[[deprecated]] std::wstring ConvertToWideStr(const std::string& text)
-	{
-		const size_t size = text.size();
-
-		std::wstring wstr;
-		if (size > 0)
-		{
-			wstr.resize(size);
-
-			size_t converted_chars;
-			mbstowcs_s(&converted_chars, wstr.data(), size + 1, text.c_str(), _TRUNCATE);
-		}
-
-		return wstr;
-	}
-
-	[[deprecated]] std::string ConvertToAnsiStr(const std::wstring& text)
-	{
-		const size_t length = text.size();
-
-		std::string str(length, '\0');
-		std::use_facet<std::ctype<wchar_t>>(std::locale()).narrow(text.c_str(), text.c_str() + length, '?', str.data());
-
-		return str;
-	}
-
 	std::string Utf8Encode(const std::wstring& wstr)
 	{
 		std::string converted_string;
