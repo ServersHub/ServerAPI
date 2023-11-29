@@ -95,7 +95,7 @@ namespace AsaApi
 		for (auto actor : actors)
 		{
 			FString bp = AsaApi::GetApiUtils().GetBlueprint(actor);
-			if (bp.Equals("Blueprint'/Script/ShooterGame.Default__PrimalPersistentWorldData'"))
+			if (bp.Equals("Blueprint'/Script/ShooterGame.PrimalPersistentWorldData'"))
 			{
 				if (actor->TargetingTeamField() == 0)
 					actor->TargetingTeamField() = a_shooter_game_mode->ServerIDField();

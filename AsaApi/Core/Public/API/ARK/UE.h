@@ -959,18 +959,9 @@ struct Globals
 			ObjectClass, InOuter, InName, Filename, LoadFlags, Sandbox, bAllowObjectReconciliation, nullptr);
 	}
 
-	static UObject* StaticConstructObject(UClass* InClass, UObject* InOuter, FName InName, EObjectFlags InFlags, UObject* InTemplate, bool bCopyTransientsFromClassDefaults, FObjectInstancingGraph* InInstanceGraph)
+	static UObject* StaticConstructObject(FStaticConstructObjectParameters& Params)
 	{
-		FStaticConstructObjectParameters Params;
-		Params.Class = InClass;
-		Params.Outer = InOuter;
-		Params.Name = InName;
-		Params.SetFlags = InFlags;
-		Params.Template = InTemplate;
-		Params.bCopyTransientsFromClassDefaults = bCopyTransientsFromClassDefaults;
-		Params.InstanceGraph = InInstanceGraph;
-
-		return NativeCall<UObject*, FStaticConstructObjectParameters*>(nullptr, "Global.StaticConstructObject_Internal(FStaticConstructObjectParameters&)", &Params);
+		return NativeCall<UObject*, FStaticConstructObjectParameters&>(nullptr, "Global.StaticConstructObject_Internal(FStaticConstructObjectParameters&)", Params);
 	}
 
 	static DataValue<struct UEngine*> GEngine() { return { "Global.GEngine" }; }
