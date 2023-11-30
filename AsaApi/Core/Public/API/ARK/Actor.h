@@ -2001,8 +2001,8 @@ struct AShooterPlayerState : APlayerState
     FPrimalPlayerDataStruct& MyPlayerDataStructField() { return *GetNativePointerField<FPrimalPlayerDataStruct*>(this, "AShooterPlayerState.MyPlayerDataStruct"); }
     FieldArray<TSubclassOf<UPrimalItem>, 10> DefaultItemSlotClassesField() { return { this, "AShooterPlayerState.DefaultItemSlotClasses" }; }
     FieldArray<unsigned __int8, 10> DefaultItemSlotEngramsField() { return { this, "AShooterPlayerState.DefaultItemSlotEngrams" }; }
-    FTribeData& MyTribeDataField() { return *GetNativePointerField<FTribeData*>(this, "AShooterPlayerState.MyTribeData"); }
-    FTribeData& LastTribeInviteDataField() { return *GetNativePointerField<FTribeData*>(this, "AShooterPlayerState.LastTribeInviteData"); }
+    FTribeData* MyTribeDataField() { return GetNativePointerField<FTribeData*>(this, "AShooterPlayerState.MyTribeData"); }
+    FTribeData* LastTribeInviteDataField() { return GetNativePointerField<FTribeData*>(this, "AShooterPlayerState.LastTribeInviteData"); }
     //TDelegate<void __cdecl(TArray<FAdminPlayerDataInfo, TSizedDefaultAllocator<32> >), FDefaultDelegateUserPolicy>& OnClientAdminInfoPlayerConnectedRecivedField() { return *GetNativePointerField<TDelegate<void __cdecl(TArray<FAdminPlayerDataInfo, TSizedDefaultAllocator<32> >), FDefaultDelegateUserPolicy>*>(this, "AShooterPlayerState.OnClientAdminInfoPlayerConnectedRecived"); }
     TDelegate<void __cdecl(FServerOptions), FDefaultDelegateUserPolicy>& OnClientServerOptionsInfoRecivedField() { return *GetNativePointerField<TDelegate<void __cdecl(FServerOptions), FDefaultDelegateUserPolicy>*>(this, "AShooterPlayerState.OnClientServerOptionsInfoRecived"); }
     //TDelegate<void __cdecl(TArray<FAdminPlayerDataInfo, TSizedDefaultAllocator<32> >), FDefaultDelegateUserPolicy>& OnClientAdminInfoPlayerBannedRecivedField() { return *GetNativePointerField<TDelegate<void __cdecl(TArray<FAdminPlayerDataInfo, TSizedDefaultAllocator<32> >), FDefaultDelegateUserPolicy>*>(this, "AShooterPlayerState.OnClientAdminInfoPlayerBannedRecived"); }
