@@ -117,9 +117,6 @@
     <ClCompile Include="Core\Private\PDBReader\PDBReader.cpp">
       <Filter>Source Files\Core\Private\PDBReader</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Private\Helpers.cpp">
-      <Filter>Source Files\Core\Private</Filter>
-    </ClCompile>
     <ClCompile Include="Core\Private\Offsets.cpp">
       <Filter>Source Files\Core\Private</Filter>
     </ClCompile>
