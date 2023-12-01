@@ -359,7 +359,6 @@ copy "$(SolutionDir)$(PlatformName)\$(ConfigurationName)\$(ProjectName).pdb" "F:
     <ClCompile Include="Core\Private\Base.cpp" />
     <ClCompile Include="Core\Private\Cache.cpp" />
     <ClCompile Include="Core\Private\Commands.cpp" />
-    <ClCompile Include="Core\Private\Helpers.cpp" />
     <ClCompile Include="Core\Private\Hooks.cpp" />
     <ClCompile Include="Core\Private\Logger.cpp" />
     <ClCompile Include="Core\Private\Offsets.cpp" />
