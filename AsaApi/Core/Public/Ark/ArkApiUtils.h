@@ -569,7 +569,7 @@ namespace AsaApi
 			auto* shooter_character = static_cast<AShooterCharacter*>(character);
 			return shooter_character != nullptr && shooter_character->GetPlayerData() != nullptr
 				? shooter_character->GetPlayerData()->MyDataField()->PlayerDataIDField()
-				: -1;
+				: 0;
 		}
 
 		static FORCEINLINE uint64 GetPlayerID(AController* controller)
