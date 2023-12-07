@@ -40,6 +40,22 @@ struct FPrimalChatMessage {
 
 struct FPrimalPlayerCharacterConfigStructReplicated
 {
+    unsigned __int8 bIsFemale : 1;
+    FLinearColor BodyColors[4];
+    FString PlayerCharacterName;
+    unsigned __int8 FacialHairIndex;
+    unsigned __int8 HeadHairIndex;
+    unsigned __int8 EyebrowIndex;
+    float PercentOfFullHeadHairGrowth;
+    float PercentOfFullFacialHairGrowth;
+    float RawBoneModifiers[26];
+    int PlayerSpawnRegionIndex;
+    unsigned __int8 OverrideHeadHairColor[2];
+    unsigned __int8 OverrideFacialHairColor[2];
+    unsigned __int8 DynamicMaterialBytes[50];
+    int PlayerVoiceCollectionIndex;
+    unsigned __int8 bUsingCustomPlayerVoiceCollection : 1;
+
     // Fields
 
     FieldArray<FLinearColor, 4> BodyColorsField() { return { this, "FPrimalPlayerCharacterConfigStructReplicated.BodyColors" }; }
@@ -56,8 +72,8 @@ struct FPrimalPlayerCharacterConfigStructReplicated
 
     // Bitfields
 
-    BitFieldValue<bool, unsigned __int32> bIsFemale() { return { this, "FPrimalPlayerCharacterConfigStructReplicated.bIsFemale" }; }
-    BitFieldValue<bool, unsigned __int32> bUsingCustomPlayerVoiceCollection() { return { this, "FPrimalPlayerCharacterConfigStructReplicated.bUsingCustomPlayerVoiceCollection" }; }
+    BitFieldValue<bool, unsigned __int32> bIsFemaleField() { return { this, "FPrimalPlayerCharacterConfigStructReplicated.bIsFemale" }; }
+    BitFieldValue<bool, unsigned __int32> bUsingCustomPlayerVoiceCollectionField() { return { this, "FPrimalPlayerCharacterConfigStructReplicated.bUsingCustomPlayerVoiceCollection" }; }
 
     // Functions
 
@@ -70,6 +86,30 @@ struct FPrimalPlayerCharacterConfigStructReplicated
     FPrimalPlayerCharacterConfigStruct* GetPlayerCharacterConfig(FPrimalPlayerCharacterConfigStruct* result) { return NativeCall<FPrimalPlayerCharacterConfigStruct*, FPrimalPlayerCharacterConfigStruct*>(this, "FPrimalPlayerCharacterConfigStructReplicated.GetPlayerCharacterConfig()", result); }
     //void FPrimalPlayerCharacterConfigStructReplicated(const FPrimalPlayerCharacterConfigStruct* fromConfig) { NativeCall<void, const FPrimalPlayerCharacterConfigStruct*>(this, "FPrimalPlayerCharacterConfigStructReplicated.FPrimalPlayerCharacterConfigStructReplicated(FPrimalPlayerCharacterConfigStruct&)", fromConfig); }
 };
+
+struct UDamageType : UObject
+{
+    // Fields
+
+    float& DamageImpulseField() { return *GetNativePointerField<float*>(this, "UDamageType.DamageImpulse"); }
+    float& DestructibleImpulseField() { return *GetNativePointerField<float*>(this, "UDamageType.DestructibleImpulse"); }
+    float& DestructibleDamageSpreadScaleField() { return *GetNativePointerField<float*>(this, "UDamageType.DestructibleDamageSpreadScale"); }
+    float& DamageFalloffField() { return *GetNativePointerField<float*>(this, "UDamageType.DamageFalloff"); }
+
+    // Bitfields
+
+    BitFieldValue<bool, unsigned __int32> bIsPassiveDamage() { return { this, "UDamageType.bIsPassiveDamage" }; }
+    BitFieldValue<bool, unsigned __int32> bCausedByWorld() { return { this, "UDamageType.bCausedByWorld" }; }
+    BitFieldValue<bool, unsigned __int32> bScaleMomentumByMass() { return { this, "UDamageType.bScaleMomentumByMass" }; }
+    BitFieldValue<bool, unsigned __int32> bRadialDamageVelChange() { return { this, "UDamageType.bRadialDamageVelChange" }; }
+
+    // Functions
+
+    static UClass* StaticClass() { return NativeCall<UClass*>(nullptr, "UDamageType.StaticClass()"); }
+    //void UDamageType(const FObjectInitializer* ObjectInitializer) { NativeCall<void, const FObjectInitializer*>(this, "UDamageType.UDamageType(FObjectInitializer&)", ObjectInitializer); }
+};
+
+
 
 struct UPrimalActor : UObject
 {
