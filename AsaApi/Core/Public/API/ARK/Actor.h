@@ -8903,7 +8903,7 @@ struct FActorSpawnParameters
     unsigned int ExtraSpawnData;
 
     FActorSpawnParameters()
-        : Name()
+        : Name(FName())
         , Template(nullptr)
         , Owner(nullptr)
         , Instigator(nullptr)
@@ -8912,9 +8912,10 @@ struct FActorSpawnParameters
         , NameMode(ESpawnActorNameMode::Required_Fatal)
         , CustomPreSpawnInitalization(nullptr)
         , AttachToComponent(nullptr)
-        , AttachToBoneName(FName(""))
+        , AttachToBoneName(FName())
         , bPrimalDeferConstruction(false)
         , SpawnCollisionHandlingOverride{0}
+        , TransformScaleMethod(ESpawnActorScaleMethod::MultiplyWithRoot)
         , ObjectFlags(EObjectFlags::RF_Transactional)
     {
     }
