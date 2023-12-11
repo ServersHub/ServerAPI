@@ -2564,3 +2564,40 @@ struct FUniqueNetIdEOS : FUniqueNetId
 	static const TSharedRef<FUniqueNetIdEOS const>* DedicatedServerId() { return NativeCall<const TSharedRef<FUniqueNetIdEOS const> *>(nullptr, "FUniqueNetIdEOS.DedicatedServerId()"); }
 };
 
+struct FCharacterAndControllerPair
+{
+	// Fields
+
+	AShooterCharacter*& CharacterField() { return *GetNativePointerField<AShooterCharacter**>(this, "FCharacterAndControllerPair.Character"); }
+	AShooterPlayerController*& ControllerField() { return *GetNativePointerField<AShooterPlayerController**>(this, "FCharacterAndControllerPair.Controller"); }
+
+	// Bitfields
+
+
+	// Functions
+
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FCharacterAndControllerPair.StaticStruct()"); }
+};
+
+struct FPointDamageEvent : FDamageEvent
+{
+	// Fields
+
+	float& DamageField() { return *GetNativePointerField<float*>(this, "FPointDamageEvent.Damage"); }
+	FVector_NetQuantizeNormal& ShotDirectionField() { return *GetNativePointerField<FVector_NetQuantizeNormal*>(this, "FPointDamageEvent.ShotDirection"); }
+	FHitResult& HitInfoField() { return *GetNativePointerField<FHitResult*>(this, "FPointDamageEvent.HitInfo"); }
+
+	// Bitfields
+
+
+	// Functions
+
+	//void ~FPointDamageEvent() { NativeCall<void>(this, "FPointDamageEvent.~FPointDamageEvent()"); }
+	//void FPointDamageEvent(const FPointDamageEvent* __that) { NativeCall<void, const FPointDamageEvent*>(this, "FPointDamageEvent.FPointDamageEvent(FPointDamageEvent&)", __that); }
+	bool IsOfType(int InID) { return NativeCall<bool, int>(this, "FPointDamageEvent.IsOfType(int)", InID); }
+	//void FPointDamageEvent() { NativeCall<void>(this, "FPointDamageEvent.FPointDamageEvent()"); }
+	//void FPointDamageEvent(float InDamage, const FHitResult* InHitInfo, const UE::Math::TVector<double>* InShotDirection, TSubclassOf<UDamageType> InDamageTypeClass) { NativeCall<void, float, const FHitResult*, const UE::Math::TVector<double>*, TSubclassOf<UDamageType>>(this, "FPointDamageEvent.FPointDamageEvent(float,FHitResult&,UE::Math::TVector<double>&,TSubclassOf<UDamageType>)", InDamage, InHitInfo, InShotDirection, InDamageTypeClass); }
+	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FPointDamageEvent.StaticStruct()"); }
+	void GetBestHitInfo(const AActor* HitActor, const AActor* HitInstigator, FHitResult* OutHitInfo, UE::Math::TVector<double>* OutImpulseDir) { NativeCall<void, const AActor*, const AActor*, FHitResult*, UE::Math::TVector<double>*>(this, "FPointDamageEvent.GetBestHitInfo(AActor*,AActor*,FHitResult&,UE::Math::TVector<double>&)", HitActor, HitInstigator, OutHitInfo, OutImpulseDir); }
+};
+

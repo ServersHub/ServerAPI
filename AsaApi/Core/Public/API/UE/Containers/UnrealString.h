@@ -1833,7 +1833,10 @@ public:
 	 * Removes whitespace characters from the start and end of this string.
 	 * @note Unlike Trim() this function returns a copy, and does not mutate the string.
 	 */
-	UE_NODISCARD FString TrimStartAndEnd() const &;
+	UE_NODISCARD FString TrimStartAndEnd() const&
+	{
+		return NativeCall<FString>(this, "FString.TrimStartAndEnd()");
+	}
 
 	/**
 	 * Removes whitespace characters from the start and end of this string.
@@ -2174,7 +2177,10 @@ public:
 	 *
 	 * @param	Chars	by default, replaces all supported characters; this parameter allows you to limit the replacement to a subset.
 	 */
-	void ReplaceCharWithEscapedCharInline( const TArray<TCHAR>* Chars = nullptr );
+	void ReplaceCharWithEscapedCharInline( const TArray<TCHAR>* Chars = nullptr )
+	{
+		NativeCall<void, const TArray<TCHAR>*>(this, "FString.ReplaceCharWithEscapedCharInline(TArray<wchar_t,TSizedDefaultAllocator<32>>*)", Chars);
+	}
 
 	/**
 	 * Replaces certain characters with the "escaped" version of that character (i.e. replaces "\n" with "\\n").

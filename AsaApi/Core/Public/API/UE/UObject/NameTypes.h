@@ -110,7 +110,10 @@ private:
 	{
 		return NativeCall<FNameEntryId, EName>(nullptr, "FNameEntryId.FromValidEName(EName)", Ename);
 	}
-	static FNameEntryId FromValidENamePostInit(EName Ename);
+	static FNameEntryId FromValidENamePostInit(EName Ename)
+	{
+		return NativeCall<FNameEntryId, EName>(nullptr, "FNameEntryId.FromValidEName(EName)", Ename);
+	}
 
 public:
 	friend inline bool operator==(EName Ename, FNameEntryId Id) { return Id == Ename; }
