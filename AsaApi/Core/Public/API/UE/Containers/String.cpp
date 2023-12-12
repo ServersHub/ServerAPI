@@ -683,13 +683,6 @@ void FString::TrimStartAndEndInline()
 	TrimStartInline();
 }
 
-FString FString::TrimStartAndEnd() const &
-{
-	FString Result(*this);
-	Result.TrimStartAndEndInline();
-	return Result;
-}
-
 FString FString::TrimStartAndEnd() &&
 {
 	TrimStartAndEndInline();
@@ -1279,21 +1272,6 @@ static const TCHAR* CharToEscapeSeqMap[][2] =
 };
 //int32 FString::ReplaceInline(const TCHAR* SearchText, const TCHAR* ReplacementText, ESearchCase::Type SearchCase);
 static const uint32 MaxSupportedEscapeChars = UE_ARRAY_COUNT(CharToEscapeSeqMap);
-
-void FString::ReplaceCharWithEscapedCharInline(const TArray<TCHAR>* Chars/*=nullptr*/)
-{
-	if ( Len() > 0 && (Chars == nullptr || Chars->Num() > 0) )
-	{
-		for ( int32 ChIdx = 0; ChIdx < MaxSupportedEscapeChars; ChIdx++ )
-		{
-			if ( Chars == nullptr || Chars->Contains(*(CharToEscapeSeqMap[ChIdx][0])) )
-			{
-				// use ReplaceInline as that won't create a copy of the string if the character isn't found
-				ReplaceInline(CharToEscapeSeqMap[ChIdx][0], CharToEscapeSeqMap[ChIdx][1]);
-			}
-		}
-	}
-}
 
 void FString::ReplaceEscapedCharWithCharInline(const TArray<TCHAR>* Chars/*=nullptr*/)
 {
