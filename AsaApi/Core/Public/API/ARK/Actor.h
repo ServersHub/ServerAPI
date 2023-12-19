@@ -3161,6 +3161,7 @@ struct AShooterPlayerController : ABasePlayerController
 
     //void ClientPlayForceFeedback(UForceFeedbackEffect* ForceFeedbackEffect, FForceFeedbackParameters* Params, float intensityMult) { NativeCall<void, UForceFeedbackEffect*, FForceFeedbackParameters*, float>(this, "AShooterPlayerController.ClientPlayForceFeedback(UForceFeedbackEffect*,FForceFeedbackParameters,float)", ForceFeedbackEffect, Params, intensityMult); }
     static UClass* GetPrivateStaticClass() { return NativeCall<UClass*>(nullptr, "AShooterPlayerController.GetPrivateStaticClass()"); }
+    static UClass* StaticClass() { return NativeCall<UClass*>(nullptr, "AShooterPlayerController.StaticClass()"); }
     bool AllowedToSpectateAllTeams() { return NativeCall<bool>(this, "AShooterPlayerController.AllowedToSpectateAllTeams()"); }
     void BPGetExtraWaypointsSOTF(APlayerController* Controller, AShooterCharacter* PlayerPawn, const TArray<FPointOfInterestData_ForCompanion, TSizedDefaultAllocator<32> >* IndicatorsIn, TArray<FPointOfInterestData_ForCompanion, TSizedDefaultAllocator<32> >* IndicatorsOut) { NativeCall<void, APlayerController*, AShooterCharacter*, const TArray<FPointOfInterestData_ForCompanion, TSizedDefaultAllocator<32> >*, TArray<FPointOfInterestData_ForCompanion, TSizedDefaultAllocator<32> >*>(this, "AShooterPlayerController.BPGetExtraWaypointsSOTF(APlayerController*,AShooterCharacter*,TArray<FPointOfInterestData_ForCompanion,TSizedDefaultAllocator<32>>&,TArray<FPointOfInterestData_ForCompanion,TSizedDefaultAllocator<32>>&)", Controller, PlayerPawn, IndicatorsIn, IndicatorsOut); }
     bool BPPreventChangeCamera() { return NativeCall<bool>(this, "AShooterPlayerController.BPPreventChangeCamera()"); }
@@ -7382,6 +7383,7 @@ struct APrimalDinoCharacter : APrimalCharacter
     bool AllowPushOthers() { return NativeCall<bool>(this, "APrimalDinoCharacter.AllowPushOthers()"); }
     bool FlyingUseHighQualityCollision() { return NativeCall<bool>(this, "APrimalDinoCharacter.FlyingUseHighQualityCollision()"); }
     static UClass* GetPrivateStaticClass() { return NativeCall<UClass*>(nullptr, "APrimalDinoCharacter.GetPrivateStaticClass()"); }
+    static UClass* StaticClass() { return NativeCall<UClass*>(nullptr, "APrimalDinoCharacter.StaticClass()"); }
     bool AllowWakingTame(APlayerController* ForPC) { return NativeCall<bool, APlayerController*>(this, "APrimalDinoCharacter.AllowWakingTame(APlayerController*)", ForPC); }
     float BlueprintAdjustOutputDamage(int AttackIndex, float OriginalDamageAmount, AActor* HitActor, TSubclassOf<UDamageType>* OutDamageType, float* OutDamageImpulse) { return NativeCall<float, int, float, AActor*, TSubclassOf<UDamageType>*, float*>(this, "APrimalDinoCharacter.BlueprintAdjustOutputDamage(int,float,AActor*,TSubclassOf<UDamageType>&,float&)", AttackIndex, OriginalDamageAmount, HitActor, OutDamageType, OutDamageImpulse); }
     float BlueprintExtraBabyScaling() { return NativeCall<float>(this, "APrimalDinoCharacter.BlueprintExtraBabyScaling()"); }
