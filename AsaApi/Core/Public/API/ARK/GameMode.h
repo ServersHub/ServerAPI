@@ -2239,6 +2239,7 @@ struct AShooterGameMode : APrimalGameMode
 	//TArray<AShooterGameMode::FAutoWaterRefreshCropData, TSizedDefaultAllocator<32> >& AutoWaterRefreshCropQueueField() { return *GetNativePointerField<TArray<AShooterGameMode::FAutoWaterRefreshCropData, TSizedDefaultAllocator<32> >*>(this, "AShooterGameMode.AutoWaterRefreshCropQueue"); }
 	FString& CachedSaveDirectoryOverrideField() { return *GetNativePointerField<FString*>(this, "AShooterGameMode.CachedSaveDirectoryOverride"); }
 	int& TicksUntilRegisterField() { return *GetNativePointerField<int*>(this, "AShooterGameMode.TicksUntilRegister"); }
+	bool& bDisableStructurePlacementCollisionField() { return *GetNativePointerField<bool*>(this, "AShooterGameMode.bDisableStructurePlacementCollision"); }
 
 	// Bitfields
 

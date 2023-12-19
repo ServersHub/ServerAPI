@@ -2138,6 +2138,7 @@ struct APrimalStructureTurret : APrimalStructureItemContainer
     // Functions
 
     static UClass* GetPrivateStaticClass() { return NativeCall<UClass*>(nullptr, "APrimalStructureTurret.GetPrivateStaticClass()"); }
+    static UClass* StaticClass() { return NativeCall<UClass*>(nullptr, "APrimalStructureTurret.StaticClass()"); }
     static void StaticRegisterNativesAPrimalStructureTurret() { NativeCall<void>(nullptr, "APrimalStructureTurret.StaticRegisterNativesAPrimalStructureTurret()"); }
     void ValidateGeneratedRepEnums(const TArray<FRepRecord, TSizedDefaultAllocator<32> >* ClassReps) { NativeCall<void, const TArray<FRepRecord, TSizedDefaultAllocator<32> >*>(this, "APrimalStructureTurret.ValidateGeneratedRepEnums(TArray<FRepRecord,TSizedDefaultAllocator<32>>&)", ClassReps); }
     void DrawHUD(AShooterHUD* HUD) { NativeCall<void, AShooterHUD*>(this, "APrimalStructureTurret.DrawHUD(AShooterHUD*)", HUD); }
