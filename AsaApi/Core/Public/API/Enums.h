@@ -2635,12 +2635,6 @@ enum class VkDynamicState:int
 	VK_DYNAMIC_STATE_MAX_ENUM = 0x7FFFFFFF
 };
 
-enum class _DEVPROPSTORE:int
-{
-	DEVPROP_STORE_SYSTEM = 0x0,
-	DEVPROP_STORE_USER = 0x1
-};
-
 enum class KF_CATEGORY:int
 {
 	KF_CATEGORY_VIRTUAL = 0x1,
@@ -3086,22 +3080,6 @@ enum class FWPS_BUILTIN_LAYERS_:int
 	FWPS_BUILTIN_LAYER_MAX = 0x67
 };
 
-enum class _NDIS_802_11_WEP_STATUS:int
-{
-	Ndis802_11WEPEnabled = 0x0,
-	Ndis802_11Encryption1Enabled = 0x0,
-	Ndis802_11WEPDisabled = 0x1,
-	Ndis802_11EncryptionDisabled = 0x1,
-	Ndis802_11WEPKeyAbsent = 0x2,
-	Ndis802_11Encryption1KeyAbsent = 0x2,
-	Ndis802_11WEPNotSupported = 0x3,
-	Ndis802_11EncryptionNotSupported = 0x3,
-	Ndis802_11Encryption2Enabled = 0x4,
-	Ndis802_11Encryption2KeyAbsent = 0x5,
-	Ndis802_11Encryption3Enabled = 0x6,
-	Ndis802_11Encryption3KeyAbsent = 0x7
-};
-
 enum class IKEEXT_QM_SA_STATE_:int
 {
 	IKEEXT_QM_SA_STATE_NONE = 0x0,
@@ -3262,14 +3240,6 @@ enum class IKEEXT_AUTHENTICATION_IMPERSONATION_TYPE_:int
 	IKEEXT_IMPERSONATION_MAX = 0x2
 };
 
-enum class _NDIS_PROCESSOR_VENDOR:int
-{
-	NdisProcessorVendorUnknown = 0x0,
-	NdisProcessorVendorGenuinIntel = 0x1,
-	NdisProcessorVendorGenuineIntel = 0x1,
-	NdisProcessorVendorAuthenticAMD = 0x2
-};
-
 enum class IKEEXT_EM_SA_STATE_:int
 {
 	IKEEXT_EM_SA_STATE_NONE = 0x0,
@@ -3399,16 +3369,6 @@ enum class FWPM_NET_FAILURE_CAUSE_:int
 	FWPM_NET_FAILURE_WRONG_COMPARTMENT = 0x1,
 	FWPM_NET_FAILURE_AUTHIP = 0x2,
 	FWPM_NET_FAILURE_CAUSE_MAX = 0x3
-};
-
-enum class NL_ADDRESS_TYPE:int
-{
-	NlatUnspecified = 0x0,
-	NlatUnicast = 0x1,
-	NlatAnycast = 0x2,
-	NlatMulticast = 0x3,
-	NlatBroadcast = 0x4,
-	NlatInvalid = 0x5
 };
 
 enum class NETIO_TRIAGE_BLOCK_ID:int
@@ -33058,17 +33018,6 @@ enum class EOldShaderPlatform:int
 	OSP_NumPlatforms = 0x1C
 };
 
-enum class IF_OPER_STATUS:int
-{
-	IfOperStatusUp = 0x1,
-	IfOperStatusDown = 0x2,
-	IfOperStatusTesting = 0x3,
-	IfOperStatusUnknown = 0x4,
-	IfOperStatusDormant = 0x5,
-	IfOperStatusNotPresent = 0x6,
-	IfOperStatusLowerLayerDown = 0x7
-};
-
 /*enum class MULTICAST_MODE_TYPE :int
 {
 	MCAST_INCLUDE = 0x0,
@@ -33102,66 +33051,6 @@ enum class EPackageStoreEntryStatus:int
 	Missing = 0x1,
 	Pending = 0x2,
 	Ok = 0x3
-};
-
-enum class _NET_IF_CONNECTION_TYPE:int
-{
-	NET_IF_CONNECTION_DEDICATED = 0x1,
-	NET_IF_CONNECTION_PASSIVE = 0x2,
-	NET_IF_CONNECTION_DEMAND = 0x3,
-	NET_IF_CONNECTION_MAXIMUM = 0x4
-};
-
-enum class TUNNEL_TYPE:int
-{
-	TUNNEL_TYPE_NONE = 0x0,
-	TUNNEL_TYPE_OTHER = 0x1,
-	TUNNEL_TYPE_DIRECT = 0x2,
-	TUNNEL_TYPE_6TO4 = 0xB,
-	TUNNEL_TYPE_ISATAP = 0xD,
-	TUNNEL_TYPE_TEREDO = 0xE,
-	TUNNEL_TYPE_IPHTTPS = 0xF
-};
-
-enum class NL_PREFIX_ORIGIN:int
-{
-	IpPrefixOriginOther = 0x0,
-	IpPrefixOriginManual = 0x1,
-	IpPrefixOriginWellKnown = 0x2,
-	IpPrefixOriginDhcp = 0x3,
-	IpPrefixOriginRouterAdvertisement = 0x4,
-	IpPrefixOriginUnchanged = 0x10
-};
-
-enum class NL_SUFFIX_ORIGIN:int
-{
-	NlsoOther = 0x0,
-	NlsoManual = 0x1,
-	NlsoWellKnown = 0x2,
-	NlsoDhcp = 0x3,
-	NlsoLinkLayerAddress = 0x4,
-	NlsoRandom = 0x5,
-	IpSuffixOriginOther = 0x0,
-	IpSuffixOriginManual = 0x1,
-	IpSuffixOriginWellKnown = 0x2,
-	IpSuffixOriginDhcp = 0x3,
-	IpSuffixOriginLinkLayerAddress = 0x4,
-	IpSuffixOriginRandom = 0x5,
-	IpSuffixOriginUnchanged = 0x10
-};
-
-enum class NL_DAD_STATE:int
-{
-	NldsInvalid = 0x0,
-	NldsTentative = 0x1,
-	NldsDuplicate = 0x2,
-	NldsDeprecated = 0x3,
-	NldsPreferred = 0x4,
-	IpDadStateInvalid = 0x0,
-	IpDadStateTentative = 0x1,
-	IpDadStateDuplicate = 0x2,
-	IpDadStateDeprecated = 0x3,
-	IpDadStatePreferred = 0x4
 };
 
 enum class EHostProtocol:int
@@ -34410,19 +34299,6 @@ enum class ADDRESS_MODE:int
 	AddrMode1632 = 0x1,
 	AddrModeReal = 0x2,
 	AddrModeFlat = 0x3
-};
-
-enum class _TCP_TABLE_CLASS:int
-{
-	TCP_TABLE_BASIC_LISTENER = 0x0,
-	TCP_TABLE_BASIC_CONNECTIONS = 0x1,
-	TCP_TABLE_BASIC_ALL = 0x2,
-	TCP_TABLE_OWNER_PID_LISTENER = 0x3,
-	TCP_TABLE_OWNER_PID_CONNECTIONS = 0x4,
-	TCP_TABLE_OWNER_PID_ALL = 0x5,
-	TCP_TABLE_OWNER_MODULE_LISTENER = 0x6,
-	TCP_TABLE_OWNER_MODULE_CONNECTIONS = 0x7,
-	TCP_TABLE_OWNER_MODULE_ALL = 0x8
 };
 
 enum class GAME_INSTALL_SCOPE:int
