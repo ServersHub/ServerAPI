@@ -1,8 +1,12 @@
-{  
-  "settings":{  
-    "AutomaticPluginReloading":true,
-    "AutomaticPluginReloadSeconds":5,
+{
+  "settings": {
+    "AutomaticPluginReloading": true,
+    "AutomaticPluginReloadSeconds": 5,
     "SaveWorldBeforePluginReload": true,
-    "AttachToParent": true
+    "AttachToParent": true,
+    "DeleteOldLogs": {
+      "Enable": true,
+      "MaxAge": 24
+    }
   }
 }
