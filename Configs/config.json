@@ -4,6 +4,9 @@
     "AutomaticPluginReloadSeconds": 5,
     "SaveWorldBeforePluginReload": true,
     "AttachToParent": true,
-    "MaxAgeInSeconds": 86400
+    "DeleteOldLogs": {
+      "Enable": true,
+      "MaxAge": 24
+    }
   }
 }
