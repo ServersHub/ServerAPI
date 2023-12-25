@@ -264,6 +264,7 @@ struct UVictoryCore : UVictoryCoreHighest
 	static char GetPreviousTrackedActorLinkedEntry() { return NativeCall<char>(nullptr, "UVictoryCore.GetPreviousTrackedActorLinkedEntry()"); }
 	static char GetNextTrackedActorLinkedEntry() { return NativeCall<char>(nullptr, "UVictoryCore.GetNextTrackedActorLinkedEntry()"); }
 	static void DoForceStreamComponents(TArray<UMeshComponent*, TSizedDefaultAllocator<32> >* ComponentsArray, bool bIsFirstPerson, bool bForceMaxTexturesOnConsole) { NativeCall<void, TArray<UMeshComponent*, TSizedDefaultAllocator<32> >*, bool, bool>(nullptr, "UVictoryCore.DoForceStreamComponents(TArray<UMeshComponent*,TSizedDefaultAllocator<32>>*,bool,bool)", ComponentsArray, bIsFirstPerson, bForceMaxTexturesOnConsole); }
+	static bool VTraceSingleBP_IgnoreActorsArray(UObject* WorldContextObject, FHitResult* OutHit, const UE::Math::TVector<double>* Start, const UE::Math::TVector<double>* End, const TArray<AActor*, TSizedDefaultAllocator<32> >* ExtraIgnoreActors, const AActor* InIgnoreActor, ECollisionChannel TraceChannel, int CollisionGroups, FName TraceTag, bool bReturnPhysMaterial, bool bTraceComplex, float DebugDrawDuration) { return NativeCall<bool, UObject *, FHitResult *, const UE::Math::TVector<double> *, const UE::Math::TVector<double> *, const TArray<AActor *,TSizedDefaultAllocator<32> > *, const AActor *, ECollisionChannel, int, FName, bool, bool, float>(nullptr, "UVictoryCore.VTraceSingleBP_IgnoreActorsArray(UObject*,FHitResult&,UE::Math::TVector<double>&,UE::Math::TVector<double>&,TArray<AActor*,TSizedDefaultAllocator<32>>&,AActor*,ECollisionChannel,int,FName,bool,bool,float)", WorldContextObject, OutHit, Start, End, ExtraIgnoreActors, InIgnoreActor, TraceChannel, CollisionGroups, TraceTag, bReturnPhysMaterial, bTraceComplex, DebugDrawDuration); }
 	//static int IsChildOfClassesSoftRefT<class UObject>(TSubclassOf<UObject> childClass, const //TArray<//TSoftClassPtr<UObject>, TSizedDefaultAllocator<32> >* ParentClassesArray) { return NativeCall<int, TSubclassOf<UObject>, const //TArray<//TSoftClassPtr<UObject>, TSizedDefaultAllocator<32> >*>(nullptr, "UVictoryCore.IsChildOfClassesSoftRefT<class UObject>(TSubclassOf<UObject>,//TArray<//TSoftClassPtr<UObject>,TSizedDefaultAllocator<32>>*)", childClass, ParentClassesArray); }
 	//static bool OverlappingActorsTrace() { return NativeCall<bool>(nullptr, "UVictoryCore.OverlappingActorsTrace()"); }
 	//static int IsChildOfClassesSoftRefT<class AActor>(TSubclassOf<UObject> childClass, const //TArray<//TSoftClassPtr<AActor>, TSizedDefaultAllocator<32> >* ParentClassesArray) { return NativeCall<int, TSubclassOf<UObject>, const //TArray<//TSoftClassPtr<AActor>, TSizedDefaultAllocator<32> >*>(nullptr, "UVictoryCore.IsChildOfClassesSoftRefT<class AActor>(TSubclassOf<UObject>,//TArray<//TSoftClassPtr<AActor>,TSizedDefaultAllocator<32>>*)", childClass, ParentClassesArray); }
@@ -1474,6 +1475,14 @@ struct FFunctionCaller
 	static UScriptStruct* StaticStruct() { return NativeCall<UScriptStruct*>(nullptr, "FFunctionCaller.StaticStruct()"); }
 };
 
+struct FActorInstanceHandle
+{
+	TWeakObjectPtr<AActor> Actor;
+	TWeakObjectPtr<struct ALightWeightInstanceManager> Manager;
+	int InstanceIndex;
+	unsigned int InstanceUID;
+};
+
 struct FHitResult
 {
 	// Fields
@@ -1491,7 +1500,7 @@ struct FHitResult
 	int& MyItemField() { return *GetNativePointerField<int*>(this, "FHitResult.MyItem"); }
 	int& ItemField() { return *GetNativePointerField<int*>(this, "FHitResult.Item"); }
 	TWeakObjectPtr<UPhysicalMaterial>& PhysMaterialField() { return *GetNativePointerField<TWeakObjectPtr<UPhysicalMaterial>*>(this, "FHitResult.PhysMaterial"); }
-	//FActorInstanceHandle& HitObjectHandleField() { return *GetNativePointerField<FActorInstanceHandle*>(this, "FHitResult.HitObjectHandle"); }
+	FActorInstanceHandle& HitObjectHandleField() { return *GetNativePointerField<FActorInstanceHandle*>(this, "FHitResult.HitObjectHandle"); }
 	TWeakObjectPtr<UPrimitiveComponent>& ComponentField() { return *GetNativePointerField<TWeakObjectPtr<UPrimitiveComponent>*>(this, "FHitResult.Component"); }
 	FName& BoneNameField() { return *GetNativePointerField<FName*>(this, "FHitResult.BoneName"); }
 	FName& MyBoneNameField() { return *GetNativePointerField<FName*>(this, "FHitResult.MyBoneName"); }

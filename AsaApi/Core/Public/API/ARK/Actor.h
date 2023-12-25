@@ -4007,6 +4007,7 @@ struct AShooterPlayerController : ABasePlayerController
     void Server_GetPlatformNameFromId_Implementation(unsigned int Id) { NativeCall<void, unsigned int>(this, "AShooterPlayerController.Server_GetPlatformNameFromId_Implementation(unsignedint)", Id); }
     void Client_GetPlatformNameFromId_Implementation(unsigned int Id, const FString* PlatformName) { NativeCall<void, unsigned int, const FString*>(this, "AShooterPlayerController.Client_GetPlatformNameFromId_Implementation(unsignedint,FString&)", Id, PlatformName); }
     void PlayReconnectSound() { NativeCall<void>(this, "AShooterPlayerController.PlayReconnectSound()"); }
+    FVector* GetViewLocation(FVector* result) { return NativeCall<FVector*, FVector*>(this, "AShooterPlayerController.GetViewLocation()", result); }
     //void OnSelectOrderGroup<0>() { NativeCall<void>(this, "AShooterPlayerController.OnSelectOrderGroup<0>()"); }
     //void OnSelectOrderGroup<1>() { NativeCall<void>(this, "AShooterPlayerController.OnSelectOrderGroup<1>()"); }
     //void OnSelectOrderGroup<2>() { NativeCall<void>(this, "AShooterPlayerController.OnSelectOrderGroup<2>()"); }
@@ -4141,6 +4142,7 @@ struct APawn : AActor
     void GetLifetimeReplicatedProps(TArray<FLifetimeProperty, TSizedDefaultAllocator<32> >* OutLifetimeProps) { NativeCall<void, TArray<FLifetimeProperty, TSizedDefaultAllocator<32> >*>(this, "APawn.GetLifetimeReplicatedProps(TArray<FLifetimeProperty,TSizedDefaultAllocator<32>>&)", OutLifetimeProps); }
     void PreReplication(IRepChangedPropertyTracker* ChangedPropertyTracker) { NativeCall<void, IRepChangedPropertyTracker*>(this, "APawn.PreReplication(IRepChangedPropertyTracker&)", ChangedPropertyTracker); }
     const FNavAgentProperties* GetNavAgentPropertiesRef() { return NativeCall<const FNavAgentProperties*>(this, "APawn.GetNavAgentPropertiesRef()"); }
+    FVector* GetPawnViewLocation(FVector* result) { return NativeCall<FVector*, FVector*>(this, "APawn.GetPawnViewLocation()", result); }
 };
 
 
