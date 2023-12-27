@@ -1462,8 +1462,26 @@ struct AActor : UPrimalActor
     void MulticastDrawDebugLine_Implementation(const UE::Math::TVector<double>* TextLocation, const FString* Text, AActor* TestBaseActor) { NativeCall<void, const UE::Math::TVector<double>*, const FString*, AActor*>(this, "AActor.MulticastDrawDebugLine_Implementation(UE::Math::TVector<double>,UE::Math::TVector<double>,FLinearColor,float,float,bool)", TextLocation, Text, TestBaseActor); }
     void MulticastDrawDebugLineTraceHitResult_Implementation(const FHitResult* Hit, UE::Math::TVector<double>* TraceStart, UE::Math::TVector<double>* TraceEnd) { NativeCall<void, const FHitResult*, UE::Math::TVector<double>*, UE::Math::TVector<double>*>(this, "AActor.MulticastDrawDebugLineTraceHitResult_Implementation(FHitResult,UE::Math::TVector<double>,UE::Math::TVector<double>,FLinearColor,FLinearColor,float,float,bool,FLinearColor,float,float,bool)", Hit, TraceStart, TraceEnd); }
     //UPathFollowingComponent* FindComponentByClass<class UPathFollowingComponent>() { return NativeCall<UPathFollowingComponent*>(this, "AActor.FindComponentByClass<class UPathFollowingComponent>()"); }
-    bool IsA(UClass* SomeBase) { return ClassPrivateField()->IsChildOf(SomeBase); }
-    inline FVector GetLocation()
+
+    // Extensions
+
+    FORCEINLINE FVector GetActorForwardVector()
+    {
+        USceneComponent* RootComponent = this->RootComponentField().Get();
+        if (RootComponent)
+        {
+            return RootComponent->ComponentToWorldField().GetUnitAxis(EAxis::X);
+        }
+
+        return FVector::ZeroVector;
+    }
+
+    FORCEINLINE bool IsA(UClass* SomeBase)
+    {
+        return this->ClassPrivateField()->IsChildOf(SomeBase);
+    }
+
+    FORCEINLINE FVector GetLocation()
     {
         auto* root = this->RootComponentField().Get();
         if (root)
