@@ -33,6 +33,7 @@
 //#include "GameState.h"
 #include "PrimalStructure.h"
 #include "Buff.h"
+#include "ModParamStructs.h"
 
 #include "../../IApiUtils.h"
 #include "../../ICommands.h"
