@@ -194,7 +194,7 @@ namespace AsaApi
 		file >> config;
 		file.close();
 
-		std::string messaging_manager_name = config["DefaultMessaging"].get<std::string>();
+		std::string messaging_manager_name = config.value("DefaultMessaging", "Default");
 
 		if (messaging_manager_name == "Default")
 			return std::make_shared<MessagingManager>();
