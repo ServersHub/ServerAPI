@@ -184,7 +184,6 @@ namespace AsaApi
 
 	std::shared_ptr<MessagingManager> ApiUtils::ReadApiMessagingManager()
 	{
-		//DefaultMessaging
 		const std::string config_path = AsaApi::Tools::GetCurrentDir() + "/config.json";
 		std::ifstream file{ config_path };
 		if (!file.is_open())
