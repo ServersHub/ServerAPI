@@ -73,7 +73,7 @@ struct APrimalBuff_ApiUtils : APrimalBuff
 
 	// Functions
 
-	AsaApiUtilsNotification GetNotificationForId(const FString& id)
+	AsaApiUtilsNotification& GetNotificationForId(const FString& id)
 	{
 		auto& Notifications = NotificationsField();
 		for (auto& Notification : Notifications)
@@ -83,5 +83,8 @@ struct APrimalBuff_ApiUtils : APrimalBuff
 				return Notification;
 			}
 		}
+
+		static AsaApiUtilsNotification EmptyNotification;
+		return EmptyNotification;
 	}
 };
