@@ -146,13 +146,30 @@ public:
 		}
 	}
 
-protected: // these are to be redefined by the child classes
+	/**
+	* \brief Returns wether this messaging manager is able to work in the current session.
+	* \brief The default one does not depend in any mod or external service so it always returns true.
+	* \brief Subclasses should redefine this function if they depend on any external service.
+	* \brief If it returns an error, it will be removed and the plugin will fall back to the default API messaging manager.
+	* \return Empty optional if no error, or optional filled with error string.
+	*/
+	virtual std::optional<std::string> MeetsRequirementsToWork()
+	{
+		return {}; // OK
+	}
 
+	// non virtual functions
+
+	/**
+	* \brief Sets the world context. This is called by the API automatically.
+	* \param world_context World context
+	*/
 	void SetWorldContext(UWorld* world_context)
 	{
 		WorldContext = world_context;
 	}
 
+protected /*overridable functions*/: // these are to be redefined by the child classes
 	// default implementations
 
 	virtual void SendServerMessage_Impl(AShooterPlayerController* player_controller, FLinearColor msg_color, const FString& msg)
@@ -166,7 +183,7 @@ protected: // these are to be redefined by the child classes
 		FPrimalChatMessage chat_message;
 		chat_message.SenderName = sender_name;
 		chat_message.Message = msg;
-		chat_message.UserId = "";//AsaApi::IApiUtils::GetEOSIDFromController(player_controller);
+		chat_message.UserId = player_controller->GetEOSId();
 		player_controller->ClientChatMessage(chat_message);
 	}
 
@@ -176,6 +193,6 @@ protected: // these are to be redefined by the child classes
 		player_controller->ClientServerNotification(&msg, color, display_scale, display_time, icon, nullptr, 1);
 	}
 
-private:
+protected /*variables*/:
 	UWorld* WorldContext = nullptr;
 };

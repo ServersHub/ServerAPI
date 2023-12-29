@@ -1,6 +1,7 @@
 #include "ApiUtils.h"
 
 #include "../IBaseApi.h"
+#include "Ark/MessagingManager.h"
 
 namespace AsaApi
 {
@@ -9,6 +10,11 @@ namespace AsaApi
 	void ApiUtils::SetWorld(UWorld* uworld)
 	{
 		u_world_ = uworld;
+
+		std::shared_ptr<MessagingManager> manager = std::make_shared<MessagingManager>();
+		manager->SetWorldContext(uworld);
+		SetMessagingManagerInternal("Default", manager);
+		CheckMessagingManagersRequirements();
 	}
 
 	UWorld* ApiUtils::GetWorld() const
@@ -111,6 +117,63 @@ namespace AsaApi
 	UShooterCheatManager* ApiUtils::GetCheatManager() const
 	{
 		return cheatmanager_;
+	}
+
+	std::shared_ptr<MessagingManager> ApiUtils::GetMessagingManagerInternal(const FString& forPlugin) const
+	{
+		auto iter = messaging_managers_.find(forPlugin);
+		if (forPlugin.IsEmpty()
+			|| iter == messaging_managers_.end())
+		{
+			return messaging_managers_.find("Default")->second;
+		}
+		return iter->second;
+	}
+
+	void ApiUtils::SetMessagingManagerInternal(const FString& forPlugin, std::shared_ptr<MessagingManager> manager)
+	{
+		if (manager == nullptr)
+			throw std::invalid_argument("MessagingManager cannot be null");
+
+		messaging_managers_[forPlugin] = manager;
+		manager->SetWorldContext(u_world_);
+	}
+
+	void ApiUtils::RemoveMessagingManagerInternal(const FString& forPlugin)
+	{
+		if (forPlugin.IsEmpty())
+			return;
+
+		messaging_managers_.erase(forPlugin);
+	}
+
+	void ApiUtils::CheckMessagingManagersRequirements()
+	{
+		for (auto it = messaging_managers_.begin(); it != messaging_managers_.end(); /*manual increm*/)
+		{
+			auto& manager = it->second;
+			if (!manager)
+			{
+				it = messaging_managers_.erase(it);
+				continue;
+			}
+			else
+			{
+				std::optional<std::string> error = manager->MeetsRequirementsToWork();
+				if (error.has_value())
+				{
+					TArray<FString> parsedName;
+					it->first.ParseIntoArray(parsedName, L"\\", true);
+					Log::GetLog()->error("Custom messaging error for '{}', using normal messaging. Reason: {}", parsedName.Last().ToString(), error.value());
+					it = messaging_managers_.erase(it);
+					continue;
+				}
+				else
+				{
+					++it;
+				}
+			}
+		}
 	}
 
 	// Free function

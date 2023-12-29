@@ -1,5 +1,7 @@
 #pragma once
 
+#include "../../IApiUtils.h"
+
 // Actor extensions
 
 FORCEINLINE FVector ActorExtensions::GetActorForwardVector()
@@ -35,6 +37,8 @@ FORCEINLINE FVector ActorExtensions::GetLocation()
 
 FORCEINLINE FString PlayerControllerExtensions::GetEOSId()
 {
-    APlayerController* _this = reinterpret_cast<APlayerController*>(this);
-	return AsaApi::IApiUtils::GetEOSIDFromController(_this);
+    AShooterPlayerController* _this = reinterpret_cast<AShooterPlayerController*>(this);
+    FString eos_id = "";
+    _this->GetUniqueNetIdAsString(&eos_id);
+    return eos_id;
 }

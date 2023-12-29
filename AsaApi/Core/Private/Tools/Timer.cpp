@@ -1,8 +1,8 @@
 #include "Timer.h"
 
-#include <Timer.h>
-
 #include "../IBaseApi.h"
+
+#include <Timer.h>
 
 namespace API
 {

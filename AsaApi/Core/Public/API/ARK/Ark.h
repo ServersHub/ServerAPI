@@ -40,5 +40,4 @@
 #include "../../ICommands.h"
 #include "IHooks.h"
 #include "Tools.h"
-
 #include "ExtensionsDefinition.h"
