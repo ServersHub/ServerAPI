@@ -128,7 +128,7 @@ namespace AsaApiModUtils
 			for (APrimalBuff* buff : buffs)
 			{
 				if (buff->CustomTagField().Compare("ApiUtilsModBuff") == 0)
-					return buff;
+					return static_cast<APrimalBuff_ApiUtils*>(buff);
 			}
 		}
 

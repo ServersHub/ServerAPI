@@ -1131,6 +1131,7 @@ copy "$(SolutionDir)$(PlatformName)\$(ConfigurationName)\$(ProjectName).pdb" "F:
     <ClInclude Include="Core\Public\API\UE\Windows\WindowsSemaphore.h" />
     <ClInclude Include="Core\Public\API\UE\Windows\WindowsSystemIncludes.h" />
     <ClInclude Include="Core\Public\Ark\ArkApiUtils.h" />
+    <ClInclude Include="Core\Public\Ark\AsaApiUtilsMessagingManager.h" />
     <ClInclude Include="Core\Public\Ark\MessagingManager.h" />
     <ClInclude Include="Core\Public\AsaApiModUtils.hpp" />
     <ClInclude Include="Core\Public\IApiUtils.h" />

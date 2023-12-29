@@ -2474,6 +2474,9 @@
     <ClInclude Include="Core\Public\API\ARK\ExtensionsDefinition.h">
       <Filter>Source Files\Core\Public\API\ARK</Filter>
     </ClInclude>
+    <ClInclude Include="Core\Public\Ark\AsaApiUtilsMessagingManager.h">
+      <Filter>Source Files\Core\Public\Ark</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="AsaApi.def">

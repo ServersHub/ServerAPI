@@ -792,6 +792,10 @@ namespace AsaApi
 			return std::static_pointer_cast<T>(GetMessagingManagerInternal(GetDllName()));
 		}
 
+		/**
+		* \brief Sets the messaging manager for the current plugin
+		* \tparam T MessagingManager type
+		*/
 		template <class T>
 		void SetMessagingManager()
 		{
