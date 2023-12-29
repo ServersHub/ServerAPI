@@ -4,6 +4,7 @@
 
 #include <API/ARK/Ark.h>
 #include <../Private/Ark/Globals.h>
+#include "MessagingManager.h"
 
 namespace AsaApi
 {
@@ -816,6 +817,7 @@ namespace AsaApi
 		}
 	private:
 		virtual AShooterPlayerController* FindPlayerFromEOSID_Internal(const FString& eos_id) const = 0;
+		//virtual std::shared_ptr<class MessagingManager> GetMessagingManager(const FString& forPlugin) const = 0;
 	};
 
 	ARK_API IApiUtils& APIENTRY GetApiUtils();

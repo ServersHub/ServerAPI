@@ -2468,6 +2468,12 @@
     <ClInclude Include="Core\Public\API\ARK\ModParamStructs.h">
       <Filter>Source Files\Core\Public\API\ARK</Filter>
     </ClInclude>
+    <ClInclude Include="Core\Public\API\ARK\ExtensionsDeclaration.h">
+      <Filter>Source Files\Core\Public\API\ARK</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Public\API\ARK\ExtensionsDefinition.h">
+      <Filter>Source Files\Core\Public\API\ARK</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="AsaApi.def">
