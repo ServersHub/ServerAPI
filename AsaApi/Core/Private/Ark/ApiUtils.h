@@ -36,6 +36,7 @@ namespace AsaApi
 
 	private:
 		void CheckMessagingManagersRequirements();
+		std::shared_ptr<MessagingManager> ReadApiMessagingManager();
 
 	private:
 		UWorld* u_world_{ nullptr };

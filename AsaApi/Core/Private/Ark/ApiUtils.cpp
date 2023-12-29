@@ -2,6 +2,9 @@
 
 #include "../IBaseApi.h"
 #include "Ark/MessagingManager.h"
+#include "Ark/AsaApiUtilsMessagingManager.h"
+#include <fstream>
+#include "json.hpp"
 
 namespace AsaApi
 {
@@ -11,7 +14,7 @@ namespace AsaApi
 	{
 		u_world_ = uworld;
 
-		std::shared_ptr<MessagingManager> manager = std::make_shared<MessagingManager>();
+		std::shared_ptr<MessagingManager> manager = ReadApiMessagingManager();
 		manager->SetWorldContext(uworld);
 		SetMessagingManagerInternal("Default", manager);
 		CheckMessagingManagersRequirements();
@@ -137,6 +140,9 @@ namespace AsaApi
 
 		messaging_managers_[forPlugin] = manager;
 		manager->SetWorldContext(u_world_);
+
+		if (GetStatus() == ServerStatus::Ready)
+			CheckMessagingManagersRequirements();
 	}
 
 	void ApiUtils::RemoveMessagingManagerInternal(const FString& forPlugin)
@@ -174,6 +180,28 @@ namespace AsaApi
 				}
 			}
 		}
+	}
+
+	std::shared_ptr<MessagingManager> ApiUtils::ReadApiMessagingManager()
+	{
+		//DefaultMessaging
+		const std::string config_path = AsaApi::Tools::GetCurrentDir() + "/config.json";
+		std::ifstream file{ config_path };
+		if (!file.is_open())
+			return std::make_shared<MessagingManager>();
+
+		nlohmann::json config;
+		file >> config;
+		file.close();
+
+		std::string messaging_manager_name = config["DefaultMessaging"].get<std::string>();
+
+		if (messaging_manager_name == "Default")
+			return std::make_shared<MessagingManager>();
+		else if (messaging_manager_name == "AsaApiUtilsMod")
+			return std::make_shared<AsaApiUtilsMessagingManager>();
+		else
+			return std::make_shared<MessagingManager>(); // fall back to default
 	}
 
 	// Free function
