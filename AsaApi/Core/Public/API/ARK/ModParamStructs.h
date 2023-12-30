@@ -22,8 +22,28 @@ struct DrawDebugLine_Params
 	FVector End;
 	FLinearColor Color;
 	int Duration;
-};
 
+	DrawDebugLine_Params()
+		: Start(FVector(0,0,0))
+		, End(FVector(0, 0, 0))
+		, Color(FLinearColor(0, 0, 0, 0))
+		, Duration(0)
+	{
+	}
+
+	DrawDebugLine_Params(
+		const FVector& Start,
+		const FVector& End,
+		const FLinearColor& Color,
+		const int& Duration
+	)
+		: Start(Start)
+		, End(End)
+		, Color(Color)
+		, Duration(Duration)
+	{
+	}
+};
 
 struct DrawDebugSphere_Params
 {
@@ -37,6 +57,25 @@ struct DrawDebugSphere_Params
 	DrawSphereType DrawType;
 	/*OUT params (return)*/
 	AActor* SphereActor;
+
+	DrawDebugSphere_Params(
+		const FVector& Center,
+		const double& Radius,
+		const int& ForPlayerID,
+		const int& ForTribeID,
+		const FLinearColor& Color,
+		const int& Duration,
+		const DrawSphereType& DrawType
+	)
+		: Center(Center)
+		, Radius(Radius)
+		, ForPlayerID(ForPlayerID)
+		, ForTribeID(ForTribeID)
+		, Color(Color)
+		, Duration(Duration)
+		, DrawType(DrawType)
+	{
+	}
 };
 
 struct AsaApiUtilsNotification
@@ -51,6 +90,45 @@ struct AsaApiUtilsNotification
 	Position TextJustification;
 	Position NotificationScreenPosition;
 	bool bAddToChat;
+
+	// default constructor
+	AsaApiUtilsNotification()
+		: NotificationId("")
+		, Text("")
+		, RecipientEOS(TArray<FString>())
+		, BackgroundColor(FLinearColor(0,0,0,0))
+		, TextColor(FLinearColor(0, 1, 0, 1))
+		, DisplayScale(1.0)
+		, DisplayTime(5.0)
+		, TextJustification(Position::Center)
+		, NotificationScreenPosition(Position::Center)
+		, bAddToChat(false)
+	{
+	}
+	
+	AsaApiUtilsNotification(
+		const FString& Text,
+		const TArray<FString>& RecipientEOS,
+		const FLinearColor& BackgroundColor,
+		const FLinearColor& TextColor,
+		const double& DisplayScale,
+		const double& DisplayTime,
+		const Position& TextJustification,
+		const Position& NotificationScreenPosition,
+		const bool& bAddToChat
+	)
+		: NotificationId("")
+		, Text(Text)
+		, RecipientEOS(RecipientEOS)
+		, BackgroundColor(BackgroundColor)
+		, TextColor(TextColor)
+		, DisplayScale(DisplayScale)
+		, DisplayTime(DisplayTime)
+		, TextJustification(TextJustification)
+		, NotificationScreenPosition(NotificationScreenPosition)
+		, bAddToChat(bAddToChat)
+	{
+	}
 };
 
 struct AddNotification_Params

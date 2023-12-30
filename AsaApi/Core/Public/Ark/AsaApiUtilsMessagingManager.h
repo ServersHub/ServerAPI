@@ -18,9 +18,7 @@ public:
 	FORCEINLINE FString SendNotificationPrettyToPlayer(APlayerController* PC, const FString& Text, const FLinearColor& BackgroundColor, const FLinearColor& TextColor,
 		const double TextScale, const double Duration, const Position TextJustification, const Position ScreenPosition, const bool bAddToChat)
 	{
-		TArray<FString> ids;
-		ids.Add(PC->GetEOSId());
-		return AsaApiModUtils::AddNotification(Text, ids, BackgroundColor, TextColor, TextScale, Duration, TextJustification, ScreenPosition, bAddToChat);
+		return SendNotificationPrettyToPlayer(PC->GetEOSId(), Text, BackgroundColor, TextColor, TextScale, Duration, TextJustification, ScreenPosition, bAddToChat);
 	}
 
 	// this function lets you send a notification to a player using the pretty widgets from the api utils mod, will all the possible params, to specific player
@@ -29,7 +27,7 @@ public:
 	{
 		TArray<FString> ids;
 		ids.Add(EOSid);
-		return AsaApiModUtils::AddNotification(Text, ids, BackgroundColor, TextColor, TextScale, Duration, TextJustification, ScreenPosition, bAddToChat);
+		return SendNotificationPrettyToPlayers(ids, Text, BackgroundColor, TextColor, TextScale, Duration, TextJustification, ScreenPosition, bAddToChat);
 	}
 
 	// this function lets you send a notification to a player using the pretty widgets from the api utils mod, will all the possible params, to all players
@@ -39,13 +37,14 @@ public:
 		TArray<FString> ids;
 		for (APlayerController* PC : PCs)
 			ids.Add(PC->GetEOSId());
-		return AsaApiModUtils::AddNotification(Text, ids, BackgroundColor, TextColor, TextScale, Duration, TextJustification, ScreenPosition, bAddToChat);
+		return SendNotificationPrettyToPlayers(ids, Text, BackgroundColor, TextColor, TextScale, Duration, TextJustification, ScreenPosition, bAddToChat);
 	}
 
-	FORCEINLINE FString SendNotificationPrettyToPlayers(TArray<FString> IDs, const FString& Text, const FLinearColor& BackgroundColor, const FLinearColor& TextColor,
+	FORCEINLINE FString SendNotificationPrettyToPlayers(const TArray<FString>& IDs, const FString& Text, const FLinearColor& BackgroundColor, const FLinearColor& TextColor,
 		const double TextScale, const double Duration, const Position TextJustification, const Position ScreenPosition, const bool bAddToChat)
 	{
-		return AsaApiModUtils::AddNotification(Text, IDs, BackgroundColor, TextColor, TextScale, Duration, TextJustification, ScreenPosition, bAddToChat);
+		AsaApiUtilsNotification params(Text, IDs, BackgroundColor, TextColor, TextScale, Duration, TextJustification, ScreenPosition, bAddToChat);
+		return AsaApiModUtils::AddNotification(params);
 	}
 protected:
 	// changes the server messages to use pretty widgets from the api utils mod
@@ -53,7 +52,7 @@ protected:
 	{
 		TArray<FString> ids;
 		ids.Add(player_controller->GetEOSId());
-		AsaApiModUtils::AddNotification(msg, ids, FLinearColor(0,0,0,0), msg_color, 1.0, 0.0, Position::Center, Position::Center, true);
+		SendNotificationPrettyToPlayers(ids, msg, FLinearColor(0, 0, 0, 0), msg_color, 1.0, 0.0, Position::Center, Position::Center, true);
 	}
 
 	// changes notifications to use pretty widgets from the api utils mod, this version mostly mimics old ASE notifications
@@ -62,7 +61,7 @@ protected:
 	{
 		TArray<FString> ids;
 		ids.Add(player_controller->GetEOSId());
-		AsaApiModUtils::AddNotification(msg, ids, FLinearColor(0, 0, 0, 0), color, display_scale, display_time, Position::Center, Position::Center, false);
+		SendNotificationPrettyToPlayers(ids, msg, FLinearColor(0, 0, 0, 0), color, display_scale, display_time, Position::Center, Position::Center, false);
 	}
 };
 

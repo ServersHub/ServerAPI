@@ -58,21 +58,14 @@ namespace AsaApiModUtils
 	* \param drawType The type of sphere to draw
 	* \return The sphere actor
 	*/
-	FORCEINLINE TWeakObjectPtr<AActor> DrawSphere(const FVector& Center, const double Radius, const int ForPlayerID, const float ForTribeID, const FLinearColor& Color, const double Duration, DrawSphereType drawType)
+	FORCEINLINE TWeakObjectPtr<AActor> DrawSphere(const DrawDebugSphere_Params& params)
 	{
-		DrawDebugSphere_Params params;
-		params.Center = Center;
-		params.Radius = Radius;
-		params.ForPlayerID = ForPlayerID;
-		params.ForTribeID = ForTribeID;
-		params.Color = Color;
-		params.Duration = Duration;
-		params.DrawType = drawType;
+		DrawDebugSphere_Params sentParams = params;
 
 		if (Singleton != nullptr)
 		{
-			Singleton->ProcessEvent(Singleton->FindFunctionChecked(FName("DrawSphere")), &params);
-			return GetWeakReference(params.SphereActor);
+			Singleton->ProcessEvent(Singleton->FindFunctionChecked(FName("DrawSphere")), &sentParams);
+			return GetWeakReference(sentParams.SphereActor);
 		}
 
 		return TWeakObjectPtr<AActor>();
@@ -91,19 +84,10 @@ namespace AsaApiModUtils
 	* \param bAddToChat Whether or not to add the notification to the chat box
 	* \return The notification ID
 	*/
-	FORCEINLINE FString AddNotification(const FString& Text, const TArray<FString>& RecipientEOS, const FLinearColor& BackgroundColor, const FLinearColor& TextColor,
-		const double TextScale, const double Duration, const Position TextJustification, const Position ScreenPosition, const bool bAddToChat)
+	FORCEINLINE FString AddNotification(const AsaApiUtilsNotification& notificationParams)
 	{
 		AddNotification_Params notification;
-		notification.Notification.Text = Text;
-		notification.Notification.RecipientEOS = RecipientEOS;
-		notification.Notification.BackgroundColor = BackgroundColor;
-		notification.Notification.TextColor = TextColor;
-		notification.Notification.DisplayScale = TextScale;
-		notification.Notification.DisplayTime = Duration;
-		notification.Notification.TextJustification = TextJustification;
-		notification.Notification.NotificationScreenPosition = ScreenPosition;
-		notification.Notification.bAddToChat = bAddToChat;
+		notification.Notification = notificationParams;
 
 		if (Singleton != nullptr)
 		{
