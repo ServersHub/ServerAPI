@@ -7,8 +7,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AsaApi", "AsaApi\AsaApi.vcx
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|x64 = Debug|x64
-		Debug|x86 = Debug|x86
 		Lethal|x64 = Lethal|x64
 		Lethal|x86 = Lethal|x86
 		Release|x64 = Release|x64
@@ -17,10 +15,6 @@ Global
 		Wooly|x86 = Wooly|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{1586E56E-B700-4F77-814E-A0150454949B}.Debug|x64.ActiveCfg = Debug|x64
-		{1586E56E-B700-4F77-814E-A0150454949B}.Debug|x64.Build.0 = Debug|x64
-		{1586E56E-B700-4F77-814E-A0150454949B}.Debug|x86.ActiveCfg = Debug|Win32
-		{1586E56E-B700-4F77-814E-A0150454949B}.Debug|x86.Build.0 = Debug|Win32
 		{1586E56E-B700-4F77-814E-A0150454949B}.Lethal|x64.ActiveCfg = Lethal|x64
 		{1586E56E-B700-4F77-814E-A0150454949B}.Lethal|x64.Build.0 = Lethal|x64
 		{1586E56E-B700-4F77-814E-A0150454949B}.Lethal|x86.ActiveCfg = Lethal|Win32
