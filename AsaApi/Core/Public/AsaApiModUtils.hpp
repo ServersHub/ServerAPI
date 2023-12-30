@@ -16,7 +16,7 @@ namespace AsaApiModUtils
 		if (!Singleton)
 		{
 			ACustomActorList* actorList = UVictoryCore::GetCustomActorList(AsaApi::GetApiUtils().GetWorld(), "ApiUtilsCCA");
-
+			
 			if (actorList != nullptr)
 				Singleton = GetWeakReference(actorList->ActorListField()[0]);
 		}

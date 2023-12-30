@@ -6,7 +6,7 @@
 
 FORCEINLINE FVector ActorExtensions::GetActorForwardVector()
 {
-    AActor* _this = reinterpret_cast<AActor*>(this);
+    AActor* _this = static_cast<AActor*>(this);
     USceneComponent* RootComponent = _this->RootComponentField().Get();
     if (RootComponent)
     {
@@ -18,12 +18,12 @@ FORCEINLINE FVector ActorExtensions::GetActorForwardVector()
 
 FORCEINLINE bool ActorExtensions::IsA(UClass* SomeBase)
 {
-    return reinterpret_cast<AActor*>(this)->ClassPrivateField()->IsChildOf(SomeBase);
+    return static_cast<AActor*>(this)->ClassPrivateField()->IsChildOf(SomeBase);
 }
 
 FORCEINLINE FVector ActorExtensions::GetLocation()
 {
-    AActor* _this = reinterpret_cast<AActor*>(this);
+    AActor* _this = static_cast<AActor*>(this);
     auto* root = _this->RootComponentField().Get();
     if (root)
     {
@@ -37,7 +37,7 @@ FORCEINLINE FVector ActorExtensions::GetLocation()
 
 FORCEINLINE FString PlayerControllerExtensions::GetEOSId()
 {
-    AShooterPlayerController* _this = reinterpret_cast<AShooterPlayerController*>(this);
+    AShooterPlayerController* _this = static_cast<AShooterPlayerController*>(this);
     FString eos_id = "";
     _this->GetUniqueNetIdAsString(&eos_id);
     return eos_id;

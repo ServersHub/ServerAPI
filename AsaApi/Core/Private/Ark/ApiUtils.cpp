@@ -17,7 +17,6 @@ namespace AsaApi
 		std::shared_ptr<MessagingManager> manager = ReadApiMessagingManager();
 		manager->SetWorldContext(uworld);
 		SetMessagingManagerInternal("Default", manager);
-		CheckMessagingManagersRequirements();
 	}
 
 	UWorld* ApiUtils::GetWorld() const
@@ -176,6 +175,7 @@ namespace AsaApi
 				}
 				else
 				{
+					manager->SetWorldContext(u_world_);
 					++it;
 				}
 			}

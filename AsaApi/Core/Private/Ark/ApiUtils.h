@@ -33,9 +33,9 @@ namespace AsaApi
 		std::shared_ptr<MessagingManager> GetMessagingManagerInternal(const FString& forPlugin) const override;
 		void SetMessagingManagerInternal(const FString& forPlugin, std::shared_ptr<MessagingManager> manager) override;
 		void RemoveMessagingManagerInternal(const FString& forPlugin);
+		void CheckMessagingManagersRequirements();
 
 	private:
-		void CheckMessagingManagersRequirements();
 		std::shared_ptr<MessagingManager> ReadApiMessagingManager();
 
 	private:
