@@ -4,6 +4,8 @@
 
 #include <API/ARK/Ark.h>
 #include <../Private/Ark/Globals.h>
+#include "MessagingManager.h"
+#include "API/Helpers/Helpers.h"
 
 namespace AsaApi
 {
@@ -50,12 +52,7 @@ namespace AsaApi
 		template <typename T, typename... Args>
 		FORCEINLINE void SendServerMessage(AShooterPlayerController* player_controller, FLinearColor msg_color, const T* msg, Args&&... args)
 		{
-			if (player_controller)
-			{
-				FString senderid = "Server";
-				FString text(FString::Format(msg, std::forward<Args>(args)...));
-				player_controller->ClientServerChatDirectMessage(&text, msg_color, false, &senderid); 
-			}
+			GetMessagingManager()->SendServerMessage(player_controller, msg_color, msg, std::forward<Args>(args)...);
 		}
 
 		/**
@@ -74,11 +71,7 @@ namespace AsaApi
 		FORCEINLINE void SendNotification(AShooterPlayerController* player_controller, FLinearColor color, float display_scale,
 			float display_time, UTexture2D* icon, const T* msg, Args&&... args)
 		{
-			if (player_controller)
-			{
-				FString text(FString::Format(msg, std::forward<Args>(args)...));
-				player_controller->ClientServerNotification(&text, color, display_scale, display_time, icon, nullptr, 1);				
-			}
+			GetMessagingManager()->SendNotification(player_controller, color, display_scale, display_time, icon, msg, std::forward<Args>(args)...);
 		}
 
 		/**
@@ -94,15 +87,7 @@ namespace AsaApi
 		FORCEINLINE void SendChatMessage(AShooterPlayerController* player_controller, const FString& sender_name, const T* msg,
 			Args&&... args)
 		{
-			if (player_controller)
-			{
-				const FString text(FString::Format(msg, std::forward<Args>(args)...));
-				FPrimalChatMessage chat_message;
-				chat_message.SenderName = sender_name;
-				chat_message.Message = text;
-				chat_message.UserId = GetEOSIDFromController(player_controller);
-				player_controller->ClientChatMessage(chat_message);
-			}
+			GetMessagingManager()->SendChatMessage(player_controller, sender_name, msg, std::forward<Args>(args)...);
 		}
 
 		/**
@@ -116,18 +101,7 @@ namespace AsaApi
 		template <typename T, typename... Args>
 		FORCEINLINE void SendServerMessageToAll(FLinearColor msg_color, const T* msg, Args&&... args)
 		{
-			FString text(FString::Format(msg, std::forward<Args>(args)...));
-
-			const auto& player_controllers = GetWorld()->PlayerControllerListField();
-			for (TWeakObjectPtr<APlayerController> player_controller : player_controllers)
-			{
-				AShooterPlayerController* shooter_pc = static_cast<AShooterPlayerController*>(player_controller.Get());
-				if (shooter_pc)
-				{
-					FString senderid = "Server";
-					shooter_pc->ClientServerChatDirectMessage(&text, msg_color, false, &senderid);
-				}
-			}
+			GetMessagingManager()->SendServerMessageToAll(msg_color, msg, std::forward<Args>(args)...);
 		}
 
 		/**
@@ -145,15 +119,7 @@ namespace AsaApi
 		FORCEINLINE void SendNotificationToAll(FLinearColor color, float display_scale,
 			float display_time, UTexture2D* icon, const T* msg, Args&&... args)
 		{
-			FString text(FString::Format(msg, std::forward<Args>(args)...));
-
-			const auto& player_controllers = GetWorld()->PlayerControllerListField();
-			for (TWeakObjectPtr<APlayerController> player_controller : player_controllers)
-			{
-				AShooterPlayerController* shooter_pc = static_cast<AShooterPlayerController*>(player_controller.Get());
-				if (shooter_pc)
-					shooter_pc->ClientServerNotification(&text, color, display_scale, display_time, nullptr, nullptr, 1);
-			}
+			GetMessagingManager()->SendNotificationToAll(color, display_scale, display_time, icon, msg, std::forward<Args>(args)...);
 		}
 
 		/**
@@ -167,22 +133,7 @@ namespace AsaApi
 		template <typename T, typename... Args>
 		FORCEINLINE void SendChatMessageToAll(const FString& sender_name, const T* msg, Args&&... args)
 		{
-			const FString text(FString::Format(msg, std::forward<Args>(args)...));
-
-			FPrimalChatMessage chat_message;
-			chat_message.SenderName = sender_name;
-			chat_message.Message = text;
-
-			const auto& player_controllers = GetWorld()->PlayerControllerListField();
-			for (TWeakObjectPtr<APlayerController> player_controller : player_controllers)
-			{
-				AShooterPlayerController* shooter_pc = static_cast<AShooterPlayerController*>(player_controller.Get());
-				if (shooter_pc)
-				{
-					chat_message.UserId = GetEOSIDFromController(shooter_pc);
-					shooter_pc->ClientChatMessage(chat_message);
-				}
-			}
+			GetMessagingManager()->SendChatMessageToAll(sender_name, msg, std::forward<Args>(args)...);
 		}
 
 		/**
@@ -807,6 +758,11 @@ namespace AsaApi
 			FMemory::Free(obj);
 		}
 
+		/**
+		* \brief Runs a command that is not logged anywhere
+		* \param _this Player controller
+		* \param Command Command to run
+		*/
 		void RunHiddenCommand(AShooterPlayerController* _this, FString* Command)
 		{
 			FString result;
@@ -814,8 +770,43 @@ namespace AsaApi
 			_this->ConsoleCommand(&result, Command, false);
 			HideCommand = false;
 		}
+
+		/**
+		* \brief Gets the current messaging manager for the plugin, without casting
+		* \return MessagingManager
+		*/
+		FORCEINLINE std::shared_ptr<MessagingManager> GetMessagingManager() const
+		{
+			return GetMessagingManagerInternal(GetDllName());
+		}
+
+		/**
+		* \brief Gets the current messaging manager for the plugin
+		* \tparam T MessagingManager type
+		* \return MessagingManager as T
+		*/
+		template <class T>
+		FORCEINLINE std::shared_ptr<T> GetMessagingManagerCasted() const
+		{
+			static_assert(std::is_base_of<MessagingManager, T>::value, "T must inherit from MessagingManager");
+			return std::static_pointer_cast<T>(GetMessagingManagerInternal(GetDllName()));
+		}
+
+		/**
+		* \brief Sets the messaging manager for the current plugin
+		* \tparam T MessagingManager type
+		*/
+		template <class T>
+		void SetMessagingManager()
+		{
+			static_assert(std::is_base_of<MessagingManager, T>::value, "T must inherit from MessagingManager");
+			SetMessagingManagerInternal(GetDllName(), std::make_shared<T>());
+		}
+
 	private:
 		virtual AShooterPlayerController* FindPlayerFromEOSID_Internal(const FString& eos_id) const = 0;
+		virtual std::shared_ptr<MessagingManager> GetMessagingManagerInternal(const FString& forPlugin) const = 0;
+		virtual void SetMessagingManagerInternal(const FString& forPlugin, std::shared_ptr<MessagingManager> manager) = 0;
 	};
 
 	ARK_API IApiUtils& APIENTRY GetApiUtils();

@@ -9,6 +9,7 @@
 
 #include "../IBaseApi.h"
 #include <Timer.h>
+#include "../Ark/ApiUtils.h"
 
 namespace API
 {
@@ -171,6 +172,7 @@ namespace API
 		}
 
 		API::Timer::Get().UnloadTimersFromModule(FString(full_dll_path).Replace(L"/", L"\\"));
+		dynamic_cast<AsaApi::ApiUtils&>(*API::game_api->GetApiUtils()).RemoveMessagingManagerInternal(FString(full_dll_path).Replace(L"/", L"\\"));
 
 		const BOOL result = FreeLibrary((*iter)->h_module);
 		if (result == 0)

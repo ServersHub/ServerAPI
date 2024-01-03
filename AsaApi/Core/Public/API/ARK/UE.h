@@ -21,8 +21,8 @@ struct FWeakObjectPtr
 template <typename T>
 struct TWeakObjectPtr
 {
-	int ObjectIndex;
-	int ObjectSerialNumber;
+	int ObjectIndex = 0;
+	int ObjectSerialNumber = 0;
 
 	FORCEINLINE T& operator*()
 	{

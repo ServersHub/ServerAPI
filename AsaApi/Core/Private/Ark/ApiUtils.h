@@ -30,11 +30,20 @@ namespace AsaApi
 		void SetPlayerController(AShooterPlayerController* player_controller);
 		void RemovePlayerController(AShooterPlayerController* player_controller);
 
+		std::shared_ptr<MessagingManager> GetMessagingManagerInternal(const FString& forPlugin) const override;
+		void SetMessagingManagerInternal(const FString& forPlugin, std::shared_ptr<MessagingManager> manager) override;
+		void RemoveMessagingManagerInternal(const FString& forPlugin);
+		void CheckMessagingManagersRequirements();
+
+	private:
+		std::shared_ptr<MessagingManager> ReadApiMessagingManager();
+
 	private:
 		UWorld* u_world_{ nullptr };
 		AShooterGameMode* shooter_game_mode_{ nullptr };
 		ServerStatus status_{ 0 };
 		UShooterCheatManager* cheatmanager_{ nullptr };
 		std::unordered_map<const FString, AShooterPlayerController*, FStringHash, FStringEqual> eos_id_map_;
+		std::unordered_map<const FString, std::shared_ptr<MessagingManager>, FStringHash, FStringEqual> messaging_managers_;
 	};
 } // namespace AsaApi

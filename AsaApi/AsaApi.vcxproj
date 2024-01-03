@@ -390,8 +390,11 @@ copy "$(SolutionDir)$(PlatformName)\$(ConfigurationName)\$(ProjectName).pdb" "F:
     <ClInclude Include="Core\Public\API\ARK\Actor.h" />
     <ClInclude Include="Core\Public\API\ARK\Ark.h" />
     <ClInclude Include="Core\Public\API\ARK\Buff.h" />
+    <ClInclude Include="Core\Public\API\ARK\ExtensionsDeclaration.h" />
+    <ClInclude Include="Core\Public\API\ARK\ExtensionsDefinition.h" />
     <ClInclude Include="Core\Public\API\ARK\GameMode.h" />
     <ClInclude Include="Core\Public\API\ARK\Inventory.h" />
+    <ClInclude Include="Core\Public\API\ARK\ModParamStructs.h" />
     <ClInclude Include="Core\Public\API\ARK\Other.h" />
     <ClInclude Include="Core\Public\API\ARK\PrimalStructure.h" />
     <ClInclude Include="Core\Public\API\ARK\UE.h" />
@@ -1128,6 +1131,9 @@ copy "$(SolutionDir)$(PlatformName)\$(ConfigurationName)\$(ProjectName).pdb" "F:
     <ClInclude Include="Core\Public\API\UE\Windows\WindowsSemaphore.h" />
     <ClInclude Include="Core\Public\API\UE\Windows\WindowsSystemIncludes.h" />
     <ClInclude Include="Core\Public\Ark\ArkApiUtils.h" />
+    <ClInclude Include="Core\Public\Ark\AsaApiUtilsMessagingManager.h" />
+    <ClInclude Include="Core\Public\Ark\MessagingManager.h" />
+    <ClInclude Include="Core\Public\AsaApiModUtils.hpp" />
     <ClInclude Include="Core\Public\IApiUtils.h" />
     <ClInclude Include="Core\Public\ICommands.h" />
     <ClInclude Include="Core\Public\IHooks.h" />
