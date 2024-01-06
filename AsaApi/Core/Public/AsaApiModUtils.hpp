@@ -16,9 +16,19 @@ namespace AsaApiModUtils
 		if (!Singleton)
 		{
 			ACustomActorList* actorList = UVictoryCore::GetCustomActorList(AsaApi::GetApiUtils().GetWorld(), "ApiUtilsCCA");
-			
 			if (actorList != nullptr)
 				Singleton = GetWeakReference(actorList->ActorListField()[0]);
+
+			if (!Singleton)
+			{
+				TArray<AActor*> actors;
+				UClass* SingletonClass = UVictoryCore::BPLoadClass("Blueprint'/AsaApiUtils/ApiUtilsSingleton.ApiUtilsSingleton'");
+				if (SingletonClass != nullptr)
+				{
+					UGameplayStatics::GetAllActorsOfClass(AsaApi::GetApiUtils().GetWorld(), SingletonClass, &actors);
+					Singleton = GetWeakReference(actors[0]);
+				}
+			}
 		}
 
 		return Singleton;
