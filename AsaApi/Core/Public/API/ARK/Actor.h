@@ -1689,6 +1689,18 @@ struct UPlayer : UObject {
 
 struct FUniqueNetIdWrapper
 {
+    //void* __vftable /*VFT*/;
+    //TVariant<TSharedPtr<FUniqueNetId const, 1>, UE::Online::TOnlineId<UE::Online::OnlineIdHandleTags::FAccount> > Variant;
+
+    FUniqueNetIdWrapper* operator=(const FUniqueNetIdWrapper* __that) { return NativeCall<FUniqueNetIdWrapper*, const FUniqueNetIdWrapper*>(this, "FUniqueNetIdWrapper.operator=(FUniqueNetIdWrapper&)", __that); }
+    FString* ToString(FString* result) { return NativeCall<FString*, FString*>(this, "FUniqueNetIdWrapper.ToString()", result); }
+    FName* GetType(FName* result) { return NativeCall<FName*, FName*>(this, "FUniqueNetIdWrapper.GetType()", result); }
+    TSharedPtr<FUniqueNetId const>* GetUniqueNetId(TSharedPtr<FUniqueNetId const>* result) { return NativeCall<TSharedPtr<FUniqueNetId const> *, TSharedPtr<FUniqueNetId const>*>(this, "FUniqueNetIdWrapper.GetUniqueNetId()", result); }
+    const FUniqueNetId* operator*() { return NativeCall<const FUniqueNetId*>(this, "FUniqueNetIdWrapper.operator*()"); }
+    bool IsValid() { return NativeCall<bool>(this, "FUniqueNetIdWrapper.IsValid()"); }
+    TSharedPtr<FUniqueNetId const>* GetV1(TSharedPtr<FUniqueNetId const>* result) { return NativeCall<TSharedPtr<FUniqueNetId const> *, TSharedPtr<FUniqueNetId const>*>(this, "FUniqueNetIdWrapper.GetV1()", result); }
+    void SetUniqueNetId(const TSharedPtr<FUniqueNetId const>* InUniqueNetId) { NativeCall<void, const TSharedPtr<FUniqueNetId const>*>(this, "FUniqueNetIdWrapper.SetUniqueNetId(TSharedPtr<FUniqueNetId,1>&)", InUniqueNetId); }
+    FString* ToDebugString(FString* result) { return NativeCall<FString*, FString*>(this, "FUniqueNetIdWrapper.ToDebugString()", result); }
 
 };
 
@@ -11532,8 +11544,8 @@ struct AStructurePreventionZoneVolume : AVolume
 
     static UClass* StaticClass() { return NativeCall<UClass*>(nullptr, "AStructurePreventionZoneVolume.StaticClass()"); }
     static void StaticRegisterNativesAStructurePreventionZoneVolume() { NativeCall<void>(nullptr, "AStructurePreventionZoneVolume.StaticRegisterNativesAStructurePreventionZoneVolume()"); }
-    static __int64 IsPointAllowed(UWorld* ForWorld, UE::Math::TVector<double>* AtPoint, bool bAllowInRegularPreventionVolumes, const APrimalStructure* Structure) { return NativeCall<__int64, UWorld*, UE::Math::TVector<double>*, bool, const APrimalStructure*>(nullptr, "AStructurePreventionZoneVolume.IsPointAllowed(UWorld*,UE::Math::TVector<double>,bool,APrimalStructure*)", ForWorld, AtPoint, bAllowInRegularPreventionVolumes, Structure); }
-    static __int64 IsWithinAnyVolume(UWorld* ForWorld, UE::Math::TVector<double>* AtPoint, bool bCheckDisabled, AStructurePreventionZoneVolume** TheVolume, bool bIsForDamageCheck, bool bIgnoreOptionalVolumes, float* OutDamageMultiplier) { return NativeCall<__int64, UWorld*, UE::Math::TVector<double>*, bool, AStructurePreventionZoneVolume**, bool, bool, float*>(nullptr, "AStructurePreventionZoneVolume.IsWithinAnyVolume(UWorld*,UE::Math::TVector<double>,bool,AStructurePreventionZoneVolume**,bool,bool,float*)", ForWorld, AtPoint, bCheckDisabled, TheVolume, bIsForDamageCheck, bIgnoreOptionalVolumes, OutDamageMultiplier); }
+    static bool IsPointAllowed(UWorld* ForWorld, UE::Math::TVector<double>* AtPoint, bool bAllowInRegularPreventionVolumes, const APrimalStructure* Structure) { return NativeCall<bool, UWorld*, UE::Math::TVector<double>*, bool, const APrimalStructure*>(nullptr, "AStructurePreventionZoneVolume.IsPointAllowed(UWorld*,UE::Math::TVector<double>,bool,APrimalStructure*)", ForWorld, AtPoint, bAllowInRegularPreventionVolumes, Structure); }
+    static bool IsWithinAnyVolume(UWorld* ForWorld, UE::Math::TVector<double>* AtPoint, bool bCheckDisabled, AStructurePreventionZoneVolume** TheVolume, bool bIsForDamageCheck, bool bIgnoreOptionalVolumes, float* OutDamageMultiplier) { return NativeCall<bool, UWorld*, UE::Math::TVector<double>*, bool, AStructurePreventionZoneVolume**, bool, bool, float*>(nullptr, "AStructurePreventionZoneVolume.IsWithinAnyVolume(UWorld*,UE::Math::TVector<double>,bool,AStructurePreventionZoneVolume**,bool,bool,float*)", ForWorld, AtPoint, bCheckDisabled, TheVolume, bIsForDamageCheck, bIgnoreOptionalVolumes, OutDamageMultiplier); }
     void PreLoadSaveGame() { NativeCall<void>(this, "AStructurePreventionZoneVolume.PreLoadSaveGame()"); }
     void EndPlay(const EEndPlayReason::Type EndPlayReason) { NativeCall<void, const EEndPlayReason::Type>(this, "AStructurePreventionZoneVolume.EndPlay(EEndPlayReason::Type)", EndPlayReason); }
 };

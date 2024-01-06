@@ -287,11 +287,21 @@ public:
 	FString GetPlainNameString() const;
 
 	/** Appends name to string. May allocate. */
-	void AppendNameToString(FString& OutString) const;
+	void AppendNameToString(FString& OutString) const
+	{
+		NativeCall<void, FString&>(this, "FNameEntry.AppendNameToString(FString&)", OutString);
+	}
 
 	/** Appends name to string builder. */
-	void AppendNameToString(FWideStringBuilderBase& OutString) const;
-	void AppendNameToString(FUtf8StringBuilderBase& OutString) const;
+	void AppendNameToString(FWideStringBuilderBase& OutString) const
+	{
+		NativeCall<void, FWideStringBuilderBase&>(nullptr, "FNameEntry.AppendNameToString(TStringBuilderBase<wchar_t>&)", OutString);
+	}
+	
+	void AppendNameToString(FUtf8StringBuilderBase& OutString) const
+	{
+		NativeCall<void, TStringBuilderBase<FGenericPlatformTypes::UTF8CHAR>&>(this, "FNameEntry.AppendNameToString(TStringBuilderBase<FGenericPlatformTypes::UTF8CHAR>&)", OutString);
+	}
 
 	/** Appends name to string builder. Entry must not be wide. */
 	void AppendAnsiNameToString(FAnsiStringBuilderBase& OutString) const;

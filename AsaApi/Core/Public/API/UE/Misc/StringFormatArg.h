@@ -36,21 +36,25 @@ struct FStringFormatArg
 	/** Value as an FString */
 	FString StringValue;
 
-	FStringFormatArg( const int32 Value );
-	FStringFormatArg( const uint32 Value );
-	FStringFormatArg( const int64 Value );
-	FStringFormatArg( const uint64 Value );
-	FStringFormatArg( const float Value );
-	FStringFormatArg( const double Value );
-	FStringFormatArg( FString Value );
-	FStringFormatArg( FStringView Value );
-	FStringFormatArg( const ANSICHAR* Value );
-	FStringFormatArg( const WIDECHAR* Value );
-	FStringFormatArg( const UCS2CHAR* Value );
-	FStringFormatArg( const UTF8CHAR* Value );
+	FStringFormatArg(const int32 Value) : Type(Int), IntValue(Value) {}
+	FStringFormatArg(const uint32 Value) : Type(UInt), UIntValue(Value) {}
+	FStringFormatArg(const int64 Value) : Type(Int), IntValue(Value) {}
+	FStringFormatArg(const uint64 Value) : Type(UInt), UIntValue(Value) {}
+	FStringFormatArg(const float Value) : Type(Double), DoubleValue(Value) {}
+	FStringFormatArg(const double Value) : Type(Double), DoubleValue(Value) {}
+	FStringFormatArg(FString Value) : Type(String), StringValue(MoveTemp(Value)) {}
+	FStringFormatArg(FStringView Value);
+	//FStringFormatArg(FStringView Value) : Type(String), StringValue(Value) {}
+	FStringFormatArg(const ANSICHAR* Value) : Type(StringLiteralANSI), StringLiteralANSIValue(Value) {}
+	FStringFormatArg(const WIDECHAR* Value) : Type(StringLiteralWIDE), StringLiteralWIDEValue(Value) {}
+	FStringFormatArg(const UCS2CHAR* Value) : Type(StringLiteralUCS2), StringLiteralUCS2Value(Value) {}
+	FStringFormatArg(const UTF8CHAR* Value) : Type(StringLiteralUTF8), StringLiteralUTF8Value(Value) {}
 
 	/** Copyable */
-	FStringFormatArg( const FStringFormatArg& RHS );
+	FStringFormatArg(const FStringFormatArg& RHS)
+	{
+		NativeCall<void, const FStringFormatArg&>(this, "FStringFormatArg.FStringFormatArg(FStringFormatArg&)", RHS);
+	}
 	
 private:
 
