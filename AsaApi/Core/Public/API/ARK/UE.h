@@ -949,6 +949,54 @@ struct UTexture2D : UTexture
 	void GetMipData(int FirstMipToLoad, void** OutMipData) { NativeCall<void, int, void**>(this, "UTexture2D.GetMipData(int,void**)", FirstMipToLoad, OutMipData); }
 };
 
+class FUObjectItem
+{
+public:
+	UObject* Object;
+	int Flags;
+	int ClusterRootIndex;
+	int SerialNumber;
+};
+
+class FChunkedFixedUObjectArray
+{
+public:
+	enum
+	{
+		ElementsPerChunk = 64 * 1024
+	};
+
+	FUObjectItem& GetByIndex(int Index)
+	{
+		return *GetObjectPtr(Index);
+	}
+
+	FUObjectItem* GetObjectPtr(int Index)
+	{
+		auto ChunkIndex = Index / ElementsPerChunk;
+		auto WithinChunkIndex = Index % ElementsPerChunk;
+		auto Chunk = Objects[ChunkIndex];
+		return Chunk + WithinChunkIndex;
+	}
+
+	FUObjectItem** Objects;
+	FUObjectItem* PreAllocatedObjects;
+	int MaxElements;
+	int NumElements;
+	int MaxChunks;
+	int NumChunks;
+};
+
+class FUObjectArray
+{
+public:
+	int ObjFirstGCIndex;
+	int ObjLastNonGCIndex;
+	int MaxObjectsNotConsideredByGC;
+	bool OpenForDisregardForGC;
+	FChunkedFixedUObjectArray ObjObjects;
+};
+
 struct Globals
 {
 	static UObject* StaticLoadObject(UClass* ObjectClass, UObject* InOuter, const wchar_t* InName, const wchar_t* Filename,
@@ -967,6 +1015,7 @@ struct Globals
 	static DataValue<struct UEngine*> GEngine() { return { "Global.GEngine" }; }
 	static DataValue<class FString*> GGameUserSettingsIni() { return { "Global.GGameUserSettingsIni" }; }
 	static DataValue<struct FConfigCacheIni*> GConfig() { return { "Global.GConfig" }; }
+	static DataValue<FUObjectArray> GUObjectArray() { return { "Global.GUObjectArray" }; }
 };
 
 struct UEngine : UObject

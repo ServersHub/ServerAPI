@@ -204,7 +204,7 @@ struct UVictoryCore : UVictoryCoreHighest
 	static AShooterCharacter* GetPlayerCharacterByController(APlayerController* PC) { return NativeCall<AShooterCharacter*, APlayerController*>(nullptr, "UVictoryCore.GetPlayerCharacterByController(APlayerController*)", PC); }
 	static APrimalDinoCharacter* GetDinoCharacterByID(UObject* WorldContextObject, const int DinoID1, const int DinoID2, const bool bSearchTamedOnly) { return NativeCall<APrimalDinoCharacter*, UObject*, const int, const int, const bool>(nullptr, "UVictoryCore.GetDinoCharacterByID(UObject*,int,int,bool)", WorldContextObject, DinoID1, DinoID2, bSearchTamedOnly); }
 	static APrimalDinoCharacter* GetDinoCharacterByLongDinoID(UObject* WorldContextObject, const FString* DinoID, const bool bSearchTamedOnly) { return NativeCall<APrimalDinoCharacter*, UObject*, const FString*, const bool>(nullptr, "UVictoryCore.GetDinoCharacterByLongDinoID(UObject*,FString&,bool)", WorldContextObject, DinoID, bSearchTamedOnly); }
-	static void GetAllClassesOfType() { NativeCall<void>(nullptr, "UVictoryCore.GetAllClassesOfType()"); }
+	static void GetAllClassesOfType(TArray<TSubclassOf<UObject>, TSizedDefaultAllocator<32> >* Subclasses, TSubclassOf<UObject> ParentClass, bool bAllowAbstract, FString* Path) { NativeCall<void, TArray<TSubclassOf<UObject>, TSizedDefaultAllocator<32> >*, TSubclassOf<UObject>, bool, FString*>(nullptr, "UVictoryCore.GetAllClassesOfType(TArray<TSubclassOf<UObject>,TSizedDefaultAllocator<32>>&,TSubclassOf<UObject>,bool,FString)", Subclasses, ParentClass, bAllowAbstract, Path); }
 	static bool IsValidItemForGrinding(const UPrimalItem* item, const UPrimalInventoryComponent* inventory) { return NativeCall<bool, const UPrimalItem*, const UPrimalInventoryComponent*>(nullptr, "UVictoryCore.IsValidItemForGrinding(UPrimalItem*,UPrimalInventoryComponent*)", item, inventory); }
 	static bool GrindItemIntoInventory(UPrimalItem* item, UPrimalInventoryComponent* inventory, const bool bGrindStack, const int MaxQuantityToGrind, const float GrindGiveItemsPercent, const int MaxItemsToGivePerGrind) { return NativeCall<bool, UPrimalItem*, UPrimalInventoryComponent*, const bool, const int, const float, const int>(nullptr, "UVictoryCore.GrindItemIntoInventory(UPrimalItem*,UPrimalInventoryComponent*,bool,int,float,int)", item, inventory, bGrindStack, MaxQuantityToGrind, GrindGiveItemsPercent, MaxItemsToGivePerGrind); }
 	static void GrindAllItemsToInventory(UPrimalInventoryComponent* inventory, const bool bGrindStack, const int MaxQuantityToGrind, const float GrindGiveItemsPercent, const int MaxItemsToGivePerGrind) { NativeCall<void, UPrimalInventoryComponent*, const bool, const int, const float, const int>(nullptr, "UVictoryCore.GrindAllItemsToInventory(UPrimalInventoryComponent*,bool,int,float,int)", inventory, bGrindStack, MaxQuantityToGrind, GrindGiveItemsPercent, MaxItemsToGivePerGrind); }
@@ -2610,3 +2610,23 @@ struct FPointDamageEvent : FDamageEvent
 	void GetBestHitInfo(const AActor* HitActor, const AActor* HitInstigator, FHitResult* OutHitInfo, UE::Math::TVector<double>* OutImpulseDir) { NativeCall<void, const AActor*, const AActor*, FHitResult*, UE::Math::TVector<double>*>(this, "FPointDamageEvent.GetBestHitInfo(AActor*,AActor*,FHitResult&,UE::Math::TVector<double>&)", HitActor, HitInstigator, OutHitInfo, OutImpulseDir); }
 };
 
+struct FTopLevelAssetPath
+{
+	// Fields
+
+	FName& PackageNameField() { return *GetNativePointerField<FName*>(this, "FTopLevelAssetPath.PackageName"); }
+	FName& AssetNameField() { return *GetNativePointerField<FName*>(this, "FTopLevelAssetPath.AssetName"); }
+
+	// Bitfields
+
+
+	// Functions
+
+	//void FTopLevelAssetPath(const FString* Path) { NativeCall<void, const FString*>(this, "FTopLevelAssetPath.FTopLevelAssetPath(FString&)", Path); }
+	void AppendString(TStringBuilderBase<wchar_t>* Builder) { NativeCall<void, TStringBuilderBase<wchar_t>*>(this, "FTopLevelAssetPath.AppendString(TStringBuilderBase<wchar_t>&)", Builder); }
+	FString* ToString(FString* result) { return NativeCall<FString*, FString*>(this, "FTopLevelAssetPath.ToString(FString&)", result); }
+	//void ToString(FString* OutString) { NativeCall<void, FString*>(this, "FTopLevelAssetPath.ToString(FString&)", OutString); }
+	bool TrySetPath(TStringView<wchar_t>* Path) { return NativeCall<bool, TStringView<wchar_t>*>(this, "FTopLevelAssetPath.TrySetPath(TStringView<wchar_t>)", Path); }
+	bool ExportTextItem(FString* ValueStr, const FTopLevelAssetPath* DefaultValue, UObject* Parent, int PortFlags, UObject* ExportRootScope) { return NativeCall<bool, FString*, const FTopLevelAssetPath*, UObject*, int, UObject*>(this, "FTopLevelAssetPath.ExportTextItem(FString&,FTopLevelAssetPath&,UObject*,int,UObject*)", ValueStr, DefaultValue, Parent, PortFlags, ExportRootScope); }
+	bool ImportTextItem(const wchar_t** Buffer, int PortFlags, UObject* Parent, FOutputDevice* ErrorText, FArchive* InSerializingArchive) { return NativeCall<bool, const wchar_t**, int, UObject*, FOutputDevice*, FArchive*>(this, "FTopLevelAssetPath.ImportTextItem(wchar_t*&,int,UObject*,FOutputDevice*,FArchive*)", Buffer, PortFlags, Parent, ErrorText, InSerializingArchive); }
+};
