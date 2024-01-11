@@ -129,6 +129,22 @@ struct AsaApiUtilsNotification
 		, bAddToChat(bAddToChat)
 	{
 	}
+
+	AsaApiUtilsNotification(
+		const FString& Notificationid,
+		const FString& Text,
+		const TArray<FString>& RecipientEOS,
+		const FLinearColor& BackgroundColor,
+		const FLinearColor& TextColor,
+		const double& DisplayScale,
+		const double& DisplayTime,
+		const Position& TextJustification,
+		const Position& NotificationScreenPosition,
+		const bool& bAddToChat
+	) : AsaApiUtilsNotification(Text, RecipientEOS, BackgroundColor, TextColor, DisplayScale, DisplayTime, TextJustification, NotificationScreenPosition, bAddToChat)
+	{
+		NotificationId = Notificationid;
+	}
 };
 
 struct AddNotification_Params
