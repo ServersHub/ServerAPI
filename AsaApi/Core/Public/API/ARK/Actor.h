@@ -6887,6 +6887,7 @@ struct APrimalDinoCharacter : APrimalCharacter
     UE::Math::TVector<double>& SpawnedLocationField() { return *GetNativePointerField<UE::Math::TVector<double>*>(this, "APrimalDinoCharacter.SpawnedLocation"); }
     long double& LastWantsToEnableNavRelevancyField() { return *GetNativePointerField<long double*>(this, "APrimalDinoCharacter.LastWantsToEnableNavRelevancy"); }
     float& DinoArmorDurabilityScalingMultiplierField() { return *GetNativePointerField<float*>(this, "APrimalDinoCharacter.DinoArmorDurabilityScalingMultiplier"); }
+    unsigned __int8& TamedAITargetingRangeField() { return *GetNativePointerField<unsigned __int8*>(this, "APrimalDinoCharacter.TamedAITargetingRange"); }
 
     // Bitfields
 

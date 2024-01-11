@@ -146,7 +146,7 @@ struct APrimalBuff_ApiUtils : APrimalBuff
 	TArray<AsaApiUtilsNotification>& NotificationsField()
 	{
 		FProperty* NotificationsProperty = FindProperty("Notifications");
-		return *NotificationsProperty->Get<TArray<AsaApiUtilsNotification>*>(this);
+		return NotificationsProperty->Get<TArray<AsaApiUtilsNotification>>(this);
 	}
 
 	// Functions

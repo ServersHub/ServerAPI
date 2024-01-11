@@ -1148,6 +1148,7 @@ struct UPrimalGameData : UObject
 	static void AppendGlobalBoneModifiers(USkeletalMeshComponent* ForMesh, bool IsFemale, TArray<FBoneModifier, TSizedDefaultAllocator<32> >* BoneModifiers) { NativeCall<void, USkeletalMeshComponent*, bool, TArray<FBoneModifier, TSizedDefaultAllocator<32> >*>(nullptr, "UPrimalGameData.AppendGlobalBoneModifiers(USkeletalMeshComponent*,bool,TArray<FBoneModifier,TSizedDefaultAllocator<32>>*)", ForMesh, IsFemale, BoneModifiers); }
 	static char GetIsItemBlacklisted() { return NativeCall<char>(nullptr, "UPrimalGameData.GetIsItemBlacklisted()"); }
 	const UPrimalGlobalUIData* GetUIDataFast() { return NativeCall<const UPrimalGlobalUIData*>(this, "UPrimalGameData.GetUIDataFast()"); }
+	static TSubclassOf<UObject>* GetRedirectedClass(TSubclassOf<UObject>* result, FString* key, UObject* WorldContextObject) { return NativeCall<TSubclassOf<UObject>*, TSubclassOf<UObject>*, FString*, UObject*>(nullptr, "UPrimalGameData.GetRedirectedClass(FString&,UObject*)", result, key, WorldContextObject);  }
 };
 
 struct UPrimalGlobals : UObject
