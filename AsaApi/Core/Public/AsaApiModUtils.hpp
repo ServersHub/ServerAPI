@@ -49,7 +49,7 @@ namespace AsaApiModUtils
 		params.Color = Color;
 		params.Duration = Duration;
 
-		if (Singleton != nullptr)
+		if (GetSingleton() != nullptr)
 		{
 			Singleton->ProcessEvent(Singleton->FindFunctionChecked(FName("DrawDebugLine")), &params);
 		}
@@ -72,7 +72,7 @@ namespace AsaApiModUtils
 	{
 		DrawDebugSphere_Params sentParams = params;
 
-		if (Singleton != nullptr)
+		if (GetSingleton() != nullptr)
 		{
 			Singleton->ProcessEvent(Singleton->FindFunctionChecked(FName("DrawSphere")), &sentParams);
 			return GetWeakReference(sentParams.SphereActor);
@@ -99,7 +99,7 @@ namespace AsaApiModUtils
 		AddNotification_Params notification;
 		notification.Notification = notificationParams;
 
-		if (Singleton != nullptr)
+		if (GetSingleton() != nullptr)
 		{
 			Singleton->ProcessEvent(Singleton->FindFunctionChecked(FName("AddNotification")), &notification);
 			return notification.NotificationId;
