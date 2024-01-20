@@ -2201,39 +2201,13 @@ public:
 	 */
 	UE_NODISCARD FString ReplaceQuotesWithEscapedQuotes() &&;
 
-	const TCHAR* CharToEscapeSeqMap[6][2] =
-	{
-		// Always replace \\ first to avoid double-escaping characters
-		{ TEXT("\\"), TEXT("\\\\") },
-		{ TEXT("\n"), TEXT("\\n")  },
-		{ TEXT("\r"), TEXT("\\r")  },
-		{ TEXT("\t"), TEXT("\\t")  },
-		{ TEXT("\'"), TEXT("\\'")  },
-		{ TEXT("\""), TEXT("\\\"") }
-	};
-
-	static const int32 MaxSupportedEscapeChars = 6;
-
 	/**
 	 * Replaces certain characters with the "escaped" version of that character (i.e. replaces "\n" with "\\n").
 	 * The characters supported are: { \n, \r, \t, \', \", \\ }.
 	 *
 	 * @param	Chars	by default, replaces all supported characters; this parameter allows you to limit the replacement to a subset.
 	 */
-	void ReplaceCharWithEscapedCharInline( const TArray<TCHAR>* Chars = nullptr )
-	{
-		if (Len() > 0 && (Chars == nullptr || Chars->Num() > 0))
-		{
-			for (int32 ChIdx = 0; ChIdx < MaxSupportedEscapeChars; ChIdx++)
-			{
-				if (Chars == nullptr || Chars->Contains(*(CharToEscapeSeqMap[ChIdx][0])))
-				{
-					// use ReplaceInline as that won't create a copy of the string if the character isn't found
-					ReplaceInline(CharToEscapeSeqMap[ChIdx][0], CharToEscapeSeqMap[ChIdx][1]);
-				}
-			}
-		}
-	}
+	void ReplaceCharWithEscapedCharInline( const TArray<TCHAR>* Chars = nullptr );
 
 	/**
 	 * Replaces certain characters with the "escaped" version of that character (i.e. replaces "\n" with "\\n").
