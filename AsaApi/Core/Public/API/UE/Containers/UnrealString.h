@@ -1475,11 +1475,41 @@ public:
 	 * @param SearchDir			Indicates whether the search starts at the beginning or at the end ( defaults to ESearchDir::FromStart )
 	 * @return true if string is split, otherwise false
 	 */
-	bool Split(const FString& InS, FString* LeftS, FString* RightS, ESearchCase::Type SearchCase,
-		ESearchDir::Type SearchDir = ESearchDir::FromStart) const;
+	FORCEINLINE bool Split(const FString& InS, FString* LeftS, FString* RightS, ESearchCase::Type SearchCase,
+		ESearchDir::Type SearchDir = ESearchDir::FromStart) const
+	{
+		check(LeftS != RightS || LeftS == nullptr);
 
-	/** Split with ESearchCase::IgnoreCase and ESearchDir::FromStart. Allows compiler to avoid branches w/o inlining code. */
-	bool Split(const FString& InS, FString* LeftS, FString* RightS) const;
+		int32 InPos = Find(InS, SearchCase, SearchDir);
+
+		if (InPos < 0) { return false; }
+
+		if (LeftS)
+		{
+			if (LeftS != this)
+			{
+				*LeftS = Left(InPos);
+				if (RightS) { *RightS = Mid(InPos + InS.Len()); }
+			}
+			else
+			{
+				// we know that RightS can't be this so we can safely modify it before we deal with LeftS
+				if (RightS) { *RightS = Mid(InPos + InS.Len()); }
+				*LeftS = Left(InPos);
+			}
+		}
+		else if (RightS)
+		{
+			*RightS = Mid(InPos + InS.Len());
+		}
+
+		return true;
+	}
+
+	FORCEINLINE bool Split(const FString& InS, FString* LeftS, FString* RightS) const
+	{
+		return Split(InS, LeftS, RightS, ESearchCase::IgnoreCase);
+	}
 
 	/** Returns a new string with the characters of this converted to uppercase */
 	UE_NODISCARD FString ToUpper() const&
@@ -2171,6 +2201,19 @@ public:
 	 */
 	UE_NODISCARD FString ReplaceQuotesWithEscapedQuotes() &&;
 
+	const TCHAR* CharToEscapeSeqMap[6][2] =
+	{
+		// Always replace \\ first to avoid double-escaping characters
+		{ TEXT("\\"), TEXT("\\\\") },
+		{ TEXT("\n"), TEXT("\\n")  },
+		{ TEXT("\r"), TEXT("\\r")  },
+		{ TEXT("\t"), TEXT("\\t")  },
+		{ TEXT("\'"), TEXT("\\'")  },
+		{ TEXT("\""), TEXT("\\\"") }
+	};
+
+	static const int32 MaxSupportedEscapeChars = 6;
+
 	/**
 	 * Replaces certain characters with the "escaped" version of that character (i.e. replaces "\n" with "\\n").
 	 * The characters supported are: { \n, \r, \t, \', \", \\ }.
@@ -2179,7 +2222,17 @@ public:
 	 */
 	void ReplaceCharWithEscapedCharInline( const TArray<TCHAR>* Chars = nullptr )
 	{
-		NativeCall<void, const TArray<TCHAR>*>(this, "FString.ReplaceCharWithEscapedCharInline(TArray<wchar_t,TSizedDefaultAllocator<32>>*)", Chars);
+		if (Len() > 0 && (Chars == nullptr || Chars->Num() > 0))
+		{
+			for (int32 ChIdx = 0; ChIdx < MaxSupportedEscapeChars; ChIdx++)
+			{
+				if (Chars == nullptr || Chars->Contains(*(CharToEscapeSeqMap[ChIdx][0])))
+				{
+					// use ReplaceInline as that won't create a copy of the string if the character isn't found
+					ReplaceInline(CharToEscapeSeqMap[ChIdx][0], CharToEscapeSeqMap[ChIdx][1]);
+				}
+			}
+		}
 	}
 
 	/**

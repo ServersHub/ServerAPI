@@ -379,49 +379,6 @@ void FString::TrimToNullTerminator()
 	}
 }
 
-
-
-bool FString::Split(const FString& InS, FString* LeftS, FString* RightS, ESearchCase::Type SearchCase, ESearchDir::Type SearchDir) const
-{
-	check(LeftS != RightS || LeftS == nullptr);
-
-	int32 InPos = Find(InS, SearchCase, SearchDir);
-
-	if (InPos < 0) { return false; }
-
-	if (LeftS)
-	{
-		if (LeftS != this)
-		{
-			*LeftS = Left(InPos);
-			if (RightS) { *RightS = Mid(InPos + InS.Len()); }
-		}
-		else
-		{
-			// we know that RightS can't be this so we can safely modify it before we deal with LeftS
-			if (RightS) { *RightS = Mid(InPos + InS.Len()); }
-			*LeftS = Left(InPos);
-		}
-	}
-	else if (RightS)
-	{
-		*RightS = Mid(InPos + InS.Len());
-	}
-
-	return true;
-}
-
-bool FString::Split(const FString& InS, FString* LeftS, FString* RightS) const
-{
-	return Split(InS, LeftS, RightS, ESearchCase::IgnoreCase);
-}
-
-
-
-
-
-
-
 void FString::RemoveSpacesInline()
 {
 	const int32 StringLength = Len();
