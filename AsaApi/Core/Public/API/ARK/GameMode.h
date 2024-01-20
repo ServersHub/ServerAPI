@@ -2007,10 +2007,10 @@ struct AShooterGameMode : APrimalGameMode
 	float& BabyMatureSpeedMultiplierField() { return *GetNativePointerField<float*>(this, "AShooterGameMode.BabyMatureSpeedMultiplier"); }
 	float& BabyFoodConsumptionSpeedMultiplierField() { return *GetNativePointerField<float*>(this, "AShooterGameMode.BabyFoodConsumptionSpeedMultiplier"); }
 	int& CurrentPlatformSaddleStructuresField() { return *GetNativePointerField<int*>(this, "AShooterGameMode.CurrentPlatformSaddleStructures"); }
-	//float[12] & PerLevelStatsMultiplier_PlayerField() { return *GetNativePointerField<float[12] *>(this, "AShooterGameMode.PerLevelStatsMultiplier_Player"); }
-	//float[12] & PerLevelStatsMultiplier_DinoTamedField() { return *GetNativePointerField<float[12] *>(this, "AShooterGameMode.PerLevelStatsMultiplier_DinoTamed"); }
-	//float[12] & PerLevelStatsMultiplier_DinoTamed_AddField() { return *GetNativePointerField<float[12] *>(this, "AShooterGameMode.PerLevelStatsMultiplier_DinoTamed_Add"); }
-	//float[12] & PerLevelStatsMultiplier_DinoTamed_AffinityField() { return *GetNativePointerField<float[12] *>(this, "AShooterGameMode.PerLevelStatsMultiplier_DinoTamed_Affinity"); }
+	FieldArray<float, 12> PerLevelStatsMultiplier_PlayerField() { return { this, "AShooterGameMode.PerLevelStatsMultiplier_Player" }; }
+	FieldArray<float, 12> PerLevelStatsMultiplier_DinoTamedField() { return { this, "AShooterGameMode.PerLevelStatsMultiplier_DinoTamed"}; }
+	FieldArray<float, 12> PerLevelStatsMultiplier_DinoTamed_AddField() { return{ this, "AShooterGameMode.PerLevelStatsMultiplier_DinoTamed_Add"}; }
+	FieldArray<float, 12> PerLevelStatsMultiplier_DinoTamed_AffinityField() { return { this, "AShooterGameMode.PerLevelStatsMultiplier_DinoTamed_Affinity" }; }
 	//float[12] & PerLevelStatsMultiplier_DinoWildField() { return *GetNativePointerField<float[12] *>(this, "AShooterGameMode.PerLevelStatsMultiplier_DinoWild"); }
 	//int[12] & MutagenLevelBoostField() { return *GetNativePointerField<int[12] *>(this, "AShooterGameMode.MutagenLevelBoost"); }
 	//int[12] & MutagenLevelBoost_BredField() { return *GetNativePointerField<int[12] *>(this, "AShooterGameMode.MutagenLevelBoost_Bred"); }
