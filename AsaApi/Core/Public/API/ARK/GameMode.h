@@ -2287,7 +2287,7 @@ struct AShooterGameMode : APrimalGameMode
 	int GetIntOptionIni(const wchar_t* Section, const wchar_t* OptionName) { return NativeCall<int, const wchar_t*, const wchar_t*>(this, "AShooterGameMode.GetIntOptionIni(wchar_t*,wchar_t*)", Section, OptionName); }
 	bool TryGetIntOptionIni(const wchar_t* Section, const wchar_t* OptionName, int* value) { return NativeCall<bool, const wchar_t*, const wchar_t*, int*>(this, "AShooterGameMode.TryGetIntOptionIni(wchar_t*,wchar_t*,int*)", Section, OptionName, value); }
 	bool TryGetBoolOptionIni(const wchar_t* Section, const wchar_t* OptionName, bool* value) { return NativeCall<bool, const wchar_t*, const wchar_t*, bool*>(this, "AShooterGameMode.TryGetBoolOptionIni(wchar_t*,wchar_t*,bool*)", Section, OptionName, value); }
-	void SaveWorld(bool bForceSynchronous) { NativeCall<void, bool>(this, "AShooterGameMode.SaveWorld(bool)", bForceSynchronous); }
+	void SaveWorld(bool bForceSynchronous) { NativeCall<void, bool>(this, "AShooterGameMode.SaveWorld(bool,bool)", bForceSynchronous); }
 	void ClearSavesAndRestart() { NativeCall<void>(this, "AShooterGameMode.ClearSavesAndRestart()"); }
 	bool LoadWorld() { return NativeCall<bool>(this, "AShooterGameMode.LoadWorld()"); }
 // TSubclassOf<AGameSession>* GetGameSessionClass(TSubclassOf<AGameSession>* result) { return NativeCall<TSubclassOf<AGameSession> *, TSubclassOf<AGameSession>*>(this, "AShooterGameMode.GetGameSessionClass(TSubclassOf<AGameSession>*)", result); }

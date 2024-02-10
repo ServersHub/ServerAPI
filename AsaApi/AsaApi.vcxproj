@@ -343,9 +343,7 @@ copy  /Y "$(SolutionDir)AsaApi\Core\Private\PDBReader\pdbignores.txt" "E:\ASA\Te
       <AdditionalDependencies>$(CoreLibraryDependencies);crypt32.lib;Ws2_32.lib;iphlpapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /I  /Y "$(TargetDir)$(ProjectName).lib" "$(SolutionDir)out_lib\"
-xcopy /I  /Y "$(TargetDir)$(ProjectName).lib" "$(SolutionDir)..\ARK-API-Stable-Libs\"
-xcopy /I  /Y "$(TargetDir)$(ProjectName).lib" "$(SolutionDir)..\ARK-API-Stable-Libs\1.02\"
+      <Command>xcopy /I  /Y "$(TargetDir)$(ProjectName).lib" "$(SolutionDir)..\ARK-API-Stable-Libs\dev-latest\"
 
 copy "$(SolutionDir)$(PlatformName)\$(ConfigurationName)\$(ProjectName).dll" "F:\ASA-Dedicated\asa-server\ShooterGame\Binaries\Win64\ArkApi\" /y
 copy "$(SolutionDir)$(PlatformName)\$(ConfigurationName)\$(ProjectName).pdb" "F:\ASA-Dedicated\asa-server\ShooterGame\Binaries\Win64\ArkApi\" /y</Command>

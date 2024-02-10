@@ -10,10 +10,12 @@
 #include "HooksImpl.h"
 #include "ApiUtils.h"
 #include <filesystem>
+#include "Requests.h"
+#include <minizip/unzip.h>
 
 namespace API
 {
-	constexpr float api_version = 1.12f;
+	constexpr float api_version = 1.13f;
 
 	ArkBaseApi::ArkBaseApi()
 		: commands_(std::make_unique<AsaApi::Commands>()),
@@ -24,8 +26,9 @@ namespace API
 
 	bool ArkBaseApi::Init()
 	{
+		nlohmann::json apiConfig = ArkBaseApi::GetConfig();
 		namespace fs = std::filesystem;
-
+		
 		Log::GetLog()->info("-----------------------------------------------");
 		Log::GetLog()->info("ARK:SA Api V{:.2f}", GetVersion());
 		Log::GetLog()->info("Loading...\n");
@@ -58,12 +61,26 @@ namespace API
 			const fs::path bitfieldsCacheFile = fs::path(exe_path).append(ArkBaseApi::GetApiName()+"/Cache/cached_bitfields.cache");
 			const fs::path offsetsCacheFilePlain = fs::path(exe_path).append(ArkBaseApi::GetApiName() + "/Cache/cached_offsets.txt");
 			const std::string fileHash = Cache::calculateSHA256(filepath);
-			const std::string storedHash = Cache::readFromFile(keyCacheFile);
+			std::string storedHash = Cache::readFromFile(keyCacheFile);
 			std::unordered_set<std::string> pdbIgnoreSet = Cache::readFileIntoSet(pdbIgnoreFile);
 
-			if (fileHash != storedHash
-				|| !fs::exists(offsetsCacheFile)
-				|| !fs::exists(bitfieldsCacheFile))
+			if (apiConfig.value("settings", nlohmann::json::object()).value("AutomaticCacheDownload", nlohmann::json::object()).value("Enable", false)
+				&& apiConfig.value("settings", nlohmann::json::object()).value("AutomaticCacheDownload", nlohmann::json::object()).value("DownloadCacheURL", "") != ""
+				&& (fileHash != storedHash || !fs::exists(offsetsCacheFile) || !fs::exists(bitfieldsCacheFile)))
+			{
+				const fs::path downloadFile = apiConfig.value("settings", nlohmann::json::object()).value("AutomaticCacheDownload", nlohmann::json::object()).value("DownloadCacheURL", "") + fileHash + ".zip";
+				const fs::path localFile = fs::path(exe_path).append(ArkBaseApi::GetApiName() + "/Cache/" + fileHash + ".zip");
+
+				if (ArkBaseApi::DownloadCacheFiles(downloadFile, localFile))
+					storedHash = Cache::readFromFile(keyCacheFile);
+				else
+					Log::GetLog()->error("Failed to download the Cache files.");
+
+				if (fs::exists(localFile))
+					fs::remove(localFile);
+			}
+
+			if (fileHash != storedHash || !fs::exists(offsetsCacheFile) || !fs::exists(bitfieldsCacheFile))
 			{
 				Log::GetLog()->info("Cache refresh required this will take several minutes to complete");
 				pdb_reader.Read(filepath, &offsets_dump, &bitfields_dump, pdbIgnoreSet);
@@ -92,14 +109,112 @@ namespace API
 			return false;
 		}
 
-
-
 		Offsets::Get().Init(move(offsets_dump), move(bitfields_dump));
 		Sleep(10);
 		AsaApi::InitHooks();
 		Log::GetLog()->info("API was successfully loaded");
 		Log::GetLog()->info("-----------------------------------------------\n");
 
+		return true;
+	}
+
+	nlohmann::json ArkBaseApi::GetConfig()
+	{
+		const std::string config_path = AsaApi::Tools::GetCurrentDir() + "/config.json";
+		std::ifstream file{ config_path };
+		if (!file.is_open())
+			return false;
+
+		nlohmann::json config;
+		file >> config;
+		file.close();
+
+		return config;
+	}
+
+	bool ArkBaseApi::DownloadCacheFiles(const std::filesystem::path downloadFile, const std::filesystem::path localFile)
+	{
+		if (API::Requests::DownloadFile(downloadFile.string(), localFile.string()))
+		{
+			std::string outputFolder = localFile.parent_path().string();
+			unzFile zf = unzOpen(localFile.string().c_str());
+			if (zf == nullptr)
+				return false;
+
+			unz_global_info globalInfo;
+			if (unzGetGlobalInfo(zf, &globalInfo) != UNZ_OK)
+			{
+				unzClose(zf);
+				return false;
+			}
+
+			char readBuffer[8192];
+
+			for (uLong i = 0; i < globalInfo.number_entry; ++i)
+			{
+				unz_file_info fileInfo;
+				char filename[256];
+				if (unzGetCurrentFileInfo(zf, &fileInfo, filename, sizeof(filename), NULL, 0, NULL, 0) != UNZ_OK)
+				{
+					unzClose(zf);
+					return false;
+				}
+
+				const size_t filenameLength = strlen(filename);
+				if (filename[filenameLength - 1] == '/')
+					continue;
+				else
+				{
+					if (unzOpenCurrentFile(zf) != UNZ_OK)
+					{
+						unzClose(zf);
+						return false;
+					}
+
+					std::string fullPath = outputFolder + "/" + filename;
+					std::ofstream out(fullPath, std::ios::binary);
+
+					if (!out) 
+					{
+						unzCloseCurrentFile(zf);
+						unzClose(zf);
+						return false;
+					}
+
+					int bytesRead;
+					do {
+						bytesRead = unzReadCurrentFile(zf, readBuffer, sizeof(readBuffer));
+						if (bytesRead < 0) 
+						{
+							unzCloseCurrentFile(zf);
+							unzClose(zf);
+							return false;
+						}
+
+						if (bytesRead > 0)
+							out.write(readBuffer, bytesRead);
+					} while (bytesRead > 0);
+
+					unzCloseCurrentFile(zf);
+					out.close();
+				}
+
+				if ((i + 1) < globalInfo.number_entry)
+				{
+					if (unzGoToNextFile(zf) != UNZ_OK)
+					{
+						unzClose(zf);
+						return false;
+					}
+				}
+			}
+
+			unzClose(zf);
+		}
+		else
+			return false;
+
+		Log::GetLog()->info("Cache files downloaded and processed successfully");
 		return true;
 	}
 
@@ -134,6 +249,7 @@ namespace API
 		GetCommands()->AddConsoleCommand("plugins.unload", &UnloadPluginCmd);
 		GetCommands()->AddRconCommand("plugins.load", &LoadPluginRcon);
 		GetCommands()->AddRconCommand("plugins.unload", &UnloadPluginRcon);
+		GetCommands()->AddRconCommand("map.setserverid", &SetServerID);
 	}
 
 	FString ArkBaseApi::LoadPlugin(FString* cmd)
@@ -214,6 +330,50 @@ namespace API
 		UWorld* /*unused*/)
 	{
 		FString reply = UnloadPlugin(&rcon_packet->Body);
+		rcon_connection->SendMessageW(rcon_packet->Id, 0, &reply);
+	}
+
+	void ArkBaseApi::SetServerID(RCONClientConnection* rcon_connection, RCONPacket* rcon_packet,
+		UWorld* /*unused*/)
+	{
+		FString reply = "Set new server id";
+		TArray<FString> parsed;
+		rcon_packet->Body.ParseIntoArray(parsed, L" ", true);
+
+		if (parsed.IsValidIndex(1))
+		{
+			int new_server_id = std::stoi(parsed[1].ToString());
+
+			try
+			{
+				const auto& actors = AsaApi::GetApiUtils().GetWorld()->PersistentLevelField().Get()->ActorsField();
+				for (auto actor : actors)
+				{
+					FString bp = AsaApi::GetApiUtils().GetBlueprint(actor);
+					if (bp.Equals("Blueprint'/Script/ShooterGame.PrimalPersistentWorldData'"))
+					{
+						actor->TargetingTeamField() = new_server_id;
+
+						AsaApi::GetApiUtils().GetShooterGameMode()->MyServerIdField() = FString(std::to_string(new_server_id));
+						AsaApi::GetApiUtils().GetShooterGameMode()->ServerIDField() = new_server_id;
+						Log::GetLog()->info("SERVER ID: {}", new_server_id);
+						Log::GetLog()->info("Forcing world save to lock-in new server id");
+						AsaApi::GetApiUtils().GetShooterGameMode()->SaveWorld(false);
+
+						break;
+					}
+				}
+			}
+			catch (const std::exception& error)
+			{
+				Log::GetLog()->warn("({}) {}", __FUNCTION__, error.what());
+				reply = FString::Format("Failed to set server id - {}", error.what());
+			}
+		}
+		else
+			reply = L"You must specify a unique server id.";
+
+		
 		rcon_connection->SendMessageW(rcon_packet->Id, 0, &reply);
 	}
 } // namespace API
