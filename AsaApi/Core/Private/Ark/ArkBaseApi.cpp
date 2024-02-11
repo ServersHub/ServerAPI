@@ -65,8 +65,8 @@ namespace API
 			std::string storedHash = Cache::readFromFile(keyCacheFile);
 			std::unordered_set<std::string> pdbIgnoreSet = Cache::readFileIntoSet(pdbIgnoreFile);
 
-			if (autoCacheConfig.value("Enable", false)
-				&& autoCacheConfig.value("DownloadCacheURL", "") != ""
+			if (autoCacheConfig.value("Enable", true)
+				&& autoCacheConfig.value("DownloadCacheURL", "https://cdn.pelayori.com/cache/") != ""
 				&& (fileHash != storedHash || !fs::exists(offsetsCacheFile) || !fs::exists(bitfieldsCacheFile)))
 			{
 				const fs::path downloadFile = autoCacheConfig.value("DownloadCacheURL", "") + fileHash + ".zip";
