@@ -83,7 +83,7 @@ namespace API
 
 			if (fileHash != storedHash || !fs::exists(offsetsCacheFile) || !fs::exists(bitfieldsCacheFile))
 			{
-				Log::GetLog()->info("Cache refresh required this will take several minutes to complete");
+				Log::GetLog()->info("Cache refresh required this will take 10-20 minutes to complete");
 				pdb_reader.Read(filepath, &offsets_dump, &bitfields_dump, pdbIgnoreSet);
 
 				Log::GetLog()->info("Caching offsets for faster loading next time");
