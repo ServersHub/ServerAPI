@@ -27,6 +27,7 @@ namespace API
 	bool ArkBaseApi::Init()
 	{
 		nlohmann::json apiConfig = ArkBaseApi::GetConfig();
+		const nlohmann::json autoCacheConfig = apiConfig.value("settings", nlohmann::json::object()).value("AutomaticCacheDownload", nlohmann::json::object());
 		namespace fs = std::filesystem;
 		
 		Log::GetLog()->info("-----------------------------------------------");
@@ -64,11 +65,11 @@ namespace API
 			std::string storedHash = Cache::readFromFile(keyCacheFile);
 			std::unordered_set<std::string> pdbIgnoreSet = Cache::readFileIntoSet(pdbIgnoreFile);
 
-			if (apiConfig.value("settings", nlohmann::json::object()).value("AutomaticCacheDownload", nlohmann::json::object()).value("Enable", false)
-				&& apiConfig.value("settings", nlohmann::json::object()).value("AutomaticCacheDownload", nlohmann::json::object()).value("DownloadCacheURL", "") != ""
+			if (autoCacheConfig.value("Enable", false)
+				&& autoCacheConfig.value("DownloadCacheURL", "") != ""
 				&& (fileHash != storedHash || !fs::exists(offsetsCacheFile) || !fs::exists(bitfieldsCacheFile)))
 			{
-				const fs::path downloadFile = apiConfig.value("settings", nlohmann::json::object()).value("AutomaticCacheDownload", nlohmann::json::object()).value("DownloadCacheURL", "") + fileHash + ".zip";
+				const fs::path downloadFile = autoCacheConfig.value("DownloadCacheURL", "") + fileHash + ".zip";
 				const fs::path localFile = fs::path(exe_path).append(ArkBaseApi::GetApiName() + "/Cache/" + fileHash + ".zip");
 
 				if (ArkBaseApi::DownloadCacheFiles(downloadFile, localFile))
@@ -358,7 +359,7 @@ namespace API
 						AsaApi::GetApiUtils().GetShooterGameMode()->ServerIDField() = new_server_id;
 						Log::GetLog()->info("SERVER ID: {}", new_server_id);
 						Log::GetLog()->info("Forcing world save to lock-in new server id");
-						AsaApi::GetApiUtils().GetShooterGameMode()->SaveWorld(false);
+						AsaApi::GetApiUtils().GetShooterGameMode()->SaveWorld(false, true);
 
 						break;
 					}
