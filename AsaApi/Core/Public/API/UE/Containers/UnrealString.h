@@ -1632,10 +1632,7 @@ public:
 	 * @param InNamedArguments		A map of named arguments that match the tokens specified in InExpression
 	 * @return A string containing the formatted text
 	 */
-	UE_NODISCARD static FString Format(const TCHAR* InFormatString, const FStringFormatNamedArguments& InNamedArguments)
-	{
-		return NativeCall<FString, TCHAR const*, FStringFormatNamedArguments const&>(nullptr, "FString.Format(wchar_t*,TMap<FString,FStringFormatArg,FDefaultSetAllocator,TDefaultMapHashableKeyFuncs<FString,FStringFormatArg,0>>&)", InFormatString, InNamedArguments);
-	};
+	UE_NODISCARD static FString Format(const TCHAR* InFormatString, const FStringFormatNamedArguments& InNamedArguments);
 
 	/**
 	 * Format the specified string using the specified arguments. Replaces instances of {0} with indices from the given array matching the index specified in the token
@@ -1643,10 +1640,7 @@ public:
 	 * @param InOrderedArguments	An array of ordered arguments that match the tokens specified in InExpression
 	 * @return A string containing the formatted text
 	 */
-	UE_NODISCARD static FString Format(const TCHAR* InFormatString, const FStringFormatOrderedArguments& InOrderedArguments)
-	{
-		return NativeCall<FString, TCHAR const*, FStringFormatOrderedArguments const&>(nullptr, "FString.Format(wchar_t*,TArray<FStringFormatArg,TSizedDefaultAllocator<32>>&)", InFormatString, InOrderedArguments);
-	}
+	UE_NODISCARD static FString Format(const TCHAR* InFormatString, const FStringFormatOrderedArguments& InOrderedArguments);
 
 	/** Returns a string containing only the Ch character */
 	UE_NODISCARD static FString Chr( TCHAR Ch );

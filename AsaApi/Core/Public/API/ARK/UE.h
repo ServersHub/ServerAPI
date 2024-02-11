@@ -454,7 +454,7 @@ struct UObject : UObjectBaseUtility
 	bool NeedsLoadForClient() { return NativeCall<bool>(this, "UObject.NeedsLoadForClient()"); }
 	void BeginDestroy() { NativeCall<void>(this, "UObject.BeginDestroy()"); }
 	void FinishDestroy() { NativeCall<void>(this, "UObject.FinishDestroy()"); }
-	FString* GetDetailedInfo(FString* result) { return NativeCall<FString*, FString*>(this, "UObject.GetDetailedInfo(FString&)", result); }
+	FString* GetDetailedInfo(FString* result) { return NativeCall<FString*, FString*>(this, "UObject.GetDetailedInfo()", result); }
 	bool ConditionalBeginDestroy() { return NativeCall<bool>(this, "UObject.ConditionalBeginDestroy()"); }
 	bool ConditionalFinishDestroy() { return NativeCall<bool>(this, "UObject.ConditionalFinishDestroy()"); }
 	void ConditionalPostLoad() { NativeCall<void>(this, "UObject.ConditionalPostLoad()"); }
