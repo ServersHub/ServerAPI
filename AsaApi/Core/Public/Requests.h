@@ -80,6 +80,8 @@ namespace API
 		ARK_API bool CreateDeleteRequest(const std::string& url,
 			const std::function<void(bool, std::string)>& callback,
 			std::vector<std::string> headers = {});
+
+		static bool DownloadFile(const std::string& url, const std::string& localPath, std::vector<std::string> headers = {});
 	private:
 		class impl;
 		std::unique_ptr<impl> pimpl;

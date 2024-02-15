@@ -3,6 +3,8 @@
 #include "../IBaseApi.h"
 #include <IApiUtils.h>
 #include "Containers/UnrealString.h"
+#include <filesystem>
+#include <json.hpp>
 
 namespace API
 {
@@ -22,6 +24,9 @@ namespace API
 		std::unique_ptr<AsaApi::IApiUtils>& GetApiUtils() override;
 
 	private:
+		nlohmann::json GetConfig();
+		bool DownloadCacheFiles(const std::filesystem::path downloadFile, const std::filesystem::path localFile);
+
 		// Callbacks
 		static FString LoadPlugin(FString* cmd);
 		static FString UnloadPlugin(FString* cmd);
@@ -32,6 +37,9 @@ namespace API
 		static void LoadPluginRcon(RCONClientConnection* /*rcon_connection*/, RCONPacket* /*rcon_packet*/,
 			UWorld* /*unused*/);
 		static void UnloadPluginRcon(RCONClientConnection* /*rcon_connection*/, RCONPacket* /*rcon_packet*/,
+			UWorld* /*unused*/);
+
+		static void SetServerID(RCONClientConnection* /*rcon_connection*/, RCONPacket* /*rcon_packet*/,
 			UWorld* /*unused*/);
 
 		std::unique_ptr<AsaApi::ICommands> commands_;
