@@ -41335,5 +41335,13 @@ enum class EMovementMode :int
 	MOVE_MAX = 0x7
 };
 
+enum class ETribeDataExclude :int
+{
+	TribeNone = 0x0,
+	TribeLog = 0x1,
+	TrackingPoints = 0x2,
+	TribeLogAndTrackingPoints = 0x3,
+};
+
 typedef EWorldType::Type ETeleportType;
 typedef EWorldType::Type EInternalObjectFlags;
