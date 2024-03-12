@@ -14,6 +14,12 @@
     },
     {
       "name": "detours"
+    },
+    {
+      "name": "zlib"
+    },
+    {
+      "name": "minizip"
     }
   ],
   "builtin-baseline": "06c79a9afa6f99f02f44d20df9e0848b2a56bf1b"

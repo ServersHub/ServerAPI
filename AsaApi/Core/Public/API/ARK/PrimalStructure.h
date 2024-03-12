@@ -2073,6 +2073,7 @@ struct APrimalStructureTurret : APrimalStructureItemContainer
     float& AimSpreadField() { return *GetNativePointerField<float*>(this, "APrimalStructureTurret.AimSpread"); }
     unsigned __int8& RangeSettingField() { return *GetNativePointerField<unsigned __int8*>(this, "APrimalStructureTurret.RangeSetting"); }
     unsigned __int8& WarningSettingField() { return *GetNativePointerField<unsigned __int8*>(this, "APrimalStructureTurret.WarningSetting"); }
+    unsigned __int8& AISettingField() { return *GetNativePointerField<unsigned __int8*>(this, "APrimalStructureTurret.AISetting"); }
     int& MinTargetLevelField() { return *GetNativePointerField<int*>(this, "APrimalStructureTurret.MinTargetLevel"); }
     int& MaxTargetLevelField() { return *GetNativePointerField<int*>(this, "APrimalStructureTurret.MaxTargetLevel"); }
     TArray<TSubclassOf<APrimalDinoCharacter>, TSizedDefaultAllocator<32> >& DinoTargetListField() { return *GetNativePointerField<TArray<TSubclassOf<APrimalDinoCharacter>, TSizedDefaultAllocator<32> >*>(this, "APrimalStructureTurret.DinoTargetList"); }

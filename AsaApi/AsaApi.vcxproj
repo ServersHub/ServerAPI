@@ -324,7 +324,7 @@ copy  /Y "$(SolutionDir)AsaApi\Core\Private\PDBReader\pdbignores.txt" "E:\ASA\Te
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>API_DEBUG;NDEBUG;ASAAPI_EXPORTS;ARK_EXPORTS;_WINDOWS;_USRDLL;POCO_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;ASAAPI_EXPORTS;ARK_EXPORTS;_WINDOWS;_USRDLL;POCO_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
@@ -343,9 +343,7 @@ copy  /Y "$(SolutionDir)AsaApi\Core\Private\PDBReader\pdbignores.txt" "E:\ASA\Te
       <AdditionalDependencies>$(CoreLibraryDependencies);crypt32.lib;Ws2_32.lib;iphlpapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /I  /Y "$(TargetDir)$(ProjectName).lib" "$(SolutionDir)out_lib\"
-xcopy /I  /Y "$(TargetDir)$(ProjectName).lib" "$(SolutionDir)..\ARK-API-Stable-Libs\"
-xcopy /I  /Y "$(TargetDir)$(ProjectName).lib" "$(SolutionDir)..\ARK-API-Stable-Libs\1.02\"
+      <Command>xcopy /I  /Y "$(TargetDir)$(ProjectName).lib" "$(SolutionDir)..\ARK-API-Stable-Libs\dev-latest\"
 
 copy "$(SolutionDir)$(PlatformName)\$(ConfigurationName)\$(ProjectName).dll" "F:\ASA-Dedicated\asa-server\ShooterGame\Binaries\Win64\ArkApi\" /y
 copy "$(SolutionDir)$(PlatformName)\$(ConfigurationName)\$(ProjectName).pdb" "F:\ASA-Dedicated\asa-server\ShooterGame\Binaries\Win64\ArkApi\" /y</Command>
@@ -390,8 +388,11 @@ copy "$(SolutionDir)$(PlatformName)\$(ConfigurationName)\$(ProjectName).pdb" "F:
     <ClInclude Include="Core\Public\API\ARK\Actor.h" />
     <ClInclude Include="Core\Public\API\ARK\Ark.h" />
     <ClInclude Include="Core\Public\API\ARK\Buff.h" />
+    <ClInclude Include="Core\Public\API\ARK\ExtensionsDeclaration.h" />
+    <ClInclude Include="Core\Public\API\ARK\ExtensionsDefinition.h" />
     <ClInclude Include="Core\Public\API\ARK\GameMode.h" />
     <ClInclude Include="Core\Public\API\ARK\Inventory.h" />
+    <ClInclude Include="Core\Public\API\ARK\ModParamStructs.h" />
     <ClInclude Include="Core\Public\API\ARK\Other.h" />
     <ClInclude Include="Core\Public\API\ARK\PrimalStructure.h" />
     <ClInclude Include="Core\Public\API\ARK\UE.h" />
@@ -1128,6 +1129,9 @@ copy "$(SolutionDir)$(PlatformName)\$(ConfigurationName)\$(ProjectName).pdb" "F:
     <ClInclude Include="Core\Public\API\UE\Windows\WindowsSemaphore.h" />
     <ClInclude Include="Core\Public\API\UE\Windows\WindowsSystemIncludes.h" />
     <ClInclude Include="Core\Public\Ark\ArkApiUtils.h" />
+    <ClInclude Include="Core\Public\Ark\AsaApiUtilsMessagingManager.h" />
+    <ClInclude Include="Core\Public\Ark\MessagingManager.h" />
+    <ClInclude Include="Core\Public\AsaApiModUtils.hpp" />
     <ClInclude Include="Core\Public\IApiUtils.h" />
     <ClInclude Include="Core\Public\ICommands.h" />
     <ClInclude Include="Core\Public\IHooks.h" />

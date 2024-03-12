@@ -815,6 +815,7 @@ struct UWeaponAttackData;
 struct UWidget;
 struct UWorld;
 struct UWorldPartition;
+struct FOverlappedFoliageElement;
 
 // Address helpers
 ARK_API DWORD64 GetAddress(const void* base, const std::string& name);

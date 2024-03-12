@@ -2459,6 +2459,24 @@
     <ClInclude Include="Core\Public\API\ARK\PrimalStructure.h">
       <Filter>Source Files\Core\Public\API\ARK</Filter>
     </ClInclude>
+    <ClInclude Include="Core\Public\Ark\MessagingManager.h">
+      <Filter>Source Files\Core\Public\Ark</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Public\AsaApiModUtils.hpp">
+      <Filter>Source Files\Core\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Public\API\ARK\ModParamStructs.h">
+      <Filter>Source Files\Core\Public\API\ARK</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Public\API\ARK\ExtensionsDeclaration.h">
+      <Filter>Source Files\Core\Public\API\ARK</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Public\API\ARK\ExtensionsDefinition.h">
+      <Filter>Source Files\Core\Public\API\ARK</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Public\Ark\AsaApiUtilsMessagingManager.h">
+      <Filter>Source Files\Core\Public\Ark</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="AsaApi.def">

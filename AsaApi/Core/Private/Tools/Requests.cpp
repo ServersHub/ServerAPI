@@ -10,7 +10,7 @@
 
 #include <mutex>
 
-
+#include "fstream"
 #include "Poco/StreamCopier.h"
 #include "Poco/URI.h"
 #include "Poco/Exception.h"
@@ -330,6 +330,70 @@ namespace API
 			}
 		).detach();
 
+		return true;
+	}
+
+	bool Requests::DownloadFile(const std::string& url, const std::string& localPath, std::vector<std::string> headers)
+	{
+		Poco::Net::HTTPResponse response(Poco::Net::HTTPResponse::HTTP_BAD_REQUEST);
+		Poco::Net::HTTPClientSession* session = nullptr;
+
+		try
+		{
+			Poco::Net::initializeSSL();
+			Poco::SharedPtr<Poco::Net::InvalidCertificateHandler> ptrCert = new Poco::Net::RejectCertificateHandler(false);
+
+			Poco::Net::Context::Ptr ptrContext = new Poco::Net::Context(Poco::Net::Context::TLS_CLIENT_USE, "", "", "", Poco::Net::Context::VERIFY_NONE, 9, false, "ALL:!ADH:!LOW:!EXP:!MD5:@STRENGTH");
+
+			Poco::Net::SSLManager::instance().initializeClient(0, ptrCert, ptrContext);
+
+			Poco::URI uri(url);
+
+			const std::string& path(uri.getPathAndQuery());
+
+			if (uri.getScheme() == "https")
+				session = new Poco::Net::HTTPSClientSession(uri.getHost(), uri.getPort());
+			else
+				session = new Poco::Net::HTTPClientSession(uri.getHost(), uri.getPort());
+
+			Poco::Net::HTTPRequest request(Poco::Net::HTTPRequest::HTTP_GET, path, Poco::Net::HTTPMessage::HTTP_1_1);
+
+			session->sendRequest(request);
+			std::istream& rs = session->receiveResponse(response);
+			if (response.getStatus() == Poco::Net::HTTPResponse::HTTP_OK)
+			{
+				std::ofstream outFile(localPath, std::ios::binary);
+				if (!outFile)
+				{
+					Log::GetLog()->error("Writing the file '{}' failed", localPath);
+					delete session;
+					session = nullptr;
+					return false;
+				}
+
+				Poco::StreamCopier::copyStream(rs, outFile);
+			}
+			else
+			{
+				Log::GetLog()->error("Requested file '{}' failed with error: '{}'", url, response.getReason());
+				Poco::NullOutputStream null;
+				Poco::StreamCopier::copyStream(rs, null);
+				delete session;
+				session = nullptr;
+				return false;
+			}
+		}
+		catch (const Poco::Exception& exc)
+		{
+			Log::GetLog()->error(exc.displayText());
+
+			delete session;
+			session = nullptr;
+			return false;
+		}
+
+		delete session;
+		session = nullptr;
 		return true;
 	}
 

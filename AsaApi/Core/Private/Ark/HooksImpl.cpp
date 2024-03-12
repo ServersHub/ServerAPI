@@ -107,6 +107,8 @@ namespace AsaApi
 				break;
 			}
 		}
+
+		dynamic_cast<ApiUtils&>(*API::game_api->GetApiUtils()).CheckMessagingManagersRequirements();
 	}
 
 	void Hook_AShooterPlayerController_ServerSendChatMessage_Impl(AShooterPlayerController* player_controller, FString* message, int mode, int senderPlatform)

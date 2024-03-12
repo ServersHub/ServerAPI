@@ -25,6 +25,7 @@
 #include "../UE/Math/ColorList.h"
 #include "UE.h"
 
+#include "ExtensionsDeclaration.h"
 //#include "Tribe.h"
 #include "Actor.h"
 #include "Other.h"
@@ -33,8 +34,10 @@
 //#include "GameState.h"
 #include "PrimalStructure.h"
 #include "Buff.h"
+#include "ModParamStructs.h"
 
 #include "../../IApiUtils.h"
 #include "../../ICommands.h"
 #include "IHooks.h"
 #include "Tools.h"
+#include "ExtensionsDefinition.h"
